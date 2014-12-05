@@ -4,3 +4,4 @@ dist
 .tmp
 .sass-cache
 env.post.js
+env.json

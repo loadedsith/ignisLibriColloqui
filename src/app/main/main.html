@@ -6,3 +6,9 @@
 
 
 <div class="button" ng-click="messageInput($event)">Let's do this thing!</div>
+<div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+<div id="status">
+</div>
