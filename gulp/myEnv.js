@@ -10,7 +10,7 @@ var env = require('../env.json');
 gulp.task('myEnv', function () {
   return gulp.src('./src/app/env.pre.js')
     .pipe(rename('env.post.js'))
-    .pipe(preprocess({context: {FP_API_KEY: env.FP_API_KEY}}))
+    .pipe(preprocess({context: {FB_API_KEY: env.FB_API_KEY}}))
     .pipe(gulp.dest('src/app'));
 });
 
