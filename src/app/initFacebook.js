@@ -1,6 +1,6 @@
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : 'your-app-id',
+    appId      : FB_API_KEY,
     xfbml      : true,
     version    : 'v2.1'
   });

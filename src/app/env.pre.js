@@ -1,0 +1,1 @@
+var FP_API_KEY = '/* @echo FP_API_KEY */'||'Your app id was unset. Ensure gulp/env.json, gulp/myEnv.js, env.pre.js all agree';
