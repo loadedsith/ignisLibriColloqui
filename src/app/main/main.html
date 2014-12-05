@@ -1,0 +1,8 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<pre class="messages" ng-bind="messages"></pre>
+<input type="text" ng-model="name" placeholder="Name" />
+<input type="textarea" ng-model="message" placeholder="Message" />
+
+
+<div class="button" ng-click="messageInput($event)">Let's do this thing!</div>
