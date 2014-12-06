@@ -41,5 +41,10 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "gulp-jsx": "^0.6.1",
+    "gulp-react": "^2.0.0",
+    "react": "^0.12.1"
   }
 }
