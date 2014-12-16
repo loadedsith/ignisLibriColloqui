@@ -30,7 +30,6 @@ angular.module('ignisLibriColloqui')
       $timeout(function () {
         var message = snapshot.val();
         message.key = snapshot.key();
-        console.log('on child_added message', message);
         $scope.messages.push(message);
       },0);
     });
