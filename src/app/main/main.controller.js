@@ -3,7 +3,17 @@
 angular.module('ignisLibriColloqui')
   .controller('MainCtrl', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', function ($scope, $timeout, FacebookService, FirebaseService) {
     $scope.messages = [];
-    
+    var Status = {
+      loading : {
+        text:"Loading...",
+        class:"status-loading"
+      },
+      ready : {
+        text:"Ready",
+        class:"status-ready"
+      },
+    }
+    $scope.status = Status.loading;
     $scope.messageInput = function (e) {
       FirebaseService.dataRef.push({
         name: $scope.name,
@@ -26,6 +36,7 @@ angular.module('ignisLibriColloqui')
     });
     
     FirebaseService.dataRef.on('value', function(snapshot) {
+      $scope.status = Status.ready;
       $timeout(function () {
         var messages = snapshot.val();
         $scope.messages = [];

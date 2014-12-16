@@ -1,17 +1,22 @@
+
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<!-- <pre class="messages" ng-bind="messages"></pre> -->
+<div class="wrapper {{status.class}}">  
+  <p class="status {{status.class}}">{{status.text}}</p>
+  
+  <fast-repeat messages="messages"></fast-repeat>
+  
+  <input type="text" ng-model="name" placeholder="Name" />
+  
+  <input type="textarea" ng-model="message" placeholder="Message" />
+  
+  <div class="button" ng-click="messageInput($event)">Send Message</div>
+  
+  <div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
+  
+  <div class="fb-login button" ng-click="loginToFacebook()">Login to Facebook</div>
+  
+  <div id="status"></div>
+</div>
 
-<fast-repeat messages="messages"></fast-repeat>
-
-<input type="text" ng-model="name" placeholder="Name" />
-
-<input type="textarea" ng-model="message" placeholder="Message" />
-
-<div class="button" ng-click="messageInput($event)">Send Message</div>
-
-<div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
-
-<div class="fb-login button" ng-click="loginToFacebook()">Login to Facebook</div>
-
-<div id="status"></div>
+<div class="loader {{status.class}}">{{status.text}}</div>

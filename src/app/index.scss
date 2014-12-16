@@ -17,3 +17,28 @@
     width: 50px;
   }
 }
+.wrapper{
+  &.status-loading{
+    display:none;
+  }
+  &.status-ready{
+    display:block;  
+  }
+}
+.loader{
+  &.status-loading{
+    display:block;
+  }
+  &.status-ready{
+    display:none;  
+  }
+}
+.status.status-loading{
+  color:#666;
+}
+.status.status-ready{
+  color:#408000;
+}
+.status.status-error{
+  color:#F66;
+}
