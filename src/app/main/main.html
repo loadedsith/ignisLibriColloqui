@@ -2,13 +2,13 @@
 
 <!-- <pre class="messages" ng-bind="messages"></pre> -->
 
-<fast-repeat data="messages"></fast-repeat>
+<fast-repeat messages="messages"></fast-repeat>
 
 <input type="text" ng-model="name" placeholder="Name" />
 
 <input type="textarea" ng-model="message" placeholder="Message" />
 
-<div class="button" ng-click="messageInput($event)">Let's do this thing!</div>
+<div class="button" ng-click="messageInput($event)">Send Message</div>
 
 <div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
 

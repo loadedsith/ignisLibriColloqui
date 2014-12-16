@@ -3,15 +3,12 @@ angular.module("ignisLibriColloqui.Directives", [])
     return {
       restrict: 'E',
       scope: {
-        data: '='
+        messages: '='
       },
       link: function(scope, el, attrs) {
-        console.log('Purple orca2');
-        scope.$watch('data', function(newValue, oldValue) {
-          console.log('Purple orca3');
-
-          React.render(MYLIST({data: newValue}),angular.element(el)[0]);
-        });
+        scope.$watch('messages', function(newValue, oldValue) {
+          React.render(MYLIST({data: newValue}),el[0]);
+        }, true);
       }
     }
   })
