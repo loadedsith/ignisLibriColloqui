@@ -2,8 +2,9 @@ angular.module("ignisLibriColloqui.Status",[])
   .service('StatusService', ['$timeout','$interval', function ($timeout,$interval) {
     var Status = this;
 
-/*    
-      Status.loading = {
+    /*    
+    
+    Status.loading = {
       text:"Loading...",
       class:"status-loading",
       animation:{
@@ -15,7 +16,8 @@ angular.module("ignisLibriColloqui.Status",[])
     Status.ready = {
       text:"Ready",
       class:"status-ready"
-    };*/
+    };
+   */
     
     Status.resetAnimation = function () {
       Status.animation = undefined;
@@ -57,9 +59,27 @@ angular.module("ignisLibriColloqui.Status",[])
                 Status.resetAnimation();
               }else{
                 var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
+
+
+                if(delta === Status.animation.lastDelta){
+
+                  window.requestAnimationFrame(Status.animation.interval);
+                  return;
+                }else{
+                  console.log('!delta', delta);
+                }
+                console.log('Musician Yellow-banded Dart frog');
+                Status.animation.lastDelta = delta;
                 var frames = Status.animation.frames;
                 var frameId =  delta % frames.length;
-                console.log('frameId , frames.length', frameId , frames.length);
+                
+                if(Status.status.animation.randomize !== undefined){
+                  if(Status.status.animation.randomize === true){
+                    frameId = Math.floor(Math.random()*frames.length);
+                  }
+                }
+                
+                
                 Status.status.animated = frames[frameId];
                 window.requestAnimationFrame(Status.animation.interval);
               }
@@ -72,10 +92,6 @@ angular.module("ignisLibriColloqui.Status",[])
         }else{
           Status.animation.frames = Status.status.animation.frames.reverse();
         }
-
-        
-        
-        
         window.requestAnimationFrame(Status.animation.interval);
       }
     }

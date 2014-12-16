@@ -28,6 +28,7 @@
 .loader{
   &.status-loading{
     display:block;
+    text-align: center;
   }
   &.status-ready{
     display:none;  
@@ -35,6 +36,7 @@
 }
 .status.status-loading{
   color:#666;
+  font-size:100px;
 }
 .status.status-ready{
   color:#408000;

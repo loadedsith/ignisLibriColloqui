@@ -12,9 +12,20 @@ angular.module('ignisLibriColloqui')
       text:"Loading...",
       class:"status-loading",
       animation:{
-        frames:["Loading", "Loading.", "Loading..", "Loading...", "Loading....", "Loading...."],
-        // frames:"🌑🌒🌓🌔🌕🌖🌗🌘",
-        delay:500
+        // frames:[
+  //         "🌑 Loading", 
+  //         "🌒 Loading", 
+  //         "🌓 Loading.", 
+  //         "🌔 Loading.", 
+  //         "🌕 Loading..", 
+  //         "🌖 Loading..",
+  //         "🌗 Loading...",
+  //         "🌘 Loading...",
+  //         "🌑 Loading..."
+  //       ],
+        frames:"🐶🐺🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👩👨👧👦👶👱👼👺👹🙉",
+        randomize:true,
+        delay:250
       }
     };
   
