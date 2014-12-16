@@ -6,8 +6,10 @@ angular.module("ignisLibriColloqui.Directives", [])
         messages: '='
       },
       link: function(scope, el, attrs) {
+        var MyComponent = React.createFactory(MYLIST);
+        
         scope.$watch('messages', function(newValue, oldValue) {
-          React.render(MYLIST({data: newValue}),el[0]);
+          React.render(MyComponent({data: newValue}),el[0]);
         }, true);
       }
     }
