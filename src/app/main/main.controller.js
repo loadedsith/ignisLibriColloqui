@@ -12,8 +12,9 @@ angular.module('ignisLibriColloqui')
       text:"Loading...",
       class:"status-loading",
       animation:{
-        chars:"🌑🌒🌓🌔🌕🌖🌗🌘",
-        delay:10
+        frames:["Loading", "Loading.", "Loading..", "Loading...", "Loading....", "Loading...."],
+        // frames:"🌑🌒🌓🌔🌕🌖🌗🌘",
+        delay:500
       }
     };
   
@@ -49,7 +50,7 @@ angular.module('ignisLibriColloqui')
       FirebaseService.dataRef.on('value', function(snapshot) {
 
         $timeout(function () {
-          StatusService.status = StatusService.ready;
+          // StatusService.status = StatusService.ready;
           var messages = snapshot.val();
           $scope.messages = [];
           angular.forEach(messages, function(value, key){

@@ -7,7 +7,7 @@ angular.module("ignisLibriColloqui.Status",[])
       text:"Loading...",
       class:"status-loading",
       animation:{
-        chars:"🌑🌒🌓🌔🌕🌖🌗🌘",
+        chars:"🌑🌒🌓🌔🌕🌖🌗🌘",//or frames:["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"],
         delay:10
       }
     };
@@ -28,8 +28,8 @@ angular.module("ignisLibriColloqui.Status",[])
         Status.resetAnimation();
         return;
       }else{
-        if(animation.chars === undefined || animation.delay === undefined){
-          console.log('no animation chars or delay defined for animation. Both must be present.');
+        if(animation.frames === undefined || animation.delay === undefined){
+          console.log('no animation frames or delay defined for animation. Both must be present.');
           Status.resetAnimation();
           return;
         }
@@ -56,9 +56,10 @@ angular.module("ignisLibriColloqui.Status",[])
               if(Status.status.animation===undefined){
                 Status.resetAnimation();
               }else{
-                var delta = Math.floor( Status.animation.startTime - now);
+                var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
                 var frames = Status.animation.frames;
                 var frameId =  delta % frames.length;
+                console.log('frameId , frames.length', frameId , frames.length);
                 Status.status.animated = frames[frameId];
                 window.requestAnimationFrame(Status.animation.interval);
               }
@@ -66,7 +67,15 @@ angular.module("ignisLibriColloqui.Status",[])
           }
         };
         
-        Status.animation.frames = Status.animation.charsToFrames(Status.status.animation.chars);
+        if(typeof Status.status.animation.frames === "string"){
+          Status.animation.frames = Status.animation.charsToFrames(Status.status.animation.frames).reverse();
+        }else{
+          Status.animation.frames = Status.status.animation.frames.reverse();
+        }
+
+        
+        
+        
         window.requestAnimationFrame(Status.animation.interval);
       }
     }
