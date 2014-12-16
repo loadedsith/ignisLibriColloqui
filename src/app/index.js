@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ignisLibriColloqui', ['ui.router', 'ignisLibriColloqui.Facebook', 'ignisLibriColloqui.Firebase', 'ignisLibriColloqui.Directives'])
+angular.module('ignisLibriColloqui', ['ui.router', 'ignisLibriColloqui.Facebook', 'ignisLibriColloqui.Firebase', 'ignisLibriColloqui.Status', 'ignisLibriColloqui.Directives'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
