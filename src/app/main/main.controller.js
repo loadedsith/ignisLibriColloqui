@@ -17,20 +17,20 @@ angular.module('ignisLibriColloqui')
     $scope.loginToFacebook = FacebookService.login;
 
     FirebaseService.dataRef.on('child_added', function(snapshot) {
-      //We'll fill this in later.
       $timeout(function () {
         var message = snapshot.val();
+        message.key = snapshot.key();
         console.log('on child_added message', message);
         $scope.messages.push(message);
       },0);
     });
     
     FirebaseService.dataRef.on('value', function(snapshot) {
-      //We'll fill this in later.
       $timeout(function () {
         var messages = snapshot.val();
         $scope.messages = [];
         angular.forEach(messages, function(value, key){
+          value.key = key;
           $scope.messages.push(value);
         });
       },0)

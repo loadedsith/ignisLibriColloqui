@@ -4,7 +4,7 @@ var MYLIST = React.createClass({
     var data = this.props.data;
 
     var rows = data.map(function (datum) {
-      return <p>{datum.name}:{datum.message}</p>;
+      return <p key={datum.key}>{datum.name}:{datum.message}</p>;
     })
 
     return (
