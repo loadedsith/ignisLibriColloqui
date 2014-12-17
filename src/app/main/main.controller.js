@@ -28,7 +28,7 @@ angular.module('ignisLibriColloqui')
       class:"status-ready"
     };
     
-    StatusService.status = StatusService.loading;
+    StatusService.setStatus(StatusService.loading);
     
     StatusService.animator();
     
@@ -53,11 +53,15 @@ angular.module('ignisLibriColloqui')
       });
     
       FirebaseService.dataRef.on('value', function(snapshot) {
-
+        //Initialize messages
         $timeout(function () {
-          // StatusService.status = StatusService.ready;
+          
+          StatusService.setStatus(StatusService.ready);
+          
           var messages = snapshot.val();
+          
           $scope.messages = [];
+          
           angular.forEach(messages, function(value, key){
             value.key = key;
             $scope.messages.push(value);
@@ -66,5 +70,7 @@ angular.module('ignisLibriColloqui')
       });
       
     }
+    StatusService.setStatus(StatusService.loading);
+    
 
   }]);
