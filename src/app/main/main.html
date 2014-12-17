@@ -19,4 +19,7 @@
   <div id="status"></div>
 </div>
 
-<div class="loader status {{status().class}}">{{status().animated || status().text}}</div>
+<div class="loader status {{status().class}}">
+  <p class="animation">{{status().animated}}</p>
+  <p class="statusLabel">{{status().text}}</p>
+</div>
