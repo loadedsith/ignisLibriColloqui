@@ -54,6 +54,8 @@
   color:#408000;
   text-align:center;
   animation-name: fadeOut;
+  animation-fill-mode: forwards;
+  animation-iterations:1;
   animation-duration: 10s;
 }
 .status.status-error{
