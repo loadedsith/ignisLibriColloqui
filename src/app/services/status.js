@@ -39,9 +39,8 @@ angular.module("ignisLibriColloqui.Status",[])
     
     Status.setStatus = function (newStatus) {
       if (newStatus === undefined) {
-        console.log('Hey buddy, you\'re supposed to send in a real status, but for some reason, you set it to undefined');
+        console.log('Set status failed; newStatus was undefined.');
       }
-      console.log('setStatus',newStatus);
       // Status.resetAnimation();
       Status.processLowercaseStatusFrames();
       if (Status.runningAnimator !== true){
