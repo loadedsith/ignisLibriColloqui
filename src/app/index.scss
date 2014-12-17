@@ -22,25 +22,60 @@
     display:none;
   }
   &.status-ready{
-    display:block;  
+    display:block;
   }
 }
 .loader{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  padding-top:30%;
   &.status-loading{
     display:block;
     text-align: center;
+
+    .animation{
+      font-size:100px;
+    }
+    .statusLabel{
+      font-size:50px;
+    }
   }
   &.status-ready{
-    display:none;  
+    display:none;
+    
   }
 }
 .status.status-loading{
   color:#666;
-  font-size:100px;
 }
-.status.status-ready{
+.status.status-ready.status{
   color:#408000;
+  text-align:center;
+  animation-name: fadeOut;
+  animation-duration: 10s;
 }
 .status.status-error{
   color:#F66;
 }
+
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  33% {
+    transform: scale(1);    
+  }
+  66%{
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0);
+    display:none;
+  }
+}
+
+
+
