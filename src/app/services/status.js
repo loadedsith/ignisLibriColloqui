@@ -1,5 +1,5 @@
 angular.module("ignisLibriColloqui.Status",[])
-  .service('StatusService', ['$timeout','$interval', function ($timeout, $interval) {
+  .service('StatusService', ['$timeout', function ($timeout) {
     var Status = this;
     
     Status.default = {
