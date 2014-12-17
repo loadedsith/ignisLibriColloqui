@@ -20,12 +20,12 @@ angular.module('ignisLibriColloqui')
   
     StatusService.ready = {
       text:"Ready",
+      class:"status-ready",
       animation:{
-        frames:["😃","👍"],
-        randomize:true,
-        delay:150
-      },
-      class:"status-ready"
+        frames:'🔥📖💬',
+        // frames:["😃","👍"],
+        delay:1500
+      }
     };
     
     StatusService.setStatus(StatusService.loading);
