@@ -80,14 +80,12 @@ angular.module("ignisLibriColloqui.Status",[])
           }else{
             var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
 
-
+            //Dont continue if the delta hasn't changed (there's nothing todo as all animations are based off the delta)
             if(delta === Status.animation.lastDelta){
-
               window.requestAnimationFrame(Status.animation.interval);
               return;
-            }else{
-              console.log('!delta', delta);
             }
+            
             Status.animation.lastDelta = delta;
             var frames = Status.animation.frames;
             var frameId =  delta % frames.length;
@@ -128,23 +126,23 @@ angular.module("ignisLibriColloqui.Status",[])
     }
     
     Status.animator = function () {
-      console.log('homeless Soldier Pygmy Three-toed Sloth');
-      if(Status.status === undefined){
-        console.log('Cant animate the current status as it is undefined.');
+      if (Status.status === undefined){
+        if (Status.debug === true) {
+          console.log('Cant animate the current status as it is undefined.');
+        }
         return;
       }else if(Status.status.animation === undefined){
-        console.log('Cant animate the current status\'s animation as it is undefined.');
+        if (Status.debug === true) {
+          console.log('Cant animate the current status\'s animation as it is undefined.');
+        }
         return;
       }else{
         var animation = Status.status.animation;
 
         if(animation.frames === undefined || animation.delay === undefined){
           console.log('No animation frames or delay defined for animation. Both must be present.');
-          // Status.resetAnimation();
           return;
         }
-        // Status.setStatus(Status.default);
-
         window.requestAnimationFrame(Status.animation.interval);
       }
     }
