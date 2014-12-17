@@ -13,6 +13,9 @@ angular.module("ignisLibriColloqui.Status",[])
     Status.loading = {
       text:"Loading...",//[Optional] Label text 
       class:"status-loading",// CSS Class available to angular, not automatically applied
+      callback: function () {
+        console.log('Im a callback!');
+      }
       animation:{//[Optional] Requires frames and delay. Use either a string of frames:
         frames:"🌑🌒🌓🌔🌕🌖🌗🌘",
         // or Manual a frames array eg;
@@ -48,6 +51,10 @@ angular.module("ignisLibriColloqui.Status",[])
       }
       Status.status = newStatus;
       Status.processLowercaseStatusFrames();
+      if(typeof Status.status.callback === 'function'){
+        Status.status.callback();
+      }
+
     };
     
     Status.animation = {
