@@ -21,7 +21,9 @@ angular.module("ignisLibriColloqui.Status",[])
         //  "🌕 Loading",
         //  "🌖 Loading",
         //  "🌗 Loading",
-        //  "🌘 Loading"],
+        //  "🌘 Loading",
+        //  function(){return $scope.message}// You can even use a function call as a frame. Result should be a string.
+        //],
         delay:10// in ms
       }
     };
