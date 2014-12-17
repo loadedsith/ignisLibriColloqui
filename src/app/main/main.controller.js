@@ -35,7 +35,7 @@ angular.module('ignisLibriColloqui')
     $scope.messageInput = function (e) {
       FirebaseService.dataRef.push({
         name: $scope.name,
-        message:$scope.message
+        message: $scope.message
       });
       $scope.message = "";
     }
@@ -43,8 +43,12 @@ angular.module('ignisLibriColloqui')
     $scope.checkLoginState = FacebookService.checkLoginState;
     
     $scope.loginToFacebook = FacebookService.login;
-    if(FirebaseService.dataRef){
+    
+    if(FirebaseService.dataRef){//Sometimes disabled for debugging, re-enable in the service.
+      
       FirebaseService.dataRef.on('child_added', function(snapshot) {
+        //receive new message
+        // will be called for each new message
         $timeout(function () {
           var message = snapshot.val();
           message.key = snapshot.key();
@@ -66,6 +70,7 @@ angular.module('ignisLibriColloqui')
             value.key = key;
             $scope.messages.push(value);
           });
+          
         }, 0)
       });
       
