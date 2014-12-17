@@ -42,13 +42,12 @@ angular.module("ignisLibriColloqui.Status",[])
         console.log('Set status failed; newStatus was undefined.');
       }
       // Status.resetAnimation();
-      Status.processLowercaseStatusFrames();
       if (Status.runningAnimator !== true){
         Status.animator();
         Status.runningAnimator !== true;
       }
       Status.status = newStatus;
-      
+      Status.processLowercaseStatusFrames();
     };
     
     Status.animation = {
