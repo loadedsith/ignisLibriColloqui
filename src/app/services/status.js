@@ -99,11 +99,10 @@ angular.module("ignisLibriColloqui.Status",[])
             }
             
             var theFrame = frames[frameId];
-            console.log('theFrame', theFrame);
             if (typeof theFrame === "function") {
-              Status.status.animated = theFrame();
+              Status.status.currentFrame = theFrame();
             } else {
-              Status.status.animated = theFrame;
+              Status.status.currentFrame = theFrame;
             }
             
             window.requestAnimationFrame(Status.animation.interval);
