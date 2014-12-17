@@ -83,35 +83,37 @@ angular.module("ignisLibriColloqui.Status",[])
             return;
           }
           if (Status.status.animation === undefined) {
-            //Status.resetAnimation();
-          }else{
-            var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
-
-            //Dont continue if the delta hasn't changed (there's nothing todo as all animations are based off the delta)
-            if(delta === Status.animation.lastDelta){
-              window.requestAnimationFrame(Status.animation.interval);
-              return;
-            }
-            
-            Status.animation.lastDelta = delta;
-            var frames = Status.animation.frames;
-            var frameId =  delta % frames.length;
-            
-            if(Status.status.animation.randomize !== undefined){
-              if(Status.status.animation.randomize === true){
-                frameId = Math.floor(Math.random()*frames.length);
-              }
-            }
-            
-            var theFrame = frames[frameId];
-            if (typeof theFrame === "function") {
-              Status.status.currentFrame = theFrame();
-            } else {
-              Status.status.currentFrame = theFrame;
-            }
-            
             window.requestAnimationFrame(Status.animation.interval);
+            
+            return;
           }
+          var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
+          //Dont continue if the delta hasn't changed (there's nothing todo as all animations are based off the delta)
+          
+          if(delta === Status.animation.lastDelta){
+            window.requestAnimationFrame(Status.animation.interval);
+            return;
+          }
+          
+          Status.animation.lastDelta = delta;
+          var frames = Status.animation.frames;
+          var frameId =  delta % frames.length;
+          
+          if(Status.status.animation.randomize !== undefined){
+            if(Status.status.animation.randomize === true){
+              frameId = Math.floor(Math.random()*frames.length);
+            }
+          }
+          
+          var theFrame = frames[frameId];
+          if (typeof theFrame === "function") {
+            Status.status.currentFrame = theFrame();
+          } else {
+            Status.status.currentFrame = theFrame;
+          }
+          
+          window.requestAnimationFrame(Status.animation.interval);
+        
         },0)
       }
     };
