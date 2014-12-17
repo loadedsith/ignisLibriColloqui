@@ -29,9 +29,7 @@ angular.module('ignisLibriColloqui')
     };
     
     StatusService.setStatus(StatusService.loading);
-    
-    StatusService.animator();
-    
+     
     $scope.messageInput = function (e) {
       FirebaseService.dataRef.push({
         name: $scope.name,

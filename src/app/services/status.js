@@ -41,10 +41,8 @@ angular.module("ignisLibriColloqui.Status",[])
       if (newStatus === undefined) {
         console.log('Set status failed; newStatus was undefined.');
       }
-      // Status.resetAnimation();
       if (Status.runningAnimator !== true){
         Status.animator();
-        Status.runningAnimator !== true;
       }
       Status.status = newStatus;
       Status.processLowercaseStatusFrames();
@@ -127,16 +125,19 @@ angular.module("ignisLibriColloqui.Status",[])
     
     Status.animator = function () {
       if (Status.status === undefined){
+        Status.runningAnimator = false;
         if (Status.debug === true) {
           console.log('Cant animate the current status as it is undefined.');
         }
         return;
       }else if(Status.status.animation === undefined){
+        Status.runningAnimator = false;
         if (Status.debug === true) {
           console.log('Cant animate the current status\'s animation as it is undefined.');
         }
         return;
       }else{
+        Status.runningAnimator = true;
         var animation = Status.status.animation;
 
         if(animation.frames === undefined || animation.delay === undefined){
