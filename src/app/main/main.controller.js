@@ -12,16 +12,16 @@ angular.module('ignisLibriColloqui')
       text:"Loading...",
       class:"status-loading",
       animation:{
-        frames:"🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹🙉",
-        randomize:true,
-        delay:150
+        frames: "🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹",
+        randomize: true,
+        delay: 150
       }
     };
   
     StatusService.ready = {
       text:"Ready",
       animation:{
-        frames:["😃","👍", function(){return $scope.message}],
+        frames:["😃","👍"],
         randomize:true,
         delay:150
       },
@@ -76,6 +76,8 @@ angular.module('ignisLibriColloqui')
       
     }
     StatusService.setStatus(StatusService.loading);
-    
+    $timeout(function () {
+          StatusService.setStatus(StatusService.ready);
+    },1000)
 
   }]);
