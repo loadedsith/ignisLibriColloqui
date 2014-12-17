@@ -2,6 +2,8 @@ angular.module("ignisLibriColloqui.Status",[])
   .service('StatusService', ['$timeout', function ($timeout) {
     var Status = this;
     
+    Status.debug = false;
+    
     Status.default = {
       text:"Default Status",
       class:"status-default"
