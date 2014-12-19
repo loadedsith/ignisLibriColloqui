@@ -14,25 +14,7 @@ angular.module('ignisLibriColloqui')
       return StatusService.status;
     };
     
-    StatusService.loading = {
-      text:'Loading...',
-      class:'status-loading',
-      animation:{
-        frames: '🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹',
-        randomize: true,
-        delay: 150
-      }
-    };
-  
-    StatusService.ready = {
-      text:'Ready',
-      class:'status-ready',
-      animation:{
-        frames:'🔥📖💬',
-        // frames:['😃','👍'],
-        delay:1500
-      }
-    };
+   
     
     StatusService.setStatus(StatusService.loading);
 
