@@ -2,6 +2,7 @@
 
 angular.module('ignisLibriColloqui', ['ui.router','ngCookies', 'ignisLibriColloqui.Facebook','ignisLibriColloqui.User', 'ignisLibriColloqui.Firebase', 'ignisLibriColloqui.Status', 'ignisLibriColloqui.Directives'])
   .config(function ($stateProvider, $urlRouterProvider) {
+    
     $stateProvider
       .state('home', {
         url: '/',
@@ -10,5 +11,4 @@ angular.module('ignisLibriColloqui', ['ui.router','ngCookies', 'ignisLibriColloq
       });
 
     $urlRouterProvider.otherwise('/');
-  })
-;
+  });
