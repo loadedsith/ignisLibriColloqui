@@ -1,17 +1,20 @@
-<div class="" ng-controller="UserController">
-  
-  <div class="tiny button" ng-click="checkLoginState()">Check Facebook Status</div>
-  
-  <div class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div>
+<div class="" ng-controller="UserController" ng-show="userInitialized()">
+  <a href="" ng-show="loggedIn()">
+    <img title="Welcome {{user().first_name}}" ng-src="{{profilePicture().data.url||'./assets/images/FBProfile.jpg'}}">
+  </a>
 
-  <div id="status"></div>
+  <a href="" ng-show="!loggedIn()">
+    <div  class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div>
+  </a>
   
-  <div class="button tiny secondary" ng-click="debugUser=!debugUser">Debug Display: {{debugUser?'debug':'hide debugging'}}</div>
-  <div ng-hide="debugUser === true">
+  <!-- <div id="status"></div> -->
+  
+  <!-- <div class="button tiny secondary" ng-click="debugUser=!debugUser">{{debugUser?'-':'+'}}</div> -->
+  <!-- <div ng-show="debugUser === true">
     <pre>
       loggedIn: {{loggedIn()}}
       loginStatus: {{loginStatus()}}
-      email: {{user().email}}
+      <!-- email: {{user().email}}
       first_name: {{user().first_name}}
       gender: {{user().gender}}
       id: {{user().id}}
@@ -23,9 +26,7 @@
       name: {{user().name}}
       timezone: {{user().timezone}}
       updated_time: {{user().updated_time}}
-      verified: {{user().verified}}
-    </pre>
-    profilePicture
-    <img ng-src="{{profilePicture().data.url||'http://placehold.it/50x50/&text=%3F🗽'}}">
-  </div>
+      verified: {{user().verified}} -->
+    <!-- </pre> -->
+  <!-- </div> -->
 </div>

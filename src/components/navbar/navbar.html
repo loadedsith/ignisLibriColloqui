@@ -1,7 +1,6 @@
 <nav class="top-bar row" ng-controller="NavbarController">
   <ul class="title-area">
     <li class="name">
-      <!-- <h1>Ignis Libri Colloqui</h1> -->
       <h1>🔥 📖 💬</h1>
     </li>
   </ul>
@@ -11,6 +10,7 @@
       <li class="active"><a ng-href="#">Home</a></li>
       <li><a ng-href="#">Messages</a></li>
       <li><a ng-href="#">Profile</a></li>
+      <li ng-include="'components/user/user.html'"></li>
     </ul>
     <ul class="left">
       <!-- <li><a ng-href="#">Current date: {{ date | date:'yyyy-MM-dd' }}</a></li> -->

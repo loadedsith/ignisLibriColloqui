@@ -61,7 +61,9 @@
 .status.status-error{
   color:#F66;
 }
-
+section.top-bar-section ul.right li img{
+  max-height: 42px;
+}
 
 @keyframes fadeOut {
   0% {
