@@ -1,6 +1,15 @@
 <div class="" ng-controller="UserController">
-  <pre>User Controls
-    loggedIn: {{loggedIn()}}
-    test: {{test}}
-  </pre>
+  
+  <div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
+  
+  <div class="fb-login button" ng-click="loginToFacebook()">Login to Facebook</div>
+  
+  <div id="status"></div>
+  
+  <div class="button" ng-click="debugUser=!debugUser">Debug Display: {{debugUser?'debug':'hide debugging'}}</div>
+  <div ng-hide="debugUser === true">
+    <pre>
+      loggedIn: {{loggedIn()}}
+    </pre>
+  </div>
 </div>

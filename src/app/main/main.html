@@ -13,12 +13,6 @@
   <input type="textarea" ng-model="message" placeholder="Message" />
   
   <div class="button" ng-click="messageInput($event)">Send Message</div>
-  
-  <div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
-  
-  <div class="fb-login button" ng-click="loginToFacebook()">Login to Facebook</div>
-  
-  <div id="status"></div>
 </div>
 
 <div class="loader status {{status().class}}">

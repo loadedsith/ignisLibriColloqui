@@ -10,7 +10,7 @@ angular.module('ignisLibriColloqui')
     
     $scope.loggedIn = function () {
       console.log('grubby Barber sailfish');
-      return UserService.loggedIn + 'test';
+      return UserService.loggedIn;
     };
     
     

@@ -10,8 +10,6 @@ angular.module('ignisLibriColloqui')
       return StatusService.status;
     };
     
-   
-    
     StatusService.setStatus(StatusService.loading);
 
     $scope.messageInput = function () {//extra attr; e
@@ -22,11 +20,7 @@ angular.module('ignisLibriColloqui')
       $scope.message = '';
     };
     
-    $scope.checkLoginState = FacebookService.checkLoginState;
     
-    $scope.loginToFacebook = FacebookService.login;
-    
-    if(FirebaseService.dataRef){//Sometimes disabled for debugging, re-enable in the service.
     if(FirebaseService.dataRef){//FirebaseService.dataRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
       
       FirebaseService.dataRef.on('child_added', function(snapshot) {
