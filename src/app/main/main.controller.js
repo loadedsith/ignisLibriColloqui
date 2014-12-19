@@ -5,10 +5,6 @@ angular.module('ignisLibriColloqui')
     
     $scope.messages = [];
     
-    $scope.loggedIn = function () {
-      return UserService.loggedIn;
-    };
-    
     //ensure that status calls reference the current status
     $scope.status = function () {
       return StatusService.status;

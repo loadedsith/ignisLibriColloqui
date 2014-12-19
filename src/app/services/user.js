@@ -3,7 +3,9 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     'use strict';
     var User = this;
     
-    console.log('$cookies', $cookies);
+    User.loggedIn = 'Testolia';
+    
+    console.log('User service test $cookies:', $cookies);
   
     return User;
   }]);
