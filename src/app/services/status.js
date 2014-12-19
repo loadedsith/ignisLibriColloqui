@@ -10,6 +10,27 @@ angular.module('ignisLibriColloqui.Status',[])
       text:'Default Status',
       class:'status-default'
     };
+    
+    Status.loading = {
+      text:'Loading...',
+      class:'status-loading',
+      animation:{
+        frames: '🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹',
+        randomize: true,
+        delay: 150
+      }
+    };
+  
+    Status.ready = {
+      text:'Ready',
+      class:'status-ready',
+      animation:{
+        frames:'🔥📖💬',
+        // frames:['😃','👍'],
+        delay:1500
+      }
+    };
+    
     /*    
     //Some examples of statuses
     Status.loading = {
