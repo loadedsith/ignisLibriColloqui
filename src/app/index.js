@@ -6,7 +6,7 @@ angular.module('ignisLibriColloqui', ['ui.router','ngCookies', 'ignisLibriColloq
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainController'
       });
 
     $urlRouterProvider.otherwise('/');
