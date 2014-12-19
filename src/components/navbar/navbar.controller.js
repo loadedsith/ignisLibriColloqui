@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('ignisLibriColloqui')
-  .controller('NavbarCtrl', function ($scope) {
+  .controller('NavbarController', ['$scope', function ($scope) {
     $scope.date = new Date();
-  });
+  }]);
