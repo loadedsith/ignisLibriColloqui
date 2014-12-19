@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ignisLibriColloqui')
-  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', 'UserService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService, UserService) {
+  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', 'UserService', 'UserManagementService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService, UserService) {
     
     $scope.messages = [];
     

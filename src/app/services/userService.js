@@ -1,5 +1,5 @@
 angular.module('ignisLibriColloqui.User', ['ngCookies'])
-  .service('UserService', ['$cookies','FacebookService', 'StatusService', function ($cookies, FacebookService, StatusService) {
+  .service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
     'use strict';
     var User = this;
     
@@ -33,6 +33,20 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       User.info = response;
       
       FacebookService.getUserImage(User.updateUserImage);
+      UserManagementService.userExists(User.info, User.userExists, User.userDoesntExist);
+    };
+
+    User.userExists = function () {
+      console.log('User service User Exists');
+      UserManagementService.getBlacklist(User.info.id, User.gotBlacklist);
+    };
+    
+    User.gotBlacklist = function (blacklist) {
+      console.log('User Service Got Blacklist:', blacklist);
+    }
+    
+    User.userDoesntExist = function () {
+      console.log('User service User DOESNT Exists');
     };
     
     User.loginCallback = function (response) {
@@ -50,6 +64,7 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       $cookies.userAuth = JSON.stringify(User.auth);
       User.loginStatus = '👍 Logged In!';
       User.loggedIn = true;
+      UserManagementService
     };
     
     
