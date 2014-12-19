@@ -4,12 +4,7 @@ angular.module('ignisLibriColloqui.Status',[])
     
     var Status = this;
     
-    Status.debug = false;
-    
-    Status.default = {
-      text:'Default Status',
-      class:'status-default'
-    };
+    Status.debug = true;
     
     Status.loading = {
       text:'Loading...',
@@ -69,7 +64,10 @@ angular.module('ignisLibriColloqui.Status',[])
       if (newStatus === undefined) {
         console.log('Set status failed; newStatus was undefined.');
       }
-      
+      if (Status.status === newStatus) {
+        //nothing has changed, so do nothing
+        return;
+      }
       Status.status = newStatus;
       Status.processLowercaseStatusFrames();
       if(typeof Status.status.callback === 'function'){

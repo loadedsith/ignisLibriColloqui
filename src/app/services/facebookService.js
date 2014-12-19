@@ -4,29 +4,67 @@ angular.module('ignisLibriColloqui.Facebook',[])
     'use strict';
     var facebookService = this;
  
-    facebookService.checkLoginState = function() {
-       console.log('facebookService.checkLoginState');
+    facebookService.checkLoginState = function(callback) {
+      console.log('facebookService.checkLoginState');
       if (typeof FB === 'undefined') {
         console.log('Facebook was not properly initialized');
         
       }else{
-        FB.getLoginStatus(function(response) {
-          facebookService.statusChangeCallback(response);
-        });
+        if(typeof callback === 'function'){
+          FB.getLoginStatus(callback);
+        }else{
+          FB.getLoginStatus(facebookService.statusChangeCallback);
+        }
+        
       }
     };
     
-    facebookService.login = function () {
-      FB.login(function (response) {
-        if (response.status === 'connected') {
-           // Logged into your app and Facebook.
-         } else if (response.status === 'not_authorized') {
-           // The person is logged into Facebook, but not your app.
-         } else {
-           // The person is not logged into Facebook, so we're not sure if
-           // they are logged into this app or not.
-         }
-      },{scope: 'public_profile,email'});
+    facebookService.apiCallbackWrapper = function (apiResource, callback) {
+      if(typeof callback === 'function'){
+        FB.api(apiResource, callback);
+      }else{
+        FB.api(apiResource, function(response) {
+          console.log('Stock api ' + apiResource + ': ', response);
+        });
+      }
+      
+    };
+    
+    facebookService.getUserImage = function (callback) {
+      console.log('FacebookService.getUserImage');
+      facebookService.apiCallbackWrapper('/me/picture', callback)
+    };
+    
+    facebookService.getUserInfo = function (callback) {
+      console.log('FacebookService.getUserInfo');
+      facebookService.apiCallbackWrapper('/me', callback);
+      
+    };
+    
+    facebookService.login = function (callback, scope) {
+      if (scope === undefined) {
+        scope = 'public_profile,email';
+      }
+      console.log('facebookService.login');
+      if (typeof callback === 'function') {
+        FB.login(callback,{scope: scope});
+        
+      }else{
+        FB.login(function (response) {
+                    console.log('facebookService.login response', response );
+          if (response.status === 'connected') {
+             // Logged into your app and Facebook.
+            console.log('facebookService.login Connected');
+           } else if (response.status === 'not_authorized') {
+             // The person is logged into Facebook, but not your app.
+            console.log('facebookService.login Not Auth');
+           } else {
+            console.log('facebookService.login other');
+             // The person is not logged into Facebook, so we're not sure if
+             // they are logged into this app or not.
+           }
+        },{scope: scope});
+      }
     };
     
     

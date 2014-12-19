@@ -1,15 +1,31 @@
 <div class="" ng-controller="UserController">
   
-  <div class="button" ng-click="checkLoginState()">Check Facebook Status</div>
+  <div class="tiny button" ng-click="checkLoginState()">Check Facebook Status</div>
   
-  <div class="fb-login button" ng-click="loginToFacebook()">Login to Facebook</div>
-  
+  <div class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div>
+
   <div id="status"></div>
   
-  <div class="button" ng-click="debugUser=!debugUser">Debug Display: {{debugUser?'debug':'hide debugging'}}</div>
+  <div class="button tiny secondary" ng-click="debugUser=!debugUser">Debug Display: {{debugUser?'debug':'hide debugging'}}</div>
   <div ng-hide="debugUser === true">
     <pre>
       loggedIn: {{loggedIn()}}
+      loginStatus: {{loginStatus()}}
+      email: {{user().email}}
+      first_name: {{user().first_name}}
+      gender: {{user().gender}}
+      id: {{user().id}}
+      last_name: {{user().last_name}}
+      link: {{user().link}}
+      https: {{user().https}}
+      locale: {{user().locale}}
+      middle_name: {{user().middle_name}}
+      name: {{user().name}}
+      timezone: {{user().timezone}}
+      updated_time: {{user().updated_time}}
+      verified: {{user().verified}}
     </pre>
+    profilePicture
+    <img ng-src="{{profilePicture().data.url||'http://placehold.it/50x50/&text=%3F🗽'}}">
   </div>
 </div>

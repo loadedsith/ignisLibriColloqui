@@ -5,13 +5,24 @@ angular.module('ignisLibriColloqui')
 
     console.log('UserController- UserService:', UserService);
     
+    $scope.checkLoginState = UserService.checkLoginState;
     
-    $scope.test = '123;';
+    $scope.loginToFacebook = UserService.loginToFacebook;
     
     $scope.loggedIn = function () {
-      console.log('grubby Barber sailfish');
       return UserService.loggedIn;
     };
     
+    $scope.loginStatus = function () {
+      return UserService.loginStatus;
+    };
+    
+    $scope.user = function () {
+      return UserService.info;
+    };
+    
+    $scope.profilePicture = function () {
+      return UserService.profilePicture;
+    };
     
   }]);
