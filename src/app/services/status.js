@@ -69,15 +69,15 @@ angular.module('ignisLibriColloqui.Status',[])
       if (newStatus === undefined) {
         console.log('Set status failed; newStatus was undefined.');
       }
-      if (Status.runningAnimator !== true){
-        Status.animator();
-      }
+      
       Status.status = newStatus;
       Status.processLowercaseStatusFrames();
       if(typeof Status.status.callback === 'function'){
         Status.status.callback();
       }
-
+      if (Status.runningAnimator !== true){
+        Status.animator();
+      }
     };
     
     Status.animation = {
