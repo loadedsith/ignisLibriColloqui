@@ -20,15 +20,18 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     User.loginToFacebook = function () {
       FacebookService.login(User.loginCallback);
     };
+    
     User.updateUserImage = function (response) {
       console.log('updateUserImage', response);
       if (response && !response.error) {
         User.profilePicture = response;
       }
     };
+    
     User.userInfoCallback = function (response) {
       console.log('average barracuda', response);
       User.info = response;
+      
       FacebookService.getUserImage(User.updateUserImage);
     };
     
@@ -44,7 +47,7 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
 
       var auth = response.authResponse;
       User.auth = response.authResponse;
-      $cookies.userAuth = User.auth;
+      $cookies.userAuth = JSON.stringify(User.auth);
       User.loginStatus = '👍 Logged In!';
       User.loggedIn = true;
     };
@@ -73,7 +76,7 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       User.loggedIn = true;
       User.auth = response.authResponse;
       if (User.auth !== $cookies.userAuth){
-        $cookies.userAuth = User.auth;
+        $cookies.userAuth = JSON.stringify(User.auth);
       }
     };
     
