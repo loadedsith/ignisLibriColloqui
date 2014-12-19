@@ -1,32 +1,34 @@
-angular.module("ignisLibriColloqui.Status",[])
+angular.module('ignisLibriColloqui.Status',[])
   .service('StatusService', ['$timeout', function ($timeout) {
+    'use strict';
+    
     var Status = this;
     
     Status.debug = false;
     
     Status.default = {
-      text:"Default Status",
-      class:"status-default"
+      text:'Default Status',
+      class:'status-default'
     };
     /*    
     //Some examples of statuses
     Status.loading = {
-      text:"Loading...",//[Optional] Label text 
-      class:"status-loading",// CSS Class available to angular, not automatically applied
+      text:'Loading...',//[Optional] Label text 
+      class:'status-loading',// CSS Class available to angular, not automatically applied
       callback: function () {
         console.log('Im a callback!');
       }
       animation:{//[Optional] Requires frames and delay. Use either a string of frames:
-        frames:"🌑🌒🌓🌔🌕🌖🌗🌘",
+        frames:'🌑🌒🌓🌔🌕🌖🌗🌘',
         // or Manual a frames array eg;
-        //frames: ["Loading",
-        //  "Loading",
-        //  "Loading Loading",
-        //  "🌔 Loading",
-        //  "🌕 Loading",
-        //  "🌖 Loading",
-        //  "🌗 Loading",
-        //  "🌘 Loading",
+        //frames: ['Loading',
+        //  'Loading',
+        //  'Loading Loading',
+        //  '🌔 Loading',
+        //  '🌕 Loading',
+        //  '🌖 Loading',
+        //  '🌗 Loading',
+        //  '🌘 Loading',
         //  function(){return $scope.message}// You can even use a function call as a frame. Result should be a string.
         //],
         delay:10// in ms
@@ -58,15 +60,15 @@ angular.module("ignisLibriColloqui.Status",[])
     };
     
     Status.animation = {
-      max : function(){return Status.status.animation.length||0},
+      max : function(){return (Status.status.animation.length || 0);},
       startTime : Date.now(),
       
       charsToFrames : function (str) {
         var split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
         var arr = [];
           for (var i=0; i < split.length; i++) {
-            var char = split[i]
-            if (char !== "") {
+            var char = split[i];
+            if (char !== '') {
               arr.push(char);
             }
           }
@@ -106,7 +108,7 @@ angular.module("ignisLibriColloqui.Status",[])
           }
           
           var theFrame = frames[frameId];
-          if (typeof theFrame === "function") {
+          if (typeof theFrame === 'function') {
             Status.status.currentFrame = theFrame();
           } else {
             Status.status.currentFrame = theFrame;
@@ -114,7 +116,7 @@ angular.module("ignisLibriColloqui.Status",[])
           
           window.requestAnimationFrame(Status.animation.interval);
         
-        },0)
+        },0);
       }
     };
     
@@ -127,12 +129,12 @@ angular.module("ignisLibriColloqui.Status",[])
         //there is a status, but it has no animation
         return;
       }
-      if (typeof Status.status.animation.frames === "string") {
+      if (typeof Status.status.animation.frames === 'string') {
         Status.animation.frames = Status.animation.charsToFrames(Status.status.animation.frames).reverse();
       } else {
         Status.animation.frames = Status.status.animation.frames.reverse();
       }
-    }
+    };
     
     Status.animator = function () {
       if (Status.status === undefined){
@@ -157,6 +159,6 @@ angular.module("ignisLibriColloqui.Status",[])
         }
         window.requestAnimationFrame(Status.animation.interval);
       }
-    }
+    };
 
   }]);

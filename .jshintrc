@@ -2,6 +2,7 @@
   "node": true,
   "esnext": true,
   "bitwise": true,
+  "browser": true,
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,
@@ -20,6 +21,12 @@
   "white": true,
   "validthis": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "React":false,
+    "MYLIST":true,
+    "Firebase":false,
+    "FB":false,
+    "FB_API_KEY":true,
+    "testAPI":false
   }
 }

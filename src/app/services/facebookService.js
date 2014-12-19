@@ -1,4 +1,5 @@
 window.fbAsyncInit = function() {
+  'use strict';
   FB.init({
     appId      : FB_API_KEY,
     xfbml      : true,
@@ -6,17 +7,21 @@ window.fbAsyncInit = function() {
   });
 };
 
-(function(d, s, id){
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement(s); js.id = id;
-   js.src = "//connect.facebook.net/en_US/sdk.js";
-   fjs.parentNode.insertBefore(js, fjs);
+/*jshint ignore:start */
+(function (d, s, id) {
+  'use strict';
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
  }(document, 'script', 'facebook-jssdk'));
+/*jshint ignore:end */
 
 
-angular.module("ignisLibriColloqui.Facebook",[])
+angular.module('ignisLibriColloqui.Facebook',[])
   .service('FacebookService',function () {
+    'use strict';
     var facebookService = this;
  
     facebookService.checkLoginState = function() {
@@ -29,7 +34,7 @@ angular.module("ignisLibriColloqui.Facebook",[])
           facebookService.statusChangeCallback(response);
         });
       }
-    }
+    };
     
     facebookService.login = function () {
       FB.login(function (response) {
@@ -41,8 +46,8 @@ angular.module("ignisLibriColloqui.Facebook",[])
            // The person is not logged into Facebook, so we're not sure if
            // they are logged into this app or not.
          }
-      },{scope: 'public_profile,email'})
-    }
+      },{scope: 'public_profile,email'});
+    };
     
     
     facebookService.statusChangeCallback = function(response) {
@@ -54,7 +59,7 @@ angular.module("ignisLibriColloqui.Facebook",[])
        // for FB.getLoginStatus().
        if (response.status === 'connected') {
          // Logged into your app and Facebook.
-         testAPI();
+         //testAPI();
        } else if (response.status === 'not_authorized') {
          // The person is logged into Facebook, but not your app.
          document.getElementById('status').innerHTML = 'Please log ' +
@@ -65,7 +70,7 @@ angular.module("ignisLibriColloqui.Facebook",[])
          document.getElementById('status').innerHTML = 'Please log ' +
            'into Facebook.';
        }
-     }
+     };
   
     return facebookService;
   });

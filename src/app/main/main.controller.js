@@ -1,42 +1,48 @@
 'use strict';
 
 angular.module('ignisLibriColloqui')
-  .controller('MainCtrl', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService) {
+  .controller('MainCtrl', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', 'UserService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService, UserService) {
+    
     $scope.messages = [];
     
+    $scope.loggedIn = function () {
+      return UserService.loggedIn;
+    };
+    
+    //ensure that status calls reference the current status
     $scope.status = function () {
       return StatusService.status;
     };
     
     StatusService.loading = {
-      text:"Loading...",
-      class:"status-loading",
+      text:'Loading...',
+      class:'status-loading',
       animation:{
-        frames: "🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹",
+        frames: '🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹',
         randomize: true,
         delay: 150
       }
     };
   
     StatusService.ready = {
-      text:"Ready",
-      class:"status-ready",
+      text:'Ready',
+      class:'status-ready',
       animation:{
         frames:'🔥📖💬',
-        // frames:["😃","👍"],
+        // frames:['😃','👍'],
         delay:1500
       }
     };
     
     StatusService.setStatus(StatusService.loading);
-     
-    $scope.messageInput = function (e) {
+
+    $scope.messageInput = function () {//extra attr; e
       FirebaseService.dataRef.push({
         name: $scope.name,
         message: $scope.message
       });
-      $scope.message = "";
-    }
+      $scope.message = '';
+    };
     
     $scope.checkLoginState = FacebookService.checkLoginState;
     
@@ -68,14 +74,12 @@ angular.module('ignisLibriColloqui')
             value.key = key;
             $scope.messages.push(value);
           });
-          
-        }, 0)
+
+        }, 0);
+        
       });
       
     }
-    StatusService.setStatus(StatusService.loading);
-    $timeout(function () {
-          StatusService.setStatus(StatusService.ready);
-    },1000)
+
 
   }]);
