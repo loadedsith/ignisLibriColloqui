@@ -27,6 +27,7 @@ angular.module('ignisLibriColloqui')
     $scope.loginToFacebook = FacebookService.login;
     
     if(FirebaseService.dataRef){//Sometimes disabled for debugging, re-enable in the service.
+    if(FirebaseService.dataRef){//FirebaseService.dataRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
       
       FirebaseService.dataRef.on('child_added', function(snapshot) {
         //receive new message
