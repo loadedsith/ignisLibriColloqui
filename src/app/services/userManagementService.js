@@ -20,9 +20,8 @@ angular.module('ignisLibriColloqui.UserManagement',[])
       
     };
     
-    UserManagement.getMatches = function (userId, blacklist, callback) {
-      var interests = [1,2];//TODO hook up interests
-      return MatchMakerService.createMatchList(blacklist, interests,
+    UserManagement.getMatches = function (userId, blacklist, topics, callback) {
+      return MatchMakerService.createMatchList(blacklist, topics,
          function (response) {
           console.log('getMatches success', response);
           callback(response);
@@ -68,7 +67,7 @@ angular.module('ignisLibriColloqui.UserManagement',[])
         }else{
           console.log('user exists');
           if (typeof success === 'function'){
-            success(user);
+            success(value.val());
           }
         }
       });

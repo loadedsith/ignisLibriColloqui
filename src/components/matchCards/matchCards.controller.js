@@ -6,6 +6,7 @@ angular.module('ignisLibriColloqui')
       if ( UserService.matches === undefined){
         return [];
       }
+
       return UserService.matches[UserService.currentTopic];
     };
     

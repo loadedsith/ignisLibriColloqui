@@ -37,8 +37,17 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       UserManagementService.userExists(User.info, User.userExists, User.userDoesntExist);
     };
 
-    User.userExists = function () {
+    User.userExists = function (user) {
       console.log('User service User Exists');
+
+      var kiis = Object.keys(user);
+
+      var u = user[kiis[0]];
+
+      User.topics = u.topics ? u.topics : [];
+      User.currentTopic = User.topics ? User.topics[0] : '-1';
+      User.blacklist = u.blacklist ? u.blacklist : [];
+
       UserManagementService.getBlacklist(User.info.id, User.gotBlacklist);
     };
     
@@ -48,7 +57,7 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       User.blacklist = blacklist;
       //add the current user to the blacklist
       User.blacklist.push(String(User.info.id));
-      UserManagementService.getMatches(User.info.id, User.blacklist, User.gotMatches);
+      UserManagementService.getMatches(User.info.id, User.blacklist, User.topics, User.gotMatches);
     };
     
     User.gotMatches = function (matches) {
@@ -71,8 +80,9 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       FacebookService.getUserInfo(User.userInfoCallback);
 
       User.auth = response.authResponse;
-      User.loginStatus = '👍 Logged In!';
+
       User.loggedIn = true;
+      User.loginStatus = '👍 Logged In!';
 
       $cookies.userAuth = JSON.stringify(User.auth);
 
