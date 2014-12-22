@@ -54,9 +54,9 @@ angular.module('ignisLibriColloqui.UserManagement',[])
             success(user);
           }
         }
-      })
+      });
     };
-        return UserManagement;
+    return UserManagement;
   }]);
   
   

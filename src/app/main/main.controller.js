@@ -2,9 +2,7 @@
 
 angular.module('ignisLibriColloqui')
   .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', 'UserService', 'UserManagementService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService, UserService) {
-    
-    $scope.messages = [];
-    
+        
     //ensure that status calls reference the current status
     $scope.status = function () {
       return StatusService.status;
@@ -19,8 +17,8 @@ angular.module('ignisLibriColloqui')
       });
       $scope.message = '';
     };
-        
-    if(FirebaseService.dataRef){//FirebaseService.dataRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
+
+    if (FirebaseService.dataRef) {//FirebaseService.dataRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
       
       FirebaseService.dataRef.on('child_added', function(snapshot) {
         //receive new message

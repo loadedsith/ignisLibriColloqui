@@ -15,7 +15,7 @@ angular.module('ignisLibriColloqui')
         return false;
       }
       return true;
-    }
+    };
     
     $scope.loginToFacebook = UserService.loginToFacebook;
     

@@ -29,9 +29,8 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     };
     
     User.userInfoCallback = function (response) {
-      console.log('average barracuda', response);
+      // console.log('User Info Found: ', response);
       User.info = response;
-      
       FacebookService.getUserImage(User.updateUserImage);
       UserManagementService.userExists(User.info, User.userExists, User.userDoesntExist);
     };
@@ -59,12 +58,12 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
 
       FacebookService.getUserInfo(User.userInfoCallback);
 
-      var auth = response.authResponse;
       User.auth = response.authResponse;
-      $cookies.userAuth = JSON.stringify(User.auth);
       User.loginStatus = '👍 Logged In!';
       User.loggedIn = true;
-      UserManagementService
+
+      $cookies.userAuth = JSON.stringify(User.auth);
+
     };
     
     
