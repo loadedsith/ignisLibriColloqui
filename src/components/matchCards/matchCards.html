@@ -8,7 +8,10 @@
         ng-repeat="card in matches()"
         swing-on-throwoutleft="swipeLeft"
         swing-on-throwoutright="swipeRight"
-        ></li>
+        >
+      <img ng-src="{{getUserImageById(card)}}" alt="" />
+      {{userId}}
+      </li>
     </ul>
   </div>
   <div class="profileWrapper">

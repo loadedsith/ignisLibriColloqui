@@ -33,11 +33,14 @@ angular.module('ignisLibriColloqui.UserManagement',[])
     UserManagement.getBlacklist = function (userId, callback) {
       FirebaseService.usersRef.orderByChild('id').equalTo(userId).once('value', function(value){
         if(typeof callback === 'function'){
+          var numChildren = value.numChildren();
+          if (numChildren === 0) {
+            console.log('There were no users with the user id: ', userId);
+          }
+          if (numChildren > 1) {
+            console.log('There were multiple users with the same user id: ', userId);
+          }
           value.forEach(function(a){
-            //this should only happen once, but it seems like it might be smelly, so im catching a second run;
-            if (value.numChildren() > 1) {
-              console.log('There were multiple users with the same user id: ', userId);
-            }
             callback(a.val().blacklist);
           });
         }

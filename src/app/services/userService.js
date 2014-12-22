@@ -2,6 +2,8 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
   .service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
     'use strict';
     var User = this;
+
+    User.currentTopic = 0;
     
     User.loggedIn = false;
     
@@ -12,7 +14,7 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     StatusService.ready.callback = function () {
       User.checkLoginState();
     };
-    
+
     User.checkLoginState = function () {
       FacebookService.checkLoginState(User.updateLoginStateCallback);
     };
@@ -42,8 +44,14 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     
     User.gotBlacklist = function (blacklist) {
       console.log('UserService.GotBlacklist: ', blacklist);
-      UserManagementService.getMatches(User.info.id, blacklist, User.gotMatches);
+      
       User.blacklist = blacklist;
+
+      //add the current user to the blacklist
+      User.blacklist.push(User.info.id);
+      
+      UserManagementService.getMatches(User.info.id, User.blacklist, User.gotMatches);
+
     };
     
     User.gotMatches = function (matches) {

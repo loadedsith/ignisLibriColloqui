@@ -35,21 +35,37 @@ angular.module('ignisLibriColloqui.MatchMaker',[])
     
 
     MatchMaker.blacklistMatchList = function (blacklist, topics) {
-      var results = [];
-      
+      var results = {};
+      for (var i = topics.length - 1; i >= 0; i--) {
+        var topic = topics[i];
+        //start with all the user's topics
+        var matchesForTopic = MatchMaker.matchList[topic];
 
-      for (var topic in topics){
-        var itIsBlacklisted = false;
-        for (var blacklisted in blacklist){
-          if (blacklisted === MatchMaker.matchList[topic]){
-            itIsBlacklisted = true;
+        //if there are any results for this topic
+        if (matchesForTopic !== undefined) {
+          //go through the black list
+          for (var blacklisted in blacklist){
+            //a flag to remove the topic if needed
+            var itIsBlacklisted = false;
+            
+            for (var matchForTopic in matchesForTopic){
+              //go through the matched topic's user ids
+              if (blacklisted === matchForTopic){
+                //flag this matchForTopic for removal
+                console.log('blacklisted flagged for removal', blacklisted);
+                itIsBlacklisted = true;
+              }
+            }
+            //now that we arent looping over the topics,
+            // check if the current blacklist object should be removed from the matches
+            if(itIsBlacklisted === true){
+              // remove blacklist object from match topic
+              matchesForTopic.pop(blacklisted);
+            }
           }
         }
-        if (itIsBlacklisted === false){
-          results.push(MatchMaker.matchList[topic]);
-        }
       }
-      return results;
+      return MatchMaker.matchList;
     };
     
     MatchMaker.createMatchList = function (blacklist, topics, success) {

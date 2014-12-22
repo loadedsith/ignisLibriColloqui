@@ -30,6 +30,11 @@ angular.module('ignisLibriColloqui.Facebook',[])
       
     };
     
+    facebookService.getUserImageById = function (id, callback) {
+      console.log('FacebookService.getUserImage');
+      facebookService.apiCallbackWrapper('/'+id+'/picture', callback);
+    };
+    
     facebookService.getUserImage = function (callback) {
       console.log('FacebookService.getUserImage');
       facebookService.apiCallbackWrapper('/me/picture', callback);
@@ -51,7 +56,7 @@ angular.module('ignisLibriColloqui.Facebook',[])
         
       }else{
         FB.login(function (response) {
-                    console.log('facebookService.login response', response );
+          console.log('facebookService.login response', response );
           if (response.status === 'connected') {
              // Logged into your app and Facebook.
             console.log('facebookService.login Connected');
