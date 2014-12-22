@@ -17,6 +17,8 @@
   <div class="button" ng-click="messageInput($event)">Send Message</div>
 </div>
 
+matchCards <div ng-include="'components/matchCards/matchCards.html'"></div> /matchCards 
+
 <div class="loader status {{status().class}}">
   <p class="animation">{{status().currentFrame}}</p>
   <p class="statusLabel">{{status().text}}</p>

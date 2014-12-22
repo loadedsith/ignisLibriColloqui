@@ -5,12 +5,14 @@ var MYLIST = React.createClass({
   render: function() {
     'use strict';
     var data = this.props.data;
-
-    var rows = data.map(function (datum) {
-      /*jshint ignore:start */
-      return <p key={datum.key}>{datum.name}:{datum.message}</p>;
-      /*jshint ignore:end */
-    });
+    
+    if (data !== undefined) {
+      var rows = data.map(function (datum) {
+        /*jshint ignore:start */
+        return <p key={datum.key}>{datum.name}:{datum.message}</p>;
+        /*jshint ignore:end */
+      });
+    }
 
     return (
       /*jshint ignore:start */

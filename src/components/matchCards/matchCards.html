@@ -1,0 +1,17 @@
+<div ng-controller="MatchCardsController">
+  <p>Match Cards</p>
+  <pre>matches:{{matches()}}</pre>
+  <div class="cardsWrapper">
+    <ul class="cards" swing-stack>
+      <li class="card" 
+        swing-card
+        ng-repeat="card in matches()"
+        swing-on-throwoutleft="swipeLeft"
+        swing-on-throwoutright="swipeRight"
+        ></li>
+    </ul>
+  </div>
+  <div class="profileWrapper">
+    <div class="profile"></div>
+  </div>
+</div>

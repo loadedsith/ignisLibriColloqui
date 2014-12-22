@@ -1,5 +1,5 @@
 angular.module('ignisLibriColloqui.UserManagement',[])
-  .service('UserManagementService', ['FirebaseService', function (FirebaseService) {
+  .service('UserManagementService', ['MatchMakerService','FirebaseService', function (MatchMakerService, FirebaseService) {
     'use strict';
     var UserManagement = this;
     
@@ -9,28 +9,41 @@ angular.module('ignisLibriColloqui.UserManagement',[])
         return;
       }
       var sanitizedUser = {
-        name: user.first_name + " " + user.last_name,
+        name: user.first_name + ' ' + user.last_name,// jshint ignore:line
         email: user.email,
         id: user.id,
-        blacklist: [-1,0]
-      }
+        blacklist: [-1,0],
+        topics: [0,1]
+      };
+      
       FirebaseService.usersRef.push(sanitizedUser);
-    }
-    UserManagement.getMatches = function (userId, callback) {
       
     };
+    
+    UserManagement.getMatches = function (userId, blacklist, callback) {
+      var interests = [1,2];//TODO hook up interests
+      return MatchMakerService.createMatchList(blacklist, interests,
+         function (response) {
+          console.log('getMatches success', response);
+          callback(response);
+        }
+      );
+    };
+    
     UserManagement.getBlacklist = function (userId, callback) {
-      FirebaseService.usersRef.orderByChild("id").equalTo(userId).once('value', function(value){
+      FirebaseService.usersRef.orderByChild('id').equalTo(userId).once('value', function(value){
         if(typeof callback === 'function'){
           value.forEach(function(a){
-            var blacklist = a.val().blacklist;
-            console.log('got blacklist:', blacklist);
-            callback(blacklist)
+            //this should only happen once, but it seems like it might be smelly, so im catching a second run;
+            if (value.numChildren() > 1) {
+              console.log('There were multiple users with the same user id: ', userId);
+            }
+            callback(a.val().blacklist);
           });
         }
       });
       //Something like this should work for live matching
-      // FirebaseService.usersRef.orderByChild("id").equalTo(userId).once('on', function(value){
+      // FirebaseService.usersRef.orderByChild('id').equalTo(userId).once('on', function(value){
       //   if(typeof callback === 'function'){
       //     value.forEach(function(a){
       //       var blacklist = a.val().blacklist;
@@ -39,12 +52,13 @@ angular.module('ignisLibriColloqui.UserManagement',[])
       //     });
       //   }
       // });
-    }
+    };
+    
     UserManagement.userExists = function (user, success, failure) {
-      FirebaseService.usersRef.orderByChild("id").equalTo(user.id).once('value', function(value){
+      FirebaseService.usersRef.orderByChild('id').equalTo(user.id).once('value', function(value){
         if(value.val() === null){
           console.log('user doesnt exist, creating');
-          UserManagement.createUser(user)
+          UserManagement.createUser(user);
           if (typeof failure === 'function'){
             failure(user);
           }

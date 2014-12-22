@@ -32,7 +32,7 @@ angular.module('ignisLibriColloqui.Facebook',[])
     
     facebookService.getUserImage = function (callback) {
       console.log('FacebookService.getUserImage');
-      facebookService.apiCallbackWrapper('/me/picture', callback)
+      facebookService.apiCallbackWrapper('/me/picture', callback);
     };
     
     facebookService.getUserInfo = function (callback) {

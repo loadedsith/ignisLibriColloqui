@@ -41,8 +41,15 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
     };
     
     User.gotBlacklist = function (blacklist) {
-      console.log('User Service Got Blacklist:', blacklist);
-    }
+      console.log('UserService.GotBlacklist: ', blacklist);
+      UserManagementService.getMatches(User.info.id, blacklist, User.gotMatches);
+      User.blacklist = blacklist;
+    };
+    
+    User.gotMatches = function (matches) {
+      console.log('UserService.gotMatches: ', matches);
+      User.matches = matches;
+    };
     
     User.userDoesntExist = function () {
       console.log('User service User DOESNT Exists');

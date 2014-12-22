@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ignisLibriColloqui', ['ui.router','ngCookies', 'ignisLibriColloqui.Facebook','ignisLibriColloqui.User','ignisLibriColloqui.UserManagement', 'ignisLibriColloqui.Firebase', 'ignisLibriColloqui.Status', 'ignisLibriColloqui.Directives'])
+angular.module('ignisLibriColloqui', ['ui.router','ngCookies','gajus.swing', 'ignisLibriColloqui.Facebook','ignisLibriColloqui.User','ignisLibriColloqui.UserManagement', 'ignisLibriColloqui.Firebase', 'ignisLibriColloqui.Status', 'ignisLibriColloqui.Directives', 'ignisLibriColloqui.MatchMaker'])
   .config(function ($stateProvider, $urlRouterProvider) {
     
     $stateProvider
