@@ -35,7 +35,6 @@ angular.module('ignisLibriColloqui.MatchMaker',[])
     
 
     MatchMaker.blacklistMatchList = function (blacklist, topics) {
-      var results = {};
       for (var i = topics.length - 1; i >= 0; i--) {
         var topic = topics[i];
         //start with all the user's topics

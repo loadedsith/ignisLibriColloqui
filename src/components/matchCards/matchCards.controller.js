@@ -18,24 +18,19 @@ angular.module('ignisLibriColloqui')
       if ($scope.images[id] === undefined){
         //set a loading image, prevents this from getting called while the image is being loaded
         $scope.images[id]='http://placehold.it/50x50';
-        
-        debugger;
-        
         //get the actual image, will be set when callback is fired
         FacebookService.getUserImageById(id, function (imageUrl) {
           if (imageUrl.error === undefined){
             $timeout(function () {
-              debugger;
               $scope.images[id] = imageUrl.data.url;
             },0);
           }else{
-            console.log('imageUrl', imageUrl);
-            debugger;
+            console.log('imageUrl.error', imageUrl.error);
           }
         });
       }
 
-      return $scope.images[id]
+      return $scope.images[id];
 
     };
     
