@@ -1,16 +1,16 @@
-<div ng-controller="MatchCardsController">
+<div ng-controller="MatchCardsController" id="matchCards" ng-show="matches().length > 0">
   <p>Match Cards</p>
   <pre>matches:{{matches()}}</pre>
   <div class="cardsWrapper">
-    <ul class="cards" swing-stack>
+    <ul class="cards stack" swing-stack>
       <li class="card" 
         swing-card
         ng-repeat="card in matches()"
-        swing-on-throwoutleft="swipeLeft"
-        swing-on-throwoutright="swipeRight"
+        swing-on-throwoutleft="swipeLeft(eventName, $event)"
+        swing-on-throwoutright="swipeRight(eventName, $event)"
         >
-      <img ng-src="{{getUserImageById(card)}}" alt="" />
-      {{userId}}
+        <img ng-src="{{getUserImageById(card)}}" alt="" />
+        {{userId}}
       </li>
     </ul>
   </div>

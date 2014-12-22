@@ -25,7 +25,7 @@ angular.module('ignisLibriColloqui')
               $scope.images[id] = imageUrl.data.url;
             },0);
           }else{
-            console.log('imageUrl.error', imageUrl.error);
+            console.log('imageUrl.error', id, imageUrl.error);
           }
         });
       }

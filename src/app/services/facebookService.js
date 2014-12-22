@@ -31,8 +31,8 @@ angular.module('ignisLibriColloqui.Facebook',[])
     };
     
     facebookService.getUserImageById = function (id, callback) {
-      console.log('FacebookService.getUserImage');
-      facebookService.apiCallbackWrapper('/'+id+'/picture', callback);
+      console.log('FacebookService.getUserImageById: ', id);
+      facebookService.apiCallbackWrapper('/' + id + '/picture', callback);
     };
     
     facebookService.getUserImage = function (callback) {

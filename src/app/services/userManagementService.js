@@ -1,5 +1,5 @@
 angular.module('ignisLibriColloqui.UserManagement',[])
-  .service('UserManagementService', ['MatchMakerService','FirebaseService', function (MatchMakerService, FirebaseService) {
+  .service('UserManagementService', ['MatchMakerService', 'FirebaseService', function (MatchMakerService, FirebaseService) {
     'use strict';
     var UserManagement = this;
     
@@ -11,7 +11,7 @@ angular.module('ignisLibriColloqui.UserManagement',[])
       var sanitizedUser = {
         name: user.first_name + ' ' + user.last_name,// jshint ignore:line
         email: user.email,
-        id: user.id,
+        id: String(user.id),
         blacklist: [-1,0],
         topics: [0,1]
       };

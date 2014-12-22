@@ -46,12 +46,9 @@ angular.module('ignisLibriColloqui.User', ['ngCookies'])
       console.log('UserService.GotBlacklist: ', blacklist);
       
       User.blacklist = blacklist;
-
       //add the current user to the blacklist
-      User.blacklist.push(User.info.id);
-      
+      User.blacklist.push(String(User.info.id));
       UserManagementService.getMatches(User.info.id, User.blacklist, User.gotMatches);
-
     };
     
     User.gotMatches = function (matches) {

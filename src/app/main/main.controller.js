@@ -11,16 +11,16 @@ angular.module('ignisLibriColloqui')
     StatusService.setStatus(StatusService.loading);
 
     $scope.messageInput = function () {//extra attr; e
-      FirebaseService.dataRef.push({
+      FirebaseService.chatRef.push({
         name: $scope.name,
         message: $scope.message
       });
       $scope.message = '';
     };
 
-    if (FirebaseService.dataRef) {//FirebaseService.dataRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
+    if (FirebaseService.chatRef) {//FirebaseService.chatRef maybe disabled for debugging, re-enable in the service, if that was intentional, move on without it.
       
-      FirebaseService.dataRef.on('child_added', function(snapshot) {
+      FirebaseService.chatRef.on('child_added', function(snapshot) {
         //receive new message
         // will be called for each new message
         $timeout(function () {
@@ -30,7 +30,7 @@ angular.module('ignisLibriColloqui')
         }, 0);
       });
     
-      FirebaseService.dataRef.on('value', function(snapshot) {
+      FirebaseService.chatRef.on('value', function(snapshot) {
         //Initialize messages
         $timeout(function () {
           
