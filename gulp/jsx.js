@@ -4,8 +4,9 @@ var react = require('gulp-react');
 var rename = require('gulp-rename');
 
 gulp.task('jsx', function() {
-  return gulp.src('./src/app/react/messages.js')
+  
+  return gulp.src('src/{app,components}/**/*.jsx')
     .pipe(react())
-    .pipe(rename('messages.post.js'))
-    .pipe(gulp.dest('./src/app/react'));
+    .pipe(rename({extname:'.js'}))
+    .pipe(gulp.dest('./.tmp'));
 });
