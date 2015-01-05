@@ -9,6 +9,7 @@ angular.module('ignisLibriColloqui', ['ui.router','ngCookies','gajus.swing', 'ig
         templateUrl: 'app/main/main.html',
         controller: 'MainController'
       });
-
+      
     $urlRouterProvider.otherwise('/');
   });
+
