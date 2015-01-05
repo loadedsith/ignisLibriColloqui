@@ -15,11 +15,12 @@ module.exports = function(config) {
 
     autoWatch : false,
 
-    frameworks: ['jasmine','jsx'],
+    frameworks: ['jasmine'],
 
     preprocessors: {
-      '**/*.jsx': ['jsx']
-    }
+      '**/*.jsx': ['react']
+    },
+    
     browsers : ['PhantomJS'],
 
     plugins : [
