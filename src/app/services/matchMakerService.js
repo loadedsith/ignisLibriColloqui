@@ -1,4 +1,5 @@
-angular.module('ignisLibriColloqui.MatchMaker',[])
+define(['angular'],function () {
+  return angular.module('ignisLibriColloqui.MatchMaker',[])
   .service('MatchMakerService', ['FirebaseService', function (FirebaseService) {
     'use strict';
     var MatchMaker = this;
@@ -82,3 +83,4 @@ angular.module('ignisLibriColloqui.MatchMaker',[])
     
     return MatchMaker;
   }]);
+})

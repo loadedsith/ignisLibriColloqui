@@ -1,5 +1,7 @@
-angular.module('ignisLibriColloqui.Status',[])
-  .service('StatusService', ['$timeout', function ($timeout) {
+
+define(['angular'],function () {
+  return angular.module('ignisLibriColloqui.Status',[])
+    .service('StatusService', ['$timeout', function ($timeout) {
     'use strict';
     
     var Status = this;
@@ -180,4 +182,5 @@ angular.module('ignisLibriColloqui.Status',[])
       }
     };
 
-  }]);
+  }]);  
+})
