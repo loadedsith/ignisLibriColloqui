@@ -1,6 +1,5 @@
-
-angular.module('ignisLibriColloqui')
-  .controller('MatchCardsController', ['$scope', '$timeout', 'UserService','FacebookService', function ($scope, $timeout, UserService, FacebookService) {
+define(['controllerModule','angular'],function (controllers) {
+  return controllers.controller('MatchCardsController', ['$scope', '$timeout', 'UserService','FacebookService', function ($scope, $timeout, UserService, FacebookService) {
     'use strict';
     $scope.matches = function () {
       if ( UserService.matches === undefined){
@@ -46,3 +45,4 @@ angular.module('ignisLibriColloqui')
     $scope.date = new Date();
     
   }]);
+});

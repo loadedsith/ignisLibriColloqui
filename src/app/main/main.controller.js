@@ -1,8 +1,8 @@
 'use strict';
-
-angular.module('ignisLibriColloqui')
-  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'FirebaseService', 'StatusService', function ($scope, $timeout,  FacebookService, FirebaseService, StatusService) {
-        
+define(['controllerModule','angular'],function (controllers) {
+return controllers
+  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'StatusService','FirebaseService', function ($scope, $timeout, FacebookService, StatusService, FirebaseService) {//,
+    console.log('MainController');
     //ensure that status calls reference the current status
     $scope.status = function () {
       return StatusService.status;
@@ -52,4 +52,5 @@ angular.module('ignisLibriColloqui')
     }
 
 
-  }]);
+  }]);  
+})
