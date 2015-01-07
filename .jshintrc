@@ -22,11 +22,13 @@
   "validthis": true,
   "globals": {
     "angular": false,
-    "React":false,
-    "MYLIST":true,
-    "Firebase":false,
-    "FB":false,
-    "FB_API_KEY":true,
-    "testAPI":false
+    "define": true,
+    "FB": false,
+    "FB_API_KEY": true,
+    "Firebase": false,
+    "MYLIST": true,
+    "React": false,
+    "require": true,
+    "testAPI": false
   }
 }
