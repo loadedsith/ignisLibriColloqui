@@ -20,7 +20,7 @@ gulp.task('styles', ['wiredep'],  function () {
     .pipe($.size());
 });
 
-var notify = require("gulp-notify");
+var notify = require('gulp-notify');
 
 gulp.task('scripts', function() {
   gulp.src('src/{app,components}/**/*.js')
@@ -34,10 +34,10 @@ gulp.task('scripts', function() {
 
       var errors = file.jshint.results.map(function (data) {
         if (data.error) {
-          return "(" + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
+          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
         }
-      }).join("\n");
-      return file.relative + " (" + file.jshint.results.length + " errors)\n" + errors;
+      }).join('\n');
+      return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
     }));
 });
 
