@@ -1,7 +1,7 @@
-define(['angular','firebase'], function (angular, firebase) {
+define(['angular','firebase'], function (angular, Firebase) {
+  'use strict';
   angular.module('ignisLibriColloqui.Firebase',[])
     .service('FirebaseService', function () {
-      'use strict';
       var firebaseService = this;
       firebaseService.matchesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/interests');
       firebaseService.chatRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/chats');
@@ -10,5 +10,5 @@ define(['angular','firebase'], function (angular, firebase) {
       return firebaseService;
     });  
     return angular.module('ignisLibriColloqui.Firebase');
-})
+});
 

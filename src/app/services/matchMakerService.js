@@ -1,7 +1,7 @@
 define(['angular'],function () {
+  'use strict';
   return angular.module('ignisLibriColloqui.MatchMaker',[])
   .service('MatchMakerService', ['FirebaseService', function (FirebaseService) {
-    'use strict';
     var MatchMaker = this;
     
     MatchMaker.matchesRef = FirebaseService.matchesRef;
@@ -83,4 +83,4 @@ define(['angular'],function () {
     
     return MatchMaker;
   }]);
-})
+});

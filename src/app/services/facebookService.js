@@ -1,8 +1,8 @@
 define(['FB','angular'],function () {
   //Facebook's vendor codes are located below
+  'use strict';
    return angular.module('ignisLibriColloqui.Facebook',[])
     .service('FacebookService', function(){
-      'use strict';
 
       var facebookService = this;
  

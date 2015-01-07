@@ -1,4 +1,5 @@
 define(['./ignisLibriColloqui'],function(ignisLibriColloqui){
+  'use strict';
   return ignisLibriColloqui.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
@@ -8,5 +9,5 @@ define(['./ignisLibriColloqui'],function(ignisLibriColloqui){
       });
       
     $urlRouterProvider.otherwise('/');
-  }])
+  }]);
 });

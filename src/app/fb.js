@@ -1,4 +1,5 @@
 define(['facebook'], function(){
+  'use strict';
   FB.init({
     appId      : FB_API_KEY,
   });

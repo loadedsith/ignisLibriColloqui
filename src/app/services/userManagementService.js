@@ -1,7 +1,7 @@
 define(['angular'],function () {
+  'use strict';
   return angular.module('ignisLibriColloqui.UserManagement',[])
     .service('UserManagementService', ['MatchMakerService', 'FirebaseService', function (MatchMakerService, FirebaseService) {
-      'use strict';
       var UserManagement = this;
     
       UserManagement.createUser = function (user) {
