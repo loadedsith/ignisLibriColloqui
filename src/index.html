@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" ng-app="ignisLibriColloqui">
+<html class="no-js">
   <head>
     <meta charset="utf-8">
     <title>🔥📖💬</title>
@@ -36,42 +36,32 @@
     <div ui-view></div>
 
     
-
+    <script src="../bower_components/requirejs/require.js"  data-main="app/require.config"></script>
+    
     <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="../bower_components/jquery/dist/jquery.js"></script>
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="../bower_components/fastclick/lib/fastclick.js"></script>
-    <script src="../bower_components/jquery.cookie/jquery.cookie.js"></script>
-    <script src="../bower_components/jquery-placeholder/jquery.placeholder.js"></script>
-    <script src="../bower_components/foundation/js/foundation.js"></script>
-    <script src="../bower_components/firebase/firebase.js"></script>
-    <script src="../bower_components/react/react.js"></script>
-    <script src="../bower_components/angular-swing/dist/angular-swing.min.js"></script>
-    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
-    <!-- endbower -->
+    <!-- disabled:bower:js -->
+    <!-- disabled:endbower -->
 
     <!-- endbuild -->
-
+        
     <!-- build:js({.tmp,src}) scripts/app.js -->
-    <script src="app/react/messages.js"></script>
+    <!-- // <script src="app/react/messages.js"></script> -->
     
-    <script src="app/directives/fastRepeat.js"></script>
+    <!-- <script src="app/directives/fastRepeat.js"></script> -->
     
-    <script src="app/services/firebaseService.js"></script>
-    <script src="app/services/statusService.js"></script>
+    <!-- <script src="app/services/firebaseService.js"></script> -->
+    <!-- <script src="app/services/statusService.js"></script>
     <script src="app/services/userService.js"></script>
     <script src="app/services/userManagementService.js"></script>
     <script src="app/services/matchMakerService.js"></script>
     
-    <script src="app/services/facebookService.js"></script>
+    <script src="app/services/facebookService.js"></script> -->
     
-    <script src="app/index.js"></script>
-    <script src="app/main/main.controller.js"></script>
-    <script src="components/navbar/navbar.controller.js"></script>
-    <script src="components/user/user.controller.js"></script>
-    <script src="components/matchCards/matchCards.controller.js"></script>
+    <!-- <script src="app/main.js"></script> -->
+    <!-- // <script src="app/main/main.controller.js"></script> -->
+    <!-- // <script src="components/navbar/navbar.controller.js"></script> -->
+    <!-- // <script src="components/user/user.controller.js"></script> -->
+    <!-- // <script src="components/matchCards/matchCards.controller.js"></script> -->
 
     <!-- inject:partials -->
     <!-- angular templates will be automaticaly converted in js and inserted here -->
