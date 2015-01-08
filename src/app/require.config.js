@@ -1,5 +1,8 @@
 require.config({
   shim: {
+    firebase: {
+      exports: 'Firebase'
+    },
     facebook: {
       exports: 'FB'
     },
