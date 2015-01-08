@@ -31,10 +31,10 @@ gulp.task('scripts', function() {
         // Don't show something if success
         return false;
       }
-
       var errors = file.jshint.results.map(function (data) {
         if (data.error) {
-          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason;
+          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
+             'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
