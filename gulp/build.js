@@ -11,7 +11,7 @@ function handleError(err) {
   this.emit('end');
 }
 
-gulp.task('styles', ['wiredep'],  function () {
+gulp.task('styles', [],  function () {
   return gulp.src('src/{app,components}/**/*.scss')
     .pipe($.sass({style: 'expanded'}))
     .on('error', handleError)
