@@ -8,5 +8,4 @@ define(['serviceModule','angular','firebase'], function (services, angular, Fire
        
       return firebaseService;
     });  
-    return angular.module('ignisLibriColloqui.Firebase');
 });

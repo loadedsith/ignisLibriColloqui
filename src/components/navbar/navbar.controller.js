@@ -6,4 +6,4 @@ define(['controllerModule','angular'],function (controllers) {
     $scope.date = new Date();
   }]);
 
-})
+});

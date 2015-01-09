@@ -36,4 +36,4 @@ define(['controllerModule','angular'],function (controllers) {
       };
     
     }]);
-})
+});

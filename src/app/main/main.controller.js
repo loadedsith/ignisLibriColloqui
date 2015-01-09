@@ -1,5 +1,5 @@
+define(['controllerModule', 'angular'],function (controllers) {
 'use strict';
-define(['controllerModule','angular'],function (controllers) {
 return controllers
   .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'StatusService','FirebaseService', function ($scope, $timeout, FacebookService, StatusService, FirebaseService) {//,
     console.log('MainController');
