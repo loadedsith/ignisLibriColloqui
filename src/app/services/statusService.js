@@ -1,7 +1,6 @@
-
-define(['angular'],function () {
-  return angular.module('ignisLibriColloqui.Status',[])
-    .service('StatusService', ['$timeout', function ($timeout) {
+define(['serviceModule','angular','firebase'], function (services, angular, Firebase) {
+  'use strict';
+  return services.service('StatusService', ['$timeout', function ($timeout) {
     'use strict';
     
     var Status = this;

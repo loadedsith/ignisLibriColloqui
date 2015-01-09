@@ -1,7 +1,6 @@
-define(['angular','firebase'], function (angular, Firebase) {
+define(['serviceModule','angular','firebase'], function (services, angular, Firebase) {
   'use strict';
-  angular.module('ignisLibriColloqui.Firebase',[])
-    .service('FirebaseService', function () {
+  return services.service('FirebaseService', function () {
       var firebaseService = this;
       firebaseService.matchesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/interests');
       firebaseService.chatRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/chats');

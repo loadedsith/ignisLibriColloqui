@@ -1,7 +1,6 @@
-define(['angular'],function () {
+define(['serviceModule','angular','firebase'], function (services, angular, Firebase) {
   'use strict';
-  return angular.module('ignisLibriColloqui.MatchMaker',[])
-  .service('MatchMakerService', ['FirebaseService', function (FirebaseService) {
+  return services.service('MatchMakerService', ['FirebaseService', function (FirebaseService) {
     var MatchMaker = this;
     
     MatchMaker.matchesRef = FirebaseService.matchesRef;

@@ -1,7 +1,6 @@
-define(['angular'],function () {
-  //Facebook's vendor codes are located below
-   return angular.module('ignisLibriColloqui.User', ['ngCookies'])
-  .service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
+define(['serviceModule','angular','firebase'], function (services, angular, Firebase) {
+  'use strict';
+  return services.service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
     'use strict';
     var User = this;
 

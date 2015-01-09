@@ -7,27 +7,17 @@ define([
     'angular-cookies',
     'angular-ui-router',
     './controllerIndex',
-    './services/facebookService',
-    './services/statusService',
-    './services/firebaseService',
-    './services/matchMakerService',
-    './services/userService',
-    './services/userManagementService'
+    './serviceIndex',
     './directiveIndex'
 ], function (angular) {
     'use strict';
+
     return angular.module('ignisLibriColloqui', [
       'ui.router',
       'ngCookies',
       'ignisLibriColloqui.directives',
       'ignisLibriColloqui.controllers',
-      'ignisLibriColloqui.Facebook',
-      'ignisLibriColloqui.Status',
-      'ignisLibriColloqui.Firebase',
-      'ignisLibriColloqui.MatchMaker',
-      'ignisLibriColloqui.User',
-      'ignisLibriColloqui.UserManagement'
-       
+      'ignisLibriColloqui.services'
     ]);
 });
 
