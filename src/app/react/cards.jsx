@@ -1,20 +1,18 @@
 /* jshint unused: false */
 define(['react'],function (React) {
    return  React.createClass({
-     handleClick: function (event) {
-       console.log('event');
-       debugger;
-     },
      render: function() {
        'use strict';
-       debugger;
     
        var data = this.props.data;
+       var handelClick = function (a,b,c,d) {
+         debugger;
 
+       };
        if (data !== undefined) {
          var rows = data.map(function (datum) {
            /*jshint ignore:start */
-           return <li class='card' key={datum.key}> Cards{datum} </li>;
+           return <li className='card' onClick={handelClick} key={datum.key}> Cards{datum} </li>;
            /*jshint ignore:end */
          });
        }
