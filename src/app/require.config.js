@@ -29,7 +29,6 @@ require.config({
     }
   },
   deps: [
-    './fb',
     './main'
   ],
   paths: {
@@ -50,4 +49,6 @@ require.config({
 
   ]
 });
+require(['fb']);
+
 
