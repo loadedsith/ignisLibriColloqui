@@ -4,12 +4,16 @@ define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], f
       return {
         restrict: 'A',
         scope: {
-          cards: '='
+          cards: '=',
+          maxDrag: '='
         },
         link: function(scope, el) {//extraAttr: attrs 
           var MyComponent = React.createFactory(CARDS);
+          
+          var maxDrag = scope.maxDrag;
+          
           scope.$watch('cards', function(newValue) {//extraAttr: oldValue
-            React.render(new MyComponent({data: newValue}),el[0]);
+            React.render(new MyComponent({data: newValue,maxDrag:maxDrag}),el[0]);
           }, true);
         }
       };

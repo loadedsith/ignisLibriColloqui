@@ -1,10 +1,9 @@
 /* jshint unused: false */
 /* exported MYLIST */
 define(['react'], function (React) {
-  
+  'use strict';
   return React.createClass({
     render: function() {
-      'use strict';
     
       var data = this.props.data;
 
