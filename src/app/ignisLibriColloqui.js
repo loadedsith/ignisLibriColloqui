@@ -13,11 +13,13 @@ define([
     './services/matchMakerService',
     './services/userService',
     './services/userManagementService'
+    './directiveIndex'
 ], function (angular) {
     'use strict';
     return angular.module('ignisLibriColloqui', [
       'ui.router',
       'ngCookies',
+      'ignisLibriColloqui.directives',
       'ignisLibriColloqui.controllers',
       'ignisLibriColloqui.Facebook',
       'ignisLibriColloqui.Status',
