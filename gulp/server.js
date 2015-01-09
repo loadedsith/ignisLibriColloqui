@@ -32,13 +32,13 @@ function browserSyncInit(baseDir, files, browser) {
 
 }
 
-gulp.task('serve', ['myEnv', 'bower', 'watch'], function () {
+gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function () {
   browserSyncInit([
     'src',
     '.tmp'
   ], [
     '.tmp/{app,components}/**/*.css',
-    '.tmp/{app,components}/**/require.js',
+    '.tmp/{app,components}/**/*.js',
     'src/assets/images/**/*',
     'src/*.html',
     'src/{app,components}/**/*.html',
