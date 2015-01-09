@@ -19,14 +19,27 @@ gulp.task('styles', [],  function () {
     .pipe(gulp.dest('.tmp'))
     .pipe($.size());
 });
-
 var notify = require('gulp-notify');
+
+function execute(command, callback){
+  var exec = require('child_process').exec;
+  exec(command, function(error, stdout, stderr){ callback(stdout); });
+};
+
+notify.on('click', function (options) {
+  var message = options.message;
+  var lines = message.split('\n');
+  var txmtUrl = lines[lines.length-2];//-2 because there's an extra '\n' on the messages so we dont actually want the last line
+  execute("open "+ txmtUrl, function(){
+    // console.log('opening in TextMate');
+  });
+});
 
 gulp.task('scripts', function() {
   gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
-    .pipe(notify(function (file) {
+    .pipe(notify({message:function (file) {
       if (file.jshint.success) {
         // Don't show something if success
         return false;
@@ -38,7 +51,7 @@ gulp.task('scripts', function() {
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-    }));
+    },wait:true}));
 });
 
 gulp.task('partials', function () {
