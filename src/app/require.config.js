@@ -41,14 +41,10 @@ require.config({
     firebase: '../bower_components/firebase/firebase',
     foundation: '../bower_components/foundation/js/foundation',
     fastclick: '../bower_components/fastclick/lib/fastclick',
-    jquery: '../bower_components/jquery/dist/jquery',
-    'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
-    'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     modernizr: '../bower_components/modernizr/modernizr',
     react: '../bower_components/react/react',
-    require: '../bower_components/require/build/require.min',
     requirejs: '../bower_components/requirejs/require',
-    'requirejs-domready': '../bower_components/requirejs-domready/domReady'
+    'requirejs-domready': '../bower_components/requirejs-domready/domReady',
   },
   packages: [
 
