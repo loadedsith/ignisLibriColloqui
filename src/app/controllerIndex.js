@@ -6,7 +6,9 @@
  **/
 define([
   'main/main.controller',
+  'cardTest/cardTest.controller',
   '../components/navbar/navbar.controller',
   '../components/matchCards/matchCards.controller',
-  '../components/user/user.controller'
+  '../components/user/user.controller',
+  '../components/cards/cards.controller'
 ], function () {});
