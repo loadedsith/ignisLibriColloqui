@@ -39,7 +39,9 @@ gulp.task('scripts', function() {
   gulp.src('src/{app,components}/**/*.js')
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
-    .pipe(notify({message:function (file) {
+    .pipe(notify({
+      title: 'JSHint',
+      message:function (file) {
       if (file.jshint.success) {
         // Don't show something if success
         return false;
