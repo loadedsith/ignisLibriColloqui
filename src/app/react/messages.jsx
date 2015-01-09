@@ -1,7 +1,8 @@
 /* jshint unused: false */
 /* exported MYLIST */
-requirejs(['react'],function (React) {
-  var MYLIST = React.createClass({
+define(['react'], function (React) {
+  
+  return React.createClass({
     render: function() {
       'use strict';
     
