@@ -4,7 +4,6 @@
  */
 define([
     'angular',
-    'angular-swing',
     'angular-cookies',
     'angular-ui-router',
     './controllerIndex',
@@ -19,7 +18,6 @@ define([
     return angular.module('ignisLibriColloqui', [
       'ui.router',
       'ngCookies',
-      'gajus.swing',
       'ignisLibriColloqui.controllers',
       'ignisLibriColloqui.Facebook',
       'ignisLibriColloqui.Status',

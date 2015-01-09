@@ -1,8 +1,10 @@
-<div ng-controller="MatchCardsController" id="matchCards" ng-show="matches().length > 0">
+<div ng-controller="MatchCardsController" id="matchCards" >
+  <!-- ng-show="matches().length > 0" -->
   <p>Match Cards</p>
   <pre>matches:{{matches()}}</pre>
-  <div class="cardsWrapper">
-    <ul class="cards stack" swing-stack>
+  <!-- <div class="cardsWrapper"> -->
+   
+    <!-- <ul class="cards stack" swing-stack>
       <li class="card" 
         swing-card
         ng-repeat="card in matches()"
@@ -12,8 +14,24 @@
         <img ng-src="{{getUserImageById(card)}}" alt="" />
         {{userId}}
       </li>
+    </ul> -->
+  <!-- </div> -->
+  
+  <hr />
+  <pre>
+    cards:
+    <ul cards-gph>
+      Cards GPH
+      <li card-gph>
+        cardGPH
+      </li>
     </ul>
-  </div>
+  </pre>
+  <hr />
+  
+  
+  
+  
   <div class="profileWrapper">
     <div class="profile"></div>
   </div>

@@ -21,12 +21,6 @@ require.config({
         'angular'
       ]
     },
-    'angular-swing': {
-      exports: 'angular-swing',
-      deps: [
-        'angular'
-      ]
-    },
     'angular-ui-router': {
       exports: 'angular-ui-router',
       deps: [
@@ -43,7 +37,6 @@ require.config({
     angular: '../bower_components/angular/angular',
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
-    'angular-swing': '../bower_components/angular-swing/dist/angular-swing.min',
     'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
     firebase: '../bower_components/firebase/firebase',
     foundation: '../bower_components/foundation/js/foundation',
