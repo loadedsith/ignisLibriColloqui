@@ -86,6 +86,7 @@ define(['react'],function (React) {
       return {
         pos: this.props.initialPos,
         rotation: 0,
+        opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
       };
@@ -95,7 +96,8 @@ define(['react'],function (React) {
         position: 'absolute',
         left: this.state.pos.x + 'px',
         top: this.state.pos.y + 'px',
-        transform:'rotate(' + this.state.rotation + 'deg)'
+        opacity: this.state.opacity,
+        transform: 'rotate(' + this.state.rotation + 'deg)'
       };
       var initialPos = {x: 100, y: 100};
            /*jshint ignore:start */
@@ -158,7 +160,7 @@ define(['react'],function (React) {
       switch(eventType){
         case 'mousedown':
           console.log('mouseDown');
-//          debugger;
+
          // only left mouse button
           if (event.button !== 0) {
             return;
@@ -181,17 +183,33 @@ define(['react'],function (React) {
             dragging: false,
             startTime: new Date().getTime()
           });
-          ;
-          this.returnCard();
+          if(this.state.pos.x>this.props.maxdrag){
+            this.props.swiperight(this)
+          }else if(this.state.pos.x< (-1 * this.props.maxdrag) ){
+            this.props.swipeleft(this)
+          }else{
+            this.returnCard();
+          }
           break;
         case 'mousemove':
           console.log('mouseMove');
           
           var xPos = event.pageX - this.state.rel.x;
-          
+          var opacity = 1;
+          if (xPos > (this.props.maxdrag/2)){
+            var ratio = this.props.maxdrag/xPos
+            if ( ratio >= 0){
+              opacity = ratio;
+            }
+          }else if(xPos < (-1 * (this.props.maxdrag/2))){
+            if (this.props.maxdrag/xPos < 0){
+              opacity = this.props.maxdrag/(-1 * xPos);
+            }
+          }
           if (this.state.dragging){
             this.setState({
               rotation: -1 * (window.innerWidth / 2 - event.pageX)/45,
+              opacity: opacity,
               pos: {
                 x: xPos
               }
@@ -211,11 +229,13 @@ define(['react'],function (React) {
      render: function() {
        var data = this.props.data;
        var maxDrag = this.props.maxDrag;
+       var swipeRight = this.props.swiperight;
+       var swipeLeft = this.props.swipeleft;
        
        if (data !== undefined) {
          var rows = data.map(function (datum) {
            /*jshint ignore:start */
-           return <CARD data={datum} dkey={datum.key} maxdrag={maxDrag}>{datum} </CARD>
+           return <CARD data={datum} dkey={datum.key} maxdrag={maxDrag} swiperight={swipeRight} swipeleft={swipeLeft}>{datum} </CARD>
            /*jshint ignore:end */
          });
        }
