@@ -1,4 +1,4 @@
-define(['serviceModule', 'facebook', 'angular'],function (services, FB) {
+define(['/app/services/serviceModule.js', 'facebook', 'angular'],function (services, FB) {
   //Facebook's vendor codes are located below
   'use strict';
    return services

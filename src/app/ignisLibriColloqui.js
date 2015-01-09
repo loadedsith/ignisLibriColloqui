@@ -7,8 +7,8 @@ define([
     'angular-cookies',
     'angular-ui-router',
     './controllerIndex',
-    './serviceIndex',
-    './directiveIndex'
+    './services/serviceIndex',
+    './directives/directiveIndex'
 ], function (angular) {
     'use strict';
 

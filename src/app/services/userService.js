@@ -1,4 +1,4 @@
-define(['serviceModule','angular','firebase'], function (services, angular, Firebase) {
+define(['/app/services/serviceModule.js','angular','firebase'], function (services, angular, Firebase) {
   'use strict';
   return services.service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
     'use strict';
