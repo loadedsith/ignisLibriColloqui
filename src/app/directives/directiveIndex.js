@@ -6,5 +6,6 @@
  **/
 define([
   'directives/fastRepeat',
-  'directives/cards-gph'
+  'directives/cards-gph',
+  'directives/card-gph'
 ], function () {});
