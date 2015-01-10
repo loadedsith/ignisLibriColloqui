@@ -60,7 +60,6 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         transform: 'rotate(' + rotation + 'deg)'
       };
       var initialPosition = this.props.config.initialPosition;
-      debugger;
       
       var cardTemplate;
       //card template must be a react object, if it is it's type is a function.

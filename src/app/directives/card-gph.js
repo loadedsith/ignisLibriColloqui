@@ -3,8 +3,6 @@ define(['/app/directives/directiveModule.js', 'react', '/app/react/card.js'], fu
   return directives.directive('cardGph',function() {
       return {
         restrict: 'E',
-        transclude:true,
-        template: '<div class=\'test\'></div><div ng-transclude></div>', // This is the template that will replace the <blink> tag. The ng-transclude indicates what element should be blended.
         scope: {
           maxDrag: '=',
           initialPosition: '=',
@@ -19,8 +17,7 @@ define(['/app/directives/directiveModule.js', 'react', '/app/react/card.js'], fu
           var maxDrag = scope.maxDrag;
           var duration = scope.duration;
           var initialPosition = scope.initialPosition;
-          var cardTemplate = scope.cardTemplate||MatchDisplay;
-          // var cardTemplate = MatchDisplay;
+          var cardTemplate = scope.cardTemplate;//React Template!
           var swipeRight;
           var swipeLeft;
 
