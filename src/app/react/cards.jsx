@@ -83,6 +83,7 @@ define(['react','bezier-easing','/app/react/card.js'],function (React, BezierEas
        var initialPosition = this.props.initialPosition;
        var swipeRight = this.props.swipeRight;
        var swipeLeft = this.props.swipeLeft;
+       var cardTemplate = this.props.cardTemplate;
 
        if (data !== undefined) {
          var config = {
@@ -90,7 +91,8 @@ define(['react','bezier-easing','/app/react/card.js'],function (React, BezierEas
            duration:duration,
            initialPosition:initialPosition,
            swipeLeft:swipeLeft,
-           swipeRight:swipeRight
+           swipeRight:swipeRight,
+           cardTemplate:cardTemplate
          };
          
          var rows = data.map(function (datum) {

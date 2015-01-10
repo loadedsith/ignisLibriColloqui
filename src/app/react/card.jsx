@@ -1,4 +1,4 @@
-define(['react','bezier-easing'],function (React, BezierEasing) {
+define(['react','bezier-easing', '/app/react/matchDisplay.js'],function (React, BezierEasing, MatchDisplay) {
   'use strict';
   var getCardFromChild = function (element, maxAttempts) {
     if(element.classList.contains('card')){
@@ -34,7 +34,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         initialPos: {x: 10, y: 10}
       };
     },
-    getInitialState: function (a,b,c,d,e,f) {
+    getInitialState: function () {
       var originalRotation = Math.floor((Math.random()*6)-3);
       return {
         pos: this.props.config.initialPosition||{x:0,y:0},
@@ -47,7 +47,10 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         rel: null // position relative to the cursor
       };
     },
-    render: function (a,b,c) {
+    render: function () {
+      //ignore react jsx, use the force to lint
+      // the vars are included to avoid unused complaints
+      /*jshint ignore:start */
       var rotation = this.state.originalRotation + this.state.rotation;
       var styles = {
         position: 'absolute',
@@ -56,20 +59,26 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         opacity: this.state.opacity,
         transform: 'rotate(' + rotation + 'deg)'
       };
-      
       var initialPosition = this.props.config.initialPosition;
-      //ignore react jsx, use the force to lint
-      /*jshint ignore:start */
+      debugger;
+      var cardTemplate = React.createElement(this.props.config.cardTemplate, {
+        data: this.props.data//,
+        // dkey: this.props.dkey,
+        // config: config
+      }, this.props.data, " ");
+
       return <li
               onMouseDown= {this.handelMouse} 
               className='card'
               style={styles}
               initialPosition={initialPosition}
               key={this.props.dkey}
-              >{this.props.data} 
+              >
+              {cardTemplate}
               </li>;
            /*jshint ignore:end */
-              
+              // <img src="{this.props.data.image.data.url}" alt="" />
+//                             
     },
     componentDidUpdate: function (props, state) {
       if (this.state.dragging && !state.dragging) {
@@ -162,7 +171,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           console.log('mouseDown');
          // only left mouse button
           if (event.button === 0) {
-            var pos = this.getDOMNode().getBoundingClientRect();
+            // var pos = this.getDOMNode().getBoundingClientRect();
             this.setState({
               initialPos:this.props.config.initialPosition,
               dragging: true,
