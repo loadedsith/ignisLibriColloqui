@@ -1,10 +1,11 @@
-define(['controllerModule', 'angular'],function (controllers) {
+define(['controllerModule','/app/react/matchDisplay.js',],function (controllers, MatchDisplay) {
 'use strict';
 return controllers
   .controller('CardTestController', ['$scope','$timeout', function ($scope, $timeout) {
     console.log('CardTestController');
     //ensure that status calls reference the current status
     //TODO: Create a constant module and a
+    $scope.CardTemplate = MatchDisplay;
     $scope.cards = [
       'new Dentist Galapagos tortoise',
       'silk-lined Airline pilot pigeon',
