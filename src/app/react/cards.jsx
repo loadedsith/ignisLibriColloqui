@@ -163,22 +163,19 @@ define(['react'],function (React) {
       switch(eventType){
         case 'mousedown':
           console.log('mouseDown');
-
          // only left mouse button
-          if (event.button !== 0) {
-            return;
+          if (event.button === 0) {
+            var pos = this.getDOMNode().getBoundingClientRect();
+            this.setState({
+              initialPos:{x:100,y:100},
+              dragging: true,
+              rotation:0,
+              rel: {
+                x: event.pageX,
+                // y: event.pageY - pos.top
+              }
+            });
           }
-          var pos = this.getDOMNode().getBoundingClientRect();
-          this.setState({
-            initialPos:{x:100,y:100},
-            dragging: true,
-            rotation:0,
-            rel: {
-              x: event.pageX,
-              // y: event.pageY - pos.top
-            }
-          });
-          
           break;
         case 'mouseup':
           console.log('mouseUp');
