@@ -74,8 +74,7 @@ define(['react','bezier-easing','/app/react/card.js'],function (React, BezierEas
     }
     return false;
   };
-  debugger;
-
+  
    return  React.createClass({
      render: function() {
        var data = this.props.data;

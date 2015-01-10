@@ -23,7 +23,7 @@ define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], f
           if(typeof scope.swipeRight === 'function'){
             swipeRight = scope.swipeRight;
           }else{
-            swipeRight = function () {console.log('defualt swipeRight event');}
+            swipeRight = function () {console.log('defualt swipeRight event');};
           }
 
           if(typeof scope.swipeLeft === 'function'){
