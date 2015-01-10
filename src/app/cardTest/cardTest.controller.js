@@ -15,9 +15,7 @@ return controllers
     ];
     $scope.swipeLeft = function (card) {
       console.log('swipeLeft: card', card, $scope, $scope.cards);
-      var myScope = $scope;
       card.returnCard();
-
     };
     $scope.removeCard = function (card) {
       console.log('removeCard');
@@ -27,10 +25,9 @@ return controllers
     };
     $scope.swipeRight = function (card) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
-      var myScope = $scope;
       card.fadeOut(function (card) {
         console.log('Green wooden Blue Whale');
-        myScope.removeCard(card.getDOMNode().innerHTML);
+        $scope.removeCard(card.getDOMNode().innerHTML);
       });
 
     };
