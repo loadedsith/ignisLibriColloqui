@@ -89,7 +89,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         duration:this.props.config.duration,
         rotation: originalRotation,
         originalRotation: originalRotation,
-        easing: BezierEasing(0.42, 0.0, 1.00, 1.0),
+        easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
         opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
@@ -128,6 +128,37 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         document.removeEventListener('mouseup', this.handelMouse);
       }
     },
+    fadeOut: function (callback) {
+      //apply an animiation cardSlideRight
+      var duration = this.props.config.duration||250;//ms
+      if (this.state.fadeStart === undefined) {
+        this.setState({
+          fadeCallback: callback
+        });
+      }
+      if (this.state.fadeStart === undefined) {
+        this.setState({
+          fadeStart: new Date().getTime()
+        });
+      }
+      var now = new Date().getTime();
+      var completeness = (now - this.state.fadeStart) / duration;
+      
+      if (completeness < 1) {
+        this.setState({
+          opacity:(1-completeness)
+        });
+        requestAnimationFrame(this.fadeOut);
+      }else{
+        this.setState({
+          opacity:0
+        });
+        
+        if(typeof this.state.fadeCallback === 'function'){
+          this.state.fadeCallback(this);
+        }
+      }
+    },
     returnCard: function () {
       var duration = this.props.config.duration||250;//ms
       if (this.state.dragging === false) {
@@ -138,7 +169,6 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         }
         var now = new Date().getTime();
         var completeness = (now - this.state.startTime) / duration;
-        console.log('duration',now - this.state.startTime, duration);
         if (completeness < 1) {
           // completeness = this.state.easing(completeness)
           //the animations duration has not yet elapsed
@@ -153,14 +183,13 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           requestAnimationFrame(this.returnCard);
         }else{
           this.setState({
+            startTime:undefined,
+            //force the final frame of the card returning animation
             rotation: this.state.originalRotation,
             pos:{
               x: this.state.initialPos.x
             }
           });
-          this.setState({
-            startTime:undefined
-          })
         }
       }
       // if(this.state.pos.x < this.state.initialPos.x && this.state.pos.x > -(this.state.initialPos.x)){
@@ -172,7 +201,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
     handelMouse: function (event) {
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
-      
+      var maxDrag = this.props.config.maxDrag;
       if(!topOfTheStack(card)){
         return;
       }
@@ -198,23 +227,38 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           this.setState({
             dragging: false,
             droppedPos: this.state.pos,
+            opacity: 1,
             startTime: new Date().getTime()
           });
-          if(this.state.pos.x>this.props['max-drag']){
-            this.props.swiperight(this)
-          }else if(this.state.pos.x< (-1 * this.props['maxdrag']) ){
-            this.props.swipeleft(this)
+          if(this.state.pos.x > maxDrag){
+            //dragged out right
+            if (typeof this.props.config.swipeRight === 'function'){
+              this.props.config.swipeRight(this);
+              
+            }else{
+              this.returnCard();
+            }
+          }else if(this.state.pos.x < (-1 * maxDrag) ){
+            //dragged out left
+            if (typeof this.props.config.swipeLeft === 'function'){
+              this.props.config.swipeLeft(this);
+            }else{
+              this.returnCard();
+            }
+
+
           }else{
             this.returnCard();
           }
           break;
         case 'mousemove':
           console.log('mouseMove');
-          var maxDrag = this.props['maxdrag'];
+
+
           var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
           if (xPos > (maxDrag/2)){
-            var ratio = maxDrag/xPos
+            var ratio = maxDrag/xPos;
             if ( ratio >= 0){
               opacity = ratio;
             }
@@ -248,7 +292,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
        var maxDrag = this.props.maxDrag;
        var duration = this.props.duration;
        var initialPosition = this.props.initialPosition;
-       var swipeRight = this.props.swipeLight;
+       var swipeRight = this.props.swipeRight;
        var swipeLeft = this.props.swipeLeft;
 
        if (data !== undefined) {

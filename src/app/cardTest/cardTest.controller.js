@@ -16,7 +16,7 @@ return controllers
     $scope.swipeLeft = function (card) {
       console.log('swipeLeft: card', card, $scope, $scope.cards);
       var myScope = $scope;
-      debugger;
+      card.returnCard();
 
     };
     $scope.removeCard = function (card) {
