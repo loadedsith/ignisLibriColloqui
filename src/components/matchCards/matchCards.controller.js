@@ -1,8 +1,9 @@
-define(['controllerModule', 'angular'],function (controllers) {
+define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (controllers, angular, MatchDisplay) {
   'use strict';
   return controllers.controller('MatchCardsController', ['$scope', '$timeout', 'UserService','FacebookService', function ($scope, $timeout, UserService, facebookService) {
     console.log('Hi everybody, im the MatchCardsController');
     $scope.matchlist = {};
+    $scope.MatchDisplay = MatchDisplay;
     $scope.matches = function () {
       if ( UserService.matches === undefined){
         return undefined;

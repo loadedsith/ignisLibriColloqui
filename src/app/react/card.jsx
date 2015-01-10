@@ -1,4 +1,4 @@
-define(['react','bezier-easing', '/app/react/matchDisplay.js'],function (React, BezierEasing, MatchDisplay) {
+define(['react','bezier-easing'],function (React, BezierEasing) {
   'use strict';
   var getCardFromChild = function (element, maxAttempts) {
     if(element.classList.contains('card')){
@@ -61,12 +61,17 @@ define(['react','bezier-easing', '/app/react/matchDisplay.js'],function (React, 
       };
       var initialPosition = this.props.config.initialPosition;
       debugger;
-      var cardTemplate = React.createElement(this.props.config.cardTemplate, {
-        data: this.props.data//,
-        // dkey: this.props.dkey,
-        // config: config
-      }, this.props.data, " ");
-
+      
+      var cardTemplate;
+      //card template must be a react object, if it is it's type is a function.
+      try {
+        cardTemplate = React.createElement(this.props.config.cardTemplate, {
+          data: this.props.data
+        }, this.props.data, " ");
+      } catch (error) {
+        cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>
+      }
+    
       return <li
               onMouseDown= {this.handelMouse} 
               className='card'

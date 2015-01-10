@@ -1,4 +1,4 @@
-define(['/app/directives/directiveModule.js', 'react', '/app/react/card.js','/app/react/matchDisplay.js',], function (directives, React, Card, MatchDisplay) {
+define(['/app/directives/directiveModule.js', 'react', '/app/react/card.js'], function (directives, React, Card) {
   'use strict';
   return directives.directive('cardGph',function() {
       return {
