@@ -149,7 +149,7 @@ define(['react'],function (React) {
           startTime:undefined
         })
       }else{
-        console.log('this.state.pos.x', this.state.pos.x);
+        //loop over this function until card is returned.
         requestAnimationFrame(this.returnCard);
       }
     },
