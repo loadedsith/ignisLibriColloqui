@@ -1,12 +1,15 @@
 <div ng-controller="CardsController" id="Cards" >
-  <ul class='cards' cards-gph ng-repeat="card in cards">
-    <li card-gph
+  <ul class='cards'>
+    <card-gph
+      ng-repeat="card in cards"
       duration="250"
       max-drag="250"
       initial-position="{x:10,y:10}"
       swipe-left="swipeLeft"
       swipe-right="swipeRight"
+      card="card"
+      cardTemplate="CardTemplate"
      >
-    </li>
+    </card-gph>
   </ul>
 </div>

@@ -6,8 +6,10 @@
   
   
   <div ng-controller="CardsController" id="Cards" >
-    <ul class="cards" ng-repeat="card in matches()">
-      <card-gph class='cards' 
+    <ul class="cards">
+      <card-gph
+        ng-repeat="card in matches()"
+        class='cards' 
         card='card'
         duration="250" 
         max-drag="250" 
