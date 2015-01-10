@@ -79,25 +79,28 @@ define(['react'],function (React) {
     getDefaultProps: function () {
       return {
         // allow the initial position to be passed in as a prop
-        initialPos: {x: 0, y: 0}
+        initialPos: {x: 10, y: 10}
       };
     },
     getInitialState: function () {
+      var originalRotation = Math.floor((Math.random()*6)-3);
       return {
         pos: this.props.initialPos,
-        rotation: 0,
+        rotation: originalRotation,
+        originalRotation: originalRotation,
         opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
       };
     },
     render: function (a,b,c) {
+      var rotation = this.state.originalRotation + this.state.rotation;
       var styles = {
         position: 'absolute',
         left: this.state.pos.x + 'px',
         top: this.state.pos.y + 'px',
         opacity: this.state.opacity,
-        transform: 'rotate(' + this.state.rotation + 'deg)'
+        transform: 'rotate(' + rotation + 'deg)'
       };
       var initialPos = {x: 100, y: 100};
            /*jshint ignore:start */
