@@ -27,7 +27,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
     return false;
   };
 
-  var CARD = React.createClass({
+  return React.createClass({
     getDefaultProps: function () {
       return {
         // allow the initial position to be passed in as a prop
@@ -37,8 +37,8 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
     getInitialState: function (a,b,c,d,e,f) {
       var originalRotation = Math.floor((Math.random()*6)-3);
       return {
-        pos: this.props.config.initialPosition,
-        duration:this.props.config.duration,
+        pos: this.props.config.initialPosition||{x:0,y:0},
+        duration:this.props.config.duration||250,
         rotation: originalRotation,
         originalRotation: originalRotation,
         easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
@@ -164,7 +164,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           if (event.button === 0) {
             var pos = this.getDOMNode().getBoundingClientRect();
             this.setState({
-              initialPos:{x:100,y:100},
+              initialPos:this.props.config.initialPosition,
               dragging: true,
               rotation:0,
               rel: {
