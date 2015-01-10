@@ -20,15 +20,18 @@ return controllers
 
     };
     $scope.removeCard = function (card) {
+      console.log('removeCard');
       $timeout(function () {
         $scope.cards.splice($scope.cards.indexOf(card),1);
-      },0)
+      },0);
     };
     $scope.swipeRight = function (card) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
       var myScope = $scope;
-      myScope.removeCard(card.getDOMNode().innerHTML);
-      debugger;
+      card.fadeOut(function (card) {
+        console.log('Green wooden Blue Whale');
+        myScope.removeCard(card.getDOMNode().innerHTML);
+      });
 
     };
   }]);  
