@@ -153,6 +153,12 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           requestAnimationFrame(this.returnCard);
         }else{
           this.setState({
+            rotation: this.state.originalRotation,
+            pos:{
+              x: this.state.initialPos.x
+            }
+          });
+          this.setState({
             startTime:undefined
           })
         }
