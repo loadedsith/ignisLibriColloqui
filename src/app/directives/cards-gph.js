@@ -6,6 +6,8 @@ define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], f
         scope: {
           cards: '=',
           maxDrag: '=',
+          initialPosition: '=',
+          duration: '=',
           swipeRight: '=',
           swipeLeft: '='
           
@@ -13,10 +15,11 @@ define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], f
         link: function(scope, el) {//extraAttr: attrs 
           var MyComponent = React.createFactory(CARDS);
           var maxDrag = scope.maxDrag;
-          
+          var duration = scope.duration;
+          var initialPosition = scope.initialPosition;
           var swipeRight;
           var swipeLeft;
-          
+
           if(typeof scope.swipeRight === 'function'){
             swipeRight = scope.swipeRight;
           }else{
@@ -30,7 +33,15 @@ define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], f
           }
           
           scope.$watch('cards', function(newValue) {//extraAttr: oldValue
-            React.render(new MyComponent({data: newValue, maxDrag:maxDrag, swiperight:swipeRight, swipeleft:swipeLeft}),el[0]);
+            React.render(new MyComponent({
+              data: newValue,
+              maxDrag: maxDrag,
+              duration: duration,
+              initialPosition: initialPosition,
+              swipeRight: swipeRight,
+              swipeLeft: swipeLeft
+            }), el[0]);
+
           }, true);
         }
       };

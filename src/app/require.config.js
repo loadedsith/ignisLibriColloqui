@@ -32,6 +32,7 @@ require.config({
     './main'
   ],
   paths: {
+    'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
     facebook: '//connect.facebook.net/en_US/all',
     angular: '../bower_components/angular/angular',
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',

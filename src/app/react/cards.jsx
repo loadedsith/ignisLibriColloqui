@@ -46,7 +46,7 @@
 */ 
 
 
-define(['react'],function (React) {
+define(['react','bezier-easing'],function (React, BezierEasing) {
   'use strict';
   var getCardFromChild = function (element, maxAttempts) {
     if(element.classList.contains('card')){
@@ -74,7 +74,7 @@ define(['react'],function (React) {
     }
     return false;
   };
-  
+
   var CARD = React.createClass({
     getDefaultProps: function () {
       return {
@@ -82,12 +82,14 @@ define(['react'],function (React) {
         initialPos: {x: 10, y: 10}
       };
     },
-    getInitialState: function () {
+    getInitialState: function (a,b,c,d,e,f) {
       var originalRotation = Math.floor((Math.random()*6)-3);
       return {
-        pos: this.props.initialPos,
+        pos: this.props.config.initialPosition,
+        duration:this.props.config.duration,
         rotation: originalRotation,
         originalRotation: originalRotation,
+        easing: BezierEasing(0.42, 0.0, 1.00, 1.0),
         opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
@@ -102,13 +104,15 @@ define(['react'],function (React) {
         opacity: this.state.opacity,
         transform: 'rotate(' + rotation + 'deg)'
       };
-      var initialPos = {x: 100, y: 100};
-           /*jshint ignore:start */
+      
+      var initialPosition = this.props.config.initialPosition;
+      //ignore react jsx, use the force to lint
+      /*jshint ignore:start */
       return <li
               onMouseDown= {this.handelMouse} 
               className='card'
               style={styles}
-              initialPos={initialPos}
+              initialPosition={initialPosition}
               key={this.props.dkey}
               >{this.props.data} 
               </li>;
@@ -125,33 +129,39 @@ define(['react'],function (React) {
       }
     },
     returnCard: function () {
-      var duration = 1250;//ms
-      if (this.state.dragging===false){
-        if (this.state.startTime === undefined){
+      var duration = this.props.config.duration||250;//ms
+      if (this.state.dragging === false) {
+        if (this.state.startTime === undefined) {
           this.setState({
             startTime: new Date().getTime()
           });
         }
         var now = new Date().getTime();
         var completeness = (now - this.state.startTime) / duration;
-
+        console.log('duration',now - this.state.startTime, duration);
         if (completeness < 1) {
+          // completeness = this.state.easing(completeness)
+          //the animations duration has not yet elapsed
+          var distance = this.state.droppedPos.x - this.state.initialPos.x;
           this.setState({
             rotation: this.state.rotation * (1 - completeness),
             pos:{
-              x: this.state.pos.x * (1 - completeness)
+              // offset + current position * completeness
+              x: this.state.droppedPos.x - (distance * (completeness)) 
             }
           });
+          requestAnimationFrame(this.returnCard);
+        }else{
+          this.setState({
+            startTime:undefined
+          })
         }
       }
-      if(this.state.pos.x < 1 && this.state.pos.x > -1){
-        this.setState({
-          startTime:undefined
-        })
-      }else{
+      // if(this.state.pos.x < this.state.initialPos.x && this.state.pos.x > -(this.state.initialPos.x)){
+      // }else{
         //loop over this function until card is returned.
-        requestAnimationFrame(this.returnCard);
-      }
+        // requestAnimationFrame(this.returnCard);
+      // }
     },
     handelMouse: function (event) {
       var eventType = event.type;
@@ -181,11 +191,12 @@ define(['react'],function (React) {
           console.log('mouseUp');
           this.setState({
             dragging: false,
+            droppedPos: this.state.pos,
             startTime: new Date().getTime()
           });
-          if(this.state.pos.x>this.props.maxdrag){
+          if(this.state.pos.x>this.props['max-drag']){
             this.props.swiperight(this)
-          }else if(this.state.pos.x< (-1 * this.props.maxdrag) ){
+          }else if(this.state.pos.x< (-1 * this.props['maxdrag']) ){
             this.props.swipeleft(this)
           }else{
             this.returnCard();
@@ -193,17 +204,17 @@ define(['react'],function (React) {
           break;
         case 'mousemove':
           console.log('mouseMove');
-          
-          var xPos = event.pageX - this.state.rel.x;
+          var maxDrag = this.props['maxdrag'];
+          var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
-          if (xPos > (this.props.maxdrag/2)){
-            var ratio = this.props.maxdrag/xPos
+          if (xPos > (maxDrag/2)){
+            var ratio = maxDrag/xPos
             if ( ratio >= 0){
               opacity = ratio;
             }
-          }else if(xPos < (-1 * (this.props.maxdrag/2))){
-            if (this.props.maxdrag/xPos < 0){
-              opacity = this.props.maxdrag/(-1 * xPos);
+          }else if(xPos < (-1 * (maxDrag/2))){
+            if (maxDrag/xPos < 0){
+              opacity = maxDrag/(-1 * xPos);
             }
           }
           if (this.state.dragging){
@@ -229,13 +240,23 @@ define(['react'],function (React) {
      render: function() {
        var data = this.props.data;
        var maxDrag = this.props.maxDrag;
-       var swipeRight = this.props.swiperight;
-       var swipeLeft = this.props.swipeleft;
-       
+       var duration = this.props.duration;
+       var initialPosition = this.props.initialPosition;
+       var swipeRight = this.props.swipeLight;
+       var swipeLeft = this.props.swipeLeft;
+
        if (data !== undefined) {
+         var config = {
+           maxDrag:maxDrag,
+           duration:duration,
+           initialPosition:initialPosition,
+           swipeLeft:swipeLeft,
+           swipeRight:swipeRight
+         };
+         
          var rows = data.map(function (datum) {
            /*jshint ignore:start */
-           return <CARD data={datum} dkey={datum.key} maxdrag={maxDrag} swiperight={swipeRight} swipeleft={swipeLeft}>{datum} </CARD>
+           return <CARD data={datum} dkey={datum.key} config={config}>{datum} </CARD>
            /*jshint ignore:end */
          });
        }
