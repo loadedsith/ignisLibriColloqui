@@ -2,8 +2,21 @@
   <!-- ng-show="matches().length > 0" -->
   <p>Match Cards</p>
   <pre>matches:{{matches()}}</pre>
-  <!-- <div class="cardsWrapper"> -->
-   
+  <div class="cardsWrapper">
+  
+  
+  <div ng-controller="CardsController" id="Cards" >
+    <ul class="cards" ng-repeat="card in matches()">
+      <card-gph class='cards' 
+        card='card'
+        duration="250" 
+        max-drag="250" 
+        initial-position="{x:10,y:10}" 
+        swipe-left="swipeLeft"
+        swipe-right="swipeRight">
+      </card-gph>
+    </ul>
+  </div>
     <!-- <ul class="cards stack" swing-stack>
       <li class="card" 
         swing-card
@@ -11,11 +24,11 @@
         swing-on-throwoutleft="swipeLeft(eventName, $event)"
         swing-on-throwoutright="swipeRight(eventName, $event)"
         >
-        <img ng-src="{{getUserImageById(card)}}" alt="" />
+
         {{userId}}
       </li>
     </ul> -->
-  <!-- </div> -->
+  </div>
   
   <hr />
   <pre>
