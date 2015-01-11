@@ -3,7 +3,7 @@ define(['/app/services/serviceModule.js','angular','firebase'], function (servic
   return services.service('FirebaseService', function () {
       var firebaseService = this;
       firebaseService.matchesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/interests');
-      firebaseService.chatRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/chats');
+      firebaseService.messagesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages');
       firebaseService.usersRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/users');
        
       return firebaseService;

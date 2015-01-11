@@ -12,6 +12,11 @@ define(['./ignisLibriColloqui'],function(ignisLibriColloqui){
         url: '/cardTest',
         templateUrl: 'app/cardTest/cardTest.html',
         controller: 'CardTestController'
+      })
+      .state('messagesTest', {
+        url: '/messagesTest',
+        templateUrl: 'app/messagesTest/messagesTest.html',
+        controller: 'MessagesTestController'
       });
 
       $urlRouterProvider.when('', '/cardTest');
