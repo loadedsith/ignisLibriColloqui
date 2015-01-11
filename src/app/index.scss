@@ -1,4 +1,7 @@
 @import 'cards';
+div.button{
+  @extend a.button;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
