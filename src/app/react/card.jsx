@@ -198,7 +198,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           if(this.state.pos.x > maxDrag){
             //dragged out right
             if (typeof this.props.config.swipeRight === 'function'){
-              this.props.config.swipeRight(this);
+              this.props.config.swipeRight(this, this.props.data);
               
             }else{
               this.returnCard();
@@ -206,7 +206,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           }else if(this.state.pos.x < (-1 * maxDrag) ){
             //dragged out left
             if (typeof this.props.config.swipeLeft === 'function'){
-              this.props.config.swipeLeft(this);
+              this.props.config.swipeLeft(this, this.props.data);
             }else{
               this.returnCard();
             }

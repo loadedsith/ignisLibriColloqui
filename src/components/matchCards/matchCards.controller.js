@@ -4,6 +4,20 @@ define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (co
     console.log('Hi everybody, im the MatchCardsController');
     $scope.matchlist = {};
     $scope.MatchDisplay = MatchDisplay;
+    
+    var imageMatchLookup = function(id,image){
+      var matches = $scope.matchlist;
+      var matchesKeys = Object.keys($scope.matchlist);
+      for (var i = matchesKeys.length - 1; i >= 0; i--) {
+        var match = matchesKeys[i];
+        if(matches[match].facebookId === id){
+          matches[match].image=image;
+          matches[match].fetching = 'fetched';//lol
+          return;
+        }
+      }
+    };
+
     $scope.matches = function () {
       if ( UserService.matches === undefined){
         return undefined;
@@ -16,15 +30,16 @@ define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (co
         if($scope.matchlist[match] === undefined) {
           $scope.matchlist[match] = {
             facebookId:match
-          }
+          };
         }
         
         if($scope.matchlist[match].fetching === undefined) {
           $scope.matchlist[match].fetching = true;
-          $scope.matchlist[match].image = facebookService.getUserImageById(match, function(image){
-            $scope.matchlist[match].fetching = 'fetched';//lol
-            $scope.matchlist[match].image=image;
-          });
+          $scope.matchlist[match].image = facebookService.getUserImageById(match, imageMatchLookup);
+          // $scope.matchlist[match].image = facebookService.getUserImageById(match, function(image){
+          //   $scope.matchlist[match].fetching = 'fetched';//lol
+          //   $scope.matchlist[match].image=image;
+          // });
         }
         /*
         {
@@ -63,7 +78,7 @@ define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (co
 
     };
     
-    $scope.swipeLeft = function (card) {
+    $scope.swipeLeft = function (card, cardData) {
        console.log('swipeLeft: card', card, $scope, $scope.cards);
        var myScope = $scope;
        card.returnCard();
@@ -72,15 +87,15 @@ define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (co
      $scope.removeCard = function (card) {
        console.log('removeCard');
        $timeout(function () {
-         $scope.matches.splice($scope.matches.indexOf(card),1);
+         delete $scope.matchlist[card.facebookId];
        },0);
      };
-     $scope.swipeRight = function (card) {
+     $scope.swipeRight = function (card, cardData) {
        console.log('swipeRight: card', card, $scope, $scope.cards);
        var myScope = $scope;
        card.fadeOut(function (card) {
          console.log('Green wooden Blue Whale');
-         myScope.removeCard(card.getDOMNode().innerHTML);
+         myScope.removeCard(cardData);
        });
      };
     
