@@ -1,0 +1,22 @@
+<div ng-controller="MessagesListController" id="Cards" >
+Messages!
+  Rooms
+  <div ng-repeat="room in rooms" ng-show="roomsReady">
+    <div ng-click="room=roomName.key;updateChatRef($event)" class='button'>
+      {{room.key}}
+    </div>
+  </div>
+
+  <fast-repeat messages="messages"></fast-repeat>
+  Current Room: {{room}}
+  <input type="text" ng-model="room" placeholder="room" />
+  <div class="button" ng-click="updateChatRef($event)">Update Room</div>
+  
+  <input type="text" ng-model="username" placeholder="UserName" />
+  
+  <div class="button" ng-click="updateChatRef($event)">Update User</div>
+  
+  <input type="textarea" ng-model="message" placeholder="Message" />
+  
+  <div class="button" ng-click="messageInput($event)">Send Message</div>
+</div>

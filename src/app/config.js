@@ -17,11 +17,16 @@ define(['./ignisLibriColloqui'],function(ignisLibriColloqui){
         url: '/messagesTest',
         templateUrl: 'app/messagesTest/messagesTest.html',
         controller: 'MessagesTestController'
+      })
+      .state('messagesListTest', {
+        url: '/messagesListTest',
+        templateUrl: 'app/messagesListTest/messagesListTest.html',
+        controller: 'MessagesListTestController'
       });
 
-      $urlRouterProvider.when('', '/cardTest');
+      $urlRouterProvider.when('', '/messagesListTest');
 
       
-    $urlRouterProvider.otherwise('/cardTest');
+    $urlRouterProvider.otherwise('/messagesListTest');
   }]);
 });

@@ -2,7 +2,6 @@ define(['controllerModule', 'angular'],function (controllers) {
   'use strict';
   return controllers.controller('MessagesController', ['$scope', '$timeout' ,'FirebaseService', 'UserService', function ($scope,$timeout ,FirebaseService, UserService) {//$scope
     console.log('Hi everybody, im the MessagesController');
-    debugger;
     
     $scope.username = 'newUser';
     $scope.messages = [];
@@ -17,8 +16,6 @@ define(['controllerModule', 'angular'],function (controllers) {
     };
 
     $scope.updateChatRef = function () {
-      debugger;
-
       userChat = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
       
       userChat.on('child_added', function(snapshot) {
