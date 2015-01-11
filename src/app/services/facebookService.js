@@ -34,7 +34,9 @@ define(['/app/services/serviceModule.js', 'facebook', 'angular'],function (servi
     
       facebookService.getUserImageById = function (id, callback) {
         console.log('FacebookService.getUserImageById: ', id);
-        facebookService.apiCallbackWrapper('/' + id + '/picture', callback);
+        facebookService.apiCallbackWrapper('/' + id + '/picture', function (image) {
+          callback(id,image);
+        });
       };
     
       facebookService.getUserImage = function (callback) {
