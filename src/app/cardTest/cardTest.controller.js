@@ -1,4 +1,4 @@
-define(['controllerModule','/app/react/matchDisplay.js',],function (controllers, MatchDisplay) {
+define(['controllerModule','react/matchDisplay',],function (controllers, MatchDisplay) {
 'use strict';
 return controllers
   .controller('CardTestController', ['$scope','$timeout', function ($scope, $timeout) {

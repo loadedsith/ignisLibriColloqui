@@ -32,6 +32,12 @@ require.config({
     './main'
   ],
   paths: {
+    'directives/directiveModule': 'directives/directiveModule',
+    'react/card': '/app/react/card',
+    'react/cards': '/app/react/cards',
+    'react/messages': '/app/react/messages',
+    'react/matchDisplay': '/app/react/matchDisplay',
+    'services/serviceModule': '/app/services/serviceModule',
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
     facebook: '//connect.facebook.net/en_US/all',
     angular: '../bower_components/angular/angular',
@@ -45,6 +51,9 @@ require.config({
     react: '../bower_components/react/react',
     requirejs: '../bower_components/requirejs/require',
     'requirejs-domready': '../bower_components/requirejs-domready/domReady',
+    jquery: '../bower_components/jquery/dist/jquery',
+    'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
+    'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie'
   },
   packages: [
 

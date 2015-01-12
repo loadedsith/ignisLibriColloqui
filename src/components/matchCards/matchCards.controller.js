@@ -1,4 +1,4 @@
-define(['controllerModule', 'angular','/app/react/matchDisplay.js'],function (controllers, angular, MatchDisplay) {
+define(['controllerModule', 'angular','react/matchDisplay'],function (controllers, angular, MatchDisplay) {
   'use strict';
   return controllers.controller('MatchCardsController', ['$scope', '$timeout', 'UserService','FacebookService', function ($scope, $timeout, UserService, facebookService) {
     console.log('Hi everybody, im the MatchCardsController');

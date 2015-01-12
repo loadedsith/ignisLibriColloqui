@@ -1,4 +1,4 @@
-define(['/app/services/serviceModule.js','angular','firebase'], function (services, angular, Firebase) {
+define(['services/serviceModule','angular','firebase'], function (services, angular, Firebase) {
   'use strict';
   return services.service('UserService', ['$cookies','FacebookService', 'StatusService', 'UserManagementService', function ($cookies, FacebookService, StatusService, UserManagementService) {
     'use strict';
@@ -57,7 +57,7 @@ define(['/app/services/serviceModule.js','angular','firebase'], function (servic
       
       User.blacklist = blacklist;
       //add the current user to the blacklist
-      User.blacklist.push(String(User.info.id));
+//      User.blacklist.push(String(User.info.id));
       UserManagementService.getMatches(User.info.id, User.blacklist, User.topics, User.gotMatches);
     };
     

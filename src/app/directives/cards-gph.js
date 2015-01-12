@@ -1,4 +1,4 @@
-define(['/app/directives/directiveModule.js', '/app/react/cards.js', 'react'], function (directives, CARDS, React) {
+define(['directives/directiveModule', 'react/cards', 'react'], function (directives, CARDS, React) {
   'use strict';
   return directives.directive('cardsGph',function() {
       return {

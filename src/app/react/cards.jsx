@@ -46,7 +46,7 @@
 */ 
 
 
-define(['react','bezier-easing','/app/react/card.js'],function (React, BezierEasing, CARD) {
+define(['react','bezier-easing','react/card'],function (React, BezierEasing, CARD) {
   'use strict';
   var getCardFromChild = function (element, maxAttempts) {
     if(element.classList.contains('card')){

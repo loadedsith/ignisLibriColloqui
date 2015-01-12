@@ -1,4 +1,4 @@
-define(['/app/directives/directiveModule.js', '/app/react/messages.js', 'react'], function (directives, Messages, React) {
+define(['directives/directiveModule', 'react/messages', 'react'], function (directives, Messages, React) {
   'use strict';
   return directives.directive('fastRepeat',function() {
       return {

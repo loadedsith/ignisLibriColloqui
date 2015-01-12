@@ -1,4 +1,4 @@
-define(['/app/services/serviceModule.js','angular','firebase'], function (services, angular, Firebase) {
+define(['services/serviceModule','angular','firebase'], function (services, angular, Firebase) {
   'use strict';
   return services.service('FirebaseService', function () {
       var firebaseService = this;
