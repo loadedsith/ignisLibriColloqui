@@ -1,22 +1,51 @@
 <div ng-controller="MessagesListController" id="Cards" >
-Messages!
-  Rooms
-  <div ng-repeat="room in rooms" ng-show="roomsReady">
-    <div ng-click="room=roomName.key;updateChatRef($event)" class='button'>
-      {{room.key}}
+  <p>{{Strings.messages}}</p>
+  <dl class="sub-nav" ng-show="roomsReady">
+    <dt>{{Strings.rooms}}</dt>
+    <dd ng-repeat="room in rooms" ng-class='{active:room.key === currentRoom}'>
+      <div ng-click="currentRoom=room.key;updateChatRef($event)">{{room.key}}</div>
+    </dd>
+  </dl>
+  <dl class="sub-nav">
+    <dt>Filter:</dt>
+    <dd class="active"><a href="#">All</a></dd>
+    <dd><a href="#">Active</a></dd>
+    <dd><a href="#">Pending</a></dd>
+    <dd><a href="#">Suspended</a></dd>
+  </dl>
+  <fast-repeat messages="messages"></fast-repeat>
+  {{Strings.currentRoom}}: {{currentRoom}}
+  
+  
+  <div class="row collapse postfix-round">
+    <div class="small-9 columns">
+      <input type="text" ng-model="room" placeholder="room" class="input"/>
+    </div>
+    <div class="small-3 columns">
+      <a class="button postfix" ng-click="updateChatRef($event)">{{Strings.updateRoom}}</a>
     </div>
   </div>
+  <div class="row collapse postfix-round">
+    <div class="small-9 columns">
+    <input type="text" ng-model="username" placeholder="UserName" />
+    </div>
+    <div class="small-3 columns">
+      <div class="button postfix" ng-click="updateChatRef($event)">{{Strings.updateUser}}</div>
+    </div>
+  </div>
+  <div class="row collapse postfix-round">
+    <div class="small-9 columns">
+    <input type="textarea" ng-model="message" placeholder="Message" />
+    </div>
+    <div class="small-3 columns">
+      <div class="button postfix" ng-click="messageInput($event)">{{Strings.sendMessage}}</div>
+    </div>
+  </div>
+  
 
-  <fast-repeat messages="messages"></fast-repeat>
-  Current Room: {{room}}
-  <input type="text" ng-model="room" placeholder="room" />
-  <div class="button" ng-click="updateChatRef($event)">Update Room</div>
+
   
-  <input type="text" ng-model="username" placeholder="UserName" />
+
+
   
-  <div class="button" ng-click="updateChatRef($event)">Update User</div>
-  
-  <input type="textarea" ng-model="message" placeholder="Message" />
-  
-  <div class="button" ng-click="messageInput($event)">Send Message</div>
 </div>

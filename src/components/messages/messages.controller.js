@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular'],function (controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', '$timeout', function ($scope,$timeout) {//$scope
+  return controllers.controller('MessagesController', ['$scope', '$timeout', 'Strings', function ($scope, $timeout, Strings) {
     console.log('Hi everybody, im the MessagesController');
-    
+    $scope.Strings = Strings;
     $scope.username = 'newUser';
     $scope.messages = [];
     var userChat = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
@@ -43,7 +43,7 @@ define(['controllerModule', 'angular'],function (controllers) {
         }, 0);
       
       });
-    }
+    };
     
     $scope.updateChatRef();
 
