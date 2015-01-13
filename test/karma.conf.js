@@ -20,6 +20,7 @@ module.exports = function(config) {
     ],
     exclude : [
       // 'node_modules/**/*.js',
+      'src/app/env.pre.js',
       'src/app/main.js'
     ],
     autoWatch : false,
@@ -31,9 +32,16 @@ module.exports = function(config) {
     preprocessors: {
       '**/*.jsx': ['react']
     },
-    
-    // browsers : ['PhantomJS'],
-    browsers: ['Chrome', 'Chrome_without_security'],
+// you can define custom flags
+    // customLaunchers: {
+      // Chrome_without_security: {
+      //   base: 'Chrome',
+      //   flags: ['--disable-web-security']
+      // }
+    // },
+    browsers: ['Chrome'],//'Chrome_without_security'
+
+    hostname:'example.com',//example.com has been added to etc/hosts as the localhost, it is also registered with the app on the Facebook API 
 
     plugins : [
         'karma-phantomjs-launcher',

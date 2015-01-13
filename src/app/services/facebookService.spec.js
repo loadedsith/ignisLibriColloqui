@@ -1,7 +1,7 @@
 /* jshint undef:true, -W030*/
 /* global describe, it, expect, beforeEach, inject */
 'use strict';
-define(['serviceModule','angular-mocks'],function (controllers) {
+define(['services/serviceModule','angular-mocks'],function (controllers) {
   describe('facebook services', function(){
     var facebookService;
 
@@ -12,8 +12,7 @@ define(['serviceModule','angular-mocks'],function (controllers) {
     }));
 
     it('should have an FB and service references ', inject(function() {
-      expect(FB).toBeUndefined();
-
+      expect(FB).toBeDefined();
       expect(facebookService).toBeDefined();
     }));
   });
