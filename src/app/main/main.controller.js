@@ -1,7 +1,7 @@
 define(['controllerModule', 'angular'],function (controllers) {
 'use strict';
 return controllers
-  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'StatusService','FirebaseService', function ($scope, $timeout, FacebookService, StatusService, FirebaseService) {//,
+  .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'StatusService','FirebaseService','Strings', function ($scope, $timeout, FacebookService, StatusService, FirebaseService, Strings) {//,
     console.log('MainController');
     //ensure that status calls reference the current status
     $scope.status = function () {

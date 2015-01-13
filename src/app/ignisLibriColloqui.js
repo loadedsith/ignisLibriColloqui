@@ -8,7 +8,8 @@ define([
     'angular-ui-router',
     'controllerIndex',
     'services/serviceIndex',
-    'directives/directiveIndex'
+    'directives/directiveIndex',
+    'strings'
 ], function (angular) {
     'use strict';
 
@@ -17,7 +18,8 @@ define([
       'ngCookies',
       'ignisLibriColloqui.directives',
       'ignisLibriColloqui.controllers',
-      'ignisLibriColloqui.services'
+      'ignisLibriColloqui.services',
+      'ignisLibriColloqui.strings'
     ]);
 });
 

@@ -1,8 +1,9 @@
 'use strict';
 define(['controllerModule','angular'],function (controllers) {
   return controllers
-  .controller('NavbarController', ['$scope', function ($scope) {
-
+  .controller('NavbarController', ['$scope','Strings', function ($scope, Strings) {
+    $scope.Strings = Strings;
+    
     $scope.date = new Date();
   }]);
 
