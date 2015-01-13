@@ -12,6 +12,7 @@
     "react": "~0.12.1",
     "requirejs": "~2.1.15",
     "requirejs-domready": "~2.0.1",
+    "requestAnimationFrame":"~0.0.22",
     "bezier-easing": "~1.0.0"
   },
   "devDependencies": {

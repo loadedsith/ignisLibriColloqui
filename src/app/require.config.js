@@ -39,6 +39,7 @@ require.config({
     'react/matchDisplay': '/app/react/matchDisplay',
     'services/serviceModule': '/app/services/serviceModule',
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
+    requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
     facebook: '//connect.facebook.net/en_US/all',
     angular: '../bower_components/angular/angular',
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',

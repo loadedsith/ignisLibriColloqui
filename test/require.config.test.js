@@ -16,6 +16,11 @@ require.config({
     angular: {
       exports: 'angular'
     },
+    react:{
+      deps:[
+      'test/reactPolyfillForPhantomJS'
+      ]
+    },
     'angular-cookies': {
       exports: 'angular-cookies',
       deps: [
@@ -94,6 +99,7 @@ require.config({
     'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router',
     firebase: 'bower_components/firebase/firebase',
     foundation: 'bower_components/foundation/js/foundation',
+    requestAnimationFrame: 'bower_components/requestAnimationFrame/app/requestAnimationFrame',
     fastclick: 'bower_components/fastclick/lib/fastclick',
     modernizr: 'bower_components/modernizr/modernizr',
     react: 'bower_components/react/react',

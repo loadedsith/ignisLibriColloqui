@@ -1,8 +1,8 @@
-define(['services/serviceModule','angular','firebase'], function (services, angular, Firebase) {
+define(['services/serviceModule','angular','firebase','requestAnimationFrame'], function (services, angular, Firebase, requestAnimationFrame) {
   'use strict';
   return services.service('StatusService', ['$timeout', function ($timeout) {
     'use strict';
-    
+
     var Status = this;
     
     Status.debug = true;
@@ -100,13 +100,13 @@ define(['services/serviceModule','angular','firebase'], function (services, angu
       interval : function (now) {
         $timeout(function () {
           if (Status.status === undefined){
+            //dont do anything, but do keep animating
             window.requestAnimationFrame(Status.animation.interval);
-            
             return;
           }
           if (Status.status.animation === undefined) {
+            //dont do anything, but do keep animating
             window.requestAnimationFrame(Status.animation.interval);
-            
             return;
           }
           var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
