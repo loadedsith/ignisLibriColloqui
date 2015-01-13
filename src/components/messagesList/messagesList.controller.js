@@ -1,6 +1,6 @@
 define(['controllerModule', 'angular'],function (controllers) {
   'use strict';
-  return controllers.controller('MessagesListController', ['$scope', '$timeout' ,'FirebaseService', 'UserService', function ($scope,$timeout ,FirebaseService, UserService) {//$scope
+  return controllers.controller('MessagesListController', ['$scope', '$timeout', function ($scope, $timeout) {//$scope
     console.log('Hi everybody, im the MessagesListController');
     
     $scope.username = 'newUser';
@@ -11,10 +11,10 @@ define(['controllerModule', 'angular'],function (controllers) {
     
     $scope.roomsReady = false;
     
-    $scope.$watch('room',function (newValue) {
+    $scope.$watch('room',function () {
       console.log('roomChange');
       $scope.updateChatRef();
-    })
+    });
     
     var currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.room);
     
@@ -78,7 +78,7 @@ define(['controllerModule', 'angular'],function (controllers) {
         }, 0);
       
       });
-    }
+    };
     
     $scope.updateChatRef();
 

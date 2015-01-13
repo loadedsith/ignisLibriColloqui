@@ -1,6 +1,6 @@
 /* jshint undef:true, -W030*/
 /* global describe, it, expect, beforeEach, inject */
-define(['ignisLibriColloqui','controllerModule','angular-mocks'],function (ignisLibriColloqui,controllers, ng) {
+define(['ignisLibriColloqui','controllerModule','angular-mocks'],function () {
   'use strict';
 
   describe('Main Controller Spec', function(){
@@ -38,4 +38,4 @@ define(['ignisLibriColloqui','controllerModule','angular-mocks'],function (ignis
     }));
   });
 
-})
+});

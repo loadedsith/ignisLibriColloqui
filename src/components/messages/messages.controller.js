@@ -1,6 +1,6 @@
 define(['controllerModule', 'angular'],function (controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', '$timeout' ,'FirebaseService', 'UserService', function ($scope,$timeout ,FirebaseService, UserService) {//$scope
+  return controllers.controller('MessagesController', ['$scope', '$timeout', function ($scope,$timeout) {//$scope
     console.log('Hi everybody, im the MessagesController');
     
     $scope.username = 'newUser';

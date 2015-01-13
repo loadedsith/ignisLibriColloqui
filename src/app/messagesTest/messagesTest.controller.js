@@ -1,7 +1,7 @@
 define(['controllerModule'],function (controllers) {
 'use strict';
 return controllers
-  .controller('MessagesTestController', ['$scope','$timeout', function ($scope, $timeout) {
+  .controller('MessagesTestController', [ function () {
     console.log('MessagesTestController');
     
   }]);  

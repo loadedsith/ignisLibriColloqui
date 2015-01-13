@@ -25,7 +25,8 @@ module.exports = function(config) {
     ],
     autoWatch : false,
     browserNoActivityTimeout: 100000,
-    logLevel: config.LOG_DEBUG,
+    
+    // logLevel: config.LOG_DEBUG,
 
     frameworks: ['jasmine','requirejs'],
 

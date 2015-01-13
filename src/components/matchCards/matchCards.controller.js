@@ -79,8 +79,7 @@ define(['controllerModule', 'angular','react/matchDisplay'],function (controller
     };
     
     $scope.swipeLeft = function (card, cardData) {
-       console.log('swipeLeft: card', card, $scope, $scope.cards);
-       var myScope = $scope;
+       console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
        card.returnCard();
 
      };
@@ -92,9 +91,8 @@ define(['controllerModule', 'angular','react/matchDisplay'],function (controller
      };
      $scope.swipeRight = function (card, cardData) {
        console.log('swipeRight: card', card, $scope, $scope.cards);
-       var myScope = $scope;
        card.fadeOut(function (card) {
-         console.log('Green wooden Blue Whale');
+         console.log('Green wooden Blue Whale',card);
          myScope.removeCard(cardData);
        });
      };
