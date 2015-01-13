@@ -1,54 +1,20 @@
 <div ng-controller="MatchCardsController" id="matchCards" >
   <!-- ng-show="matches().length > 0" -->
-  <p>Match Cards</p>
-  <pre>matches:{{matches()}}</pre>
   <div class="cardsWrapper">
-  
-  
-  <div ng-controller="CardsController" id="Cards" >
-    <ul class="cards">
-      <card-gph
-        ng-repeat="card in matches()" 
-        card='card'
-        duration="250" 
-        max-drag="250" 
-        initial-position="{x:10, y:10}" 
-        swipe-left="swipeLeft"
-        swipe-right="swipeRight"
-        card-template="MatchDisplay"
-        >
-      </card-gph>
-    </ul>
-  </div>
-    <!-- <ul class="cards stack" swing-stack>
-      <li class="card" 
-        swing-card
-        ng-repeat="card in matches()"
-        swing-on-throwoutleft="swipeLeft(eventName, $event)"
-        swing-on-throwoutright="swipeRight(eventName, $event)"
-        >
-
-        {{userId}}
-      </li>
-    </ul> -->
-  </div>
-  
-  <hr />
-  <pre>
-    cards:
-    <ul cards-gph>
-      Cards GPH
-      <li card-gph>
-        cardGPH
-      </li>
-    </ul>
-  </pre>
-  <hr />
-  
-  
-  
-  
-  <div class="profileWrapper">
-    <div class="profile"></div>
+    <div ng-controller="CardsController" id="Cards" >
+      <ul class="cards">
+        <card-gph
+          ng-repeat="card in matches()" 
+          card='card'
+          duration="250" 
+          max-drag="250" 
+          initial-position="{x:10, y:10}" 
+          swipe-left="swipeLeft"
+          swipe-right="swipeRight"
+          card-template="MatchDisplay"
+          >
+        </card-gph>
+      </ul>
+    </div>
   </div>
 </div>

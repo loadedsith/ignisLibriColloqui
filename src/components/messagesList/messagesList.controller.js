@@ -6,7 +6,7 @@ define(['controllerModule', 'angular'],function (controllers) {
     $scope.Strings = Strings;
     
     $scope.username = 'newUser';
-    $scope.room = 'newRoom';
+    $scope.currentRoom = 'newRoom';
 
     $scope.messages = [];
     $scope.rooms= [];
@@ -18,7 +18,7 @@ define(['controllerModule', 'angular'],function (controllers) {
       $scope.updateChatRef();
     });
     
-    var currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.room);
+    var currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.currentRoom);
     
     $scope.messageInput = function () {//extra attr; e
       currentRoomRef.push({
@@ -53,7 +53,7 @@ define(['controllerModule', 'angular'],function (controllers) {
         }, 0);
       });
       
-      currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.room);
+      currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.currentRoom);
       
       currentRoomRef.on('child_added', function(snapshot) {
         //receive new message
