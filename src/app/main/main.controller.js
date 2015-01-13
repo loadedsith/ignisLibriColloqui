@@ -5,11 +5,20 @@ return controllers
     console.log('MainController');
     //ensure that status calls reference the current status
     $scope.Strings = Strings;
+
+    StatusService.setStatus(StatusService.loading);
+    
     $scope.status = function () {
       return StatusService.status;
     };
-    
-    StatusService.setStatus(StatusService.loading);
+
+    if (window.location.host === 'localhost:3000') {
+      var useRealHostToTestFacebook = {
+        text:'You must use example.com:3000 to test Facebook integration',
+        class:'status-error',
+      };
+      StatusService.setStatus(useRealHostToTestFacebook);
+    }
 
     $scope.messageInput = function () {//extra attr; e
       FirebaseService.chatRef.push({
