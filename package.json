@@ -39,6 +39,7 @@
     "jshint-stylish": "^0.4.0",
     "karma-jasmine": "^0.1.5",
     "karma-phantomjs-launcher": "^0.1.4",
+    "karma-requirejs": "0.2.2",
     "karma-react-preprocessor": "0.0.2",
     "main-bower-files": "^2.0.0",
     "protractor": "^1.4.0",
