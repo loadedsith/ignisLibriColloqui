@@ -1,4 +1,4 @@
-define(['facebook'], function(){
+define(['facebook', 'env'], function(){
   'use strict';
   FB.init({
     appId      : FB_API_KEY,
