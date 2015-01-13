@@ -4,7 +4,6 @@ for (var file in window.__karma__.files) {
         tests.push(file);
     }
 }
-console.log('tests', tests);
 require.config({
   baseUrl:'/base',
   shim: {
@@ -38,6 +37,7 @@ require.config({
   },
   deps: tests,
   paths: {
+    'env': '.tmp/app/env',
     'fb': 'src/app/fb',
     'controllerModule': 'src/app/controllerModule',
     'controllerIndex': 'src/app/controllerIndex',
@@ -62,16 +62,14 @@ require.config({
     '../components/messages/messages.controller': 'src/components/messages/messages.controller',
     '../components/messagesList/messagesList.controller': 'src/components/messagesList/messagesList.controller',
     'userManagement.controller': 'src/components/userManagement/userManagement.controller',
-    'services/serviceModule': 'src/app/services/serviceModule',
-    'serviceModule': 'src/app/services/serviceModule',
-    'serviceIndex': 'src/app/services/serviceIndex',
+    'services/serviceModule': '/base/src/app/services/serviceModule',
+    'services/serviceIndex': 'src/app/services/serviceIndex',
     'services/userService':'src/app/services/userService',
     'services/userManagementService':'src/app/services/userManagementService',
     'services/firebaseService':'src/app/services/firebaseService',
     'services/facebookService':'src/app/services/facebookService',
     'services/statusService':'src/app/services/statusService',
     'services/matchMakerService':'src/app/services/matchMakerService',
-    'services/serviceIndex': 'src/app/services/serviceIndex',
     'fastRepeat': 'src/app/directives/fastRepeat',
     'directives/fastRepeat': 'src/app/directives/fastRepeat',
     'directives/cards-gph': 'src/app/directives/cards-gph',
