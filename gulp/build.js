@@ -35,7 +35,7 @@ notify.on('click', function (options) {
   });
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts',['test'], function() {
   gulp.src(['src/{app,components}/**/*.js'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
