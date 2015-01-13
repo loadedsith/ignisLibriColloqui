@@ -93,7 +93,7 @@ define(['controllerModule', 'angular','react/matchDisplay'],function (controller
        console.log('swipeRight: card', card, $scope, $scope.cards);
        card.fadeOut(function (card) {
          console.log('Green wooden Blue Whale',card);
-         myScope.removeCard(cardData);
+         $scope.removeCard(cardData);
        });
      };
     
