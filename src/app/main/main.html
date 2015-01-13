@@ -1,28 +1,24 @@
 
 <div ng-include="'components/navbar/navbar.html'"></div>
-
-<div class="button small" ng-click="test()">
-  check
+<div class="row">
+  <div class="small-12 small-centered columns">
+    <div class="wrapper {{status().class}}">
+      <p class="status {{status().class}}">{{status().currentFrame || status().text}}</p>
+    
+      <fast-repeat messages="messages"></fast-repeat>
+    
+      <input type="text" ng-model="name" placeholder="{{Strings.buttonLabel.name}}" />
+    
+      <input type="textarea" ng-model="message" placeholder="{{Strings.buttonLabel.message}}" />
+    
+      <div class="button" ng-click="messageInput($event)">{{Strings.buttonLabel.sendMessage}}</div>
+    </div>
+  
+    <div ng-include="'components/matchCards/matchCards.html'" ng-if="matches().length > 0"></div>
+  
+    <div class="loader status {{status().class}}">
+      <p class="animation">{{status().currentFrame}}</p>
+      <p class="statusLabel">{{status().text}}</p>
+    </div>
+  </div>
 </div>
-
-<div class="wrapper {{status().class}}">
-  <p class="status {{status().class}}">{{status().currentFrame || status().text}}</p>
-  
-  <fast-repeat messages="messages"></fast-repeat>
-  
-  <input type="text" ng-model="name" placeholder="Name" />
-  
-  <input type="textarea" ng-model="message" placeholder="Message" />
-  
-  <div class="button" ng-click="messageInput($event)">Send Message</div>
-</div>
-
-matchCards <div ng-include="'components/matchCards/matchCards.html'"></div> /matchCards 
-
-<div class="loader status {{status().class}}">
-  <p class="animation">{{status().currentFrame}}</p>
-  <p class="statusLabel">{{status().text}}</p>
-</div>
-<p>
-  <a href="http://example.com:3000">example.com:3000</a>
-</p>

@@ -4,6 +4,7 @@ return controllers
   .controller('MainController', ['$scope', '$timeout', 'FacebookService', 'StatusService','FirebaseService','Strings', function ($scope, $timeout, FacebookService, StatusService, FirebaseService, Strings) {//,
     console.log('MainController');
     //ensure that status calls reference the current status
+    $scope.Strings = Strings;
     $scope.status = function () {
       return StatusService.status;
     };
