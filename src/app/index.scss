@@ -12,7 +12,9 @@ div.button{
 .panel {
   margin-top: 50px;
 }
-
+[ng-click]{
+  cursor:pointer;
+}
 .th {
   width: 100%;
   height: 200px;
