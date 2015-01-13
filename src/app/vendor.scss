@@ -1,4 +1,26 @@
+@import '../../bower_components/foundation/scss/normalize';
+@import '../../bower_components/foundation/scss/foundation/functions';
+@import 'settings';
 @import '../../bower_components/foundation/scss/foundation';
+.sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div{
+/*  @extend .sub-nav dt.active div;*/
+  $font-color: $sub-nav-font-color;
+  $font-size: $sub-nav-font-size;
+  $active-bg: $sub-nav-active-bg;
+  $active-bg-hover: $sub-nav-active-bg-hover;
+  
+  @include radius($sub-nav-border-radius);
+  font-weight: $sub-nav-active-font-weight;
+  background: $active-bg;
+  padding: $sub-nav-active-padding;
+  cursor: pointer;
+  color: $sub-nav-active-color;
+  &:hover {
+    background: $active-bg-hover;
+  }
+}
+/*
+
 .cardsWrapper{
   border: 2px dotted ForestGreen !important;
 
@@ -35,4 +57,4 @@
            }
        }
   }
-}
+}*/
