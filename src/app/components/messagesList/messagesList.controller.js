@@ -1,7 +1,7 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesListController', ['$scope', '$timeout', 'Config',
-    function($scope, $timeout, Config) {//$scope
+  return controllers.controller('MessagesListController', ['$scope', '$timeout', 'Config', 'FirebaseService',
+    function($scope, $timeout, Config, FirebaseService) {//$scope
       console.log('Hi everybody, im the MessagesListController');
 
       $scope.Strings = Config.strings;
@@ -10,7 +10,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.currentRoom = 'newRoom';
 
       $scope.messages = [];
-      $scope.rooms= [];
+      $scope.rooms = [];
 
       $scope.roomsReady = false;
 
@@ -18,9 +18,12 @@ define(['controllerModule', 'angular'], function(controllers) {
         console.log('roomChange');
         $scope.updateChatRef();
       });
+      var messagesRoot = FirebaseService.firebaseUrl + '/messages';
+      var userMessages = messagesRoot + '/' + $scope.username;
+      var userRoomMessages = userMessages + '/' + $scope.currentRoom;
+      var currentRoomRef = new Firebase(userRoomMessages);
 
-      var currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.currentRoom);
-
+      //FirebaseService.firebaseUrl+'/messages/' + $scope.username + '/' + $scope.currentRoom
       $scope.messageInput = function() {//extra attr; e
         currentRoomRef.push({
           name: $scope.username,
@@ -28,9 +31,10 @@ define(['controllerModule', 'angular'], function(controllers) {
         });
         $scope.message = '';
       };
-        var roomListRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
+
+      var roomListRef = new Firebase(userMessages);
       $scope.updateChatRef = function() {
-        roomListRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
+        roomListRef = new Firebase(userMessages);
         roomListRef.on('child_added', function(snapshot) {
           //receive new message
           // will be called for each new message
@@ -54,7 +58,11 @@ define(['controllerModule', 'angular'], function(controllers) {
           }, 0);
         });
 
-        currentRoomRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username + '/' + $scope.currentRoom);
+        var messagesRoot = FirebaseService.firebaseUrl + '/messages';
+        var userMessages = messagesRoot + '/' + $scope.username;
+        var userRoomMessages = userMessages + '/' + $scope.currentRoom;
+
+        currentRoomRef = new Firebase(userRoomMessages);
 
         currentRoomRef.on('child_added', function(snapshot) {
           //receive new message

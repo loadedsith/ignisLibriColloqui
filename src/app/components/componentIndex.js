@@ -4,7 +4,11 @@
  * below, you can see we bring in our services and constants modules
  * which avails each controller of, for example, the `config` constants object.
  **/
-define(['angular', 'config'], function(ng) {
-  'use strict';
-  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config']);
-});
+define([
+  'components/navbar/navbar.controller',
+  'components/matchCards/matchCards.controller',
+  'components/user/user.controller',
+  'components/cards/cards.controller',
+  'components/messages/messages.controller',
+  'components/messagesList/messagesList.controller'
+], function() {});

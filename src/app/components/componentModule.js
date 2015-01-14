@@ -6,5 +6,5 @@
  **/
 define(['angular', 'config'], function(ng) {
   'use strict';
-  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config']);
+  return ng.module('ignisLibriColloqui.components', ['ignisLibriColloqui.config']);
 });

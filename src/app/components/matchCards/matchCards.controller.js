@@ -1,6 +1,8 @@
 define(['controllerModule', 'angular', 'react/matchDisplay'], function(controllers, angular, MatchDisplay) {
   'use strict';
-  return controllers.controller('MatchCardsController', ['$scope', '$timeout', 'UserService', 'FacebookService', function($scope, $timeout, UserService, facebookService) {
+  return controllers.controller('MatchCardsController',
+  ['$scope', '$timeout', 'UserService', 'FacebookService',
+  function($scope, $timeout, UserService, facebookService) {
     console.log('Hi everybody, im the MatchCardsController');
     $scope.matchlist = {};
     $scope.MatchDisplay = MatchDisplay;
@@ -11,7 +13,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       for (var i = matchesKeys.length - 1; i >= 0; i--) {
         var match = matchesKeys[i];
         if (matches[match].facebookId === id) {
-          matches[match].image=image;
+          matches[match].image = image;
           matches[match].fetching = 'fetched';//lol
           return;
         }
@@ -19,7 +21,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
     };
 
     $scope.matches = function() {
-      if ( UserService.matches === undefined) {
+      if (UserService.matches === undefined) {
         return undefined;
       }
 
@@ -36,20 +38,9 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         if ($scope.matchlist[match].fetching === undefined) {
           $scope.matchlist[match].fetching = true;
           $scope.matchlist[match].image = facebookService.getUserImageById(match, imageMatchLookup);
-          // $scope.matchlist[match].image = facebookService.getUserImageById(match, function(image) {
-          //   $scope.matchlist[match].fetching = 'fetched';//lol
-          //   $scope.matchlist[match].image=image;
-          // });
         }
-        /*
-        {
-        userId:match,
-        image:
-        }
-        */
 
       }
-      // return undefined;
       return $scope.matchlist;
     };
 
@@ -61,7 +52,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
 
       if ($scope.images[id] === undefined) {
         //set a loading image, prevents this from getting called while the image is being loaded
-        $scope.images[id]='http://placehold.it/50x50';
+        $scope.images[id] = 'http://placehold.it/50x50';
         //get the actual image, will be set when callback is fired
         facebookService.getUserImageById(id, function(imageUrl) {
           if (imageUrl.error === undefined) {
@@ -79,23 +70,23 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
     };
 
     $scope.swipeLeft = function(card, cardData) {
-       console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
-       card.returnCard();
+      console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
+      card.returnCard();
 
-     };
-     $scope.removeCard = function(card) {
-       console.log('removeCard');
-       $timeout(function() {
-         delete $scope.matchlist[card.facebookId];
-       }, 0);
-     };
-     $scope.swipeRight = function(card, cardData) {
-       console.log('swipeRight: card', card, $scope, $scope.cards);
-       card.fadeOut(function(card) {
-         console.log('Green wooden Blue Whale', card);
-         $scope.removeCard(cardData);
-       });
-     };
+    };
+    $scope.removeCard = function(card) {
+      console.log('removeCard');
+      $timeout(function() {
+        delete $scope.matchlist[card.facebookId];
+      }, 0);
+    };
+    $scope.swipeRight = function(card, cardData) {
+      console.log('swipeRight: card', card, $scope, $scope.cards);
+      card.fadeOut(function(card) {
+        console.log('Green wooden Blue Whale', card);
+        $scope.removeCard(cardData);
+      });
+    };
     $scope.date = new Date();
   }]);
 });

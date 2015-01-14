@@ -8,11 +8,5 @@ define([
   'main/main.controller',
   'cardTest/cardTest.controller',
   'messagesTest/messagesTest.controller',
-  'messagesListTest/messagesListTest.controller',
-  '../components/navbar/navbar.controller',
-  '../components/matchCards/matchCards.controller',
-  '../components/user/user.controller',
-  '../components/cards/cards.controller',
-  '../components/messages/messages.controller',
-  '../components/messagesList/messagesList.controller'
+  'messagesListTest/messagesListTest.controller'
 ], function() {});

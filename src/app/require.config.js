@@ -33,6 +33,7 @@ require.config({
   ],
   paths: {
     'directives/directiveModule': 'directives/directiveModule',
+    'components/componentModule': 'components/componentModule',
     'react/card': '/app/react/card',
     'react/cards': '/app/react/cards',
     'react/messages': '/app/react/messages',

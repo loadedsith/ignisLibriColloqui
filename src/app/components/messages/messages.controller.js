@@ -1,6 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', '$timeout', 'Config', function($scope, $timeout, Config) {
+  return controllers.controller('MessagesController',
+  ['$scope', '$timeout', 'Config',
+  function($scope, $timeout, Config) {
     console.log('Hi everybody, im the MessagesController');
     $scope.Strings = Config.strings;
     $scope.username = 'newUser';

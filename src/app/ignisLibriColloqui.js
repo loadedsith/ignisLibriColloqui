@@ -6,6 +6,7 @@ define([
   'controllerIndex',
   'services/serviceIndex',
   'directives/directiveIndex',
+  'components/componentIndex',
   'config'
 ], function(angular) {
   'use strict';
@@ -16,6 +17,7 @@ define([
     'ignisLibriColloqui.directives',
     'ignisLibriColloqui.controllers',
     'ignisLibriColloqui.services',
+    'ignisLibriColloqui.components',
     'ignisLibriColloqui.config'
   ]);
 });

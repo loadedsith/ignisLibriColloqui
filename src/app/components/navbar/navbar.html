@@ -9,7 +9,7 @@
     <ul class="right">
       <li ng-repeat="link in Strings.links|orderBy:$index:true"><a ui-sref="{{link.route}}">{{link.name}}</a></li>
       <!-- <li><a href="http://example.com:3000">example.com:3000</a></li> -->
-      <li ng-include="'components/user/user.html'" ></li>
+      <li ng-include="'app/components/user/user.html'" ></li>
     </ul>
   </section>
 </nav>
