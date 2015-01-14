@@ -44,7 +44,7 @@ require.config({
   paths: {
     'env': '.tmp/app/env',
     'fb': 'src/app/fb',
-    'strings': 'src/app/strings',
+    'config': 'src/app/config',
     'controllerModule': 'src/app/controllerModule',
     'controllerIndex': 'src/app/controllerIndex',
     'main.controller': 'src/app/main.controller',

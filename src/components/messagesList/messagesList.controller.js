@@ -1,9 +1,9 @@
 define(['controllerModule', 'angular'],function (controllers) {
   'use strict';
-  return controllers.controller('MessagesListController', ['$scope', '$timeout','Strings', function ($scope, $timeout, Strings) {//$scope
+  return controllers.controller('MessagesListController', ['$scope', '$timeout', 'Config', function ($scope, $timeout, Config) {//$scope
     console.log('Hi everybody, im the MessagesListController');
     
-    $scope.Strings = Strings;
+    $scope.Strings = Config.strings;
     
     $scope.username = 'newUser';
     $scope.currentRoom = 'newRoom';

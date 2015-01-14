@@ -1,9 +1,9 @@
 define(['controllerModule'],function (controllers) {
 'use strict';
 return controllers
-  .controller('MessagesTestController', ['$scope','Strings', function ($scope, Strings) {
+  .controller('MessagesTestController', ['$scope','Config', function ($scope, Config) {
     console.log('MessagesTestController');
-    $scope.Strings = Strings;
+    $scope.Strings = Config.strings;
     
   }]);  
 });

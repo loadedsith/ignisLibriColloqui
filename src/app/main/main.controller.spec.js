@@ -1,6 +1,6 @@
 /* jshint undef:true, -W030*/
 /* global describe, it, expect, beforeEach, inject */
-define(['ignisLibriColloqui','controllerModule','angular-mocks', 'strings'],function () {
+define(['ignisLibriColloqui','controllerModule','angular-mocks'],function () {
   'use strict';
 
   describe('Main Controller Spec', function(){
@@ -21,8 +21,8 @@ define(['ignisLibriColloqui','controllerModule','angular-mocks', 'strings'],func
     beforeEach(inject(function(StatusService) {
       statusService = StatusService;
     }));
-    beforeEach(inject(function(Strings) {
-      strings = Strings;
+    beforeEach(inject(function(Config) {
+      strings = Config.strings;
     }));
 
     it('have 4 services that are not undefined', inject(function($controller) {

@@ -5,8 +5,8 @@
 define([
     'require',
     'angular',
-    './ignisLibriColloqui',
-    './config'
+    'ignisLibriColloqui',
+    'routes'
 ], function (require, ng) {
     'use strict';
 

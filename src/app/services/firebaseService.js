@@ -1,6 +1,6 @@
-define(['services/serviceModule','angular','firebase'], function (services, angular, Firebase) {
+define(['services/serviceModule', 'angular', 'firebase'], function (services, angular, Firebase) {
   'use strict';
-  return services.service('FirebaseService', function () {
+  return services.service('FirebaseService', function (Config) {
       var firebaseService = this;
       firebaseService.matchesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/interests');
       firebaseService.messagesRef = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages');

@@ -1,32 +1,27 @@
-define(['./ignisLibriColloqui'],function(ignisLibriColloqui){
+define(['angular'],function () {
   'use strict';
-  
-  return ignisLibriColloqui.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('home', {
-        url: '/home',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController'
-      })
-      .state('cardTest', {
-        url: '/cardTest',
-        templateUrl: 'app/cardTest/cardTest.html',
-        controller: 'CardTestController'
-      })
-      .state('messagesTest', {
-        url: '/messagesTest',
-        templateUrl: 'app/messagesTest/messagesTest.html',
-        controller: 'MessagesTestController'
-      })
-      .state('messagesListTest', {
-        url: '/messagesListTest',
-        templateUrl: 'app/messagesListTest/messagesListTest.html',
-        controller: 'MessagesListTestController'
-      });
-
-      $urlRouterProvider.when('', '/messagesListTest');
-
-      
-    $urlRouterProvider.otherwise('/messagesListTest');
-  }]);
+  angular.module('ignisLibriColloqui.config',[]).constant('Config',{
+    firebaseUrl:'https://resplendent-fire-9421.firebaseIO.com',
+    strings:{
+      siteTitle:'🔥 📖 💬',
+      links:[
+        {name:'Home',route:'home'},
+        {name:'Card Test',route:'cardTest'},
+        {name:'Messages Test',route:'messagesTest'},
+        {name:'Messages List Test',route:'messagesListTest'}
+      ],
+      buttonLabel:{
+        sendMessage: 'Send Message',
+        name:'Name',
+        message:'Message'
+      },
+      messageList:'Messages List',
+      messages: 'Messages',
+      rooms: 'Rooms',
+      currentRoom: 'Current Room',
+      updateRoom: 'Update Room',
+      updateUser: 'Update User',
+      sendMessage: 'Send Message'
+    }
+  });
 });
