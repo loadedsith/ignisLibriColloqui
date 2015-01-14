@@ -4,7 +4,7 @@ define(['ignisLibriColloqui','controllerModule','angular-mocks'],function () {
   'use strict';
 
   describe('Main Controller Spec', function(){
-    var scope, facebookService, firebaseService, statusService, strings;
+    var scope, facebookService, firebaseService, statusService, config;
 
     beforeEach(module('ignisLibriColloqui'));
 
