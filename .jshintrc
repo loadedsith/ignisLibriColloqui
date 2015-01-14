@@ -25,6 +25,8 @@
     "define": true,
     "FB": false,
     "FB_API_KEY": true,
+    "spyOn": false,
+    "jasmine": false,
     "Firebase": false,
     "MYLIST": true,
     "React": false,
