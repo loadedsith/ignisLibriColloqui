@@ -90,7 +90,7 @@ require.config({
     'react/messages': '.tmp/app/react/messages',
     'ignisLibriColloqui': 'src/app/ignisLibriColloqui',
     'main': 'src/app/main',
-    
+
     'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
     facebook: '//connect.facebook.net/en_US/all',
     angular: 'bower_components/angular/angular',
@@ -113,6 +113,6 @@ require.config({
 
   ],
   callback: window.__karma__.start
-  
+
 });
 require(['fb']);

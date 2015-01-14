@@ -1,13 +1,14 @@
-define(['services/serviceModule','angular','firebase','requestAnimationFrame'], function (services, angular, Firebase, requestAnimationFrame) {
+define(['services/serviceModule', 'angular', 'firebase', 'requestAnimationFrame'],
+function(services, angular, Firebase, requestAnimationFrame) {
   'use strict';
-  return services.service('StatusService', ['$timeout', function ($timeout) {
+  return services.service('StatusService', ['$timeout', function($timeout) {
     'use strict';
 
-    var Status = this;
-    
-    Status.debug = true;
-    
-    Status.loading = {
+    var _this = this;
+
+    _this.debug = true;
+
+    _this.loading = {
       text:'Loading...',
       class:'status-loading',
       animation:{
@@ -16,23 +17,23 @@ define(['services/serviceModule','angular','firebase','requestAnimationFrame'], 
         delay: 150
       }
     };
-  
-    Status.ready = {
+
+    _this.ready = {
       text:'Ready',
       class:'status-ready',
       animation:{
         frames:'🔥📖💬',
-        // frames:['😃','👍'],
+        // frames:['😃', '👍'],
         delay:1500
       }
     };
-    
-    /*    
+
+    /*
     //Some examples of statuses
-    Status.loading = {
-      text:'Loading...',//[Optional] Label text 
-      class:'status-loading',// CSS Class available to angular, not automatically applied
-      callback: function () {
+    _this.loading = {
+      text:'Loading...', //[Optional] Label text
+      class:'status-loading', // CSS Class available to angular, not automatically applied
+      callback: function() {
         console.log('Im a callback!');
       }
       animation:{//[Optional] Requires frames and delay. Use either a string of frames:
@@ -46,140 +47,144 @@ define(['services/serviceModule','angular','firebase','requestAnimationFrame'], 
         //  '🌖 Loading',
         //  '🌗 Loading',
         //  '🌘 Loading',
-        //  function(){return $scope.message}// You can even use a function call as a frame. Result should be a string.
+        //  function() {return $scope.message}// You can even use a function call as a frame. Result should be a string.
         //],
         delay:10// in ms
       }
     };
    */
 
-    // Status.resetAnimation = function () {
-    //   if(Status.status !== undefined){
-    //     if(Status.status.animation !== undefined){
-    //       Status.status.animation = undefined;
+    // _this.resetAnimation = function() {
+    //   if (_this.status !== undefined) {
+    //     if (_this.status.animation !== undefined) {
+    //       _this.status.animation = undefined;
     //     }
     //   }
     // };
-    
-    Status.setStatus = function (newStatus) {
+    _this.defaultAction = function() {
+      console.log('No action has been defined for this status');
+    };
+    _this.setStatus = function(newStatus) {
       if (newStatus === undefined) {
         console.log('Set status failed; newStatus was undefined.');
       }
-      if (Status.status === newStatus) {
+      if (_this.status === newStatus) {
         //nothing has changed, so do nothing
         return;
       }
-      Status.status = newStatus;
-      Status.processLowercaseStatusFrames();
-      if(typeof Status.status.callback === 'function'){
-        Status.status.callback();
+      if (!('action' in newStatus)) {
+        newStatus.action = _this.defaultAction;
       }
-      if (Status.runningAnimator !== true){
-        Status.animator();
+      _this.status = newStatus;
+      _this.processLowercaseStatusFrames();
+      if (typeof _this.status.callback === 'function') {
+        _this.status.callback();
+      }
+      if (_this.runningAnimator !== true) {
+        _this.animator();
       }
     };
-    
-    Status.animation = {
-      max : function(){return (Status.status.animation.length || 0);},
+
+    _this.animation = {
+      max : function() {return (_this.status.animation.length || 0);},
       startTime : Date.now(),
-      
-      charsToFrames : function (str) {
+
+      charsToFrames : function(str) {
         var split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
         var arr = [];
-          for (var i=0; i < split.length; i++) {
-            var char = split[i];
-            if (char !== '') {
-              arr.push(char);
-            }
+        for (var i = 0; i < split.length; i++) {
+          var char = split[i];
+          if (char !== '') {
+            arr.push(char);
           }
-          return arr;
+        }
+        return arr;
       },
-      
+
       frames : [],
-      
-      interval : function (now) {
-        $timeout(function () {
-          if (Status.status === undefined){
+
+      interval : function(now) {
+        $timeout(function() {
+          if (_this.status === undefined) {
             //dont do anything, but do keep animating
-            window.requestAnimationFrame(Status.animation.interval);
+            window.requestAnimationFrame(_this.animation.interval);
             return;
           }
-          if (Status.status.animation === undefined) {
+          if (_this.status.animation === undefined) {
             //dont do anything, but do keep animating
-            window.requestAnimationFrame(Status.animation.interval);
+            window.requestAnimationFrame(_this.animation.interval);
             return;
           }
-          var delta = Math.floor( (Status.animation.startTime - now) / Status.status.animation.delay);
+          var delta = Math.floor((_this.animation.startTime - now) / _this.status.animation.delay);
+
           //Dont continue if the delta hasn't changed (there's nothing todo as all animations are based off the delta)
-          
-          if(delta === Status.animation.lastDelta){
-            window.requestAnimationFrame(Status.animation.interval);
+          if (delta === _this.animation.lastDelta) {
+            window.requestAnimationFrame(_this.animation.interval);
             return;
           }
-          
-          Status.animation.lastDelta = delta;
-          var frames = Status.animation.frames;
+
+          _this.animation.lastDelta = delta;
+          var frames = _this.animation.frames;
           var frameId =  delta % frames.length;
-          
-          if(Status.status.animation.randomize !== undefined){
-            if(Status.status.animation.randomize === true){
-              frameId = Math.floor(Math.random()*frames.length);
+
+          if (_this.status.animation.randomize !== undefined) {
+            if (_this.status.animation.randomize === true) {
+              frameId = Math.floor(Math.random() * frames.length);
             }
           }
-          
+
           var theFrame = frames[frameId];
           if (typeof theFrame === 'function') {
-            Status.status.currentFrame = theFrame();
+            _this.status.currentFrame = theFrame();
           } else {
-            Status.status.currentFrame = theFrame;
+            _this.status.currentFrame = theFrame;
           }
-          
-          window.requestAnimationFrame(Status.animation.interval);
-        
-        },0);
+
+          window.requestAnimationFrame(_this.animation.interval);
+        }, 0);
       }
     };
-    
-    Status.processLowercaseStatusFrames = function () {
-      if (Status.status === undefined) {
-        //Status.status is the current status, yet, it is undefined.
+
+    _this.processLowercaseStatusFrames = function() {
+      if (_this.status === undefined) {
+        //_this.status is the current status, yet, it is undefined.
         return;
       }
-      if(Status.status.animation === undefined){
+      if (_this.status.animation === undefined) {
         //there is a status, but it has no animation
         return;
       }
-      if (typeof Status.status.animation.frames === 'string') {
-        Status.animation.frames = Status.animation.charsToFrames(Status.status.animation.frames).reverse();
+      if (typeof _this.status.animation.frames === 'string') {
+        _this.animation.frames = _this.animation.charsToFrames(_this.status.animation.frames).reverse();
       } else {
-        Status.animation.frames = Status.status.animation.frames.reverse();
+        _this.animation.frames = _this.status.animation.frames.reverse();
       }
     };
-    
-    Status.animator = function () {
-      if (Status.status === undefined){
-        Status.runningAnimator = false;
-        if (Status.debug === true) {
+
+    _this.animator = function() {
+      if (_this.status === undefined) {
+        _this.runningAnimator = false;
+        if (_this.debug === true) {
           console.log('Cant animate the current status as it is undefined.');
         }
         return;
-      }else if(Status.status.animation === undefined){
-        Status.runningAnimator = false;
-        if (Status.debug === true) {
+      }else if (_this.status.animation === undefined) {
+        _this.runningAnimator = false;
+        if (_this.debug === true) {
           console.log('Cant animate the current status\'s animation as it is undefined.');
         }
         return;
-      }else{
-        Status.runningAnimator = true;
-        var animation = Status.status.animation;
+      } else {
+        _this.runningAnimator = true;
+        var animation = _this.status.animation;
 
-        if(animation.frames === undefined || animation.delay === undefined){
+        if (animation.frames === undefined || animation.delay === undefined) {
           console.log('No animation frames or delay defined for animation. Both must be present.');
           return;
         }
-        window.requestAnimationFrame(Status.animation.interval);
+        window.requestAnimationFrame(_this.animation.interval);
       }
     };
-
-  }]);  
-})
+    return _this;
+  }]);
+});

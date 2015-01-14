@@ -9,7 +9,7 @@ gulp.task('bower', function() {
         transitive: true
     };
 
-    bowerRequireJS(options, function (rjsConfigFromBower) {
+    bowerRequireJS(options, function(rjsConfigFromBower) {
         console.log("Updated src/app/require.config.js !");
     });
 });

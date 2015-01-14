@@ -12,7 +12,7 @@ function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
   var routes = null;
-  if(baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
+  if (baseDir === 'src' || (util.isArray(baseDir) && baseDir.indexOf('src') !== -1)) {
     routes = {
       // Should be '/bower_components': '../bower_components'
       // Waiting for https://github.com/shakyShane/browser-sync/issues/308
@@ -27,12 +27,16 @@ function browserSyncInit(baseDir, files, browser) {
       middleware: middleware,
       routes: routes
     },
-    browser: browser
+    open:false,
+    browser: browser,
   });
-
 }
+function execute(command, callback) {
+  var exec = require('child_process').exec;
+  exec(command, function(error, stdout, stderr) { callback(stdout); });
+};
 
-gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function () {
+gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function() {
   browserSyncInit([
     'src',
     '.tmp'
@@ -44,16 +48,19 @@ gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function () {
     'src/{app,components}/**/*.html',
     'src/{app,components}/**/*.js'
   ]);
+  execute('open http://example.com:3000', function() {
+    console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');
+  });
 });
 
-gulp.task('serve:dist', ['build'], function () {
+gulp.task('serve:dist', ['build'], function() {
   browserSyncInit('dist');
 });
 
-gulp.task('serve:e2e', function () {
+gulp.task('serve:e2e', function() {
   browserSyncInit(['src', '.tmp'], null, []);
 });
 
-gulp.task('serve:e2e-dist', ['watch'], function () {
+gulp.task('serve:e2e-dist', ['watch'], function() {
   browserSyncInit('dist', null, []);
 });

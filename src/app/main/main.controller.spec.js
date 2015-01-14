@@ -1,17 +1,21 @@
 /* jshint undef:true, -W030*/
 /* global describe, it, expect, beforeEach, inject */
-define(['ignisLibriColloqui','controllerModule','angular-mocks'],function () {
+define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
   'use strict';
 
-  describe('Main Controller Spec', function(){
-    var scope, facebookService, firebaseService, statusService, config;
+  describe('Main Controller Spec', function() {
+    var scope;
+    var facebookService;
+    var firebaseService;
+    var statusService;
+    var config;
 
     beforeEach(module('ignisLibriColloqui'));
 
     beforeEach(inject(function($rootScope) {
       scope = $rootScope.$new();
     }));
-  
+
     beforeEach(inject(function(FacebookService) {
       facebookService = FacebookService;
     }));
@@ -22,28 +26,26 @@ define(['ignisLibriColloqui','controllerModule','angular-mocks'],function () {
       statusService = StatusService;
     }));
     beforeEach(inject(function(Config) {
-      strings = Config.strings;
+      config = Config;
     }));
 
-    it('have 4 services that are not undefined', inject(function($controller) {
+    it('have 4 services that are not undefined', inject(function() {
       expect(scope.status).toBeUndefined();
 
       $controller('MainController', {
         $scope: scope
-    	});
-    
+      });
 
       // expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
       expect(scope.status).toBeDefined();
-      expect(strings).toBeDefined();
+      expect(config).toBeDefined();
       expect(facebookService).toBeDefined();
       expect(firebaseService).toBeDefined();
       expect(statusService).toBeDefined();
     }));
-    it(' should links defined in the strings sbject', inject(function($controller) {
-      expect(strings.links).toBeDefined();
-      })
-    );
+    it(' should links defined in the config.strings object', inject(function($controller) {
+      expect(config.strings).toBeDefined();
+    }));
   });
 
 });

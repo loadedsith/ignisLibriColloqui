@@ -1,7 +1,7 @@
 /* jshint unused: false */
 
 /* {      
-       var findKeyframesRule = function (rule) {
+       var findKeyframesRule = function(rule) {
          var ss = document.styleSheets;
          for (var i = 0; i < ss.length; ++i) {
            for (var j = 0; j < ss[i].cssRules.length; ++j) {
@@ -46,20 +46,20 @@
 */ 
 
 
-define(['react','bezier-easing','react/card'],function (React, BezierEasing, CARD) {
+define(['react', 'bezier-easing', 'react/card'], function(React, BezierEasing, CARD) {
   'use strict';
-  var getCardFromChild = function (element, maxAttempts) {
-    if(element.classList.contains('card')){
+  var getCardFromChild = function(element, maxAttempts) {
+    if (element.classList.contains('card')) {
       return element;
     }
-    if(maxAttempts===undefined){maxAttempts = 6;}
+    if (maxAttempts === undefined) {maxAttempts = 6;}
     var attemptsLeft = maxAttempts;
-    if(!(element === undefined || element === null)){
-      if(!(element.classList === undefined || element.classList === null)){
-        while(!element.classList.contains('card') && attemptsLeft > 0){
+    if (!(element === undefined || element === null)) {
+      if (!(element.classList === undefined || element.classList === null)) {
+        while(!element.classList.contains('card') && attemptsLeft > 0) {
           element = element.parentElement;
           attemptsLeft = attemptsLeft-1;
-          if(!(element === undefined || element === null)){
+          if (!(element === undefined || element === null)) {
             attemptsLeft = 0;
           }
         }
@@ -68,8 +68,8 @@ define(['react','bezier-easing','react/card'],function (React, BezierEasing, CAR
     return element;
   };
   
-  var topOfTheStack = function (card) {
-    if(card.nextSibling === null){
+  var topOfTheStack = function(card) {
+    if (card.nextSibling === null) {
       return true;
     }
     return false;
@@ -95,7 +95,7 @@ define(['react','bezier-easing','react/card'],function (React, BezierEasing, CAR
            cardTemplate:cardTemplate
          };
          
-         var rows = data.map(function (datum) {
+         var rows = data.map(function(datum) {
            /*jshint ignore:start */
            return <CARD data={datum} dkey={datum.key} config={config}>{datum} </CARD>
            /*jshint ignore:end */

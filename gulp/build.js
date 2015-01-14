@@ -11,8 +11,8 @@ function handleError(err) {
   this.emit('end');
 }
 
-gulp.task('styles', [],  function () {
-  return gulp.src('src/{app,components}/**/*.scss')
+gulp.task('styles', [],  function() {
+  return gulp.src('src/{app, components}/**/*.scss')
     .pipe($.sass({style: 'expanded'}))
     .on('error', handleError)
     .pipe($.autoprefixer('last 1 version'))
@@ -21,61 +21,85 @@ gulp.task('styles', [],  function () {
 });
 var notify = require('gulp-notify');
 
-function execute(command, callback){
+function execute(command, callback) {
   var exec = require('child_process').exec;
-  exec(command, function(error, stdout, stderr){ callback(stdout); });
+  exec(command, function(error, stdout, stderr) { callback(stdout); });
 };
 
-notify.on('click', function (options) {
+notify.on('click', function(options) {
   var message = options.message;
   var lines = message.split('\n');
   var txmtUrl = lines[lines.length-2];//-2 because there's an extra '\n' on the messages so we dont actually want the last line
-  execute("open "+ txmtUrl, function(){
+  execute("open "+ txmtUrl, function() {
     // console.log('opening in TextMate');
   });
 });
+var jscs = require('gulp-jscs');
+gulp.task('jscs', function() {
+  return  gulp.src('src/{app, components}/**/*.js')
+    .pipe(jscs({
+        "preset": "google",
+        "fileExtensions": [ ".js", "jscs" ],
 
-gulp.task('scripts', function() {
-  gulp.src(['src/{app,components}/**/*.js'])
+        "requireParenthesesAroundIIFE": true,
+        "maximumLineLength": 120,
+        "validateLineBreaks": null,
+        "validateIndentation": 2,
+
+        "disallowKeywords": ["with"],
+        "disallowSpacesInsideObjectBrackets": null,
+        "disallowImplicitTypeConversion": ["string"],
+
+        "safeContextKeyword": "_this",
+
+        "excludeFiles": [
+            "test/data/**"
+        ]
+    }
+  ));
+
+})
+gulp.task('scripts', ['jscs'], function() {//add ['test'] here to auto test w/ server
+  gulp.src(['src/{app, components}/**/*.js'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify({
       title: 'JSHint',
-      message:function (file) {
+      message:function(file) {
       if (file.jshint.success) {
         // Don't show something if success
         return false;
       }
-      var errors = file.jshint.results.map(function (data) {
+      var errors = file.jshint.results.map(function(data) {
         if (data.error) {
           return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
              'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-    },wait:true}));
-  gulp.src(['src/{app,components}/**/*.jsx'])
+    }, wait:true}));
+  gulp.src(['src/{app, components}/**/*.jsx'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify({
       title: 'JSHint',
-      message:function (file) {
+      message:function(file) {
       if (file.jshint.success) {
         // Don't show something if success
         return false;
       }
-      var errors = file.jshint.results.map(function (data) {
+      var errors = file.jshint.results.map(function(data) {
         if (data.error) {
           return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
              'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-    },wait:true}));
+    }, wait:true}));
 });
 
-gulp.task('partials', function () {
-  return gulp.src('src/{app,components}/**/*.html')
+gulp.task('partials', function() {
+  return gulp.src('src/{app, components}/**/*.html')
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -88,14 +112,14 @@ gulp.task('partials', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'partials'], function () {
+gulp.task('html', ['styles', 'scripts', 'partials'], function() {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
   var assets;
 
   return gulp.src('src/*.html')
-    .pipe($.inject(gulp.src('.tmp/{app,components}/**/*.js'), {
+    .pipe($.inject(gulp.src('.tmp/{app, components}/**/*.js'), {
       read: false,
       starttag: '<!-- inject:partials -->',
       addRootSlash: false,
@@ -124,7 +148,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe($.size());
 });
 
-gulp.task('images', function () {
+gulp.task('images', function() {
   return gulp.src('src/assets/images/**/*')
     .pipe($.cache($.imagemin({
       optimizationLevel: 3,
@@ -135,21 +159,21 @@ gulp.task('images', function () {
     .pipe($.size());
 });
 
-gulp.task('fonts', function () {
+gulp.task('fonts', function() {
   return gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+    .pipe($.filter('**/*.{eot, svg, ttf, woff}'))
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size());
 });
 
-gulp.task('misc', function () {
+gulp.task('misc', function() {
   return gulp.src('src/**/*.ico')
     .pipe(gulp.dest('dist'))
     .pipe($.size());
 });
 
-gulp.task('clean', function (done) {
+gulp.task('clean', function(done) {
   $.del(['.tmp', 'dist'], done);
 });
 

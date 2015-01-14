@@ -3,19 +3,19 @@
  * NOTE: the ng-app attribute should not be on the index.html when using ng.bootstrap
  */
 define([
-    'require',
-    'angular',
-    'ignisLibriColloqui',
-    'routes'
-], function (require, ng) {
-    'use strict';
+  'require',
+  'angular',
+  'ignisLibriColloqui',
+  'routes'
+], function(require, ng) {
+  'use strict';
 
-    /*
-     * place operations that need to initialize prior to app start here
-     * using the `run` function on the top-level module
-     */
+  /*
+   * place operations that need to initialize prior to app start here
+   * using the `run` function on the top-level module
+   */
 
-    require(['requirejs-domready!'], function (document) {
-        ng.bootstrap(document, ['ignisLibriColloqui']);
-    });
+  require(['requirejs-domready!'], function(document) {
+    ng.bootstrap(document, ['ignisLibriColloqui']);
+  });
 });

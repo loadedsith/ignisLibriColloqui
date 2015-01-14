@@ -7,8 +7,8 @@ module.exports = function(config) {
 
     files : [
         {pattern: 'bower_components/**/*.js', included: false},
-        {pattern: 'src/{app,components}/**/*.js', included: false},
-        {pattern: '.tmp/{app,components}/**/*.js', included: false},
+        {pattern: 'src/{app, components}/**/*.js', included: false},
+        {pattern: '.tmp/{app, components}/**/*.js', included: false},
         {pattern: 'test/**/*spec.js', included: false},
         'test/require.config.test.js',
         'test/reactPolyfillForPhantomJS.js'
@@ -22,7 +22,7 @@ module.exports = function(config) {
     // logLevel: config.LOG_DEBUG,
     singleRun:false,
 
-    frameworks: ['jasmine','requirejs'],
+    frameworks: ['jasmine', 'requirejs'],
 
     preprocessors: {
       '**/*.jsx': ['react']
@@ -34,7 +34,7 @@ module.exports = function(config) {
          flags: ['--disable-web-security']
        }
      },*/
-    browsers: ['PhantomJS'],//'Chrome','Chrome_without_security'
+    browsers: ['PhantomJS'], //'Chrome', 'Chrome_without_security'
       
     //example.com has been added to etc/hosts as the localhost,
     //it is also registered with the app on the Facebook API

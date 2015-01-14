@@ -4,7 +4,7 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('test',['myEnv'], function() {
+gulp.task('test', ['myEnv'], function() {
   return gulp.src('noFile.dontCreateThisFile.gulp-karma-issue-7')
     .pipe($.karma({
       configFile: 'test/karma.conf.js',

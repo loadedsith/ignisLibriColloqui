@@ -2,31 +2,7 @@
   <a href="" ng-show="loggedIn()">
     <img title="Welcome {{user().first_name}}" ng-src="{{profilePicture().data.url||'./assets/images/FBProfile.jpg'}}"/>
   </a>
-
   <a href="" ng-show="!loggedIn()">
     <div  class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div> 
   </a>
-  
-  <!-- <div id="status"></div> -->
-  
-  <!-- <div class="button tiny secondary" ng-click="debugUser=!debugUser">{{debugUser?'-':'+'}}</div> -->
-  <!-- <div ng-show="debugUser === true">
-    <pre>
-      loggedIn: {{loggedIn()}}
-      loginStatus: {{loginStatus()}}
-      <!-- email: {{user().email}}
-      first_name: {{user().first_name}}
-      gender: {{user().gender}}
-      id: {{user().id}}
-      last_name: {{user().last_name}}
-      link: {{user().link}}
-      https: {{user().https}}
-      locale: {{user().locale}}
-      middle_name: {{user().middle_name}}
-      name: {{user().name}}
-      timezone: {{user().timezone}}
-      updated_time: {{user().updated_time}}
-      verified: {{user().verified}} -->
-    <!-- </pre> -->
-  <!-- </div> -->
 </div>

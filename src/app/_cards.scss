@@ -28,9 +28,9 @@ $maxCardRotation : 0.6deg;
   animation-delay: 0.1s;
   
   @for $cardI from 1 through 10 {
-    &:nth-child(#{$cardI}){
+    &:nth-child(#{$cardI}) {
       transform:rotate( ( nth($randA, $cardI) - 5) *  $maxCardRotation);
-      left: 10 + ( nth($randB,$cardI) - 5 ) * 1px;
+      left: 10 + ( nth($randB, $cardI) - 5 ) * 1px;
     }
   }
   background:#999;

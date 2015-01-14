@@ -1,7 +1,8 @@
-define(['ignisLibriColloqui'],function(ignisLibriColloqui){
+define(['ignisLibriColloqui'], function(ignisLibriColloqui) {
   'use strict';
-  
-  return ignisLibriColloqui.config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
+  return ignisLibriColloqui.config([
+    '$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/home',
@@ -24,9 +25,7 @@ define(['ignisLibriColloqui'],function(ignisLibriColloqui){
         controller: 'MessagesListTestController'
       });
 
-      $urlRouterProvider.when('', '/messagesListTest');
-
-      
-    $urlRouterProvider.otherwise('/messagesListTest');
+    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.otherwise('/home');
   }]);
 });

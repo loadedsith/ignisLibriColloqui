@@ -1,17 +1,17 @@
-define(['react','bezier-easing'],function (React, BezierEasing) {
+define(['react', 'bezier-easing'], function(React, BezierEasing) {
   'use strict';
-  var getCardFromChild = function (element, maxAttempts) {
-    if(element.classList.contains('card')){
+  var getCardFromChild = function(element, maxAttempts) {
+    if (element.classList.contains('card')) {
       return element;
     }
-    if(maxAttempts===undefined){maxAttempts = 6;}
+    if (maxAttempts === undefined) {maxAttempts = 6;}
     var attemptsLeft = maxAttempts;
-    if(!(element === undefined || element === null)){
-      if(!(element.classList === undefined || element.classList === null)){
-        while(!element.classList.contains('card') && attemptsLeft > 0){
+    if (!(element === undefined || element === null)) {
+      if (!(element.classList === undefined || element.classList === null)) {
+        while(!element.classList.contains('card') && attemptsLeft > 0) {
           element = element.parentElement;
           attemptsLeft = attemptsLeft-1;
-          if(!(element === undefined || element === null)){
+          if (!(element === undefined || element === null)) {
             attemptsLeft = 0;
           }
         }
@@ -20,24 +20,24 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
     return element;
   };
   
-  var topOfTheStack = function (card) {
-    if(card.nextSibling === null){
+  var topOfTheStack = function(card) {
+    if (card.nextSibling === null) {
       return true;
     }
     return false;
   };
 
   return React.createClass({
-    getDefaultProps: function () {
+    getDefaultProps: function() {
       return {
         // allow the initial position to be passed in as a prop
         initialPos: {x: 10, y: 10}
       };
     },
-    getInitialState: function () {
+    getInitialState: function() {
       var originalRotation = Math.floor((Math.random()*6)-3);
       return {
-        pos: this.props.config.initialPosition||{x:0,y:0},
+        pos: this.props.config.initialPosition||{x:0, y:0},
         duration:this.props.config.duration||250,
         rotation: originalRotation,
         originalRotation: originalRotation,
@@ -47,7 +47,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         rel: null // position relative to the cursor
       };
     },
-    render: function () {
+    render: function() {
       //ignore react jsx, use the force to lint
       // the vars are included to avoid unused complaints
       /*jshint ignore:start */
@@ -84,7 +84,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
               // <img src="{this.props.data.image.data.url}" alt="" />
 //                             
     },
-    componentDidUpdate: function (props, state) {
+    componentDidUpdate: function(props, state) {
       if (this.state.dragging && !state.dragging) {
         document.addEventListener('mousemove', this.handelMouse);
         document.addEventListener('mouseup', this.handelMouse);
@@ -93,7 +93,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
         document.removeEventListener('mouseup', this.handelMouse);
       }
     },
-    fadeOut: function (callback) {
+    fadeOut: function(callback) {
       //apply an animiation cardSlideRight
       var duration = this.props.config.duration||250;//ms
       if (this.state.fadeStart === undefined) {
@@ -114,17 +114,17 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           opacity:(1-completeness)
         });
         requestAnimationFrame(this.fadeOut);
-      }else{
+      } else {
         this.setState({
           opacity:0
         });
         
-        if(typeof this.state.fadeCallback === 'function'){
+        if (typeof this.state.fadeCallback === 'function') {
           this.state.fadeCallback(this);
         }
       }
     },
-    returnCard: function () {
+    returnCard: function() {
       var duration = this.props.config.duration||250;//ms
       if (this.state.dragging === false) {
         if (this.state.startTime === undefined) {
@@ -146,7 +146,7 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
             }
           });
           requestAnimationFrame(this.returnCard);
-        }else{
+        } else {
           this.setState({
             startTime:undefined,
             //force the final frame of the card returning animation
@@ -157,20 +157,20 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
           });
         }
       }
-      // if(this.state.pos.x < this.state.initialPos.x && this.state.pos.x > -(this.state.initialPos.x)){
-      // }else{
+      // if (this.state.pos.x < this.state.initialPos.x && this.state.pos.x > -(this.state.initialPos.x)) {
+      // } else {
         //loop over this function until card is returned.
         // requestAnimationFrame(this.returnCard);
       // }
     },
-    handelMouse: function (event) {
+    handelMouse: function(event) {
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
       var maxDrag = this.props.config.maxDrag;
-      if(!topOfTheStack(card)){
+      if (!topOfTheStack(card)) {
         return;
       }
-      switch(eventType){
+      switch (eventType) {
         case 'mousedown':
           console.log('mouseDown');
          // only left mouse button
@@ -195,24 +195,24 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
             opacity: 1,
             startTime: new Date().getTime()
           });
-          if(this.state.pos.x > maxDrag){
+          if (this.state.pos.x > maxDrag) {
             //dragged out right
-            if (typeof this.props.config.swipeRight === 'function'){
+            if (typeof this.props.config.swipeRight === 'function') {
               this.props.config.swipeRight(this, this.props.data);
               
-            }else{
+            } else {
               this.returnCard();
             }
-          }else if(this.state.pos.x < (-1 * maxDrag) ){
+          }else if (this.state.pos.x < (-1 * maxDrag) ) {
             //dragged out left
-            if (typeof this.props.config.swipeLeft === 'function'){
+            if (typeof this.props.config.swipeLeft === 'function') {
               this.props.config.swipeLeft(this, this.props.data);
-            }else{
+            } else {
               this.returnCard();
             }
 
 
-          }else{
+          } else {
             this.returnCard();
           }
           break;
@@ -222,17 +222,17 @@ define(['react','bezier-easing'],function (React, BezierEasing) {
 
           var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
-          if (xPos > (maxDrag/2)){
+          if (xPos > (maxDrag/2)) {
             var ratio = maxDrag/xPos;
-            if ( ratio >= 0){
+            if ( ratio >= 0) {
               opacity = ratio;
             }
-          }else if(xPos < (-1 * (maxDrag/2))){
-            if (maxDrag/xPos < 0){
+          }else if (xPos < (-1 * (maxDrag/2))) {
+            if (maxDrag/xPos < 0) {
               opacity = maxDrag/(-1 * xPos);
             }
           }
-          if (this.state.dragging){
+          if (this.state.dragging) {
             this.setState({
               rotation: -1 * (window.innerWidth / 2 - event.pageX)/45,
               opacity: opacity,

@@ -1,19 +1,19 @@
-define(['services/serviceModule', 'angular', 'firebase'], function (services, angular, Firebase) {
+define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('FirebaseService', function (Config) {
-      var firebaseService = this;
+  return services.service('FirebaseService', function(Config) {
+      var _this = this;
 
       if (Config.firebaseUrl) {
-        firebaseService.firebaseUrl = Config.firebaseUrl;
-      }else{
+        _this.firebaseUrl = Config.firebaseUrl;
+      } else {
         console.log('Strings.firebaseUrl was unset');
-        firebaseService.firebaseUrl = 'https://resplendent-fire-9421.firebaseIO.com';
+        _this.firebaseUrl = 'https://resplendent-fire-9421.firebaseIO.com';
       }
 
-      firebaseService.matchesRef = new Firebase(firebaseService.firebaseUrl + '/interests');
-      firebaseService.messagesRef = new Firebase(firebaseService.firebaseUrl + '/messages');
-      firebaseService.usersRef = new Firebase(firebaseService.firebaseUrl + '/users');
-       
-      return firebaseService;
-    });  
+      _this.matchesRef = new Firebase(_this.firebaseUrl + '/interests');
+      _this.messagesRef = new Firebase(_this.firebaseUrl + '/messages');
+      _this.usersRef = new Firebase(_this.firebaseUrl + '/users');
+
+      return _this;
+    });
 });

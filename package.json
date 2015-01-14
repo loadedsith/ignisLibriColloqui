@@ -47,7 +47,8 @@
     "react-tools": "^0.12.2",
     "require-dir": "^0.1.0",
     "uglify-save-license": "^0.4.1",
-    "wiredep": "^1.8.5"
+    "wiredep": "^1.8.5",
+    "gulp-jscs":"^1.4.0"
   },
   "engines": {
     "node": ">=0.10.0"

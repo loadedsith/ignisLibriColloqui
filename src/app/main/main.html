@@ -3,20 +3,14 @@
 <div class="row">
   <div class="small-12 small-centered columns">
     <div class="wrapper {{status().class}}">
-      <p class="status {{status().class}}">{{status().currentFrame || status().text}}</p>
-    
-      <fast-repeat messages="messages"></fast-repeat>
-    
-      <input type="text" ng-model="name" placeholder="{{Strings.buttonLabel.name}}" />
-    
-      <input type="textarea" ng-model="message" placeholder="{{Strings.buttonLabel.message}}" />
-    
-      <div class="button" ng-click="messageInput($event)">{{Strings.buttonLabel.sendMessage}}</div>
+      <p class="status {{status().class}}" ng-click="status().action()">{{status().currentFrame || status().text}}</p>
+      <!-- Content here -->
+      Welcome to {{Strings.siteTitle}}, {{User}}.
     </div>
   
     <div ng-include="'components/matchCards/matchCards.html'" ng-if="matches().length > 0"></div>
   
-    <div class="loader status {{status().class}}">
+    <div class="loader status {{status().class}}" ng-click="status().action()">
       <p class="animation">{{status().currentFrame}}</p>
       <p class="statusLabel">{{status().text}}</p>
     </div>

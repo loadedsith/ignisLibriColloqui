@@ -1,13 +1,13 @@
-define(['controllerModule', 'angular'],function (controllers) {
+define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', '$timeout', 'Strings', function ($scope, $timeout, Strings) {
+  return controllers.controller('MessagesController', ['$scope', '$timeout', 'Config', function($scope, $timeout, Config) {
     console.log('Hi everybody, im the MessagesController');
-    $scope.Strings = Strings;
+    $scope.Strings = Config.strings;
     $scope.username = 'newUser';
     $scope.messages = [];
     var userChat = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
-    
-    $scope.messageInput = function () {//extra attr; e
+
+    $scope.messageInput = function() {//extra attr; e
       userChat.push({
         name: $scope.name,
         message: $scope.message
@@ -15,36 +15,36 @@ define(['controllerModule', 'angular'],function (controllers) {
       $scope.message = '';
     };
 
-    $scope.updateChatRef = function () {
+    $scope.updateChatRef = function() {
       userChat = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
-      
+
       userChat.on('child_added', function(snapshot) {
         //receive new message
         // will be called for each new message
-        $timeout(function () {
+        $timeout(function() {
           var message = snapshot.val();
           message.key = snapshot.key();
           $scope.messages.push(message);
         }, 0);
       });
-  
+
       userChat.on('value', function(snapshot) {
         //Initialize messages
-        $timeout(function () {
+        $timeout(function() {
           var messages = snapshot.val();
-        
+
           $scope.messages = [];
-        
-          angular.forEach(messages, function(value, key){
+
+          angular.forEach(messages, function(value, key) {
             value.key = key;
             $scope.messages.push(value);
           });
 
         }, 0);
-      
+
       });
     };
-    
+
     $scope.updateChatRef();
 
   }]);

@@ -1,84 +1,80 @@
-define(['services/serviceModule', 'facebook', 'angular'],function (services, FB) {
+define(['services/serviceModule', 'facebook', 'env', 'angular'], function(services, FB) {
   //Facebook's vendor codes are located below
   'use strict';
-   return services
-    .service('FacebookService', function(){
+  FB.init({
+    appId      : FB_API_KEY,
+  });
+  return services
+    .service('FacebookService', function() {
+      var _this = this;
 
-      var facebookService = this;
- 
-      facebookService.checkLoginState = function(callback) {
-        console.log('facebookService.checkLoginState');
+      _this.checkLoginState = function(callback) {
+        console.log('facebook Service.checkLoginState');
         if (typeof FB === 'undefined') {
           console.log('Facebook was not properly initialized');
-        
-        }else{
-          if(typeof callback === 'function'){
+        } else {
+          if (typeof callback === 'function') {
             FB.getLoginStatus(callback);
-          }else{
-            FB.getLoginStatus(facebookService.statusChangeCallback);
+          } else {
+            FB.getLoginStatus(_this.statusChangeCallback);
           }
-        
         }
       };
-    
-      facebookService.apiCallbackWrapper = function (apiResource, callback) {
-        if(typeof callback === 'function'){
+
+      _this.apiCallbackWrapper = function(apiResource, callback) {
+        if (typeof callback === 'function') {
           FB.api(apiResource, callback);
-        }else{
+        } else {
           FB.api(apiResource, function(response) {
             console.log('Stock api ' + apiResource + ': ', response);
           });
         }
-      
       };
-    
-      facebookService.getUserImageById = function (id, callback) {
+
+      _this.getUserImageById = function(id, callback) {
         console.log('FacebookService.getUserImageById: ', id);
-        facebookService.apiCallbackWrapper('/' + id + '/picture', function (image) {
-          callback(id,image);
+        _this.apiCallbackWrapper('/' + id + '/picture', function(image) {
+          callback(id, image);
         });
       };
-    
-      facebookService.getUserImage = function (callback) {
+
+      _this.getUserImage = function(callback) {
         console.log('FacebookService.getUserImage');
-        facebookService.apiCallbackWrapper('/me/picture', callback);
+        _this.apiCallbackWrapper('/me/picture', callback);
       };
-    
-      facebookService.getUserInfo = function (callback) {
+
+      _this.getUserInfo = function(callback) {
         console.log('FacebookService.getUserInfo');
-        facebookService.apiCallbackWrapper('/me', callback);
-      
+        _this.apiCallbackWrapper('/me', callback);
       };
-    
-      facebookService.login = function (callback, scope) {
+
+      _this.login = function(callback, scope) {
         if (scope === undefined) {
-          scope = 'public_profile,email';
+          scope = 'public_profile, email';
         }
-        console.log('facebookService.login');
+        console.log('facebook service.login');
         if (typeof callback === 'function') {
-          FB.login(callback,{scope: scope});
-        
-        }else{
-          FB.login(function (response) {
-            console.log('facebookService.login response', response );
+          FB.login(callback, {scope: scope});
+        } else {
+          FB.login(function(response) {
+            console.log('facebookService.login response', response);
             if (response.status === 'connected') {
-               // Logged into your app and Facebook.
+              // Logged into your app and Facebook.
               console.log('facebookService.login Connected');
-             } else if (response.status === 'not_authorized') {
-               // The person is logged into Facebook, but not your app.
+            } else if (response.status === 'not_authorized') {
+              // The person is logged into Facebook, but not your app.
               console.log('facebookService.login Not Auth');
-             } else {
+            } else {
+              // The person is not logged into Facebook, so we're not sure if
+              // they are logged into this app or not.
               console.log('facebookService.login other');
-               // The person is not logged into Facebook, so we're not sure if
-               // they are logged into this app or not.
-             }
-          },{scope: scope});
+            }
+          }, {scope: scope});
         }
       };
-    
-      facebookService.statusChangeCallback = function(response) {
-         console.log('facebookService.statusChangeCallback');
-         console.log(response);
+
+      _this.statusChangeCallback = function(response) {
+         console.log('facebook Service.statusChangeCallback');
          // The response object is returned with a status field that lets the
          // app know the current login status of the person.
          // Full docs on the response object can be found in the documentation
@@ -97,6 +93,6 @@ define(['services/serviceModule', 'facebook', 'angular'],function (services, FB)
              'into Facebook.';
          }
        };
-      return facebookService;
+      return _this;
     });
 });
