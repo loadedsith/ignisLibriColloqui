@@ -29,7 +29,7 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
       config = Config;
     }));
 
-    it('have 4 services that are not undefined', inject(function() {
+    it('have 4 services that are not undefined', inject(function($controller) {
       expect(scope.status).toBeUndefined();
 
       $controller('MainController', {
@@ -43,7 +43,7 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
       expect(firebaseService).toBeDefined();
       expect(statusService).toBeDefined();
     }));
-    it(' should links defined in the config.strings object', inject(function($controller) {
+    it(' should links defined in the config.strings object', inject(function() {
       expect(config.strings).toBeDefined();
     }));
   });
