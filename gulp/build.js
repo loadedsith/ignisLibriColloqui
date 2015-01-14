@@ -6,6 +6,7 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
+
 function handleError(err) {
   console.error(err.toString());
   this.emit('end');
@@ -34,10 +35,10 @@ notify.on('click', function(options) {
     // console.log('opening in TextMate');
   });
 });
-var jscs = require('gulp-jscs');
+
 gulp.task('jscs', function() {
   return  gulp.src('src/{app, components}/**/*.js')
-    .pipe(jscs({
+    .pipe($.jscs({
         "preset": "google",
         "fileExtensions": [ ".js", "jscs" ],
 
@@ -56,10 +57,11 @@ gulp.task('jscs', function() {
             "test/data/**"
         ]
     }
-  ));
-
+  )).on('error',function(e){
+    this.end();
+  })
 })
-gulp.task('scripts', ['jscs'], function() {//add ['test'] here to auto test w/ server
+gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
   gulp.src(['src/{app, components}/**/*.js'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
