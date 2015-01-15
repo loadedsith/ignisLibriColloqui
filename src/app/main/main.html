@@ -5,7 +5,7 @@
     <div class="wrapper {{status().class}}">
       <p class="status {{status().class}}" ng-click="status().action()">{{status().currentFrame || status().text}}</p>
       <!-- Content here -->
-      Welcome to {{Strings.siteTitle}}, {{User}}.
+      Welcome to {{Strings.siteTitle}}, {{user.info.first_name}}.
     </div>
   
     <div ng-include="'app/components/matchCards/matchCards.html'" ng-if="matches().length > 0"></div>

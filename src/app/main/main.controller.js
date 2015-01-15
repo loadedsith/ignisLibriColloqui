@@ -13,9 +13,11 @@ define(['controllerModule', 'angular'], function(controllers) {
         return StatusService.status;
       };
 
-      $scope.User = function() {
-        return UserService.user;
-      };
+      $scope.userUpdate = function (user) {
+        $scope.user = user;
+      }
+      
+      UserService.addListener('update', $scope.userUpdate)
 
       UserService.checkLoginState();
 

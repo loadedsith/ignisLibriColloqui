@@ -5,6 +5,35 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     'use strict';
     var _this = this;
 
+    _this.events = {
+      "update":[]
+    };
+    
+    _this.addListener = function (condition, callback) {
+
+
+      if (condition in _this.events){
+        if (typeof callback === 'function') {
+          _this.events[condition].push(callback)
+        }else{
+          console.log('UserService Event not a function. Condition: ', condition, ", callback: ", callback);
+        }
+      }else{
+        console.log('UserService Event doesn\'t exist: condition: ',condition);
+      }
+    }
+
+    _this.triggerListeners = function(condition) {
+      if (_this.events[condition].length > 0){
+        for (var i = _this.events[condition].length - 1; i >= 0; i--) {
+          var callback = _this.events[condition][i]
+          if (typeof callback === 'function'){
+            callback(_this.user);
+          }
+        }
+      }
+    }
+
     _this.currentTopic = 0;
 
     _this.user = {
@@ -13,10 +42,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     }
 
     console.log('User service test $cookies:', $cookies);
-
-    StatusService.ready.callback = function() {
-      _this.checkLoginState();
-    };
 
     _this.checkLoginState = function() {
       FacebookService.checkLoginState(_this.updateLoginStateCallback);
@@ -31,13 +56,15 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (response && !response.error) {
         _this.user.profilePicture = response;
       }
+      _this.triggerListeners('update');
     };
 
     _this.userInfoCallback = function(response) {
       // console.log('_this Info Found: ', response);
-      _this.info = response;
+      StatusService.setStatus(StatusService.ready);
+      _this.user.info = response;
       FacebookService.getUserImage(_this.updateUserImage);
-      UserManagementService.userExists(_this.info, _this.userExists, _this.userDoesntExist);
+      UserManagementService.userExists(_this.user.info, _this.userExists, _this.userDoesntExist);
     };
 
     _this.userExists = function(user) {
@@ -51,7 +78,8 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.currentTopic = _this.topics ? _this.topics[0] : '-1';
       _this.blacklist = u.blacklist ? u.blacklist : [];
 
-      UserManagementService.getBlacklist(_this.info.id, _this.gotBlacklist);
+      UserManagementService.getBlacklist(_this.user.info.id, _this.gotBlacklist);
+      _this.triggerListeners('update');
     };
 
     _this.gotBlacklist = function(blacklist) {
@@ -59,8 +87,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
       _this.blacklist = blacklist;
       //add the current user to the blacklist
-//      _this.blacklist.push(String(_this.info.id));
-      UserManagementService.getMatches(_this.info.id, _this.blacklist, _this.topics, _this.gotMatches);
+      UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
     };
 
     _this.gotMatches = function(matches) {
@@ -70,6 +97,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.userDoesntExist = function() {
       console.log('User service User DOESNT Exists');
+      _this.triggerListeners('update');
     };
 
     _this.loginCallback = function(response) {
@@ -77,6 +105,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';
+        _this.triggerListeners('update');
         return;
       }
 
@@ -92,7 +121,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.updateLoginStateCallback = function(response) {
       StatusService.setStatus(StatusService.ready);
-
       if (response.status === 'connected') {
         _this.loginStatus = '👍 Logged In!';
       } else if (response.status === 'not_authorized') {

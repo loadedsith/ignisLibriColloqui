@@ -28,7 +28,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.user = function() {
-        return UserService.info;
+        return UserService.user;
       };
 
       $scope.profilePicture = function() {

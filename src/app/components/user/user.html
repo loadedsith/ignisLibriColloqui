@@ -1,6 +1,6 @@
 <div class="" ng-controller="UserController">
   <a href="" ng-show="loggedIn()">
-    <img title="Welcome {{user().first_name}}" ng-src="{{profilePicture().data.url||'./assets/images/FBProfile.jpg'}}"/>
+    <img title="Welcome {{user().info.first_name}}" ng-src="{{profilePicture().data.url || './assets/images/FBProfile.jpg'}}"/>
   </a>
   <a href="" ng-show="!loggedIn()">
     <div  class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div> 

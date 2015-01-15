@@ -45,6 +45,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
     };
 
     $scope.getUserImageById = function(id) {
+
       if ($scope.images === undefined) {
         $scope.images = {};
         return '';
