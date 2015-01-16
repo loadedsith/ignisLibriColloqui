@@ -7,24 +7,23 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
   return services
     .service('FacebookService', function() {
       var _this = this;
-      
-      _this.getUserImageByIdModifiers={
-        redirect:false,
-        height:320,
-        width:160,
-        type:"normal"
-      }
-      
-  
+
+      _this.getUserImageByIdModifiers = {
+        redirect: false,
+        height: 320,
+        width: 160,
+        type: 'normal'
+      };
+
       _this.checkLoginState = function(deferred) {
         console.log('facebook Service.checkLoginState');
         if (typeof FB === 'undefined') {
           console.log('Facebook was not properly initialized');
         } else {
-          FB.getLoginStatus(function (response) {
-            if (response.status==='connected'){
+          FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
               deferred.resolve(response);
-            }else{
+            } else {
               deferred.reject(response);
             }
           });
@@ -45,32 +44,32 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         var modifiers = _this.getUserImageByIdModifiers;
         console.log('FacebookService.getUserImageById: ', id);
         var resource = '/' + id + '/picture';
-        
+
         if (config !== undefined) {
-          if(config.redirect !== undefined){
+          if (config.redirect !== undefined) {
             resource = resource + '?redirect=' + config.redirect;
-          }else{
+          } else {
             resource = resource + '?redirect=' + modifiers.redirect;
           }
-          resource = resource + "&"; 
-          
-          if(config.type !== undefined){
+          resource = resource + '&';
+
+          if (config.type !== undefined) {
             resource = resource + 'type=' + config.type;
-          }else{
+          } else {
             resource = resource + 'type=' + modifiers.type;
           }
-          resource = resource + "&"; 
-          
-          if(config.height !== undefined){
+          resource = resource + '&';
+
+          if (config.height !== undefined) {
             resource = resource + 'height=' + config.height;
-          }else{
+          } else {
             resource = resource + 'height=' + modifiers.height;
           }
-          resource = resource + "&"; 
-          
-          if(config.width !== undefined){
+          resource = resource + '&';
+
+          if (config.width !== undefined) {
             resource = resource + 'width=' + config.width;
-          }else{
+          } else {
             resource = resource + 'width=' + modifiers.width;
           }
         }
@@ -78,7 +77,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           callback(id, image);
         });
       };
-      
+
       _this.getUserImage = function(callback) {
         console.log('FacebookService.getUserImage');
         _this.apiCallbackWrapper('/me/picture', callback);

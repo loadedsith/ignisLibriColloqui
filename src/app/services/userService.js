@@ -18,8 +18,8 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       deferred.promise.then(_this.loginSuccess, _this.loginFailure)
       return deferred.promise;
     };
-    
-    _this.loginFailure = function (response) {
+
+    _this.loginFailure = function(response) {
       if (response.status === 'not_authorized') {
         // the user is logged in to Facebook,
         // but has not authenticated your app
@@ -31,8 +31,8 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
         _this.loginStatus = '🚫 You are not logged into Facebook. Please login.';
       }
     };
-    
-    _this.loginSuccess = function (response) {
+
+    _this.loginSuccess = function(response) {
       _this.loginStatus = '👍 Logged In!';
       FacebookService.getUserInfo(_this.userInfoCallback);
       _this.loggedIn = true;
@@ -41,7 +41,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
         $cookies.userAuth = JSON.stringify(_this.auth);
       }
     };
-    
+
     _this.loginToFacebook = function() {
       FacebookService.login(_this.loginCallback);
     };
@@ -109,15 +109,14 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       $cookies.userAuth = JSON.stringify(_this.auth);
     };
 
-
-    _this.getUser = function () {return _this.user}
+    _this.getUser = function() {return _this.user}
 
     //Watch for changes, and like a boss, update any listeners.
-    $rootScope.$watch(_this.getUser,function () {
-      console.log('broadcast',_this.user);
+    $rootScope.$watch(_this.getUser, function() {
+      console.log('broadcast', _this.user);
       $rootScope.$broadcast('UserService:Update', _this.user);
-    },true)
-    
+    }, true)
+
     return _this;
   }]);
 });

@@ -6,13 +6,13 @@ define(['react'], function(React) {
       var imageUrl;
       
       //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
-      var imageData = (((this.props.data||{}).image||{}).data||{});
+      var imageData = (((this.props.data || {}).image || {}).data || {});
 
         /*jshint camelcase: false */
       if(imageData.is_silhouette === true){
         /*jshint camelcase: true */
         imageUrl = './assets/images/FBProfile.jpg';
-      }else{
+      } else {
         imageUrl = imageData.url||'./assets/images/FBProfile.jpg';
       }
       /*jshint ignore:start */

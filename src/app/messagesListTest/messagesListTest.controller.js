@@ -5,24 +5,24 @@ define(['controllerModule'], function(controllers) {
       console.log('MessagesListTestController');
       $scope.Strings = Config.strings;
       $scope.testMode = true;
-      
+
       $scope.username = 'username1234';
       $scope.currentRoom = 'testRoom';
-      
+
       MessagesService.username = $scope.username;
       MessagesService.currentRoom = $scope.currentRoom;
-      
+
       MessagesService.updateMessagesRef();
-      
-      $scope.messageInput = function () {
+
+      $scope.messageInput = function() {
         console.log('send message: ', $scope.message);
         var successful = MessagesService.sendMessage($scope.message);
         if (successful) {
           $scope.message = '';
         }
       }
-      
-      $scope.updateMessagesRef = function (event) {
+
+      $scope.updateMessagesRef = function(event) {
         MessagesService.username = $scope.username;
         MessagesService.currentRoom = $scope.currentRoom;
         console.log('$scope.currentRoom', $scope.currentRoom);

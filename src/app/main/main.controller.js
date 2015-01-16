@@ -7,50 +7,50 @@ define(['controllerModule', 'angular'], function(controllers) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.user = {};
-      
+
       StatusService.setStatus(StatusService.loading);
 
-      $scope.$on('StatusService:Update',function (event, status) {
+      $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
-      $scope.$on('UserService:Update',function (event, user) {
+      $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
       });
-      
-      $scope.showMatches = (Config.showMatches||false);
-      
-      $scope.showMessages = (Config.showMessages||false);
-      
-      $scope.toggleMatches = function (value) {
-        if (value === undefined){
+
+      $scope.showMatches = (Config.showMatches || false);
+
+      $scope.showMessages = (Config.showMessages || false);
+
+      $scope.toggleMatches = function(value) {
+        if (value === undefined) {
           $scope.showMatches = !$scope.showMatches;
-        }else{
+        } else {
           $scope.showMatches = !!value;
         }
         if ($scope.showMatches) {
           $scope.showMessages = false;
         }
       };
-      
-      $scope.toggleMessages = function (value) {
-        if (value === undefined){
+
+      $scope.toggleMessages = function(value) {
+        if (value === undefined) {
           $scope.showMessages = !$scope.showMessages;
-        }else{
+        } else {
           $scope.showMessages = !!value;
         }
         if ($scope.showMessages) {
           $scope.showMatches = false;
         }
       };
-      
+
       var userLoginState = UserService.checkLoginState();
-      
-      userLoginState.then(function (response) {
+
+      userLoginState.then(function(response) {
         StatusService.setStatus(StatusService.ready);
-        console.log('maincontroller responding to facebook login succcess',response);
-      }, function (response) {
+        console.log('maincontroller responding to facebook login succcess', response);
+      }, function(response) {
         StatusService.setStatus(StatusService.ready);
-        console.log('maincontroller responding to facebook login fail',response);
+        console.log('maincontroller responding to facebook login fail', response);
       });
 
       if (window.location.host === 'localhost:3000') {

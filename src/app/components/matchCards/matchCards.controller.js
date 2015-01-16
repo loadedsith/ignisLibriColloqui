@@ -19,20 +19,20 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         }
       }
     };
-    
-    $scope.$on('UserService:Update', function (event, user) {
-      if(user.matches){
-        $scope.processMatches(user.matches)
+
+    $scope.$on('UserService:Update', function(event, user) {
+      if (user.matches) {
+        $scope.processMatches(user.matches);
         console.log('$scope.matchlist', $scope.matchlist);
-      }else{
+      } else {
         console.debug('got service update for match controller, but no matches!')
       }
     })
-    var w = 400/2;
-    var h = 558/2;
+    var w = 400 / 2;
+    var h = 558 / 2;
     var facebookImageConfig = {
-      width:w,
-      height:h
+      width: w,
+      height: h
     };
     $scope.processMatches = function(matches) {
       if (matches === undefined) {
@@ -51,7 +51,8 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
 
         if ($scope.matchlist[match].fetching === undefined) {
           $scope.matchlist[match].fetching = true;
-          $scope.matchlist[match].image = facebookService.getUserImageById(match, facebookImageConfig, imageMatchLookup);
+          $scope.matchlist[match].image =
+            facebookService.getUserImageById(match, facebookImageConfig, imageMatchLookup);
         }
 
       }
@@ -69,7 +70,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         //set a loading image, prevents this from getting called while the image is being loaded
         $scope.images[id] = 'http://placehold.it/50x50';
         //get the actual image, will be set when callback is fired
-        
+
         facebookService.getUserImageById(id, facebookImageConfig, function(imageUrl) {
           if (imageUrl.error === undefined) {
             $timeout(function() {
@@ -82,7 +83,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       }
       return $scope.images[id];
     };
-    
+
     $scope.removeCard = function(card) {
       console.log('removeCard');
       $timeout(function() {
@@ -94,21 +95,21 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
     }
     $scope.swipeLeft = function(card, cardData) {
       console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
-      if(typeof $scope.$parent.swipeLeft === 'function'){
+      if (typeof $scope.$parent.swipeLeft === 'function') {
         card.removeCard = $scope.removeCard;
         $scope.$parent.swipeLeft(card, cardData, $scope.cardControl)
-      }else{
+      } else {
         card.returnCard();
       }
     };
 
     $scope.swipeRight = function(card, cardData) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
-      
-      if(typeof $scope.$parent.swipeRight === 'function'){
+
+      if (typeof $scope.$parent.swipeRight === 'function') {
         card.removeCard = $scope.removeCard;
         $scope.$parent.swipeRight(card, cardData, $scope.cardControl)
-      }else{
+      } else {
         card.fadeOut(function(card) {
           console.log('fade out card callback, card: ', card);
           $scope.removeCard(cardData);

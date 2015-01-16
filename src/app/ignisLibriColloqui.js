@@ -21,11 +21,11 @@ define([
     'ignisLibriColloqui.config'
   ]).filter('debug', function() {
     return function(input) {
-      console.log('input',input);
+      console.log('input', input);
       if (input === '') {
         return 'empty string';
       }
-      return input ? input : ('' + input);
+      return input;
     };
   });
 });

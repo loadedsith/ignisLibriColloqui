@@ -27,7 +27,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         return UserService.loginStatus;
       };
 
-      $scope.$on('UserService:Update',function (event, user) {
+      $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
       })
     }]);

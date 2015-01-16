@@ -6,7 +6,6 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-
 function handleError(err) {
   console.error(err.toString());
   this.emit('end');

@@ -186,13 +186,13 @@ function(services, angular, Firebase, requestAnimationFrame) {
       }
     };
 
-    _this.getStatus = function () {return _this.status}
+    _this.getStatus = function() {return _this.status}
 
     //Watch for changes, and like a boss, update any listeners.
-    $rootScope.$watch(_this.getStatus,function () {
+    $rootScope.$watch(_this.getStatus, function() {
       $rootScope.$broadcast('StatusService:Update', _this.status);
-    },true)
-    
+    }, true)
+
     return _this;
   }]);
 });

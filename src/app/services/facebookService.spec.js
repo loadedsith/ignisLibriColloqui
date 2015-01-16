@@ -112,7 +112,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
 
       it(' api wrapper should call the FB.api function with apiResource', function() {
         var expectedResource = '/' + userId + '/picture'
-        expect(facebookService.apiCallbackWrapper).toHaveBeenCalledWith(expectedResource, undefined, jasmine.any(Function));
+        expect(facebookService.apiCallbackWrapper)
+          .toHaveBeenCalledWith(expectedResource, undefined, jasmine.any(Function));
       });
     });
 
@@ -138,7 +139,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       });
 
       it(' api wrapper should call the FB.api function with apiResource', function() {
-        expect(facebookService.apiCallbackWrapper).toHaveBeenCalledWith('/me/picture', jasmine.any(Function));
+        expect(facebookService.apiCallbackWrapper)
+          .toHaveBeenCalledWith('/me/picture', jasmine.any(Function));
       });
     });
     describe(' getUserInfo calls the callback', function() {
@@ -163,7 +165,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       });
 
       it(' api wrapper should call the FB.api function with apiResource', function() {
-        expect(facebookService.apiCallbackWrapper).toHaveBeenCalledWith('/me', jasmine.any(Function));
+        expect(facebookService.apiCallbackWrapper)
+          .toHaveBeenCalledWith('/me', jasmine.any(Function));
       });
     });
   });

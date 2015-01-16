@@ -6,14 +6,14 @@ define(['controllerModule', 'angular'], function(controllers) {
       console.log('MatchesController');
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
-      
+
       $scope.swipeLeft = function(card, cardData) {
         card.returnCard();
         var scope = $scope;
         debugger;
 
       };
-      
+
       $scope.swipeRight = function(card, cardData, cardControl) {
         card.fadeOut(function(card) {
           console.log('fade out card callback, card: ', card);
