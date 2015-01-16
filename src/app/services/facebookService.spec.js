@@ -90,7 +90,7 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
 
     describe(' getUserImageById calls the callback', function() {
       beforeEach(function(done) {
-        facebookService.getUserImageById('1000', done);
+        facebookService.getUserImageById('1000', undefined, done);
       });
       it(' getUserImageById should call callback function', function() {
         expect(true)// just by getting here you've verified the callback (it was done())
@@ -112,7 +112,7 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
 
       it(' api wrapper should call the FB.api function with apiResource', function() {
         var expectedResource = '/' + userId + '/picture'
-        expect(facebookService.apiCallbackWrapper).toHaveBeenCalledWith(expectedResource, jasmine.any(Function));
+        expect(facebookService.apiCallbackWrapper).toHaveBeenCalledWith(expectedResource, undefined, jasmine.any(Function));
       });
     });
 

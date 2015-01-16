@@ -9,10 +9,10 @@ define(['react'], function(React) {
         imageUrl = './assets/images/FBProfile.jpg';
       }
       /*jshint ignore:start */
+      /* <p>FBID:{this.props.data.facebookId}</p>*/
+      /** <p>fetching:{this.props.data.fetching}</p>*/
       return <div>
-      <p>FBID:{this.props.data.facebookId}</p>
-      <p>image: <img src={imageUrl}/></p>
-      <p>fetching:{this.props.data.fetching}</p>
+        <img src={imageUrl} className="matchImage"/>
       </div>
       /*jshint ignore:end */
       

@@ -7,7 +7,15 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
   return services
     .service('FacebookService', function() {
       var _this = this;
-
+      
+      _this.getUserImageByIdModifiers={
+        redirect:false,
+        height:320,
+        width:160,
+        type:"normal"
+      }
+      
+  
       _this.checkLoginState = function(deferred) {
         console.log('facebook Service.checkLoginState');
         if (typeof FB === 'undefined') {
@@ -33,13 +41,44 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         }
       };
 
-      _this.getUserImageById = function(id, callback) {
+      _this.getUserImageById = function(id, config, callback) {
+        var modifiers = _this.getUserImageByIdModifiers;
         console.log('FacebookService.getUserImageById: ', id);
-        _this.apiCallbackWrapper('/' + id + '/picture', function(image) {
+        var resource = '/' + id + '/picture';
+        
+        if (config !== undefined) {
+          if(config.redirect !== undefined){
+            resource = resource + '?redirect=' + config.redirect;
+          }else{
+            resource = resource + '?redirect=' + modifiers.redirect;
+          }
+          resource = resource + "&"; 
+          
+          if(config.type !== undefined){
+            resource = resource + 'type=' + config.type;
+          }else{
+            resource = resource + 'type=' + modifiers.type;
+          }
+          resource = resource + "&"; 
+          
+          if(config.height !== undefined){
+            resource = resource + 'height=' + config.height;
+          }else{
+            resource = resource + 'height=' + modifiers.height;
+          }
+          resource = resource + "&"; 
+          
+          if(config.width !== undefined){
+            resource = resource + 'width=' + config.width;
+          }else{
+            resource = resource + 'width=' + modifiers.width;
+          }
+        }
+        _this.apiCallbackWrapper(resource, function(image) {
           callback(id, image);
         });
       };
-
+      
       _this.getUserImage = function(callback) {
         console.log('FacebookService.getUserImage');
         _this.apiCallbackWrapper('/me/picture', callback);
