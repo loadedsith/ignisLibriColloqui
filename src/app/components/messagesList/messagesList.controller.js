@@ -6,7 +6,6 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.Strings = Config.strings;
 
-      $scope.username = 'newUser';
       $scope.currentRoom = 'newRoom';
 
       $scope.messages = [];
@@ -19,12 +18,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.updateChatRef();
       }
 
-      var messagesRoot = FirebaseService.firebaseUrl + '/messages';
-      var userMessages = messagesRoot + '/' + $scope.username;
-      var userRoomMessages = userMessages + '/' + $scope.currentRoom;
-      var currentRoomRef = new Firebase(userRoomMessages);
-
-      //FirebaseService.firebaseUrl+'/messages/' + $scope.username + '/' + $scope.currentRoom
       $scope.messageInput = function() {//extra attr; e
         currentRoomRef.push({
           name: $scope.username,
@@ -33,12 +26,13 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.message = '';
       };
 
-      var roomListRef = new Firebase(userMessages);
       $scope.updateChatRef = function() {
         var messagesRoot = FirebaseService.firebaseUrl + '/messages';
         var userMessages = messagesRoot + '/' + $scope.username;
         var userRoomMessages = userMessages + '/' + $scope.currentRoom;
         var currentRoomRef = new Firebase(userRoomMessages);
+
+        var roomListRef = new Firebase(userMessages);
 
         roomListRef = new Firebase(userMessages);
         roomListRef.on('child_added', function(snapshot) {
