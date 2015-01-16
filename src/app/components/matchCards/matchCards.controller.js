@@ -19,12 +19,22 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         }
       }
     };
-    $scope.matches = function() {
-      if (UserService.matches === undefined) {
+    
+    $scope.$on('UserService:Update', function (event, user) {
+      if(user.matches){
+        $scope.processMatches(user.matches)
+        console.log('$scope.matchlist', $scope.matchlist);
+      }else{
+        console.debug('got service update for match controller, but no matches!')
+      }
+    })
+    
+    $scope.processMatches = function(matches) {
+      if (matches === undefined) {
         return undefined;
       }
 
-      var matches = UserService.matches[UserService.currentTopic];
+      matches = matches[UserService.currentTopic];
 
       for (var i = matches.length - 1; i >= 0; i--) {
         var match = matches[i];
@@ -85,7 +95,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       $scope.swipeRight = function(card, cardData) {
         console.log('swipeRight: card', card, $scope, $scope.cards);
         card.fadeOut(function(card) {
-          console.log('Green wooden Blue Whale', card);
+          console.log('fade out card callback, card: ', card);
           $scope.removeCard(cardData);
         });
       };

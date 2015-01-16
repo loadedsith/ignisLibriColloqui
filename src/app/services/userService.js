@@ -84,7 +84,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.gotMatches = function(matches) {
       console.log('UserService.gotMatches: ', matches);
-      _this.matches = matches;
+      _this.user.matches = matches;
     };
 
     _this.userDoesntExist = function() {
