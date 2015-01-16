@@ -2,6 +2,7 @@ define(['angular'], function() {
   'use strict';
   angular.module('ignisLibriColloqui.config', []).constant('Config', {
     firebaseUrl: 'https://resplendent-fire-9421.firebaseIO.com',
+    showMatches: true,//show matches automatically on successful login
     strings: {
       siteTitle: '🔥 📖 💬',
       links: [
@@ -25,6 +26,7 @@ define(['angular'], function() {
       },
       messageList: 'Messages List',
       messages: 'Messages',
+      matches: 'Matches',
       rooms: 'Rooms',
       currentRoom: 'Current Room',
       updateRoom: 'Update Room',

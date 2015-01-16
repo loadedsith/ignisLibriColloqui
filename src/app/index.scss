@@ -15,6 +15,10 @@ div.button{
 [ng-click]{
   cursor:pointer;
 }
+.reveal-modal.matches{
+  height: 410px;
+  width: 300px;
+}
 .th {
   width: 100%;
   height: 200px;
@@ -69,6 +73,13 @@ div.button{
 }
 section.top-bar-section ul.right li img{
   max-height: 42px;
+}
+
+.reveal-modal.open{
+  display: block; 
+  opacity: 1;
+  visibility: visible;
+  top: 88px;
 }
 
 @keyframes fadeOut {

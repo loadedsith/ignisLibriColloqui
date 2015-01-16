@@ -8,5 +8,6 @@ define([
   'main/main.controller',
   'cardTest/cardTest.controller',
   'messagesTest/messagesTest.controller',
-  'messagesListTest/messagesListTest.controller'
+  'messagesListTest/messagesListTest.controller',
+  'matches/matches.controller'
 ], function() {});

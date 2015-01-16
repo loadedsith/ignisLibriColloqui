@@ -7,6 +7,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.user = {};
+      
       StatusService.setStatus(StatusService.loading);
 
       $scope.$on('StatusService:Update',function (event, status) {
@@ -15,7 +16,17 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:Update',function (event, user) {
         $scope.user = user;
       });
-
+      
+      $scope.showMatches = Config.showMatches||false;
+      
+      $scope.toggleMatches = function (value) {
+        if (value === undefined){
+          $scope.showMatches = !$scope.showMatches;
+        }else{
+          $scope.showMatches = !!value;
+        }
+      };
+      
       var userLoginState = UserService.checkLoginState();
       
       userLoginState.then(function (response) {
