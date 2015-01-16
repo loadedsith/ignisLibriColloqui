@@ -6,8 +6,6 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.Strings = Config.strings;
 
-      $scope.currentRoom = 'newRoom';
-
       $scope.messages = [];
       $scope.rooms = [];
 
@@ -19,6 +17,11 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
 
       $scope.messageInput = function() {//extra attr; e
+        if($scope.currentRoom === undefined||$scope.currentRoom === ''){
+          console.debug("Talking to yourself again?");
+          $scope.message = '';
+          return;
+        }
         currentRoomRef.push({
           name: $scope.username,
           message: $scope.message
