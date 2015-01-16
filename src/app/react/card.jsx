@@ -211,15 +211,12 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
               this.returnCard();
             }
 
-
           } else {
             this.returnCard();
           }
           break;
         case 'mousemove':
           console.log('mouseMove');
-
-
           var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
           if (xPos > (maxDrag/2)) {
