@@ -22,11 +22,15 @@ $maxCardRotation : 0.6deg;
   position:absolute;
   top:10px;
   cursor: pointer;
-  animation: cardSlideRight;
-  animation-play-state: paused;
-  animation-duration: 4s;
-  animation-delay: 0.1s;
-  
+  .matchDisplay{
+    background-size:cover;
+    background-position: 50% 50%;
+    width :400 / 2 * 1px;
+    height:558 / 2 * 1px;
+    .description{
+    
+    }
+  }
   @for $cardI from 1 through 10 {
     &:nth-child(#{$cardI}) {
       transform:rotate( ( nth($randA, $cardI) - 5) *  $maxCardRotation);
@@ -34,20 +38,4 @@ $maxCardRotation : 0.6deg;
     }
   }
   background:#999;
-   
-  img{
-    
-  }
-  .description{
-    
-  }
-}
-
-@keyframes cardSlideRight {
-  0%{
-    transform: rotate(0deg);
-  }
-  100%{
-    transform: rotate(90deg);
-  }
 }
