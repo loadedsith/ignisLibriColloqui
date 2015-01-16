@@ -1,17 +1,9 @@
 <div ng-controller="MessagesListController" id="Messages" >
-  <p>{{Strings.messages}}</p>
-  
   <dl class="sub-nav" ng-show="roomsReady">
     <dt>{{Strings.rooms}}</dt>
     <dd ng-repeat="room in rooms" ng-class='{active:room.key === currentRoom}'>
       <div ng-click="setCurrentRoom(room.key)">{{room.key}}</div>
     </dd>
   </dl>
-  
-  {{testMode||'not Test Mode'}}
   <fast-repeat messages="messages"></fast-repeat>
-
-  <pre>
-    {{Strings.currentRoom}}: {{currentRoom}}
-  </pre>  
 </div>

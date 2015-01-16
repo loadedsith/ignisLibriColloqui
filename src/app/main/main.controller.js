@@ -64,12 +64,5 @@ define(['controllerModule', 'angular'], function(controllers) {
         StatusService.setStatus(useRealHostToTestFacebook);
       }
 
-      $scope.messageInput = function() {//extra attr; e
-        FirebaseService.chatRef.push({
-          name: $scope.name,
-          message: $scope.message
-        });
-        $scope.message = '';
-      };
     }]);
 });
