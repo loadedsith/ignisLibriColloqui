@@ -29,6 +29,7 @@ define(['angular'], function() {
       updateRoom: 'Update Room',
       updateUser: 'Update User',
       sendMessage: 'Send Message'
+      send: 'Send'
     }
   });
 });
