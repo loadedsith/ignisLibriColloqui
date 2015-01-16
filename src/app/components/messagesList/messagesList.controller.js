@@ -14,10 +14,11 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.roomsReady = false;
 
-      $scope.$watch('room', function() {
-        console.log('roomChange');
+      $scope.setCurrentRoom = function (name) {
+        $scope.currentRoom = name;
         $scope.updateChatRef();
-      });
+      }
+
       var messagesRoot = FirebaseService.firebaseUrl + '/messages';
       var userMessages = messagesRoot + '/' + $scope.username;
       var userRoomMessages = userMessages + '/' + $scope.currentRoom;
@@ -34,6 +35,11 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       var roomListRef = new Firebase(userMessages);
       $scope.updateChatRef = function() {
+        var messagesRoot = FirebaseService.firebaseUrl + '/messages';
+        var userMessages = messagesRoot + '/' + $scope.username;
+        var userRoomMessages = userMessages + '/' + $scope.currentRoom;
+        var currentRoomRef = new Firebase(userRoomMessages);
+
         roomListRef = new Firebase(userMessages);
         roomListRef.on('child_added', function(snapshot) {
           //receive new message

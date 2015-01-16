@@ -19,11 +19,27 @@ define(['controllerModule', 'angular'], function(controllers) {
       
       $scope.showMatches = (Config.showMatches||false);
       
+      $scope.showMessages = (Config.showMessages||false);
+      
       $scope.toggleMatches = function (value) {
         if (value === undefined){
           $scope.showMatches = !$scope.showMatches;
         }else{
           $scope.showMatches = !!value;
+        }
+        if ($scope.showMatches) {
+          $scope.showMessages = false;
+        }
+      };
+      
+      $scope.toggleMessages = function (value) {
+        if (value === undefined){
+          $scope.showMessages = !$scope.showMessages;
+        }else{
+          $scope.showMessages = !!value;
+        }
+        if ($scope.showMessages) {
+          $scope.showMatches = false;
         }
       };
       

@@ -2,4 +2,11 @@
 
 <h1>{{Strings.messages}}</h1>
 
-<div ng-include="'app/components/messages/messages.html'"></div>
+<div ng-controller="MessagesTest">
+  <div ng-include="'app/components/messages/messages.html'"></div>
+
+  <input type="text" ng-model="username" placeholder="UserName" />
+  <div class="button" ng-click="updateChatRef($event)">Update User</div>
+  
+  <input type="text" ng-model="name" placeholder="Name" />
+</div>

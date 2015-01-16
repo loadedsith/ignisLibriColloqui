@@ -1,5 +1,12 @@
-<div ng-include="'app/components/navbar/navbar.html'"></div>
+<div ng-controller="MessagesListTestController">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
 
-<h1>{{Strings.messageList}}</h1>
+  <h1>{{Strings.messageList}}</h1>
 
-<div ng-include="'app/components/messagesList/messagesList.html'"></div>
+  <div ng-include="'app/components/messagesList/messagesList.html'"></div>
+
+  <input type="text" ng-model="username" placeholder="UserName" />
+  <div class="button" ng-click="updateChatRef($event)">Update User</div>
+
+  <input type="text" ng-model="name" placeholder="Name" />
+</div>

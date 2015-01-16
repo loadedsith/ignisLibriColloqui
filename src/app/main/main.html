@@ -4,6 +4,7 @@
     <div class="wrapper {{status.class}}">
       <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
       <div class="reveal-modal matches" ng-class="{open:showMatches}" data-reveal ng-include="'app/matches/matches.html'"></div>
+      <div class="reveal-modal messages" ng-class="{open:showMessages}" data-reveal ng-include="'app/messages/messages.html'"></div>
     </div>
     <div class="loader status {{status.class}}" ng-click="status.action()">
       <p class="animation">{{status.currentFrame}}</p>

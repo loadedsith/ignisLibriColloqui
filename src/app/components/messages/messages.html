@@ -1,14 +1,7 @@
 <div ng-controller="MessagesController" id="Cards" >
 {{Strings.Messages}}
   <fast-repeat messages="messages"></fast-repeat>
-  
-  <input type="text" ng-model="username" placeholder="UserName" />
-  <div class="button" ng-click="updateChatRef($event)">Update User</div>
-
-  
-  
-  <input type="text" ng-model="name" placeholder="Name" />
-  
+    
   <input type="textarea" ng-model="message" placeholder="Message" />
   
   <div class="button" ng-click="messageInput($event)">Send Message</div>

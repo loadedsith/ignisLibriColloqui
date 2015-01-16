@@ -13,6 +13,9 @@
       <li>
         <span class="button" ng-click="toggleMatches()">{{Strings.matches}}</span class="button">
       </li>
+      <li>
+        <span class="button" ng-click="toggleMessages()">{{Strings.messages}}</span class="button">
+      </li>
       <li ng-if="true" class="subtitle" ng-repeat="link in Strings.devLinks|orderBy:$index:true">
         <a ui-sref="{{link.route}}">{{link.name}}</a>
       </li>

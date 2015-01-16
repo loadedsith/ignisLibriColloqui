@@ -5,8 +5,10 @@ define(['controllerModule', 'angular'], function(controllers) {
   function($scope, $timeout, Config) {
     console.log('Hi everybody, im the MessagesController');
     $scope.Strings = Config.strings;
-    $scope.username = 'newUser';
+    $scope.username = $scope.$parent.username||'newUser';
+    
     $scope.messages = [];
+    
     var userChat = new Firebase('https://resplendent-fire-9421.firebaseIO.com/messages/' + $scope.username);
 
     $scope.messageInput = function() {//extra attr; e

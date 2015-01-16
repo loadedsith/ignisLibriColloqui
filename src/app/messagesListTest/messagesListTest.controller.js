@@ -4,5 +4,6 @@ define(['controllerModule'], function(controllers) {
     function($scope, $timeout, Config) {
       console.log('MessagesListTestController');
       $scope.Strings = Config.strings;
+      $scope.testMode = true;
     }]);
 });

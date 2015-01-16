@@ -4,5 +4,6 @@ define(['controllerModule'], function(controllers) {
     function($scope, Config) {
       console.log('MessagesTestController');
       $scope.Strings = Config.strings;
+      $scope.test = true;
     }]);
 });
