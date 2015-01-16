@@ -19,7 +19,6 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         }
       }
     };
-
     $scope.matches = function() {
       if (UserService.matches === undefined) {
         return undefined;
@@ -65,29 +64,34 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
           }
         });
       }
-
       return $scope.images[id];
-
     };
-
-    $scope.swipeLeft = function(card, cardData) {
-      console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
-      card.returnCard();
-
-    };
+    
     $scope.removeCard = function(card) {
       console.log('removeCard');
       $timeout(function() {
         delete $scope.matchlist[card.facebookId];
       }, 0);
     };
-    $scope.swipeRight = function(card, cardData) {
-      console.log('swipeRight: card', card, $scope, $scope.cards);
-      card.fadeOut(function(card) {
-        console.log('Green wooden Blue Whale', card);
-        $scope.removeCard(cardData);
-      });
-    };
+    
+    if($scope.swipeLeft === undefined){
+      $scope.swipeLeft = function(card, cardData) {
+        console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
+        card.returnCard();
+      };
+    }
+    
+    if($scope.swipeRight === undefined){
+      $scope.swipeRight = function(card, cardData) {
+        console.log('swipeRight: card', card, $scope, $scope.cards);
+        card.fadeOut(function(card) {
+          console.log('Green wooden Blue Whale', card);
+          $scope.removeCard(cardData);
+        });
+      };
+    }
+    
+    
     $scope.date = new Date();
   }]);
 });
