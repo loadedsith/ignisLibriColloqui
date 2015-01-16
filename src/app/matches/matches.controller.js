@@ -8,14 +8,22 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.Strings = Config.strings;
       
       $scope.swipeLeft = function(card, cardData) {
-        console.log('122223swipeLeft: card', card, cardData, $scope, $scope.cards);
         card.returnCard();
+        var scope = $scope;
+        debugger;
+
       };
       
-      $scope.swipeRight = function(card, cardData) {
-        console.log('122223swipeRight: card', card, cardData, $scope, $scope.cards);
+      $scope.swipeRight = function(card, cardData, cardControl) {
+        card.fadeOut(function(card) {
+          console.log('fade out card callback, card: ', card);
+          cardControl.removeCard(cardData);
+        });
+      };
+
+      $scope.swipeLeft = function(card, cardData, cardControl) {
         card.returnCard();
       };
-      
+
     }]);
 });
