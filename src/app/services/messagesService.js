@@ -16,7 +16,7 @@ return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseSer
           return false;
         }
         if(_this.currentRoomRef === undefined){
-          _this.updateChatRef();
+          _this.updateMessagesRef();
         }
         
         if(_this.currentRoomRef !== undefined){
@@ -63,7 +63,7 @@ return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseSer
         _this.currentRoom = name;
       }
       
-      _this.chatUpdate = function(snapshot) {
+      _this.messagesUpdate = function(snapshot) {
         //receive new message
         // will be called for each new message
         var message = snapshot.val();
@@ -72,7 +72,7 @@ return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseSer
         $rootScope.$broadcast('MessagesService:UpdateMessages', _this.messages)
       };
       
-      _this.setChat = function(snapshot) {
+      _this.setMessages = function(snapshot) {
         //Initialize messages
         var messages = snapshot.val();
         _this.messages = [];
@@ -83,10 +83,10 @@ return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseSer
         $rootScope.$broadcast('MessagesService:UpdateMessages', _this.messages)
       };
       
-      _this.updateChatRef = function() {
-        console.log('updateChatRef');
+      _this.updateMessagesRef = function() {
+        console.log('updateMessagesRef');
         if (_this.username === undefined) {
-          console.debug('Username undefined, not bothering to updateChatRef, did you forget to set it?');
+          console.debug('Username undefined, not bothering to updateMessagesRef, did you forget to set it?');
           return;
         }
         var messagesRoot = FirebaseService.firebaseUrl + '/messages';
@@ -94,8 +94,8 @@ return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseSer
         if (_this.currentRoom !== '' && _this.currentRoom !== undefined) {
           var userRoomMessages = userMessages + '/' + _this.currentRoom;
           _this.currentRoomRef = new Firebase(userRoomMessages);
-          _this.currentRoomRef.on('child_added', _this.chatUpdate);
-          _this.currentRoomRef.on('value', _this.setChat);
+          _this.currentRoomRef.on('child_added', _this.messagesUpdate);
+          _this.currentRoomRef.on('value', _this.setMessages);
           
         }
         var roomListRef = new Firebase(userMessages);

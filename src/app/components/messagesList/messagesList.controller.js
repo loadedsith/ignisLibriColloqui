@@ -15,8 +15,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         MessagesService.setCurrentRoom(name);
       }
 
-      $scope.updateChatRef = function () {
-        MessagesService.updateChatRef()
+      $scope.updateMessagesRef = function () {
+        MessagesService.updateMessagesRef()
       }
 
       $scope.$on('MessagesService:UpdateMessages',function (event, messages) {

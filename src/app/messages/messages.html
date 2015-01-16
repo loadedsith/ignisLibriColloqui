@@ -1,6 +1,22 @@
 <div ng-controller="MessagesController">
   <div class="Messages" ng-show="showMessages">
     <h1>{{Strings.messages}}</h1>
-    <div ng-include="'app/components/messagesList/messagesList.html'"></div>
+    <div ng-show="rooms.length > 0" ng-include="'app/components/messagesList/messagesList.html'"></div>
+
+  
+    <div class="row collapse postfix-round" ng-if="currentRoom">
+      <div class="small-9 columns">
+        <input type="text" ng-model="message" placeholder="{{Strings.message}}" />
+      </div>
+      <div class="small-3 columns">
+        <div class="button postfix" ng-click="messageInput()">{{Strings.send}}</div>
+      </div>
+    </div>
+    <div ng-show="rooms.length === 0">
+      <p>{{Strings.noRooms}}</p>
+    </div>
+    <div ng-if="!currentRoom">
+      <p>{{Strings.noCurrentRoom}}</p>
+    </div>
   </div>
 </div>

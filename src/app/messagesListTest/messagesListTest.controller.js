@@ -12,7 +12,7 @@ define(['controllerModule'], function(controllers) {
       MessagesService.username = $scope.username;
       MessagesService.currentRoom = $scope.currentRoom;
       
-      MessagesService.updateChatRef();
+      MessagesService.updateMessagesRef();
       
       $scope.messageInput = function () {
         console.log('send message: ', $scope.message);
@@ -22,11 +22,11 @@ define(['controllerModule'], function(controllers) {
         }
       }
       
-      $scope.updateChatRef = function (event) {
+      $scope.updateMessagesRef = function (event) {
         MessagesService.username = $scope.username;
         MessagesService.currentRoom = $scope.currentRoom;
         console.log('$scope.currentRoom', $scope.currentRoom);
-        MessagesService.updateChatRef();
+        MessagesService.updateMessagesRef();
       }
     }]);
 });
