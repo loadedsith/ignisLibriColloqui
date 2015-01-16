@@ -10,5 +10,6 @@ define([
   'services/matchMakerService',
   'services/statusService',
   'services/userManagementService',
-  'services/userService'
+  'services/userService',
+  'services/messagesService'
 ], function() {});

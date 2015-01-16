@@ -1,7 +1,7 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesListController', ['$scope', '$timeout', 'Config', 'FirebaseService',
-    function($scope, $timeout, Config, FirebaseService) {//$scope
+  return controllers.controller('MessagesListController', ['$scope', '$timeout', 'Config', 'MessagesService', 'FirebaseService',
+    function($scope, $timeout, Config, MessagesService, FirebaseService) {//$scope
       console.log('Hi everybody, im the MessagesListController');
 
       $scope.Strings = Config.strings;
@@ -12,89 +12,23 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.roomsReady = false;
 
       $scope.setCurrentRoom = function (name) {
-        $scope.currentRoom = name;
-        $scope.updateChatRef();
+        MessagesService.setCurrentRoom(name);
       }
 
-      $scope.messageInput = function() {//extra attr; e
-        if($scope.currentRoom === undefined||$scope.currentRoom === ''){
-          console.debug("Talking to yourself again?");
-          $scope.message = '';
-          return;
-        }
-        currentRoomRef.push({
-          name: $scope.username,
-          message: $scope.message
-        });
-        $scope.message = '';
-      };
+      $scope.updateChatRef = function () {
+        MessagesService.updateChatRef()
+      }
 
-      $scope.updateChatRef = function() {
-        var messagesRoot = FirebaseService.firebaseUrl + '/messages';
-        var userMessages = messagesRoot + '/' + $scope.username;
-        var userRoomMessages = userMessages + '/' + $scope.currentRoom;
-        var currentRoomRef = new Firebase(userRoomMessages);
+      $scope.$on('MessagesService:UpdateMessages',function (event, messages) {
+        console.log('updateMessages', messages);
+        $scope.messages = messages;
+      });
 
-        var roomListRef = new Firebase(userMessages);
-
-        roomListRef = new Firebase(userMessages);
-        roomListRef.on('child_added', function(snapshot) {
-          //receive new message
-          // will be called for each new message
-          $timeout(function() {
-            var room = snapshot.val();
-            room.key = snapshot.key();
-            $scope.rooms.push(room);
-          }, 0);
-        });
-        roomListRef.on('value', function(snapshot) {
-          //Initialize messages
-          $scope.roomsReady = false;
-          $timeout(function() {
-            var rooms = snapshot.val();
-            $scope.rooms = [];
-            angular.forEach(rooms, function(value, key) {
-              value.key = key;
-              $scope.rooms.push(value);
-            });
-            $scope.roomsReady = true;
-          }, 0);
-        });
-
-        var messagesRoot = FirebaseService.firebaseUrl + '/messages';
-        var userMessages = messagesRoot + '/' + $scope.username;
-        var userRoomMessages = userMessages + '/' + $scope.currentRoom;
-
-        currentRoomRef = new Firebase(userRoomMessages);
-
-        currentRoomRef.on('child_added', function(snapshot) {
-          //receive new message
-          // will be called for each new message
-          $timeout(function() {
-            var message = snapshot.val();
-            currentRoomRef.key = snapshot.key();
-            $scope.messages.push(message);
-          }, 0);
-        });
-
-        currentRoomRef.on('value', function(snapshot) {
-          //Initialize messages
-          $timeout(function() {
-            var messages = snapshot.val();
-
-            $scope.messages = [];
-
-            angular.forEach(messages, function(value, key) {
-              value.key = key;
-              $scope.messages.push(value);
-            });
-
-          }, 0);
-
-        });
-      };
-
-      $scope.updateChatRef();
+      $scope.$on('MessagesService:UpdateRooms',function (event, rooms) {
+        console.log('updateRooms', rooms);
+        $scope.rooms = rooms;
+        $scope.roomsReady = true;
+      });
 
     }]);
 });
