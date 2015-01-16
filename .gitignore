@@ -5,3 +5,4 @@ dist
 .sass-cache
 env.post.js
 env.json
+report
