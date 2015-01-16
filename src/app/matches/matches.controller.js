@@ -17,19 +17,5 @@ define(['controllerModule', 'angular'], function(controllers) {
         card.returnCard();
       };
       
-      $scope.toggleMatches = function (value) {
-        debugger;
-
-        if ($scope.matches.length > 0){
-          if (value === undefined){
-            $scope.showMatches = !$scope.showMatches;
-          }else{
-            $scope.showMatches = !!value;
-          }
-        }else{
-          console.debug('Cant show matches, cus there arn\'t any son.')
-        }
-      };
-      
     }]);
 });
