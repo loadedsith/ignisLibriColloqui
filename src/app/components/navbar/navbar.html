@@ -4,17 +4,16 @@
       <h1>{{Strings.siteTitle}}</h1>
     </li>
   </ul>
-
   <section class="top-bar-section">
     <ul class="right">
       <li>
         <a ui-sref="home">Home</a>
       </li>
       <li>
-        <span class="button" ng-click="toggleMatches()">{{Strings.matches}}</span class="button">
+        <a class="" ng-click="toggleMatches()">{{Strings.matches}}</a>
       </li>
       <li>
-        <span class="button" ng-click="toggleMessages()">{{Strings.messages}}</span class="button">
+        <a class="" ng-click="toggleMessages()">{{Strings.messages}}</a>
       </li>
       <li ng-if="true" class="subtitle" ng-repeat="link in Strings.devLinks|orderBy:$index:true">
         <a ui-sref="{{link.route}}">{{link.name}}</a>
