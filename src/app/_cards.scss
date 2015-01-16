@@ -14,7 +14,6 @@ $maxCardRotation : 0.6deg;
   margin-left: auto;
 }
 .card{
-  border:4px solid #CCC;
   display:block;
   overflow:hidden;
   width :400 / 2 * 1px;
@@ -22,7 +21,9 @@ $maxCardRotation : 0.6deg;
   position:absolute;
   top:10px;
   cursor: pointer;
-  border-radius:23px;
+  border-radius:13px;
+  transform:translateZ(0);
+  backface-visibility:hidden;
   .matchDisplay{
     background-size:cover;
     background-position: 50% 50%;
