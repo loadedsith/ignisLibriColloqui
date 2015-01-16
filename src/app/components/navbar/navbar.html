@@ -15,8 +15,8 @@
       <li>
         <a class="" ng-click="toggleMessages()">{{Strings.messages}}</a>
       </li>
-      <li ng-if="true" class="subtitle" ng-repeat="link in Strings.devLinks|orderBy:$index:true">
-        <a ui-sref="{{link.route}}">{{link.name}}</a>
+      <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
+        <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
       </li>
       <li ng-include="'app/components/user/user.html'" ></li>
     </ul>
