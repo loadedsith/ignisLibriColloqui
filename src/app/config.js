@@ -28,7 +28,7 @@ define(['angular'], function() {
       currentRoom: 'Current Room',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
-      sendMessage: 'Send Message'
+      sendMessage: 'Send Message',
       send: 'Send'
     }
   });
