@@ -9,6 +9,5 @@ define([
   'components/matchCards/matchCards.controller',
   'components/user/user.controller',
   'components/cards/cards.controller',
-  'components/messages/messages.controller',
   'components/messagesList/messagesList.controller'
 ], function() {});
