@@ -5,11 +5,7 @@ define(['angular'], function() {
     showMatches: true,//show matches automatically on successful login
     strings: {
       siteTitle: '🔥 📖 💬',
-      links: [
-        {
-          name: 'Home',
-          route: 'home'
-        },
+      devLinks: [
         {
           name: 'Card Test',
           route: 'cardTest'
