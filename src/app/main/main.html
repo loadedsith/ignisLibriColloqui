@@ -2,17 +2,15 @@
 <div ng-include="'app/components/navbar/navbar.html'"></div>
 <div class="row">
   <div class="small-12 small-centered columns">
-    <div class="wrapper {{status().class}}">
-      <p class="status {{status().class}}" ng-click="status().action()">{{status().currentFrame || status().text}}</p>
-      <!-- Content here -->
-      Welcome to {{Strings.siteTitle}}, {{user.info.first_name}}.
+    <div class="wrapper {{status.class}}">
+      <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
+
+      <div ng-include="'app/components/matchCards/matchCards.html'" ng-if="matches().length > 0"></div>
+      Welcome to <span class="siteTitle" ng-bind="Strings.siteTitle"></span>, {{user.info['first_name']}}.
     </div>
-  
-    <div ng-include="'app/components/matchCards/matchCards.html'" ng-if="matches().length > 0"></div>
-  
-    <div class="loader status {{status().class}}" ng-click="status().action()">
-      <p class="animation">{{status().currentFrame}}</p>
-      <p class="statusLabel">{{status().text}}</p>
+    <div class="loader status {{status.class}}" ng-click="status.action()">
+      <p class="animation">{{status.currentFrame}}</p>
+      <p class="statusLabel">{{status.text}}</p>
     </div>
   </div>
 </div>

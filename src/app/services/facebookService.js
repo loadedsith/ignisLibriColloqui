@@ -8,16 +8,18 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
     .service('FacebookService', function() {
       var _this = this;
 
-      _this.checkLoginState = function(callback) {
+      _this.checkLoginState = function(deferred) {
         console.log('facebook Service.checkLoginState');
         if (typeof FB === 'undefined') {
           console.log('Facebook was not properly initialized');
         } else {
-          if (typeof callback === 'function') {
-            FB.getLoginStatus(callback);
-          } else {
-            FB.getLoginStatus(_this.statusChangeCallback);
-          }
+          FB.getLoginStatus(function (response) {
+            if (response.status==='connected'){
+              deferred.resolve(response);
+            }else{
+              deferred.reject(response);
+            }
+          });
         }
       };
 
@@ -72,27 +74,6 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           }, {scope: scope});
         }
       };
-
-      _this.statusChangeCallback = function(response) {
-         console.log('facebook Service.statusChangeCallback');
-         // The response object is returned with a status field that lets the
-         // app know the current login status of the person.
-         // Full docs on the response object can be found in the documentation
-         // for FB.getLoginStatus().
-         if (response.status === 'connected') {
-           // Logged into your app and Facebook.
-           //testAPI();
-         } else if (response.status === 'not_authorized') {
-           // The person is logged into Facebook, but not your app.
-           document.getElementById('status').innerHTML = 'Please log ' +
-             'into this app.';
-         } else {
-           // The person is not logged into Facebook, so we're not sure if
-           // they are logged into this app or not.
-           document.getElementById('status').innerHTML = 'Please log ' +
-             'into Facebook.';
-         }
-       };
       return _this;
     });
 });

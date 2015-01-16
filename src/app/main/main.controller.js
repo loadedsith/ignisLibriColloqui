@@ -6,20 +6,25 @@ define(['controllerModule', 'angular'], function(controllers) {
       console.log('MainController');
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
-
+      $scope.user = {};
       StatusService.setStatus(StatusService.loading);
 
-      $scope.status = function() {
-        return StatusService.status;
-      };
-
-      $scope.userUpdate = function (user) {
+      $scope.$on('StatusService:Update',function (event, status) {
+        $scope.status = status;
+      });
+      $scope.$on('UserService:Update',function (event, user) {
         $scope.user = user;
-      }
-      
-      UserService.addListener('update', $scope.userUpdate)
+      });
 
-      UserService.checkLoginState();
+      var userLoginState = UserService.checkLoginState();
+      
+      userLoginState.then(function (response) {
+        StatusService.setStatus(StatusService.ready);
+        console.log('maincontroller responding to facebook login succcess',response);
+      }, function (response) {
+        StatusService.setStatus(StatusService.ready);
+        console.log('maincontroller responding to facebook login fail',response);
+      })
 
       if (window.location.host === 'localhost:3000') {
         var useRealHostToTestFacebook = {
@@ -30,7 +35,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           }
         };
         StatusService.setStatus(useRealHostToTestFacebook);
-      }
+      };
 
       $scope.messageInput = function() {//extra attr; e
         FirebaseService.chatRef.push({

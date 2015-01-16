@@ -1,7 +1,7 @@
 define(['services/serviceModule', 'angular', 'firebase', 'requestAnimationFrame'],
 function(services, angular, Firebase, requestAnimationFrame) {
   'use strict';
-  return services.service('StatusService', ['$timeout', function($timeout) {
+  return services.service('StatusService', ['$rootScope', '$timeout', function($rootScope, $timeout) {
     'use strict';
 
     var _this = this;
@@ -185,6 +185,14 @@ function(services, angular, Firebase, requestAnimationFrame) {
         window.requestAnimationFrame(_this.animation.interval);
       }
     };
+
+    _this.getStatus = function () {return _this.status}
+
+    //Watch for changes, and like a boss, update any listeners.
+    $rootScope.$watch(_this.getStatus,function () {
+      $rootScope.$broadcast('StatusService:Update', _this.status);
+    },true)
+    
     return _this;
   }]);
 });

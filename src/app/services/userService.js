@@ -1,38 +1,9 @@
 define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('UserService', ['$cookies', 'FacebookService', 'StatusService', 'UserManagementService',
-  function($cookies, FacebookService, StatusService, UserManagementService) {
+  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'StatusService', 'UserManagementService',
+  function($rootScope, $cookies, $q, FacebookService, StatusService, UserManagementService) {
     'use strict';
     var _this = this;
-
-    _this.events = {
-      "update":[]
-    };
-    
-    _this.addListener = function (condition, callback) {
-
-
-      if (condition in _this.events){
-        if (typeof callback === 'function') {
-          _this.events[condition].push(callback)
-        }else{
-          console.log('UserService Event not a function. Condition: ', condition, ", callback: ", callback);
-        }
-      }else{
-        console.log('UserService Event doesn\'t exist: condition: ',condition);
-      }
-    }
-
-    _this.triggerListeners = function(condition) {
-      if (_this.events[condition].length > 0){
-        for (var i = _this.events[condition].length - 1; i >= 0; i--) {
-          var callback = _this.events[condition][i]
-          if (typeof callback === 'function'){
-            callback(_this.user);
-          }
-        }
-      }
-    }
 
     _this.currentTopic = 0;
 
@@ -41,12 +12,37 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       loggedIn : false
     }
 
-    console.log('User service test $cookies:', $cookies);
-
     _this.checkLoginState = function() {
-      FacebookService.checkLoginState(_this.updateLoginStateCallback);
+      var deferred = $q.defer();
+      //FacebookService.checkLoginState(_this.updateLoginStateCallback);
+      FacebookService.checkLoginState(deferred);
+      deferred.promise.then(_this.loginSuccess, _this.loginFailure)
+      return deferred.promise;
     };
-
+    
+    _this.loginFailure = function (response) {
+      if (response.status === 'not_authorized') {
+        // the user is logged in to Facebook,
+        // but has not authenticated your app
+        _this.loggedIn = false;
+        _this.loginStatus = '🚫 App was not authorized. Please allow access via Facebook.';
+      } else {
+        // the user isn't logged in to Facebook.
+        _this.loggedIn = false;
+        _this.loginStatus = '🚫 You are not logged into Facebook. Please login.';
+      }
+    };
+    
+    _this.loginSuccess = function (response) {
+      _this.loginStatus = '👍 Logged In!';
+      FacebookService.getUserInfo(_this.userInfoCallback);
+      _this.loggedIn = true;
+      _this.auth = response.authResponse;
+      if (_this.auth !== $cookies.userAuth) {
+        $cookies.userAuth = JSON.stringify(_this.auth);
+      }
+    };
+    
     _this.loginToFacebook = function() {
       FacebookService.login(_this.loginCallback);
     };
@@ -56,7 +52,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (response && !response.error) {
         _this.user.profilePicture = response;
       }
-      _this.triggerListeners('update');
     };
 
     _this.userInfoCallback = function(response) {
@@ -79,7 +74,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.blacklist = u.blacklist ? u.blacklist : [];
 
       UserManagementService.getBlacklist(_this.user.info.id, _this.gotBlacklist);
-      _this.triggerListeners('update');
     };
 
     _this.gotBlacklist = function(blacklist) {
@@ -97,7 +91,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.userDoesntExist = function() {
       console.log('User service User DOESNT Exists');
-      _this.triggerListeners('update');
     };
 
     _this.loginCallback = function(response) {
@@ -105,7 +98,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';
-        _this.triggerListeners('update');
         return;
       }
 
@@ -119,31 +111,15 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       $cookies.userAuth = JSON.stringify(_this.auth);
     };
 
-    _this.updateLoginStateCallback = function(response) {
-      StatusService.setStatus(StatusService.ready);
-      if (response.status === 'connected') {
-        _this.loginStatus = '👍 Logged In!';
-      } else if (response.status === 'not_authorized') {
-        // the user is logged in to Facebook,
-        // but has not authenticated your app
-        _this.loggedIn = false;
-        _this.loginStatus = '🚫 App was not authorized. Please allow access via Facebook.';
-        return;// dont set cookies
-      } else {
-        // the user isn't logged in to Facebook.
-        _this.loggedIn = false;
-        _this.loginStatus = '🚫 You are not logged into Facebook. Please login.';
-        return;// dont set cookies
-      }
-      FacebookService.getUserInfo(_this.userInfoCallback);
 
-      _this.loggedIn = true;
-      _this.auth = response.authResponse;
-      if (_this.auth !== $cookies.userAuth) {
-        $cookies.userAuth = JSON.stringify(_this.auth);
-      }
-    };
+    _this.getUser = function () {return _this.user}
 
+    //Watch for changes, and like a boss, update any listeners.
+    $rootScope.$watch(_this.getUser,function () {
+      console.log('broadcast',_this.user);
+      $rootScope.$broadcast('UserService:Update', _this.user);
+    },true)
+    
     return _this;
   }]);
 });

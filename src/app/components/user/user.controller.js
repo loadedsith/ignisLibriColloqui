@@ -8,10 +8,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.checkLoginState = UserService.checkLoginState;
 
       $scope.userInitialized = function() {
-        if ($scope.user() === undefined) {
+        if ($scope.user === undefined) {
           return false;
         }
-        if ($scope.user().id === undefined) {
+        if ($scope.user.id === undefined) {
           return false;
         }
         return true;
@@ -27,13 +27,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         return UserService.loginStatus;
       };
 
-      $scope.user = function() {
-        return UserService.user;
-      };
-
-      $scope.profilePicture = function() {
-        return UserService.user.profilePicture;
-      };
-
+      $scope.$on('UserService:Update',function (event, user) {
+        $scope.user = user;
+      })
     }]);
 });

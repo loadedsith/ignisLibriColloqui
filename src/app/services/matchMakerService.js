@@ -21,10 +21,10 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
               _this.matchList[topic].push(String(user.id));
             }
           }
-          console.log('Matched matchList', _this.matchList);
+          // console.log('Matched matchList', _this.matchList);
         });
         if (typeof callback === 'function') {
-          console.log('trigger');
+          // console.log('trigger');
           callback();
         }
       });
