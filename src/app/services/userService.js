@@ -1,7 +1,7 @@
 define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'StatusService', 'UserManagementService',
-  function($rootScope, $cookies, $q, FacebookService, StatusService, UserManagementService) {
+  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'UserManagementService',
+  function($rootScope, $cookies, $q, FacebookService, UserManagementService) {
     'use strict';
     var _this = this;
 
@@ -14,7 +14,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.checkLoginState = function() {
       var deferred = $q.defer();
-      //FacebookService.checkLoginState(_this.updateLoginStateCallback);
       FacebookService.checkLoginState(deferred);
       deferred.promise.then(_this.loginSuccess, _this.loginFailure)
       return deferred.promise;
@@ -56,7 +55,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.userInfoCallback = function(response) {
       // console.log('_this Info Found: ', response);
-      StatusService.setStatus(StatusService.ready);
       _this.user.info = response;
       FacebookService.getUserImage(_this.updateUserImage);
       UserManagementService.userExists(_this.user.info, _this.userExists, _this.userDoesntExist);
