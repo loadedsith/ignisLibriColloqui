@@ -19,5 +19,13 @@ define([
     'ignisLibriColloqui.services',
     'ignisLibriColloqui.components',
     'ignisLibriColloqui.config'
-  ]);
+  ]).filter('debug', function() {
+    return function(input) {
+      console.log('input',input);
+      if (input === '') {
+        return 'empty string';
+      }
+      return input ? input : ('' + input);
+    };
+  });
 });
