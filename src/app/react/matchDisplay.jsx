@@ -7,8 +7,10 @@ define(['react'], function(React) {
       
       //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
       var imageData = (((this.props.data||{}).image||{}).data||{});
-      
-      if(imageData['is_silhouette'] === true){
+
+        /*jshint camelcase: false */
+      if(imageData.is_silhouette === true){
+        /*jshint camelcase: true */
         imageUrl = './assets/images/FBProfile.jpg';
       }else{
         imageUrl = imageData.url||'./assets/images/FBProfile.jpg';

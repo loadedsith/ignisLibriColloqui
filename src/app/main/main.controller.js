@@ -17,7 +17,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.user = user;
       });
       
-      $scope.showMatches = Config.showMatches||false;
+      $scope.showMatches = (Config.showMatches||false);
       
       $scope.toggleMatches = function (value) {
         if (value === undefined){
@@ -35,7 +35,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       }, function (response) {
         StatusService.setStatus(StatusService.ready);
         console.log('maincontroller responding to facebook login fail',response);
-      })
+      });
 
       if (window.location.host === 'localhost:3000') {
         var useRealHostToTestFacebook = {
@@ -46,7 +46,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           }
         };
         StatusService.setStatus(useRealHostToTestFacebook);
-      };
+      }
 
       $scope.messageInput = function() {//extra attr; e
         FirebaseService.chatRef.push({
