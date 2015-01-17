@@ -56,7 +56,8 @@
     "url": "https://github.com/loadedsith/ignisLibriColloqui.git"
   },
   "engines": {
-    "node": ">=0.10.16"
+    "node": ">=0.10.32",
+    "npm":"1.x.x"
   },
   "dependencies": {}
 }
