@@ -3,8 +3,6 @@ define(['controllerModule', 'react/matchDisplay'], function(controllers, MatchDi
   return controllers
     .controller('CardTestController', ['$scope', '$timeout', function($scope, $timeout) {
       console.log('CardTestController');
-      //ensure that status calls reference the current status
-      //TODO: Create a constant module and a
       $scope.CardTemplate = MatchDisplay;
       $scope.cards = [
         'new Dentist Galapagos tortoise',

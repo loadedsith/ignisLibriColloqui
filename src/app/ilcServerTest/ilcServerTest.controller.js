@@ -22,6 +22,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.testLogin = function() {
         $socket.emit('loginValidator', $scope.fakedToken);
       };
+
       $scope.loginStatus = 'Original';
 
       $scope.getMatches = function() {
@@ -44,7 +45,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $socket.on('user valid', function(user) {
-
         $scope.loginStatus = 'Login Success! Getting Local Profile...';
         var config = {
           'userId': $scope.fakeUserId,

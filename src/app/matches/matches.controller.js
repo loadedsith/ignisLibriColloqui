@@ -4,13 +4,11 @@ define(['controllerModule', 'angular'], function(controllers) {
     '$scope', 'Config',
     function($scope, Config) {
       console.log('MatchesController');
-      //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
 
       $scope.swipeLeft = function(card, cardData) {
         card.returnCard();
         var scope = $scope;
-
       };
 
       $scope.swipeRight = function(card, cardData, cardControl) {
