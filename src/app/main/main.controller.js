@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('MainController', [
-    '$scope', '$timeout', 'FacebookService', 'StatusService', 'FirebaseService', 'UserService', 'Config',
-    function($scope, $timeout, FacebookService, StatusService, FirebaseService, UserService, Config) {
+    '$scope', '$timeout', 'FacebookService', 'StatusService', 'FirebaseService', 'UserService', 'ILCServerService', 'Config',
+    function($scope, $timeout, FacebookService, StatusService, FirebaseService, UserService, ILCServerService, Config) {
       console.log('MainController');
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
@@ -48,6 +48,9 @@ define(['controllerModule', 'angular'], function(controllers) {
       userLoginState.then(function(response) {
         StatusService.setStatus(StatusService.ready);
         console.log('maincontroller responding to facebook login succcess', response);
+        
+        ILCServerService.login(response.authResponse.accessToken);
+        
       }, function(response) {
         StatusService.setStatus(StatusService.ready);
         console.log('maincontroller responding to facebook login fail', response);

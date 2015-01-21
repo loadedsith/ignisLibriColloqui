@@ -1,7 +1,7 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('ILCServerTestController', [
-    '$scope', 'Config', 'ILCServerService','$socket',
+    '$scope', 'Config', 'ILCServerService', '$socket',
     function($scope, Config, ILCServer, $socket) {
       console.log('ILC Server Test Controller, reporting in.');
       $scope.Strings = Config.strings;
@@ -20,7 +20,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       });
 
       $scope.testLogin = function() {
-        $socket.emit('loginValidator', $scope.fakedToken);
+        $socket.emit('login validator', $scope.fakedToken);
       };
 
       $scope.loginStatus = 'Original';
