@@ -1,6 +1,14 @@
 #🔥 📖 💬
 
 An example work, tying together RequireJS, Angular, React, the Facebook Graph API, Firebase, Karma, and Gulp. The final product should be a clone of Tinder with a few special modifications...
+
+
+You're gonna need an env.json to provide environmental variables, specifically the app's API Key. This belongs in the root of the repo, next to the `gulpfile.js`. Mine looks like this:
+/* /env.json */
+{
+  "FB_API_KEY" : "______________"
+}
+
 ---
 Below is a boilerplate contributing document, if you wanted to contribute, you could fix that, or you could take the below as some general guidelines to making your own.
 
