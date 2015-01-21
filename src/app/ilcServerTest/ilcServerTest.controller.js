@@ -21,9 +21,18 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.testLogin = function() {
         $socket.emit('loginValidator', $scope.fakedToken);
-
       };
       $scope.loginStatus = 'Original';
+
+      $scope.getMatches = function() {
+        var config = {
+          'userId': $scope.fakeUserId,
+          'accessToken': $scope.fakedToken,
+          'profile':'Goober Bean Boo: ' + Math.floor(Math.random() * 100)
+        };
+        $socket.emit('get user matches', config);
+      };
+
 
       $scope.setProfile = function() {
         var config = {
@@ -73,9 +82,15 @@ define(['controllerModule', 'angular'], function(controllers) {
         console.log('rooms Set', rooms);
         $scope.rooms = rooms;
       });
+      $scope.cards = $scope.matchList;
+      $scope.matchList = {};
+      $socket.on('got user matchList', function(matchList) {
+        console.log('got user matchList', matchList);
+        $scope.matchList = matchList;
+        $scope.cards = $scope.matchList;
+      });
 
       $scope.messages = {};
-
       $socket.on('room update', function(room) {
         console.log('room update', room);
         $scope.messages[room.room] = room;
