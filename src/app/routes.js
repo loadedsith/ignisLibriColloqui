@@ -30,9 +30,7 @@ define(['ignisLibriColloqui'], function(ignisLibriColloqui) {
         controller: 'ILCServerTestController'
       });
 
-    $urlRouterProvider.when('', '/ilcServerTest');
-    $urlRouterProvider.otherwise('/ilcServerTest');
-    // $urlRouterProvider.when('', '/home');
-    // $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.when('', '/home');
+    $urlRouterProvider.otherwise('/home');
   }]);
 });

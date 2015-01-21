@@ -5,7 +5,7 @@ define(['angular'], function() {
     ilcServerUrl: 'http://localhost:5000',
     showMatches: false,//show automatically
     showMessages: true,//show automatically
-    devLinks: ['cardTest', 'messagesListTest'],
+    devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       currentRoom: 'Current Room',
       buttonLabel: {
@@ -13,6 +13,7 @@ define(['angular'], function() {
         name: 'Name',
         message: 'Message',
         messagesListTest:'Messages List Test',
+        ilcServerTest:'ILC Server Test',
         cardTest:'Card Test'
       },
       matches: 'Matches',
