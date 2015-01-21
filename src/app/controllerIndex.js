@@ -10,5 +10,6 @@ define([
   'messages/messages.controller',
   'matches/matches.controller',
   'messagesTest/messagesTest.controller',
-  'messagesListTest/messagesListTest.controller'
+  'messagesListTest/messagesListTest.controller',
+  'ilcServerTest/ilcServerTest.controller'
 ], function() {});

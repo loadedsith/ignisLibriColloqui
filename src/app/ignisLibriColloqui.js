@@ -7,6 +7,7 @@ define([
   'services/serviceIndex',
   'directives/directiveIndex',
   'components/componentIndex',
+  'ng-socket',
   'config'
 ], function(angular) {
   'use strict';
@@ -18,8 +19,15 @@ define([
     'ignisLibriColloqui.controllers',
     'ignisLibriColloqui.services',
     'ignisLibriColloqui.components',
-    'ignisLibriColloqui.config'
-  ]).filter('debug', function() {
+    'ignisLibriColloqui.config',
+    'ngSocket'
+  ]).config(['Config','$socketProvider', function (Config, $socketProvider) {
+    var server;
+    if((Config||{}).ilcServerUrl !== undefined){
+      server = Config.ilcServerUrl;
+    }
+    $socketProvider.setUrl(server);
+  }]).filter('debug', function() {
     return function(input) {
       console.log('input', input);
       if (input === '') {

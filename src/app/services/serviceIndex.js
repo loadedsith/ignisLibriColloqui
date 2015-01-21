@@ -11,5 +11,6 @@ define([
   'services/statusService',
   'services/userManagementService',
   'services/userService',
-  'services/messagesService'
+  'services/messagesService',
+  'services/ilcServerService'
 ], function() {});

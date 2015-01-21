@@ -15,6 +15,11 @@ require.config({
         'angular'
       ]
     },
+    'ng-socket': {
+      deps: [
+        'angular'
+      ]
+    },
     'angular-mocks': {
       exports: 'angular-mocks',
       deps: [
@@ -29,6 +34,7 @@ require.config({
     }
   },
   deps: [
+    './startSocketIo',
     './main'
   ],
   paths: {
@@ -55,7 +61,9 @@ require.config({
     'requirejs-domready': '../bower_components/requirejs-domready/domReady',
     jquery: '../bower_components/jquery/dist/jquery',
     'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
-    'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie'
+    'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
+    'socket.io-client': '../bower_components/socket.io-client/socket.io',
+    'ng-socket': '../bower_components/ng-socket/ngSocket'
   },
   packages: [
 

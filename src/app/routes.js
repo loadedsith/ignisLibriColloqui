@@ -23,9 +23,16 @@ define(['ignisLibriColloqui'], function(ignisLibriColloqui) {
         url: '/messagesListTest',
         templateUrl: 'app/messagesListTest/messagesListTest.html',
         controller: 'MessagesListTestController'
+      })
+      .state('ilcServerTest', {
+        url: '/ilcServerTest',
+        templateUrl: 'app/ilcServerTest/ilcServerTest.html',
+        controller: 'ILCServerTestController'
       });
 
-    $urlRouterProvider.when('', '/home');
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.when('', '/ilcServerTest');
+    $urlRouterProvider.otherwise('/ilcServerTest');
+    // $urlRouterProvider.when('', '/home');
+    // $urlRouterProvider.otherwise('/home');
   }]);
 });
