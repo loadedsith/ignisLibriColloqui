@@ -10,7 +10,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.swipeLeft = function(card, cardData) {
         card.returnCard();
         var scope = $scope;
-        debugger;
 
       };
 

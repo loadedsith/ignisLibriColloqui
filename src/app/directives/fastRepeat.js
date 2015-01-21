@@ -8,7 +8,6 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
       },
       link: function(scope, el) {//extraAttr: attrs
         var MyComponent = React.createFactory(Messages);
-        // debugger;
         scope.$watch('messages', function(newValue) {//extraAttr: oldValue
           React.render(new MyComponent({data: newValue}), el[0]);
         }, true);
