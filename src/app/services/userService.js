@@ -86,7 +86,12 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       console.log('UserService.gotMatches: ', matches);
       _this.user.matches = matches;
     };
-
+    
+    _this.setMatchList = function(matchList) {
+      console.log('UserService.setMatchList: ', matchList);
+      _this.user.matches = matchList;
+    };
+    
     _this.userDoesntExist = function() {
       console.log('User service User DOESNT Exists');
     };
@@ -113,7 +118,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     //Watch for changes, and like a boss, update any listeners.
     $rootScope.$watch(_this.getUser, function() {
-      console.log('broadcast', _this.user);
       $rootScope.$broadcast('UserService:Update', _this.user);
     }, true)
 

@@ -1,9 +1,16 @@
 <div ng-controller="MessagesListController" id="Messages" >
   <dl class="sub-nav" ng-show="roomsReady">
     <dt>{{Strings.rooms}}</dt>
-    <dd ng-repeat="room in rooms" ng-class='{active:room.key === currentRoom}'>
-      <div ng-click="setCurrentRoom(room.key)">{{room.key}}</div>
+    <dd ng-repeat="room in rooms" ng-class='{active:room === currentRoom}'>
+      <div ng-click="setCurrentRoom(room)">{{room}}</div>
     </dd>
   </dl>
-  <fast-repeat messages="messages"></fast-repeat>
+  <div ng-repeat="room in rooms">
+    <div ng-if="parseInt(room) < parseInt(userId)">
+      <fast-repeat messages="messages[room + '+' + userId]" ng-show="room === currentRoom"></fast-repeat>
+    </div>
+    <div ng-if="parseInt(room) > parseInt(userId)">
+      <fast-repeat messages="messages[userId + '+' + room]" ng-show="room === currentRoom"></fast-repeat>
+    </div>
+  </div>
 </div>

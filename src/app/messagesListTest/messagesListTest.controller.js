@@ -16,7 +16,7 @@ define(['controllerModule'], function(controllers) {
 
       $scope.messageInput = function() {
         console.log('send message: ', $scope.message);
-        var successful = MessagesService.sendMessage($scope.message);
+        var successful = MessagesService.sendMessage($scope.message, $scope.currentRoom);
         if (successful) {
           $scope.message = '';
         }

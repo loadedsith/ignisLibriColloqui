@@ -11,11 +11,11 @@ define(['controllerModule'], function(controllers) {
         $scope.roomsReady = true;
         if ($scope.currentRoom === undefined) {
           if (rooms[0] !== undefined) {
-            $scope.currentRoom = rooms[0]
+            $scope.currentRoom = rooms[0];
           }
         }
       });
-
+      
       $scope.$on('UserService:Update', function(event, user) {
         var username = (((user || {}).info || {}).id || 'no username');
         if (username !== 'no username') {
@@ -24,9 +24,9 @@ define(['controllerModule'], function(controllers) {
         }
       });
 
-      $scope.messageInput = function() {
-        console.log('send message: ', $scope.message);
-        var successful = MessagesService.sendMessage($scope.message);
+      $scope.messageInput = function(message) {
+        console.log('mc send message: ', message);
+        var successful = MessagesService.sendMessage(message, $scope.currentRoom);
         if (successful) {
           $scope.message = '';
         }

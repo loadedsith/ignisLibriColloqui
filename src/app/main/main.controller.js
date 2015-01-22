@@ -7,7 +7,9 @@ define(['controllerModule', 'angular'], function(controllers) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.user = {};
-
+      
+      $scope.userId = "default user id, did facebook login fail?";
+      
       StatusService.setStatus(StatusService.loading);
 
       $scope.$on('StatusService:Update', function(event, status) {
@@ -31,7 +33,16 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.showMessages = false;
         }
       };
-
+      
+      $scope.messageInput = function(message, successCallback) {
+        console.log('send message: ', message);
+        if(typeof successCallback === 'function'){
+          successCallback();
+        }
+      }
+      
+      $scope.useIlcServer = true;
+      
       $scope.toggleMessages = function(value) {
         if (value === undefined) {
           $scope.showMessages = !$scope.showMessages;
@@ -43,14 +54,15 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
+      $scope.parseInt = parseInt;
+
       var userLoginState = UserService.checkLoginState();
 
       userLoginState.then(function(response) {
-        StatusService.setStatus(StatusService.ready);
-        console.log('maincontroller responding to facebook login succcess', response);
-        
+        StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
         ILCServerService.login(response.authResponse.accessToken);
-        
+        $scope.userId = response.authResponse.userID;
+        console.log('maincontroller responding to facebook login succcess, sending request to ILC Server');
       }, function(response) {
         StatusService.setStatus(StatusService.ready);
         console.log('maincontroller responding to facebook login fail', response);

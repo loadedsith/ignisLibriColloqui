@@ -1,7 +1,7 @@
 define(['services/serviceModule'], function(services) {
   'use strict';
-  return services.service('MessagesService', ['$rootScope', 'Config', 'FirebaseService', '$timeout',
-    function($rootScope, Config, FirebaseService, $timeout) {
+  return services.service('MessagesService', ['$rootScope', 'Config', '$timeout',
+    function($rootScope, Config, $timeout) {
       var _this = this;
 
       _this.rooms = [];
@@ -10,11 +10,11 @@ define(['services/serviceModule'], function(services) {
       _this.currentRoom = '';
 
       _this.sendMessage = function(message) {
-
         if (_this.currentRoom === undefined || _this.currentRoom === '') {
           console.debug('Talking to yourself again?');
           return false;
         }
+        
         if (_this.currentRoomRef === undefined) {
           _this.updateMessagesRef();
         }
@@ -41,12 +41,18 @@ define(['services/serviceModule'], function(services) {
 
       _this.setRooms = function(snapshot) {
         console.log('roomListUpdated');
-        //Initialize messages
+
         _this.roomsReady = false;
-        var rooms = snapshot.val();
+        var rooms;
+        if(typeof snapshot.val === 'function'){
+          rooms = snapshot.val();  
+        }else{
+          rooms = snapshot;
+        }
+
         _this.rooms = [];
         angular.forEach(rooms, function(value, key) {
-          value.key = key;
+          // value.key = key;
           _this.rooms.push(value);
         });
         _this.roomsReady = true;
@@ -54,8 +60,8 @@ define(['services/serviceModule'], function(services) {
         if (_this.rooms[0] !== '' && _this.rooms[0] !== undefined) {
           _this.setCurrentRoom(_this.rooms[0].key);
         }
-
-        $rootScope.$broadcast('MessagesService:UpdateRooms', _this.rooms)
+        console.log('Red good swordfish');
+        $rootScope.$broadcast('MessagesService:UpdateRooms', _this.rooms);
       };
 
       _this.setCurrentRoom = function(name) {
@@ -66,10 +72,15 @@ define(['services/serviceModule'], function(services) {
       _this.messagesUpdate = function(snapshot) {
         //receive new message
         // will be called for each new message
-        var message = snapshot.val();
-        _this.currentRoomRef.key = snapshot.key();
-        _this.messages.push(message);
-        $rootScope.$broadcast('MessagesService:UpdateMessages', _this.messages)
+        var message;
+        if (typeof snapshot.val === 'function'){
+          message = snapshot.val();
+          _this.currentRoomRef.key = snapshot.key();
+        }else{
+          message = snapshot
+          _this.messages.push(message);
+        }
+        $rootScope.$broadcast('MessagesService:UpdateMessages', message);
       };
 
       _this.setMessages = function(snapshot) {
@@ -84,23 +95,24 @@ define(['services/serviceModule'], function(services) {
       };
 
       _this.updateMessagesRef = function() {
-        console.log('updateMessagesRef');
-        if (_this.username === undefined) {
-          console.debug('Username undefined, not bothering to updateMessagesRef, did you forget to set it?');
-          return;
-        }
-        var messagesRoot = FirebaseService.firebaseUrl + '/messages';
-        var userMessages = messagesRoot + '/' + _this.username;
-        if (_this.currentRoom !== '' && _this.currentRoom !== undefined) {
-          var userRoomMessages = userMessages + '/' + _this.currentRoom;
-          _this.currentRoomRef = new Firebase(userRoomMessages);
-          _this.currentRoomRef.on('child_added', _this.messagesUpdate);
-          _this.currentRoomRef.on('value', _this.setMessages);
-
-        }
-        var roomListRef = new Firebase(userMessages);
-        roomListRef.on('child_added', _this.roomAdded);
-        roomListRef.on('value', _this.setRooms);
+        console.log('!!!!!! updateMessagesRef is depreciated, you shouldnt see any of these either');
+        // console.log('updateMessagesRef');
+        // if (_this.username === undefined) {
+        //   console.debug('Username undefined, not bothering to updateMessagesRef, did you forget to set it?');
+        //   return;
+        // }
+        // var messagesRoot = FirebaseService.firebaseUrl + '/messages';
+        // var userMessages = messagesRoot + '/' + _this.username;
+        // if (_this.currentRoom !== '' && _this.currentRoom !== undefined) {
+        //   var userRoomMessages = userMessages + '/' + _this.currentRoom;
+        //   _this.currentRoomRef = new Firebase(userRoomMessages);
+        //   _this.currentRoomRef.on('child_added', _this.messagesUpdate);
+        //   _this.currentRoomRef.on('value', _this.setMessages);
+        // 
+        // }
+        // var roomListRef = new Firebase(userMessages);
+        // roomListRef.on('child_added', _this.roomAdded);
+        // roomListRef.on('value', _this.setRooms);
       };
 
       return _this;

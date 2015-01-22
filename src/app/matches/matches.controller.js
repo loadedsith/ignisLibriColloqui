@@ -10,7 +10,12 @@ define(['controllerModule', 'angular'], function(controllers) {
         card.returnCard();
         var scope = $scope;
       };
-
+      
+      $scope.$on('set matchList', function(matchList) {
+        console.log('set matchList', matchList);
+        $scope.matchList = matchList;
+      });
+      
       $scope.swipeRight = function(card, cardData, cardControl) {
         card.fadeOut(function(card) {
           console.log('fade out card callback, card: ', card);
