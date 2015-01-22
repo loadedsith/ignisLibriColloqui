@@ -57,6 +57,19 @@ div.button{
     
   }
 }
+.chatBubble{
+  border:1px solid black;
+  border-radius:4px;
+  .user{
+    font-weight:bold;
+  }
+  .userLocal{
+    color:red;
+  }
+  .userRemote{
+    color:blue;
+  }
+}
 .status.status-loading{
   color:#666;
 }
