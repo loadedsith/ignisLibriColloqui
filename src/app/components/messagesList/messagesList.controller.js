@@ -15,11 +15,16 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.setCurrentRoom = function(name) {
         MessagesService.setCurrentRoom(name);
         $scope.currentRoom = name;
-      }
-
+      };
+   
       $scope.updateMessagesRef = function() {
         MessagesService.updateMessagesRef()
-      }
+      };
+      
+      $scope.$on('MessagesService:MessageSent', function(event, message) {
+        console.log('clearing message', message);
+        $scope.message = '';
+      });
 
       $scope.$on('MessagesService:UpdateMessages', function(event, messages) {
         console.log('updateMessages', messages);

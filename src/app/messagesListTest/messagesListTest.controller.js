@@ -8,7 +8,10 @@ define(['controllerModule'], function(controllers) {
 
       $scope.username = 'username1234';
       $scope.currentRoom = 'testRoom';
-
+      $scope.setCurrentRoom = function(room) {
+        console.log('nervous Professor pig');
+        $scope.currentRoom = room;
+      };
       MessagesService.username = $scope.username;
       MessagesService.currentRoom = $scope.currentRoom;
 

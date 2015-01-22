@@ -16,6 +16,16 @@ define(['controllerModule'], function(controllers) {
         }
       });
       
+      
+      $scope.$on('MessagesService:MessageSent', function(event, message) {
+        console.log('clearing message', message);
+        $scope.message = '';
+      });
+      
+      $scope.$on('MessagesService:SetCurrentRoom', function(event, room) {
+        $scope.currentRoom = room;
+      });
+      
       $scope.$on('UserService:Update', function(event, user) {
         var username = (((user || {}).info || {}).id || 'no username');
         if (username !== 'no username') {
@@ -24,9 +34,10 @@ define(['controllerModule'], function(controllers) {
         }
       });
 
-      $scope.messageInput = function(message) {
-        console.log('mc send message: ', message);
-        var successful = MessagesService.sendMessage(message, $scope.currentRoom);
+      $scope.messageInput = function(message, currentRoom) {
+        console.log('mc send message: ', message, currentRoom);
+        
+        var successful = MessagesService.sendMessage(message, currentRoom);
         if (successful) {
           $scope.message = '';
         }

@@ -33,14 +33,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.showMessages = false;
         }
       };
-      
-      $scope.messageInput = function(message, successCallback) {
-        console.log('send message: ', message);
-        if(typeof successCallback === 'function'){
-          successCallback();
-        }
-      }
-      
+
       $scope.useIlcServer = true;
       
       $scope.toggleMessages = function(value) {

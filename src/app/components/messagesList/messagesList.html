@@ -2,7 +2,7 @@
   <dl class="sub-nav" ng-show="roomsReady">
     <dt>{{Strings.rooms}}</dt>
     <dd ng-repeat="room in rooms" ng-class='{active:room === currentRoom}'>
-      <div ng-click="setCurrentRoom(room)">{{room}}</div>
+      <div ng-click="setCurrentRoom(room);">{{room}}</div>
     </dd>
   </dl>
   <div ng-repeat="room in rooms">

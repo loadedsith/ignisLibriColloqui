@@ -51,6 +51,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     $socket.on('message sent', function(message) {
       console.log('message sent', message);
+      MessagesService.messageSent(message);
       //TODO Clear input from message field
     });
 
