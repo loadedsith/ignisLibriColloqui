@@ -76,14 +76,13 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     $socket.on('room update', function(room) {
       console.log('ilc room update', room);
+      MessagesService.roomUpdate(room);
       // $scope.messages[room.room] = room;
     });
 
-
-
     $socket.on('room set', function(room) {
       console.log('ilc room set', room);
-      MessagesService.messagesUpdate(room);
+      MessagesService.roomSet(room);
       // $scope.messages[room.room] = {};
       // $scope.messages[room.room] = room.snapshot;
     });

@@ -28,13 +28,25 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.message = '';
       });
 
-      $scope.$on('MessagesService:UpdateMessages', function(event, messages) {
+      $scope.$on('MessagesService:MessageUpdate', function(event, message) {
+        if ($scope.messages[message.room] === undefined) {
+          $scope.messages[message.room] = [];
+        }
+        $scope.messages[message.room].push(message.snapshot);
+      })
+      $scope.$on('MessagesService:MessagesSet', function(event, messages) {
         console.log('updateMessages', messages);
         if (messages.snapshot !== null) {
           if (messages.snapshot[messages.room]) {
             $scope.messages[messages.room] = messages.snapshot[messages.room];
           }else{
-            $scope.messages[messages.room] = {};
+            if( $scope.messages[messages.room] === undefined) {
+              $scope.messages[messages.room]=[];
+            }
+            for(var messageKey in messages.snapshot){
+              var message = messages.snapshot[messageKey];
+              $scope.messages[messages.room].push(message);
+            }
           }
         } else {
           $scope.messages[messages.room] = {};

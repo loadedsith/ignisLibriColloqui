@@ -75,18 +75,25 @@ define(['services/serviceModule'], function(services) {
         
       }
 
-      _this.messagesUpdate = function(snapshot) {
+      _this.roomSet = function(snapshot) {
         //receive new message
         // will be called for each new message
-        var message;
-        if (typeof snapshot.val === 'function'){
-          message = snapshot.val();
-          _this.currentRoomRef.key = snapshot.key();
-        }else{
-          message = snapshot
-          _this.messages.push(message);
+        var room;
+        if(snapshot.snapshot!==undefined){
+          _this.rooms[snapshot.room] = snapshot.snapshot;
         }
-        $rootScope.$broadcast('MessagesService:UpdateMessages', message);
+        $rootScope.$broadcast('MessagesService:MessagesSet', snapshot);
+      };
+      
+      _this.roomUpdate = function(snapshot) {
+        //receive new message
+        // will be called for each new message
+        // _this.rooms[snapshot.room] = snapshot.snapshot
+        if(snapshot.snapshot!==undefined){
+          _this.rooms[snapshot.room] = [];
+          _this.rooms[snapshot.room].push(snapshot.snapshot)
+        }
+        $rootScope.$broadcast('MessagesService:MessageUpdate', snapshot);
       };
 
       _this.setMessages = function(snapshot) {
