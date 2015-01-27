@@ -10,6 +10,8 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.messages = {};
       $scope.rooms = [];
 
+      $scope.glued = true;
+
       $scope.roomsReady = false;
 
       $scope.setCurrentRoom = function(name) {

@@ -5,7 +5,7 @@
  * which avails each controller of, for example, the `config` constants object.
  **/
 define([
-  'directives/fastRepeat',
+  'directives/messages-gph',
   'directives/cards-gph',
   'directives/card-gph'
 ], function() {});

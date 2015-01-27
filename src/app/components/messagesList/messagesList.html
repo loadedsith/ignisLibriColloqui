@@ -7,10 +7,22 @@
   </dl>
   <div ng-repeat="room in rooms">
     <div ng-if="parseInt(room) < parseInt(userId)">
-      <fast-repeat messages="messages[room + '+' + userId]" ng-show="room === currentRoom"></fast-repeat>
+      <messages-gph 
+        scroll-glue="glued"
+        class="messageWrapper"
+        local-user="user"
+        messages="messages[room + '+' + userId]"
+        ng-show="room === currentRoom"
+        ></messages-gph>
     </div>
     <div ng-if="parseInt(room) > parseInt(userId)">
-      <fast-repeat messages="messages[userId + '+' + room]" ng-show="room === currentRoom"></fast-repeat>
+      <messages-gph 
+        scroll-glue="glued"
+        class="messageWrapper"
+        local-user="user"
+        messages="messages[userId + '+' + room]"
+        ng-show="room === currentRoom"
+        ></messages-gph>
     </div>
   </div>
 </div>

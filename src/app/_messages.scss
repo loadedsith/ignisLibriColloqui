@@ -1,0 +1,37 @@
+messages-gph{
+  position: relative;
+  display: block;
+  &:before {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
+    max-width:100%;
+    width:100%;
+    content: "";
+    background: url(/assets/images/messageFade.png) repeat-x;
+    height:30px;
+  }
+  &.messageWrapper{
+    max-height: 100%;
+    height: 350px;
+    overflow-x: scroll;
+    .messageBubble{
+      word-wrap: break-word;
+      border-radius:4px;
+      padding: 4px;
+      .user{
+        margin-right: 10px;
+        font-weight:bold;
+      }
+      .userLocal{
+        margin-right: 10px;
+        color:red;
+      }
+      .userRemote{
+        margin-right: 10px;
+        color:blue;
+      }
+    }
+  }
+}
