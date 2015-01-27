@@ -2,9 +2,15 @@
   <div class="cardsWrapper">
     <div ng-controller="CardsController" id="Cards" >
       <ul class="cards">
+        <pre ng-repeat="card in matchList">
+          card:{{card|json}}
+          profiles{{profiles|json}}
+          profile{{profiles[card.facebookId]|json}}
+        </pre>
         <card-gph
           ng-repeat="card in matchList"
           card='card'
+          profile=''
           duration="250"
           max-drag="250"
           initial-position="{x:10, y:10}"

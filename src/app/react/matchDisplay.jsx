@@ -8,9 +8,8 @@ define(['react'], function(React) {
       //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
       var imageData = (((this.props.data || {}).image || {}).data || {});
 
-        /*jshint camelcase: false */
-      if(imageData.is_silhouette === true){
-        /*jshint camelcase: true */
+
+      if(imageData['is_silhouette'] === true){
         imageUrl = './assets/images/FBProfile.jpg';
       } else {
         imageUrl = imageData.url||'./assets/images/FBProfile.jpg';
@@ -21,8 +20,10 @@ define(['react'], function(React) {
       };
       /* <p>FBID:{this.props.data.facebookId}</p>*/
       /** <p>fetching:{this.props.data.fetching}</p>*/
-      // <img src={imageUrl} className="matchImage"/>
-      return <div className="matchDisplay" style={styles}>
+      // <img src={imageUrl} className='matchImage'/>
+      console.log('matchCard Data', this.props.data);
+      return <div className='matchDisplay' style={styles}>
+
       </div>
       /*jshint ignore:end */
       

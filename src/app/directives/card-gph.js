@@ -8,6 +8,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         initialPosition: '=',
         duration: '=',
         card: '=',
+        profile: '=',
         swipeRight: '=',
         swipeLeft: '=',
         cardTemplate:'='
@@ -18,6 +19,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         var duration = scope.duration;
         var initialPosition = scope.initialPosition;
         var cardTemplate = scope.cardTemplate;//React Template!
+        var profile = scope.profile;
         var swipeRight;
         var swipeLeft;
 
@@ -43,6 +45,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
           initialPosition:initialPosition,
           swipeLeft:swipeLeft,
           swipeRight:swipeRight,
+          profile:profile,
           cardTemplate:cardTemplate
         };
 

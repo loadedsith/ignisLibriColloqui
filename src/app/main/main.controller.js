@@ -12,6 +12,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       
       StatusService.setStatus(StatusService.loading);
 
+
       $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
@@ -47,8 +48,13 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
-      $scope.parseInt = parseInt;
+      $scope.$on('MatchCard:AvailableForProcessing', function(event, match) {
+        console.log('match---', match);
+        ILCServerService.getProfile(match.facebookId);
+      });
 
+      $scope.parseInt = parseInt;
+      
       var userLoginState = UserService.checkLoginState();
 
       userLoginState.then(function(response) {

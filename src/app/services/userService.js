@@ -6,7 +6,9 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     var _this = this;
 
     _this.currentTopic = 0;
-
+    
+    _this.profiles = {};
+    
     _this.user = {
       profilePicture : null,
       loggedIn : false
@@ -53,10 +55,19 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       }
     };
 
+    _this.attachProfileToLocalUser = function(response) {
+      if (_this.user.profiles===undefined){
+        if (_this.profiles[response.id] !== undefined) {
+          _this.user.profile = _this.profiles[response.id]
+        }
+      }
+    }
+
     _this.userInfoCallback = function(response) {
       // console.log('_this Info Found: ', response);
       _this.user.info = response;
       FacebookService.getUserImage(_this.updateUserImage);
+      _this.attachProfileToLocalUser(response);
       UserManagementService.userExists(_this.user.info, _this.userExists, _this.userDoesntExist);
     };
 
@@ -80,6 +91,21 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.blacklist = blacklist;
       //add the current user to the blacklist
       UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
+    };
+
+    _this.setUserProfile = function(user) {
+      console.log('UserService.setUserProfile: ', user);
+      _this.profiles[user.data['user_id']] = user.profile;
+      if (_this.user.info !== undefined) {
+         if (_this.user.info.id === user.data.user_id){
+           _this.user.profile = user.profile;
+         }else {
+           $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
+         } 
+      }else{
+        $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
+      }
+      
     };
 
     _this.gotMatches = function(matches) {

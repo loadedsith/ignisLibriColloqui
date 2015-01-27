@@ -1,6 +1,8 @@
 define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
-  return services.service('ILCServerService', ['Config', 'MessagesService', 'UserService', '$socket', function(Config, MessagesService, UserService, $socket) {
+  return services.service('ILCServerService',
+  ['Config', 'MessagesService', 'UserService', 'MatchMakerService','$socket',
+   function(Config, MessagesService, UserService, MatchMakerService, $socket) {
     var _this = this;
     // console.log('socket', socket);
 
@@ -9,6 +11,19 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     } else {
       console.log('Strings.ilcServerUrl was unset');
       _this.ilcServerUrl = 'http://localhost:5000';
+    }
+
+    _this.getProfile = function(user) {
+      console.log('ilc get profile',user);
+      if (_this.accessToken === undefined) {
+        console.log('gotta have a successful login before you go requesting profiles, son.');
+      } else{ 
+        var config = {
+          user:user,
+          accessToken:_this.accessToken,
+        }
+        $socket.emit('get profile',config);
+      }
     }
 
     _this.login = function(accessToken) {
@@ -34,6 +49,10 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       });
     }
 
+    $socket.on('user profile', function(user) {
+      UserService.setUserProfile(user);
+    })
+    
     $socket.on('rooms update', function(room) {
       console.log('ilc rooms update', room);
       MessagesService.roomAdded(room);
@@ -60,11 +79,11 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       // $scope.messages[room.room] = room;
     });
 
+
+
     $socket.on('room set', function(room) {
       console.log('ilc room set', room);
-      
       MessagesService.messagesUpdate(room);
-      
       // $scope.messages[room.room] = {};
       // $scope.messages[room.room] = room.snapshot;
     });
