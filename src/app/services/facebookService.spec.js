@@ -18,7 +18,7 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       facebookService = FacebookService;
     }));
 
-    it('should have an FB and service references ', inject(function() {
+    it('should have an FB and service references', inject(function() {
       expect(FB).toBeDefined();
       expect(facebookService).toBeDefined();
     }));
@@ -30,7 +30,7 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
     //   beforeEach(function(done) {
     //     facebookService.checkLoginState(done);
     //   });
-    //   it(' checkLoginState should call callback function', function() {
+    //   it('checkLoginState should call callback function', function() {
     //     expect(true);
     //   });
     // });
@@ -45,13 +45,13 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
     //       done();
     //     });
     //   });
-    //   it(' api wrapper should call callback function', function() {
+    //   it('api wrapper should call callback function', function() {
     //     expect(true);//just getting here means the callback worked
     //   });
-    //   it(' api wrapper callback should set response', function() {
+    //   it('api wrapper callback should set response', function() {
     //     expect(response).toBeDefined();
     //   });
-    //   it(' api wrapper callback should arg response be an object', function() {
+    //   it('api wrapper callback should arg response be an object', function() {
     //     expect(typeof response).toBe('object');
     //   });
     // });
@@ -67,11 +67,11 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.apiCallbackWrapper(apiResource, done);
       });
 
-      it(' api wrapper should call the FB.api function', function() {
+      it('api wrapper should call the FB.api function', function() {
         expect(FB.api).toHaveBeenCalled();
       });
 
-      it(' api wrapper should call the FB.api function with apiResource', function() {
+      it('api wrapper should call the FB.api function with apiResource', function() {
         expect(FB.api).toHaveBeenCalledWith(apiResource, jasmine.any(Function));
       });
 
@@ -87,25 +87,25 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.login(done, fbScope);
       });
 
-      it(' api wrapper should call the FB.api function', function() {
+      it('api wrapper should call the FB.api function', function() {
         expect(FB.login).toHaveBeenCalled();
       });
 
-      it(' api wrapper should call the FB.api function with apiResource', function() {
+      it('api wrapper should call the FB.api function with apiResource', function() {
         expect(FB.login).toHaveBeenCalledWith(jasmine.any(Function), {scope:fbScope});
       });
     });
 
-    describe(' getUserImageById calls the callback', function() {
+    describe('getUserImageById calls the callback', function() {
       beforeEach(function(done) {
         facebookService.getUserImageById('1000', defaultImageProperties, done);
       });
-      it(' getUserImageById should call callback function', function() {
+      it('getUserImageById should call callback function', function() {
         expect(true)// just by getting here you've verified the callback (it was done())
       });
     });
 
-    describe(' getUserImageById calls the callback with values', function() {
+    describe('getUserImageById calls the callback with values', function() {
       var userId = '1001';
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
@@ -114,11 +114,11 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserImageById(userId, defaultImageProperties, done);
       });
 
-      it(' api wrapper should call the FB.api function', function() {
+      it('api wrapper should call the FB.api function', function() {
         expect(facebookService.apiCallbackWrapper).toHaveBeenCalled();
       });
 
-      it(' api wrapper should call the FB.api function with apiResource', function() {
+      it('api wrapper should call the FB.api function with apiResource', function() {
         var expectedResource = '/' + userId + '/picture';
         var expectedResourceParams = '?redirect=' + defaultImageProperties.redirect;
         expectedResourceParams += '&type=' + defaultImageProperties.type;
@@ -130,16 +130,16 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       });
     });
 
-    describe(' getUserImage calls the callback', function() {
+    describe('getUserImage calls the callback', function() {
       beforeEach(function(done) {
         facebookService.getUserImage(done);
       });
-      it(' getUserImage should call callback function', function() {
+      it('getUserImage should call callback function', function() {
         expect(true)// just by getting here you've verified the callback (it was done())
       });
     });
 
-    describe(' getUserImage calls the callback with values', function() {
+    describe('getUserImage calls the callback with values', function() {
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
           done()
@@ -147,25 +147,25 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserImage(done);
       });
 
-      it(' api wrapper should call the FB.api function', function() {
+      it('api wrapper should call the FB.api function', function() {
         expect(facebookService.apiCallbackWrapper).toHaveBeenCalled();
       });
 
-      it(' api wrapper should call the FB.api function with apiResource', function() {
+      it('api wrapper should call the FB.api function with apiResource', function() {
         expect(facebookService.apiCallbackWrapper)
           .toHaveBeenCalledWith('/me/picture', jasmine.any(Function));
       });
     });
-    describe(' getUserInfo calls the callback', function() {
+    describe('getUserInfo calls the callback', function() {
       beforeEach(function(done) {
         facebookService.getUserInfo(done);
       });
-      it(' getUserInfo should call callback function', function() {
+      it('getUserInfo should call callback function', function() {
         expect(true)// just by getting here you've verified the callback (it was done())
       });
     });
 
-    describe(' getUserInfo calls the callback with values', function() {
+    describe('getUserInfo calls the callback with values', function() {
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
           done()
@@ -173,11 +173,11 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserInfo(done);
       });
 
-      it(' api wrapper should call the FB.api function', function() {
+      it('api wrapper should call the FB.api function', function() {
         expect(facebookService.apiCallbackWrapper).toHaveBeenCalled();
       });
 
-      it(' api wrapper should call the FB.api function with apiResource', function() {
+      it('api wrapper should call the FB.api function with apiResource', function() {
         expect(facebookService.apiCallbackWrapper)
           .toHaveBeenCalledWith('/me', jasmine.any(Function));
       });

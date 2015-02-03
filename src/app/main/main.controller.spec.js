@@ -30,13 +30,16 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
     }));
 
     it('have 4 services that are not undefined', inject(function($controller) {
+      $controller('MainController', {
+        $scope: scope
+      });
       expect(scope.status).toBeUndefined();
       expect(config).toBeDefined();
       expect(facebookService).toBeDefined();
       expect(firebaseService).toBeDefined();
       expect(statusService).toBeDefined();
     }));
-    it(' should have access to the strings object', inject(function() {
+    it('should have access to the strings object', inject(function($controller) {
       $controller('MainController', {
         $scope: scope
       });

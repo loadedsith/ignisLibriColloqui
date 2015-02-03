@@ -5,8 +5,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.matchesRef = FirebaseService.matchesRef;
 
-    console.log('Match Maker Service Reporting in, firebase matchesRef:', _this.matchesRef);
-
     _this.matchList = {};
 
     _this.populateMatchList = function(callback) {

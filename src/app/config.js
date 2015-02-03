@@ -8,7 +8,7 @@ define(['angular'], function() {
     showProfile: true,//show automatically
     devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
-      interests:"Interests",
+      interests:'Interests',
       currentRoom: 'Current Room',
       buttonLabel: {
         sendMessage: 'Send Message',
@@ -20,7 +20,7 @@ define(['angular'], function() {
       },
       email:'Email',
       errors:{
-        noName:"Look bro, I\'m not saying what you have to put in this box, but you have to put something!"
+        noName:'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
       matches: 'Matches',
       messages: 'Messages',

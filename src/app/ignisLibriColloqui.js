@@ -36,7 +36,7 @@ define([
       if (input === '') {
         return 'empty string';
       }
-      return input
+      return input;
     };
   }).run(function(editableOptions) {
     editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'

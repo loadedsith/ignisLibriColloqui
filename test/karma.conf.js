@@ -20,7 +20,7 @@ module.exports = function(config) {
     autoWatch : false,
     // browserNoActivityTimeout: 100000,
     // logLevel: config.LOG_DEBUG,
-    singleRun:false,
+    singleRun: false,
 
     frameworks: ['jasmine', 'requirejs'],
 
@@ -35,7 +35,7 @@ module.exports = function(config) {
        }
      },*/
     browsers: ['PhantomJS'], //'Chrome', 'Chrome_without_security'
-      
+
     //example.com has been added to etc/hosts as the localhost,
     //it is also registered with the app on the Facebook API
     hostname:'example.com',

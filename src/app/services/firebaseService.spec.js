@@ -11,8 +11,8 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       firebaseService = FirebaseService;
     }));
 
-    describe(' firebaseService ', function() {
-      it(' should execute normally', function() {
+    describe('firebaseService', function() {
+      it('should execute normally', function() {
         expect(true);// just by getting here you've verified the callback (it was done())
       });
     });
