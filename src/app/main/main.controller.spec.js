@@ -31,20 +31,16 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
 
     it('have 4 services that are not undefined', inject(function($controller) {
       expect(scope.status).toBeUndefined();
-
-      $controller('MainController', {
-        $scope: scope
-      });
-
-      // expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-      expect(scope.status).toBeDefined();
       expect(config).toBeDefined();
       expect(facebookService).toBeDefined();
       expect(firebaseService).toBeDefined();
       expect(statusService).toBeDefined();
     }));
-    it(' should links defined in the config.strings object', inject(function() {
-      expect(config.strings).toBeDefined();
+    it(' should have access to the strings object', inject(function() {
+      $controller('MainController', {
+        $scope: scope
+      });
+      expect(scope.Strings).toBeDefined();
     }));
   });
 

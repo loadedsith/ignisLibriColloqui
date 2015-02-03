@@ -4,11 +4,7 @@
  * below, you can see we bring in our services and constants modules
  * which avails each controller of, for example, the `config` constants object.
  **/
-define(['angular', 'config'], function(ng) {
+define(['angular', 'config', 'angular-cookies', 'ng-socket'], function(ng) {
   'use strict';
-  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config'])
-  
-  
-
-  
+  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config', 'ngCookies', 'ngSocket'])
 });

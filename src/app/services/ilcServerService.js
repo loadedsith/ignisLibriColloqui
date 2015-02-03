@@ -47,6 +47,9 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       });
     }
 
+    $socket.on('user disconnected', function(value) {
+      console.log('disconnected',value);
+    })
     $socket.on('user profile', function(user) {
       UserService.setUserProfile(user);
     })

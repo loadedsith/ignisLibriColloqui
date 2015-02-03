@@ -1,9 +1,12 @@
-var tests = [];
+var tests = [
+  'src/app/startSocketIo'
+];
 for (var file in window.__karma__.files) {
     if (/spec\.js$/.test(file)) {
         tests.push(file);
     }
 }
+
 require.config({
   baseUrl:'/base',
   shim: {
@@ -16,9 +19,24 @@ require.config({
     angular: {
       exports: 'angular'
     },
+    'angular-xeditable': {
+      deps: [
+        'angular'
+      ]
+    },
+    'ng-socket': {
+      deps: [
+        'angular'
+      ]
+    },
     react:{
       deps:[
       'test/reactPolyfillForPhantomJS'
+      ]
+    },
+    'angular-scroll-glue':{
+      deps: [
+        'angular'
       ]
     },
     'angular-cookies': {
@@ -48,6 +66,10 @@ require.config({
     'controllerModule': 'src/app/controllerModule',
     'controllerIndex': 'src/app/controllerIndex',
     'main.controller': 'src/app/main.controller',
+    'messages/messages.controller': 'src/app/messages/messages.controller',
+    'profile/profile.controller': 'src/app/profile/profile.controller',
+    'matches/matches.controller': 'src/app/matches/matches.controller',
+    'ilcServerTest/ilcServerTest.controller': 'src/app/ilcServerTest/ilcServerTest.controller',
     'messagesList.controller': 'src/app/components/messagesList/messagesList.controller',
     'messagesTest.controller': 'src/app/messagesTest/messagesTest.controller',
     'cardTest.controller': 'src/app/cardTest/cardTest.controller',
@@ -70,6 +92,8 @@ require.config({
     'services/userManagementService':'src/app/services/userManagementService',
     'services/firebaseService':'src/app/services/firebaseService',
     'services/facebookService':'src/app/services/facebookService',
+    'services/messagesService':'src/app/services/messagesService',
+    'services/ilcServerService':'src/app/services/ilcServerService',
     'services/statusService':'src/app/services/statusService',
     'services/matchMakerService':'src/app/services/matchMakerService',
     'messages-gph': 'src/app/directives/fastRepeat',
@@ -87,6 +111,9 @@ require.config({
     'ignisLibriColloqui': 'src/app/ignisLibriColloqui',
     'main': 'src/app/main',
 
+    'socket.io-client': 'bower_components/socket.io-client/socket.io',
+    'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
+    'ng-socket': 'bower_components/ng-socket/ngSocket',
     'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
     facebook: '//connect.facebook.net/en_US/all',
     angular: 'bower_components/angular/angular',
@@ -100,6 +127,7 @@ require.config({
     modernizr: 'bower_components/modernizr/modernizr',
     react: 'bower_components/react/react',
     requirejs: 'bower_components/requirejs/require',
+    'angular-scroll-glue': 'bower_components/angular-scroll-glue/src/scrollglue',
     'requirejs-domready': 'bower_components/requirejs-domready/domReady',
     jquery: 'bower_components/jquery/dist/jquery',
     'jquery-placeholder': 'bower_components/jquery-placeholder/jquery.placeholder',
