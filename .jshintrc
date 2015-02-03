@@ -20,6 +20,7 @@
   "smarttabs": true,
   "white": true,
   "validthis": true,
+  "sub": true,
   "globals": {
     "angular": false,
     "define": true,
