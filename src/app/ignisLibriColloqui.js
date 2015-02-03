@@ -33,11 +33,10 @@ define([
     $socketProvider.setUrl(server);
   }]).filter('debug', function() {
     return function(input) {
-      console.log('input', input);
       if (input === '') {
         return 'empty string';
       }
-      return input;
+      return input
     };
   }).run(function(editableOptions) {
     editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'

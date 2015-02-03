@@ -3,7 +3,6 @@ define(['controllerModule', 'angular'], function(controllers) {
   return controllers.controller('MainController', [
     '$scope', '$timeout', 'FacebookService', 'StatusService', 'FirebaseService', 'UserService', 'ILCServerService', 'Config',
     function($scope, $timeout, FacebookService, StatusService, FirebaseService, UserService, ILCServerService, Config) {
-      console.log('MainController');
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.user = {};
@@ -103,7 +102,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.$on('MatchCard:AvailableForProcessing', function(event, match) {
-        console.log('match---', match);
         ILCServerService.getProfile(match.facebookId);
       });
 
@@ -115,7 +113,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
         ILCServerService.login(response.authResponse.accessToken);
         $scope.userId = response.authResponse.userID;
-        console.log('maincontroller responding to facebook login succcess, sending request to ILC Server');
       }, function(response) {
         StatusService.setStatus(StatusService.ready);
         console.log('maincontroller responding to facebook login fail', response);

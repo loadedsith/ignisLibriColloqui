@@ -16,7 +16,6 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
       };
 
       _this.checkLoginState = function(deferred) {
-        console.log('facebook Service.checkLoginState');
         if (typeof FB === 'undefined') {
           console.log('Facebook was not properly initialized');
         } else {
@@ -42,7 +41,6 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
 
       _this.getUserImageById = function(id, config, callback) {
         var modifiers = _this.getUserImageByIdModifiers;
-        console.log('FacebookService.getUserImageById: ', id);
         var resource = '/' + id + '/picture';
 
         if (config !== undefined) {
@@ -79,12 +77,10 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
       };
 
       _this.getUserImage = function(callback) {
-        console.log('FacebookService.getUserImage');
         _this.apiCallbackWrapper('/me/picture', callback);
       };
 
       _this.getUserInfo = function(callback) {
-        console.log('FacebookService.getUserInfo');
         _this.apiCallbackWrapper('/me', callback);
       };
 
@@ -92,7 +88,6 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         if (scope === undefined) {
           scope = 'public_profile, email';
         }
-        console.log('facebook service.login');
         if (typeof callback === 'function') {
           FB.login(callback, {scope: scope});
         } else {

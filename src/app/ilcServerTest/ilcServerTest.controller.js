@@ -3,7 +3,6 @@ define(['controllerModule', 'angular'], function(controllers) {
   return controllers.controller('ILCServerTestController', [
     '$scope', 'Config', 'ILCServerService', '$socket',
     function($scope, Config, ILCServer, $socket) {
-      console.log('ILC Server Test Controller, reporting in.');
       $scope.Strings = Config.strings;
       
       //test user open_fnvwvuk_user@tfbnw.net's access id,
@@ -74,30 +73,25 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.rooms = [];
 
       $socket.on('rooms update', function(room) {
-        console.log('rooms update', room);
         $scope.rooms.push(String(room.remoteId));
       });
 
       $socket.on('rooms set', function(rooms) {
-        console.log('rooms Set', rooms);
         $scope.rooms = rooms;
       });
       $scope.cards = $scope.matchList;
       $scope.matchList = {};
       $socket.on('got user matchList', function(matchList) {
-        console.log('got user matchList', matchList);
         $scope.matchList = matchList;
         $scope.cards = $scope.matchList;
       });
 
       $scope.messages = {};
       $socket.on('room update', function(room) {
-        console.log('room update', room);
         $scope.messages[room.room] = room;
       });
 
       $socket.on('room set', function(room) {
-        console.log('room set', room);
         $scope.messages[room.room] = {};
         $scope.messages[room.room] = room.snapshot;
       });

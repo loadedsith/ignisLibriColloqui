@@ -3,7 +3,6 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
   return controllers.controller('MatchCardsController',
   ['$scope', '$timeout', 'UserService', 'FacebookService',
   function($scope, $timeout, UserService, facebookService) {
-    console.log('Hi everybody, im the MatchCardsController');
     $scope.matchList = {};
     $scope.MatchDisplay = MatchDisplay;
 
@@ -25,7 +24,6 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       var userId = user.data['user_id'];
       if ($scope.profiles[userId] !== undefined) {
         $scope.profiles[userId].profile = user.profile;
-        console.log('$scope.profiles', $scope.profiles);
       }else{
         $scope.profiles[userId] = {
           profile : user.profile

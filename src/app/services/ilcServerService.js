@@ -1,10 +1,9 @@
 define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
   return services.service('ILCServerService',
-  ['Config', 'MessagesService', 'UserService', 'MatchMakerService','$socket',
+  ['Config', 'MessagesService', 'UserService', 'MatchMakerService', '$socket',
    function(Config, MessagesService, UserService, MatchMakerService, $socket) {
     var _this = this;
-    // console.log('socket', socket);
 
     if (Config.ilcServerUrl) {
       _this.ilcServerUrl = Config.ilcServerUrl;
@@ -14,10 +13,9 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     }
 
     _this.getProfile = function(user) {
-      console.log('ilc get profile',user);
       if (_this.accessToken === undefined) {
         console.log('gotta have a successful login before you go requesting profiles, son.');
-      } else{ 
+      } else{
         var config = {
           user:user,
           accessToken:_this.accessToken,
@@ -52,7 +50,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     $socket.on('user profile', function(user) {
       UserService.setUserProfile(user);
     })
-    
+
     $socket.on('rooms update', function(room) {
       console.log('ilc rooms update', room);
       MessagesService.roomAdded(room);
@@ -62,7 +60,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       console.log('ilc rooms Set', rooms);
       MessagesService.setRooms(rooms);
     });
-    
+
     $socket.on('got user matchList', function(matchList) {
       console.log('ilc got user matchList', matchList);
       UserService.setMatchList(matchList)

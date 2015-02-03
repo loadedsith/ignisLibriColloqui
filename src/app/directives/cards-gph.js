@@ -25,7 +25,7 @@ define(['directives/directiveModule', 'react/cards', 'react'], function(directiv
           swipeRight = scope.swipeRight;
         } else {
           swipeRight = function(card) {
-            console.log('defualt swipeRight event', card);
+            console.log('default swipeRight event', card);
           };
         }
 
@@ -33,7 +33,7 @@ define(['directives/directiveModule', 'react/cards', 'react'], function(directiv
           swipeLeft = scope.swipeLeft;
         } else {
           swipeLeft = function(card) {
-            console.log('defualt swipeLeft event', card);
+            console.log('default swipeLeft event', card);
           };
         }
 

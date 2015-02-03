@@ -2,7 +2,6 @@ define(['controllerModule', 'react/matchDisplay'], function(controllers, MatchDi
   'use strict';
   return controllers
     .controller('CardTestController', ['$scope', '$timeout', function($scope, $timeout) {
-      console.log('CardTestController');
       $scope.CardTemplate = MatchDisplay;
       $scope.cards = [
         'new Dentist Galapagos tortoise',
@@ -25,7 +24,6 @@ define(['controllerModule', 'react/matchDisplay'], function(controllers, MatchDi
       $scope.swipeRight = function(card) {
         console.log('swipeRight: card', card, $scope, $scope.cards);
         card.fadeOut(function(card) {
-          console.log('Green wooden Blue Whale');
           $scope.removeCard(card.getDOMNode().innerHTML);
         });
 

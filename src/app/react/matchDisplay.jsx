@@ -21,7 +21,6 @@ define(['react'], function(React) {
       /* <p>FBID:{this.props.data.facebookId}</p>*/
       /** <p>fetching:{this.props.data.fetching}</p>*/
       // <img src={imageUrl} className='matchImage'/>
-      console.log('matchCard Data', this.props.data);
       return <div className='matchDisplay' style={styles}>
 
       </div>

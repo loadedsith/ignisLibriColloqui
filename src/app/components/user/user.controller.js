@@ -3,7 +3,6 @@ define(['controllerModule', 'angular'], function(controllers) {
   controllers
     .controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
 
-      console.log('UserController- UserService:', UserService);
       $scope.debugUser = false;
       $scope.checkLoginState = UserService.checkLoginState;
 

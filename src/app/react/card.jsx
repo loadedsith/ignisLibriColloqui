@@ -172,7 +172,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       }
       switch (eventType) {
         case 'mousedown':
-          console.log('mouseDown');
          // only left mouse button
           if (event.button === 0) {
             // var pos = this.getDOMNode().getBoundingClientRect();
@@ -188,7 +187,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
           }
           break;
         case 'mouseup':
-          console.log('mouseUp');
           this.setState({
             dragging: false,
             droppedPos: this.state.pos,
@@ -216,7 +214,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
           }
           break;
         case 'mousemove':
-          console.log('mouseMove');
           var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
           if (xPos > (maxDrag/2)) {

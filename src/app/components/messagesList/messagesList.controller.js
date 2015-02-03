@@ -3,7 +3,6 @@ define(['controllerModule', 'angular'], function(controllers) {
   return controllers.controller('MessagesListController',
     ['$scope', '$timeout', 'Config', 'MessagesService', 'FirebaseService',
     function($scope, $timeout, Config, MessagesService, FirebaseService) {
-      console.log('Hi everybody, im the MessagesListController');
 
       $scope.Strings = Config.strings;
       
@@ -24,7 +23,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
       
       $scope.$on('MessagesService:MessageSent', function(event, message) {
-        console.log('clearing message', message);
         $scope.message = '';
       });
 
@@ -35,7 +33,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.messages[message.room].push(message.snapshot);
       })
       $scope.$on('MessagesService:MessagesSet', function(event, messages) {
-        console.log('updateMessages', messages);
         if (messages.snapshot !== null) {
           if (messages.snapshot[messages.room]) {
             $scope.messages[messages.room] = messages.snapshot[messages.room];
@@ -51,11 +48,9 @@ define(['controllerModule', 'angular'], function(controllers) {
         } else {
           $scope.messages[messages.room] = {};
         }
-        console.log('$scope.messages', $scope.messages);
       });
 
       $scope.$on('MessagesService:UpdateRooms', function(event, rooms) {
-        console.log('updateRooms', rooms);
         $scope.rooms = rooms;
         $scope.roomsReady = true;
       });
