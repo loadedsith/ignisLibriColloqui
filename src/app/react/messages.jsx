@@ -7,14 +7,14 @@ define(['react'], function(React) {
       var rows = [];
 
       var messages = this.props.data;
+        /*jshint ignore:start */
       var errorElement = <p>messages failed to load. Sorry!</p>;
       
       if (messages === undefined) {
         console.log('data is undefined in messages.jsx');
-        /*jshint ignore:start */
         return errorElement;
-        /*jshint ignore:end */
       }
+        /*jshint ignore:end */
       var classes = 'user';
       var lastTime;
       for (var messageKey in messages) {
