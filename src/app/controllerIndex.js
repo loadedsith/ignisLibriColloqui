@@ -9,6 +9,7 @@ define([
   'cardTest/cardTest.controller',
   'messages/messages.controller',
   'matches/matches.controller',
+  'profile/profile.controller',
   'messagesTest/messagesTest.controller',
   'messagesListTest/messagesListTest.controller',
   'ilcServerTest/ilcServerTest.controller'

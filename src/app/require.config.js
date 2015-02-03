@@ -20,6 +20,11 @@ require.config({
         'angular'
       ]
     },
+    'angular-xeditable': {
+      deps: [
+        'angular'
+      ]
+    },
     'angular-scroll-glue': {
       deps: [
         'angular'
@@ -69,7 +74,8 @@ require.config({
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
     'ng-socket': '../bower_components/ng-socket/ngSocket',
-    'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue'
+    'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue',
+    'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'
   },
   packages: [
 

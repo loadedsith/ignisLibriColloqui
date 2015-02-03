@@ -48,13 +48,33 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       FacebookService.login(_this.loginCallback);
     };
 
+    _this.updateProfile = function(profile) {
+      _this.user.profile = profile;
+    };
+
     _this.updateUserImage = function(response) {
       console.log('updateUserImage', response);
       if (response && !response.error) {
         _this.user.profilePicture = response;
       }
     };
-
+    _this.isProfileComplete = function() {
+      var missing = [];
+      if (!_this.user.profile) {
+        missing.push('profile')
+      } else {
+        if (!_this.user.profile.name) {
+          missing.push('name');
+        }
+        if (!_this.user.profile.interests) {
+          missing.push('interests');
+        }
+        if (!_this.user.profile.blacklist) {
+          missing.push('blacklist');
+        }
+      }
+      return (missing.length === 0) ? true : missing;
+    };
     _this.attachProfileToLocalUser = function(response) {
       if (_this.user.profiles===undefined){
         if (_this.profiles[response.id] !== undefined) {
@@ -99,6 +119,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (_this.user.info !== undefined) {
          if (_this.user.info.id === user.data.user_id){
            _this.user.profile = user.profile;
+           $rootScope.$broadcast('UserService:UpdateUserProfile', user);
          }else {
            $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
          } 

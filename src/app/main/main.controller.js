@@ -11,18 +11,70 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.userId = "default user id, did facebook login fail?";
       
       StatusService.setStatus(StatusService.loading);
-
-
+      
+      var profileIncomplete = {
+        text:'Please complete your profile before moving on.', //[Optional] Label text
+        class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
+      };
+      
+      $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
+        debugger;
+        UserService.updateProfile(user);
+      })
+      $scope.$on('UserService:UpdateUserProfile', function(event, user) {
+        $scope.user.profile = user.profile;
+        if ((user.profile.interests||[]).length === 0){
+          $scope.showProfile = true;
+          StatusService.setStatus(profileIncomplete);
+        }
+      });
+      
+      $scope.$watch('showProfile',function(newValue, oldValue) {
+        var complete = UserService.isProfileComplete();
+        if (newValue === false) {
+          if (complete !== true) {
+            $scope.showProfile = true;
+            var missing = complete;
+            profileIncomplete.text = 'Please complete your profile before moving on. Missing: '+missing.toString()
+            StatusService.setStatus(profileIncomplete);
+          }
+        }
+      });
+      
       $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
       $scope.$on('UserService:Update', function(event, user) {
+        if (user.profile !== undefined){
+          //skip the inital setting
+          if ($scope.user.profile !== undefined){
+            if($scope.user.profile!==user.profile){
+              debugger;
+              
+            }
+          } 
+        }
         $scope.user = user;
+        
       });
 
       $scope.showMatches = (Config.showMatches || false);
 
       $scope.showMessages = (Config.showMessages || false);
+      
+      $scope.showProfile = (Config.showProfile || false);
+
+      $scope.toggleProfile = function(value) {
+        if (value === undefined) {
+          $scope.showProfile = !$scope.showProfile;
+        } else {
+          $scope.showProfile = !!value;
+        }
+        if ($scope.showProfile) {
+          $scope.showMessages = false;
+          $scope.showMatches = false;
+        }
+      };
 
       $scope.toggleMatches = function(value) {
         if (value === undefined) {
@@ -32,6 +84,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
         if ($scope.showMatches) {
           $scope.showMessages = false;
+          $scope.showProfile = false;
         }
       };
 
@@ -45,6 +98,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
         if ($scope.showMessages) {
           $scope.showMatches = false;
+          $scope.showProfile = false;
         }
       };
 

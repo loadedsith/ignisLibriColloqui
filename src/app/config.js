@@ -4,9 +4,11 @@ define(['angular'], function() {
     firebaseUrl: 'https://resplendent-fire-9421.firebaseIO.com',
     ilcServerUrl: 'http://localhost:5000',
     showMatches: false,//show automatically
-    showMessages: true,//show automatically
+    showMessages: false,//show automatically
+    showProfile: true,//show automatically
     devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
+      interests:"Interests",
       currentRoom: 'Current Room',
       buttonLabel: {
         sendMessage: 'Send Message',
@@ -16,8 +18,13 @@ define(['angular'], function() {
         ilcServerTest:'ILC Server Test',
         cardTest:'Card Test'
       },
+      email:'Email',
+      errors:{
+        noName:"Look bro, I\'m not saying what you have to put in this box, but you have to put something!"
+      },
       matches: 'Matches',
       messages: 'Messages',
+      name:'Name',
       noCurrentRoom: 'There are no current rooms available to you.  ' +
         'Are you sure you have any one who\'s willing to hear you prattle?',
       noRooms:'No Messages, sorry Bro.',
@@ -25,6 +32,7 @@ define(['angular'], function() {
       send: 'Send',
       sendMessage: 'Send Message',
       siteTitle: '🔥 📖 💬',
+      profile: 'Profile',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
       messageList: 'Messages List'

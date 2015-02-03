@@ -1,0 +1,69 @@
+@import "../../bower_components/angular-xeditable/dist/css/xeditable.css";
+.editable-error{
+  color: $alert-color;
+}
+label{
+  font-size: 0.875rem;
+  padding-top: 0.125em;
+}
+input[type="text"]{
+  height: 1.3125rem;
+}
+.inline-list > li {
+  margin-left: 0.375rem;
+  margin-top: 0.375rem;
+}
+.editable-click, a.editable-click{
+  border-bottom:1px dashed transparent;
+  &:hover{
+    border-bottom:1px dashed darken($primary-color,20%);
+  }
+}
+.interestWrapper {
+  display:inline-block;
+  padding-left: 1.3em;
+  padding-right: 1em;
+  background-color:rgba($primary-color, 0.3);
+  form{
+    display:inline-block;
+  }
+  form + span.remove {
+    display: inline-block;
+    font-size:100%;
+    opacity: 1!important;
+    height: 10px;
+    color: #000!important;
+    &:hover{
+      font-weight:bolder;
+    }
+  }
+  &:hover{
+    .remove{
+      font-weight:100;
+      opacity: 1;
+    }
+  }
+  #addInterest{
+    padding-top: 2px;
+  }
+  .remove{
+    transition: 0.3s 0.1s opacity linear, 0.3s 0.0s color linear;
+    opacity: 0;
+    border:1px solid transparent;
+    border-radius:150px;
+    display:inline-block;
+    line-height:0;
+    width: 0;
+    font-size:150%;
+    margin-left: -3px;
+    vertical-align: baseline;
+    &:hover{
+      font-weight:700;
+      color: $alert-color;
+    }
+  }
+  .interest{
+    transition:0.2s 0.3s color linear;
+    display: inline-block;
+  }
+}

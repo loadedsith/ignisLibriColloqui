@@ -1,0 +1,61 @@
+<div ng-controller="ProfileController" class="profile">
+  <h3>{{Strings.profile}}</h3>
+  <!-- editable username (text with validation) -->
+  <!-- <span editable-text="user.profile.name" e-name="name" onbeforesave="checkName($data)" buttons="no">{{ user.profile.name || 'no name' }}</span>   -->
+    <div class="row">
+      <div class="small-8 columns">
+        <div class="row">
+          <div class="small-3 columns">
+            <label for="name">{{Strings.name}}</label>
+          </div>
+          <div class="small-9 columns">
+            <a id="name" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.name">
+              {{ user.profile.name || 'Name' }}
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-3 columns">
+            <label for="email">Email</label>
+          </div>
+          <div class="small-9 columns">
+            <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.email">
+              {{ user.profile.email || 'Email' }}
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-3 columns">
+            <label for="email">{{Strings.interests}}</label>
+          </div>
+          <div class="small-9 columns">
+            <ul class="inline-list">
+              <li class="interestWrapper" ng-repeat="interest in interests">
+                <a class="interest"
+                  href="#"
+                  editable-text="addInterestPlaceholder"
+                  buttons="no"
+                  onbeforesave="checkInterest($data)"
+                  onaftersave="addInterest($data, user.profile)"
+                  >
+                  {{interest}}
+                </a>
+                <span class="remove" ng-click="removeInterest(interest)">&times;</span>
+              </li>
+              <li id="addInterest"
+                href="#"
+                editable-text="addInterestPlaceholder"
+                buttons="no"
+                onbeforesave="checkInterest($data)"
+                onaftersave="addInterest($data, user.profile)">
+                Add Interest
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  
+  <pre>{{user.profile|json}}</pre>
+</div>

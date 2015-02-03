@@ -2,11 +2,24 @@
 <div class="row">
   <div class="small-12 small-centered columns">
     <div class="wrapper {{status.class}}">
-      <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
-      <div class="reveal-modal matches" ng-class="{open:showMatches}" data-reveal ng-include="'app/matches/matches.html'"></div>
-      <div class="reveal-modal messages" ng-class="{open:showMessages}" data-reveal ng-include="'app/messages/messages.html'"></div>
+      <p class="status {{status.class}}" ng-click="status.action()" ng-show="!showProfile && !showMatches && !showMessages">{{status.currentFrame || status.text}}</p>
+      <div class="reveal-modal profile" ng-class="{open:showProfile}" data-reveal>
+        <div class="close" ng-click="showProfile = false">&times;</div>
+        <p class="status {{status.class}}" ng-click="status.action()" ng-show="showProfile">{{status.currentFrame || status.text}}</p>
+        <div ng-include="'app/profile/profile.html'"></div>
+      </div>
+      <div class="reveal-modal matches" ng-class="{open:showMatches}" data-reveal>
+        <div class="close" ng-click="showMatches = false">&times;</div>
+        <p class="status {{status.class}}" ng-click="status.action()" ng-show="showMatches">{{status.currentFrame || status.text}}</p>
+        <div ng-include="'app/matches/matches.html'"></div>
+      </div>
+      <div class="reveal-modal messages" ng-class="{open:showMessages}" data-reveal>
+        <div class="close" ng-click="showMessages = false">&times;</div>
+        <p class="status {{status.class}}" ng-click="status.action()" ng-show="showMessages">{{status.currentFrame || status.text}}</p>
+        <div ng-include="'app/messages/messages.html'"></div>
+      </div>
     </div>
-    <div class="loader status {{status.class}}" ng-click="status.action()">
+    <div class="loader status {{status.class}}" ng-click="status.action()" ng-show="!showProfile && !showMatches && !showMessages">
       <p class="animation">{{status.currentFrame}}</p>
       <p class="statusLabel">{{status.text}}</p>
     </div>

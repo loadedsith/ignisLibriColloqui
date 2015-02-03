@@ -15,6 +15,9 @@
       <li>
         <a class="" ng-click="toggleMessages()">{{Strings.messages}}</a>
       </li>
+      <li>
+        <a class="" ng-click="toggleProfile()">{{Strings.profile}}</a>
+      </li>
       <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
         <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
       </li>

@@ -9,6 +9,7 @@ define([
   'directives/directiveIndex',
   'components/componentIndex',
   'ng-socket',
+  'angular-xeditable',
   'config'
 ], function(angular) {
   'use strict';
@@ -22,6 +23,7 @@ define([
     'ignisLibriColloqui.services',
     'ignisLibriColloqui.components',
     'ignisLibriColloqui.config',
+    'xeditable',
     'ngSocket'
   ]).config(['Config','$socketProvider', function (Config, $socketProvider) {
     var server;
@@ -37,5 +39,7 @@ define([
       }
       return input;
     };
+  }).run(function(editableOptions) {
+    editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
   });
 });
