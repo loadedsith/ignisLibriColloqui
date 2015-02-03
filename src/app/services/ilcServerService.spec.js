@@ -41,7 +41,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       });
     });
     describe('has many socket connections', function() {
-      console.log('socket', socket);
       it('at least one on call', function() {
         expect(socket.on).toHaveBeenCalled();
       });

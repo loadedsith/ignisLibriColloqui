@@ -60,7 +60,6 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       var apiResource = 'test';
 
       beforeEach(function(done) {
-        console.log('FB.api', FB.api);
         spyOn(FB, 'api').and.callFake(function() {
           done()
         })
