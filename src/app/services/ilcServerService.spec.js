@@ -4,8 +4,12 @@
 
 define(['services/serviceModule', 'angular-mocks'], function() {
   describe('ILC Server Services', function() {
+    var arraysEqual = function (a1, a2) {
+        return JSON.stringify(a1) === JSON.stringify(a2);
+    };
     var ilcServerService;
     var messagesService;
+    var userService;
     var scope;
     var $timeout;
     var $rootScope;
@@ -30,9 +34,10 @@ define(['services/serviceModule', 'angular-mocks'], function() {
 
     }));
 
-    beforeEach(inject(function(ILCServerService, MessagesService, _$timeout_, $socket, _$rootScope_) {
+    beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
       ilcServerService = ILCServerService;
       messagesService = MessagesService;
+      userService = UserService;
       $timeout = _$timeout_;
       $rootScope = _$rootScope_;
       socket = $socket;
@@ -66,13 +71,234 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
         socket.emit('ping',{})
         socket.on('pong',function(data) {
-          console.log('pong data', data);
           done();
         });
       });
     });
 
-    describe('MessagesService events', function() {
+
+    describe('login', function() {
+      var mockAccessToken = 'abcd1234';
+      var mockLoginEvent = {
+        name:'login',
+        data:{}
+      };
+      it('should trigger an emit to validate login',
+        function() {
+          spyOn(socket, 'emit');
+          ilcServerService.login(mockAccessToken);
+          expect(socket.emit).toHaveBeenCalledWith('login validator', mockAccessToken);
+        }
+      );
+      it('should trigger an emit to validate login, which should be answered',
+        function() {
+          ilcServerService.login(mockAccessToken);
+          expect(socket.on).toHaveBeenCalledWith('user valid', jasmine.any(Function));
+        }
+      );
+    });
+
+
+    describe('user profile event', function() {
+      var mockUserProfileEvent = {
+        name:'user profile',
+        data:{
+          "data" : {
+            "app_id" : "676670295780686",
+            "application" : "ignisLibriColloqui",
+            "expires_at" : 1421946000,
+            "is_valid" : true,
+            "scopes" : [ "public_profile", "basic_info", "email", "publish_actions", "user_friends" ],
+            "setTime" : 1421939766356,
+            "user_id" : "1396362880657353"
+          },
+          "profile" : {
+            "id" : "1396362880657353",
+            "test":"dummyObject"
+          }
+        }
+      };
+      it('should trigger UserService.setUserProfile',
+        function(done) {
+          spyOn(userService, 'setUserProfile').and.callFake(function() {
+            expect(true);
+            done();
+          });
+          socket.emit('test event', mockUserProfileEvent);
+        }
+      );
+      it('should trigger UserService.setUserProfile and trigger \'UserService:UpdateMatchProfile\'',
+        function(done) {
+          $rootScope.$on('UserService:UpdateMatchProfile',function() {
+            // expect(arraysEqual(userService.user.profile, mockUserProfileEvent.data)).toBe(true);
+            console.log('userService.profiles[mockUserProfileEvent.data.data[\'user_id\']]', userService.profiles[mockUserProfileEvent.data.data['user_id']]);
+            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']]).toBeDefined();
+            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].id).toBe(mockUserProfileEvent.data.profile.id);
+            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].test).toBe(mockUserProfileEvent.data.profile.test);
+            done();
+          });
+          socket.emit('test event', mockUserProfileEvent);
+        }
+      );
+    });
+
+    describe('rooms set event', function() {
+      var mockRoomsSetEvent = {
+        name:'rooms set',
+        data:[
+          "1234",
+          "4321",
+          "93472",
+          "98844",
+          "98844"
+        ]
+      };
+      it('should trigger MessagesService.setRooms',
+        function(done) {
+          spyOn(messagesService, 'setRooms').and.callFake(function() {
+            expect(true);
+            done();
+          });
+          socket.emit('test event', mockRoomsSetEvent);
+        }
+      );
+      it('should trigger MessagesService.setRooms and trigger \'MessagesService:UpdateRooms\'',
+        function(done) {
+          $rootScope.$on('MessagesService:UpdateRooms',function() {
+            expect(arraysEqual(messagesService.rooms,mockRoomsSetEvent.data)).toBe(true);
+            done();
+          });
+          socket.emit('test event', mockRoomsSetEvent);
+        }
+      );
+    });
+    describe('got user matchList event', function() {
+      it('should trigger UserService.setMatchList \'\'',
+        function(done) {
+          var mockGotUserMatchListEvent = {
+            name:'got user matchList',
+            data:['test','dummyObject']
+          };
+          spyOn(userService, 'setMatchList').and.callFake(function() {
+            expect(true);
+            done();
+          });
+          socket.emit('test event', mockGotUserMatchListEvent);
+        }
+      );
+      it('should trigger UserService.setMatchList and set userService.user.matches',
+        function(done) {
+          var mockGotUserMatchListEvent = {
+            name:'got user matchList',
+            data:['test','dummyObject']
+          };
+          setInterval(function() {
+            console.log('userService.user.matches', userService.user.matches);
+            console.log('mockGotUserMatchListEvent.data', mockGotUserMatchListEvent.data);
+            if(arraysEqual(userService.user.matches, mockGotUserMatchListEvent.data)){
+              done();
+            }else{
+              console.log('userService.user.matches', userService.user.matches);
+            }
+          },100);
+          socket.emit('test event', mockGotUserMatchListEvent);
+        }
+      );
+    });
+    describe('message sent confirmation', function() {
+      it('should trigger messages service \'\'',
+        function(done) {
+          var mockMessageSent={
+            name:'message sent',
+            data:{
+              snapshot:{}
+            }
+          }
+          spyOn(messagesService, 'messageSent').and.callFake(function() {
+            expect(true);
+            done();
+          });
+          socket.emit('test event', mockMessageSent);
+        }
+      );
+      it('should trigger messages service, which should trigger a rootScope broadcast \'MessagesService:MessageSent\'',
+        function(done) {
+          var mockMessageSent={
+            name:'message sent',
+            data:{
+              snapshot:{}
+            }
+          };
+          $rootScope.$on('MessagesService:MessageSent',function() {
+            expect(true);
+            done();
+          })
+          socket.emit('test event', mockMessageSent);
+        }
+      );
+    });
+    describe('room set events ', function() {
+      it('expects on(\'room update\') to trigger messagesService\'s room update',function(done) {
+        var mockRoomUpdate = {
+          name:'room update',
+          data:{
+            snapshot:{}
+          }
+        };
+        spyOn(messagesService, 'roomUpdate').and.callFake(function() {
+          done();
+          expect(true);//Got to this function via the socket event in ilcServerService
+        });
+        socket.emit('test event', mockRoomUpdate);
+      });
+      it('expects on(\'room update\') to update the room',
+        function(done) {
+          var mockRoomUpdate = {
+            name:'room update',
+            data:{
+              room:"123245",
+              snapshot:{
+                "123245" : {
+                  "date" : new Date().getTime(),
+                  "message" : "Hello Laura",
+                  "user" : {
+                    "data" : {
+                      "app_id" : "676670295780686",
+                      "application" : "ignisLibriColloqui",
+                      "expires_at" : 1421888400,
+                      "is_valid" : true,
+                      "scopes" : [ "public_profile", "email" ],
+                      "setTime" : 1421881793587,
+                      "user_id" : "10101118662asd154115"
+                    }
+                  }
+                }
+              }
+            }
+          };
+          spyOn(messagesService, 'roomUpdate').and.callThrough();
+
+          //it should run twice, and there should be 2 messages
+          var first = true;
+          $rootScope.$on('MessagesService:MessageUpdate',function() {
+            if(first === true){
+              first = false;//ignore the first run
+              return;
+            }
+            expect(messagesService.rooms[mockRoomUpdate.data.room]).not.toBeUndefined();
+            var last = messagesService.rooms[mockRoomUpdate.data.room].length-1;
+            expect(last+1 === 2);//because we sent in 2 updates;
+            expect(messagesService.rooms[mockRoomUpdate.data.room][last]).toEqual(mockRoomUpdate.data.snapshot);
+
+            done();
+
+          })
+          socket.emit('test event', mockRoomUpdate);
+          socket.emit('test event', mockRoomUpdate);
+        }
+      );
+    });
+    describe('room set events ', function() {
       it('expects on(\'room set\') to trigger messagesService\'s room set',function(done) {
         var mockRoomSet = {
           name:'room set',
