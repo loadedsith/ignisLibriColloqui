@@ -48,11 +48,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       UserService.setUserProfile(user);
     })
 
-    $socket.on('rooms update', function(room) {
-      console.log('ilc rooms update', room);
-      MessagesService.roomAdded(room);
-    });
-
     $socket.on('rooms set', function(rooms) {
       console.log('ilc rooms Set', rooms);
       MessagesService.setRooms(rooms);
@@ -66,7 +61,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     $socket.on('message sent', function(message) {
       console.log('message sent', message);
       MessagesService.messageSent(message);
-      //TODO Clear input from message field
     });
 
     $socket.on('room update', function(room) {

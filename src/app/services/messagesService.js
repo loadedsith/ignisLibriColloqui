@@ -68,6 +68,7 @@ define(['services/serviceModule'], function(services) {
         console.log('messages service messageSent', message);
         $rootScope.$broadcast('MessagesService:MessageSent', message);
       };
+
       _this.setCurrentRoom = function(name) {
         console.log('messages service currentRoom, name', _this.currentRoom, name);
         _this.currentRoom = name;
@@ -96,7 +97,7 @@ define(['services/serviceModule'], function(services) {
       };
 
       _this.updateMessagesRef = function() {
-        console.log('!!!!!! updateMessagesRef is depreciated, you shouldn\'t use it, nor see any of these either... eventually I guess');
+        console.log('updateMessagesRef is depreciated, you shouldn\'t use it, nor see any of these either... eventually I guess');
       };
 
       return _this;

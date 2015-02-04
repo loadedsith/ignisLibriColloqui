@@ -6,9 +6,9 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     var _this = this;
 
     _this.currentTopic = 0;
-    
+
     _this.profiles = {};
-    
+
     _this.user = {
       profilePicture : null,
       loggedIn : false
@@ -122,23 +122,23 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
            $rootScope.$broadcast('UserService:UpdateUserProfile', user);
          }else {
            $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
-         } 
+         }
       }else{
         $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
       }
-      
+
     };
 
     _this.gotMatches = function(matches) {
       console.log('UserService.gotMatches: ', matches);
       _this.user.matches = matches;
     };
-    
+
     _this.setMatchList = function(matchList) {
       console.log('UserService.setMatchList: ', matchList);
       _this.user.matches = matchList;
     };
-    
+
     _this.userDoesntExist = function() {
       console.log('User service User DOESNT Exists');
     };

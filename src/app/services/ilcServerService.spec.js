@@ -76,10 +76,13 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       it('expects on(\'room set\') to trigger messagesService\'s room set',function(done) {
         var mockRoomSet = {
           name:'room set',
-          data:[]
+          data:{
+            snapshot:{}
+          }
         };
         spyOn(messagesService, 'roomSet').and.callFake(function() {
-          done()
+          done();
+          expect(true);//Got to this function via the socket event in ilcServerService
         });
         socket.emit('test event', mockRoomSet);
       });
@@ -109,8 +112,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
             }
           };
           $rootScope.$on('MessagesService:MessagesSet',function(event, room) {
-            console.log('room', room);
-            console.log('messagesService.rooms', messagesService.rooms);
             expect(room).toEqual(mockRoomSet.data);
             expect(messagesService.messages[room.room]).toEqual(mockRoomSet.data.snapshot[mockRoomSet.data.room]);
             done();
