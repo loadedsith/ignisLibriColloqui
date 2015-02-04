@@ -6,5 +6,5 @@ gulp.task('watch', ['styles'] , function() {
   gulp.watch('src/{app,components}/**/*.scss', ['styles']);
   gulp.watch(['src/{app,components}/**/*.js'], ['scripts']);//'jscs'
   gulp.watch(['src/{app,components}/**/*.jsx'], ['jsx', 'scripts']);//'jscs'
-  gulp.watch('src/assets/images/**/*', ['images']);  
+  gulp.watch('src/assets/images/**/*', ['images']);
 });
