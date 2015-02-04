@@ -78,11 +78,9 @@ define(['services/serviceModule'], function(services) {
       _this.roomSet = function(snapshot) {
         //receive new message
         // will be called for each new message
-
         if(snapshot.room){
           _this.messages[snapshot.room] = snapshot.snapshot[snapshot.room]
         }
-
         $rootScope.$broadcast('MessagesService:MessagesSet', snapshot);
       };
 
@@ -97,36 +95,8 @@ define(['services/serviceModule'], function(services) {
         $rootScope.$broadcast('MessagesService:MessageUpdate', snapshot);
       };
 
-      _this.setMessages = function(snapshot) {
-        //Initialize messages
-        var messages = snapshot.val();
-        _this.messages = [];
-        angular.forEach(messages, function(value, key) {
-          value.key = key;
-          _this.messages.push(value);
-        });
-        $rootScope.$broadcast('MessagesService:UpdateMessages', _this.messages)
-      };
-
       _this.updateMessagesRef = function() {
-        console.log('!!!!!! updateMessagesRef is depreciated, you shouldnt see any of these either');
-        // console.log('updateMessagesRef');
-        // if (_this.username === undefined) {
-        //   console.debug('Username undefined, not bothering to updateMessagesRef, did you forget to set it?');
-        //   return;
-        // }
-        // var messagesRoot = FirebaseService.firebaseUrl + '/messages';
-        // var userMessages = messagesRoot + '/' + _this.username;
-        // if (_this.currentRoom !== '' && _this.currentRoom !== undefined) {
-        //   var userRoomMessages = userMessages + '/' + _this.currentRoom;
-        //   _this.currentRoomRef = new Firebase(userRoomMessages);
-        //   _this.currentRoomRef.on('child_added', _this.messagesUpdate);
-        //   _this.currentRoomRef.on('value', _this.setMessages);
-        //
-        // }
-        // var roomListRef = new Firebase(userMessages);
-        // roomListRef.on('child_added', _this.roomAdded);
-        // roomListRef.on('value', _this.setRooms);
+        console.log('!!!!!! updateMessagesRef is depreciated, you shouldn\'t use it, nor see any of these either... eventually I guess');
       };
 
       return _this;
