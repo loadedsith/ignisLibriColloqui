@@ -13,7 +13,6 @@ define([
   'config'
 ], function(angular) {
   'use strict';
-
   return angular.module('ignisLibriColloqui', [
     'ui.router',
     'ngCookies',

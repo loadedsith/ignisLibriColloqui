@@ -5,13 +5,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
    function(Config, MessagesService, UserService, MatchMakerService, $socket) {
     var _this = this;
 
-    if (Config.ilcServerUrl) {
-      _this.ilcServerUrl = Config.ilcServerUrl;
-    } else {
-      console.log('Strings.ilcServerUrl was unset');
-      _this.ilcServerUrl = 'http://localhost:5000';
-    }
-
     _this.getProfile = function(user) {
       if (_this.accessToken === undefined) {
         console.log('gotta have a successful login before you go requesting profiles, son.');
@@ -50,7 +43,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     $socket.on('user disconnected', function(value) {
       console.log('disconnected',value);
     })
-    
+
     $socket.on('user profile', function(user) {
       UserService.setUserProfile(user);
     })
