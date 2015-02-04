@@ -2,7 +2,8 @@ define(['angular'], function() {
   'use strict';
   angular.module('ignisLibriColloqui.config', []).constant('Config', {
     firebaseUrl: 'https://resplendent-fire-9421.firebaseIO.com',
-    ilcServerUrl: 'http://localhost:5000',
+    ilcServerUrl: 'http://0.0.0.0:5000',
+    ilcTestServerUrl: 'http://0.0.0.0:5001',
     showMatches: false,//show automatically
     showMessages: false,//show automatically
     showProfile: true,//show automatically
