@@ -26,10 +26,13 @@ io.sockets.on('connection', function(socket) {
   console.log('user connected');
   socket.on('ping', function(data) {
     console.log('received ping', data);
-    data.signed = 'gph';
     socket.emit('pong', data);
     console.log('sent pong', data);
   });
+  socket.on('test event',function(mockEvent) {
+    console.log('got event: ', mockEvent.name, mockEvent.data);
+    socket.emit(mockEvent.name,mockEvent.data);
+  })
 });
 
 server.listen(httpPort, function() {
