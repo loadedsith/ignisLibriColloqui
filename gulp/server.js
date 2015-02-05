@@ -46,7 +46,8 @@ gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function() {
     'src/assets/images/**/*',
     'src/*.html',
     'src/{app,components}/**/*.html',
-    'src/{app,components}/**/*.js'
+    'src/{app,components}/**/*.js',
+    '!src/{app,components}/**/*spec.js'
   ]);
   execute('open http://example.com:3000', function() {
     console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');
