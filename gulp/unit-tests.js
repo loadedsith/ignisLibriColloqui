@@ -4,14 +4,17 @@ var gulp = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('test', ['myEnv'], function() {
-  return gulp.src('noFile.dontCreateThisFile.gulp-karma-issue-7')
-    .pipe($.karma({
-      configFile: 'test/karma.conf.js',
-      action: 'run',
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
+var karma = require('karma').server;
+var karmaRunner = require('karma').runner;
+
+gulp.task('test', ['myEnv','test-server'], function(done) {
+  karmaRunner.run({
+    configFile: __dirname + '/../test/karma.conf.js',
+  },function() {
+    karma.start({
+      configFile: __dirname + '/../test/karma.conf.js',
+      singleRun: false,
+      autoWatch:true
     });
+  });
 });
