@@ -7,11 +7,11 @@ module.exports = function(config) {
 
     files : [
         {pattern: 'bower_components/**/*.js', included: false},
-        {pattern: 'src/components/**/*.js', included: false},
-        {pattern: 'src/app/**/*.js', included: false},
+        {pattern: 'src/components/**/*.js', included: false,watched: true},
+        {pattern: 'src/app/**/*.js', included: false,watched: true},
         {pattern: '.tmp/components/**/*.js', included: false},
         {pattern: '.tmp/app/**/*.js', included: false},
-        {pattern: 'test/**/*spec.js', included: false},
+        {pattern: 'test/**/*spec.js', included: false,watched: true},
         'test/require.config.test.js',
         'test/reactPolyfillForPhantomJS.js'
     ],
@@ -24,6 +24,7 @@ module.exports = function(config) {
     // browserNoActivityTimeout: 100000,
     // logLevel: config.LOG_DEBUG,
     singleRun: false,
+    background:true,
 
     frameworks: ['jasmine', 'requirejs'],
 
