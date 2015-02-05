@@ -25,9 +25,8 @@ io.sockets.on('connection', function(socket) {
   var socketId = socket.id;
   console.log('user connected');
   socket.on('ping', function(data) {
-    console.log('received ping', data);
+    console.log('ping');
     socket.emit('pong', data);
-    console.log('sent pong', data);
   });
   socket.on('test event',function(mockEvent) {
     console.log('got event: ', mockEvent.name, mockEvent.data);
@@ -36,5 +35,5 @@ io.sockets.on('connection', function(socket) {
 });
 
 server.listen(httpPort, function() {
-  console.log('resify server listening at %s', server.url, 'socket port:', socketPort);
+  console.log('restify server listening at %s', server.url, 'socket port:', socketPort);
 });

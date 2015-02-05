@@ -27,11 +27,11 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       'user disconnected',
       'user profile',
     ]
+
     beforeEach(module('ignisLibriColloqui.services', function(Config, $socketProvider) {
       $socketProvider.setUrl(Config.ilcTestServerUrl);
       Config.ilcServerUrl = Config.ilcTestServerUrl;
       url = Config.ilcTestServerUrl;
-
     }));
 
     beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
@@ -75,7 +75,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
         });
       });
     });
-
 
     describe('login', function() {
       var mockAccessToken = 'abcd1234';
@@ -130,8 +129,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       it('should trigger UserService.setUserProfile and trigger \'UserService:UpdateMatchProfile\'',
         function(done) {
           $rootScope.$on('UserService:UpdateMatchProfile',function() {
-            // expect(arraysEqual(userService.user.profile, mockUserProfileEvent.data)).toBe(true);
-            console.log('userService.profiles[mockUserProfileEvent.data.data[\'user_id\']]', userService.profiles[mockUserProfileEvent.data.data['user_id']]);
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']]).toBeDefined();
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].id).toBe(mockUserProfileEvent.data.profile.id);
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].test).toBe(mockUserProfileEvent.data.profile.test);
@@ -165,7 +162,7 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       it('should trigger MessagesService.setRooms and trigger \'MessagesService:UpdateRooms\'',
         function(done) {
           $rootScope.$on('MessagesService:UpdateRooms',function() {
-            expect(arraysEqual(messagesService.rooms,mockRoomsSetEvent.data)).toBe(true);
+            expect(messagesService.rooms).toEqual(mockRoomsSetEvent.data);
             done();
           });
           socket.emit('test event', mockRoomsSetEvent);
@@ -193,13 +190,12 @@ define(['services/serviceModule', 'angular-mocks'], function() {
             data:['test','dummyObject']
           };
           setInterval(function() {
-            console.log('userService.user.matches', userService.user.matches);
-            console.log('mockGotUserMatchListEvent.data', mockGotUserMatchListEvent.data);
-            if(arraysEqual(userService.user.matches, mockGotUserMatchListEvent.data)){
+            if(userService.user.matches && mockGotUserMatchListEvent.data){
+              expect(userService.user.matches).toEqual(mockGotUserMatchListEvent.data)
               done();
             }else{
-              console.log('userService.user.matches', userService.user.matches);
-            }
+              console.log('waiting');
+            };
           },100);
           socket.emit('test event', mockGotUserMatchListEvent);
         }

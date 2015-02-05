@@ -17,6 +17,7 @@ require.config({
     },
     'ng-socket': {
       deps: [
+        './startSocketIo',
         'angular'
       ]
     },
@@ -44,7 +45,6 @@ require.config({
     }
   },
   deps: [
-    './startSocketIo',
     './main'
   ],
   paths: {

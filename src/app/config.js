@@ -5,8 +5,8 @@ define(['angular'], function() {
     ilcServerUrl: 'http://0.0.0.0:5000',
     ilcTestServerUrl: 'http://0.0.0.0:5001',
     showMatches: false,//show automatically
-    showMessages: false,//show automatically
-    showProfile: true,//show automatically
+    showMessages: true,//show automatically
+    showProfile: false,//show automatically
     devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       interests:'Interests',
