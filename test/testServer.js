@@ -23,21 +23,21 @@ server.get(/.*/, restify.serveStatic({
 
 io.sockets.on('connection', function(socket) {
   var socketId = socket.id;
-  console.log('user connected');
+  console.log('Server: user connected');
   socket.on('ping', function(data) {
-    console.log('ping');
+    console.log('Server: ping');
     socket.emit('pong', data);
   });
   socket.on('test event',function(mockEvent) {
-    console.log('got event: ', mockEvent.name, mockEvent.data);
+    console.log('Server: got event: ', mockEvent.name, mockEvent.data);
     socket.emit(mockEvent.name,mockEvent.data);
   });
   socket.on('disconnect',function() {
-    console.log('disconnect');
+    console.log('Server: disconnect you');
     socket.disconnect();
   });
 });
 
 server.listen(httpPort, function() {
-  console.log('restify server listening at %s', server.url, 'socket port:', socketPort);
+  console.log('Server: restify server listening at %s', server.url, 'socket port:', socketPort);
 });
