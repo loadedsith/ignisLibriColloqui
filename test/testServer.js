@@ -31,7 +31,11 @@ io.sockets.on('connection', function(socket) {
   socket.on('test event',function(mockEvent) {
     console.log('got event: ', mockEvent.name, mockEvent.data);
     socket.emit(mockEvent.name,mockEvent.data);
-  })
+  });
+  socket.on('disconnect',function() {
+    console.log('disconnect');
+    socket.disconnect();
+  });
 });
 
 server.listen(httpPort, function() {
