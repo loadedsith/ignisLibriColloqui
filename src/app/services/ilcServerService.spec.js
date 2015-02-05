@@ -3,17 +3,17 @@
 'use strict';
 
 define(['services/serviceModule', 'angular-mocks'], function() {
-  describe('ILC Server Services', function() {
-    var arraysEqual = function (a1, a2) {
-        return JSON.stringify(a1) === JSON.stringify(a2);
-    };
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 300;
+  localStorage.debug = 'ERROR';
+    describe('ILC Server Services', function() {
+    var socket;
     var ilcServerService;
     var messagesService;
     var userService;
     var scope;
     var $timeout;
     var $rootScope;
-    var socket;
+
     var url;
 
     var events = [
@@ -43,10 +43,9 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       socket = $socket;
       spyOn(socket,'on').and.callThrough();
     }));
+    afterEach(function() {
 
-
-
-
+    })
     describe('ilcServerService start', function() {
       it('should execute normally', function() {
         expect(true);// just by getting here you've verified the callback (it was done())
