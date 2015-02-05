@@ -19,7 +19,6 @@ module.exports = function(config) {
       'src/app/env.pre.js',
       'src/app/main.js'
     ],
-    background: false,
     autoWatch : false,
     // browserNoActivityTimeout: 100000,
     // logLevel: config.LOG_DEBUG,

@@ -5,8 +5,9 @@
 define(['services/serviceModule', 'angular-mocks'], function() {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 300;
   localStorage.debug = 'ERROR';
-    describe('ILC Server Services', function() {
+  describe('ILC Server Services', function() {
     var socket;
+    var url;
     var ilcServerService;
     var messagesService;
     var userService;
@@ -14,7 +15,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
     var $timeout;
     var $rootScope;
 
-    var url;
 
     var events = [
       'got user matchList',
@@ -43,9 +43,6 @@ define(['services/serviceModule', 'angular-mocks'], function() {
       socket = $socket;
       spyOn(socket,'on').and.callThrough();
     }));
-    afterEach(function() {
-
-    })
     describe('ilcServerService start', function() {
       it('should execute normally', function() {
         expect(true);// just by getting here you've verified the callback (it was done())
@@ -341,6 +338,42 @@ define(['services/serviceModule', 'angular-mocks'], function() {
         }
       );
     });
+    // it('tears down the connection',function(done) {
+//       console.log('Start connecting');
+//
+//       for (var i = events.length - 1; i >= 0; i--) {
+//         var event = events[i];
+//         socket.removeAllListeners(event);
+//       }
 
+      // if(io(url).connected === true){
+ //        io(url).emit('disconnectMe');
+ //        io(url).disconnect();
+ //        done();
+ //        io(url).on('disconnect',function() {s
+ //          console.log('disconnect event');
+ //          io(url).on('connectification',function() {
+ //            console.log('connected');
+ //            done();
+ //          });
+ //          io(url).on('connect_failed',function(error) {
+ //            console.log('1error', error);
+ //            done();
+ //          });
+ //          io.connect(url);
+ //        })
+ //      }else{
+ //        console.log('Galley slave California Condor');
+ //        io(url).on('connectification',function() {
+ //          console.log('connected');
+ //          done();
+ //        });
+ //        io(url).on('connect_failed',function(error) {
+ //          console.log('1error', error);
+ //          done();
+ //        });
+ //        io.connect(url);
+ //      }
+    // })
   });
 });
