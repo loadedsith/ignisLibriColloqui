@@ -125,11 +125,11 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       var mockRoomsSetEvent = {
         name:'rooms set',
         data:[
-          "1234",
-          "4321",
-          "93472",
-          "98844",
-          "98844"
+          '1234',
+          '4321',
+          '93472',
+          '98844',
+          '98844'
         ]
       };
       it('should trigger MessagesService.setRooms',
@@ -234,20 +234,20 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           var mockRoomUpdate = {
             name:'room update',
             data:{
-              room:"123245",
+              room:'123245',
               snapshot:{
-                "123245" : {
-                  "date" : new Date().getTime(),
-                  "message" : "Hello Laura",
-                  "user" : {
-                    "data" : {
-                      "app_id" : "676670295780686",
-                      "application" : "ignisLibriColloqui",
-                      "expires_at" : 1421888400,
-                      "is_valid" : true,
-                      "scopes" : [ "public_profile", "email" ],
-                      "setTime" : 1421881793587,
-                      "user_id" : "10101118662asd154115"
+                '123245' : {
+                  'date' : new Date().getTime(),
+                  'message' : 'Hello Laura',
+                  'user' : {
+                    'data' : {
+                      'app_id' : '676670295780686',
+                      'application' : 'ignisLibriColloqui',
+                      'expires_at' : 1421888400,
+                      'is_valid' : true,
+                      'scopes' : [ 'public_profile', 'email' ],
+                      'setTime' : 1421881793587,
+                      'user_id' : '10101118662asd154115'
                     }
                   }
                 }
@@ -295,20 +295,20 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           var mockRoomSet = {
             name:'room set',
             data:{
-              room:"123245",
+              room:'123245',
               snapshot:{
-                "123245" : {
-                  "date" : 1421882245257,
-                  "message" : "Hello Laura",
-                  "user" : {
-                    "data" : {
-                      "app_id" : "676670295780686",
-                      "application" : "ignisLibriColloqui",
-                      "expires_at" : 1421888400,
-                      "is_valid" : true,
-                      "scopes" : [ "public_profile", "email" ],
-                      "setTime" : 1421881793587,
-                      "user_id" : "10101118662asd154115"
+                '123245' : {
+                  'date' : 1421882245257,
+                  'message' : 'Hello Laura',
+                  'user' : {
+                    'data' : {
+                      'app_id' : '676670295780686',
+                      'application' : 'ignisLibriColloqui',
+                      'expires_at' : 1421888400,
+                      'is_valid' : true,
+                      'scopes' : [ 'public_profile', 'email' ],
+                      'setTime' : 1421881793587,
+                      'user_id' : '10101118662asd154115'
                     }
                   }
                 }
