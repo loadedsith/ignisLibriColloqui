@@ -2,8 +2,8 @@
 /* global describe, it, expect, beforeEach, inject */
 'use strict';
 
-define(['services/serviceModule', 'angular-mocks'], function() {
-  jasmine.DEFAULT_TIMEOUT_INTERVAL = 300;
+define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function() {
+  jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
   localStorage.debug = 'ERROR';
   describe('ILC Server Services', function() {
     var socket;
@@ -97,21 +97,7 @@ define(['services/serviceModule', 'angular-mocks'], function() {
     describe('user profile event', function() {
       var mockUserProfileEvent = {
         name:'user profile',
-        data:{
-          "data" : {
-            "app_id" : "676670295780686",
-            "application" : "ignisLibriColloqui",
-            "expires_at" : 1421946000,
-            "is_valid" : true,
-            "scopes" : [ "public_profile", "basic_info", "email", "publish_actions", "user_friends" ],
-            "setTime" : 1421939766356,
-            "user_id" : "1396362880657353"
-          },
-          "profile" : {
-            "id" : "1396362880657353",
-            "test":"dummyObject"
-          }
-        }
+        data:mockUserProfile
       };
       it('should trigger UserService.setUserProfile',
         function(done) {
