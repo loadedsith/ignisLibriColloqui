@@ -12,6 +12,8 @@ module.exports = function(config) {
         {pattern: '.tmp/components/**/*.js', included: false},
         {pattern: '.tmp/app/**/*.js', included: false},
         {pattern: 'test/**/*spec.js', included: false,watched: true},
+        {pattern: 'test/vendor/*.js',included: false},
+        {pattern: 'test/mock/*.js',included: false},
         'test/require.config.test.js',
         'test/reactPolyfillForPhantomJS.js'
     ],
@@ -19,13 +21,19 @@ module.exports = function(config) {
       'src/app/env.pre.js',
       'src/app/main.js'
     ],
-    autoWatch : false,
+    // autoWatch : false,
     // browserNoActivityTimeout: 100000,
     // logLevel: config.LOG_DEBUG,
-    singleRun: false,
-    background:true,
+    // singleRun: false,
+    // background:true,
 
-    frameworks: ['jasmine', 'requirejs'],
+    reporters: ['mocha'],
+
+    // mochaReporter: {
+   //    output: 'autowatch'
+   //  },
+   //
+   frameworks: ['jasmine', 'requirejs'],
 
     preprocessors: {
       '**/*.jsx': ['react']
@@ -46,6 +54,7 @@ module.exports = function(config) {
     plugins : [
         'karma-phantomjs-launcher',
         'karma-chrome-launcher',
+        'karma-mocha-reporter',
         'karma-requirejs',
         'karma-jasmine'
     ]

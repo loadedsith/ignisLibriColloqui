@@ -1,7 +1,14 @@
+var skips = ['/base/src/app/services/facebookService.spec.js'];
 var tests = [];
 for (var file in window.__karma__.files) {
     if (/spec\.js$/.test(file)) {
-        tests.push(file);
+      console.log('file', file);
+      for (var i = skips.length - 1; i >= 0; i--) {
+        var skip = skips[i];
+        if(file !== skip){
+          tests.push(file);
+        }
+      }
     }
 }
 
@@ -55,10 +62,15 @@ require.config({
       deps: [
         'angular'
       ]
+    },
+    'mockUserProfile': {
+      exports: 'mockUserProfile'
     }
   },
   deps: tests,
   paths: {
+    'mockUserProfile':'test/mock/userProfile',
+
     'env': '.tmp/app/env',
     'fb': 'src/app/fb',
     'config': 'src/app/config',
@@ -114,7 +126,8 @@ require.config({
     'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
     'ng-socket': 'bower_components/ng-socket/ngSocket',
     'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
-    facebook: '//connect.facebook.net/en_US/all',
+    facebook: 'test/vendor/mockFb',
+    // facebook: '//connect.facebook.net/en_US/all',
     angular: 'bower_components/angular/angular',
     'angular-cookies': 'bower_components/angular-cookies/angular-cookies',
     'angular-mocks': 'bower_components/angular-mocks/angular-mocks',

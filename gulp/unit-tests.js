@@ -15,14 +15,16 @@ gulp.task('test', ['myEnv','karmaTeam'], function(done) {
 gulp.task('karmaTeam', function(done) {
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js',
-    singleRun: true,
-    autoWatch:false
-  },done);
+    singleRun: true
+  },function(a,b,c) {
+    console.log('karma is down');
+    done();
+  });
 })
 gulp.task('karmaRunner', function(done) {
   karma.start({
     configFile: __dirname + '/../test/karma.conf.js',
-    singleRun: false,
+    singleRun: true,
     autoWatch:true
-  });
+  },done);
 });
