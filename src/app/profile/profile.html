@@ -2,60 +2,73 @@
   <h3>{{Strings.profile}}</h3>
   <!-- editable username (text with validation) -->
   <!-- <span editable-text="user.profile.name" e-name="name" onbeforesave="checkName($data)" buttons="no">{{ user.profile.name || 'no name' }}</span>   -->
-    <div class="row">
-      <div class="small-8 columns">
-        <div class="row">
-          <div class="small-3 columns">
-            <label for="name">{{Strings.name}}</label>
-          </div>
-          <div class="small-9 columns">
-            <a id="name" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.name">
-              {{ user.profile.name || 'Name' }}
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="small-3 columns">
-            <label for="email">Email</label>
-          </div>
-          <div class="small-9 columns">
-            <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.email">
-              {{ user.profile.email || 'Email' }}
-            </a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="small-3 columns">
-            <label for="email">{{Strings.interests}}</label>
-          </div>
-          <div class="small-9 columns">
-            <ul class="inline-list">
-              <li class="interestWrapper" ng-repeat="interest in user.profile.interests">
-                <a class="interest"
-                  href="#"
-                  editable-text="addInterestPlaceholder"
-                  buttons="no"
-                  onbeforesave="checkInterest($data, user.profile.interests)"
-                  onaftersave="addInterest($data, user.profile)"
-                  >
-                  {{interest}}
-                </a>
-                <span class="remove" ng-click="removeInterest(interest)">&times;</span>
-              </li>
-              <li id="addInterest"
-                href="#"
-                editable-text="addInterestPlaceholder"
-                buttons="no"
-                onbeforesave="checkInterest($data)"
-                onaftersave="addInterest($data, user.profile)">
-                Add Interest
-              </li>
-            </ul>
-          </div>
-        </div>
-
+  <div class="row photo">
+    <div class="small-12 show-for-medium-up medium-3 columns">
+      <img ng-src="{{user.profilePicture.data.url}}" class="no-touch" ng-click="facebookHandlesImagesWarning = true"/>
+      <div class="small error" ng-if="facebookHandlesImagesWarning">
+        {{Strings.facebookHandlesImagesWarning}}
       </div>
     </div>
-
-  <pre>{{user.profile|json}}</pre>
+    <div class="small-12 medium-9 columns">
+      <div class="row name">
+        <div class="small-12 medium-3 columns">
+          <label for="name">{{Strings.name}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <a id="name" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.name">
+            {{ user.profile.name || Strings.name }}
+          </a>
+        </div>
+      </div>
+      <div class="row email">
+        <div class="small-12 medium-3 columns">
+          <label for="email">{{Strings.email}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.email">
+            {{ user.profile.email || Strings.email }}
+          </a>
+        </div>
+      </div>
+      <div class="row interests">
+        <div class="small-12 medium-3 columns">
+          <label>{{Strings.interests}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <ul class="inline-list">
+            <li class="interestWrapper" ng-repeat="interest in user.profile.interests">
+              <a class="interest"
+                href="#"
+                editable-text="interest"
+                buttons="no"
+                onbeforesave="checkInterest($data, user.profile.interests)"
+                onaftersave="addInterest($data, user.profile)"
+                >
+                {{interest}}
+              </a>
+              <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
+            </li>
+            <li id="addInterest"
+              href="#"
+              editable-text="addInterestPlaceholder"
+              buttons="no"
+              onbeforesave="checkInterest($data, user.profile.interests)"
+              onaftersave="addInterest($data, user.profile)">
+              {{Strings.addInterest}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row aboutMe">
+        <div class="small-12 medium-3 columns">
+          <label for="aboutMe">{{Strings.aboutMe}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <a href="#" editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
+              <pre>{{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}</pre>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

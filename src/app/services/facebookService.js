@@ -39,45 +39,56 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         }
       };
 
-      _this.getUserImageById = function(id, config, callback) {
+      _this.imageConfigToAttributes = function(config) {
         var modifiers = _this.getUserImageByIdModifiers;
-        var resource = '/' + id + '/picture';
-
+        var imageConfig = '';
         if (config !== undefined) {
           if (config.redirect !== undefined) {
-            resource = resource + '?redirect=' + config.redirect;
+            imageConfig = imageConfig + '?redirect=' + config.redirect;
           } else {
-            resource = resource + '?redirect=' + modifiers.redirect;
+            imageConfig = imageConfig + '?redirect=' + modifiers.redirect;
           }
-          resource = resource + '&';
+          imageConfig = imageConfig + '&';
 
           if (config.type !== undefined) {
-            resource = resource + 'type=' + config.type;
+            imageConfig = imageConfig + 'type=' + config.type;
           } else {
-            resource = resource + 'type=' + modifiers.type;
+            imageConfig = imageConfig + 'type=' + modifiers.type;
           }
-          resource = resource + '&';
+          imageConfig = imageConfig + '&';
 
           if (config.height !== undefined) {
-            resource = resource + 'height=' + config.height;
+            imageConfig = imageConfig + 'height=' + config.height;
           } else {
-            resource = resource + 'height=' + modifiers.height;
+            imageConfig = imageConfig + 'height=' + modifiers.height;
           }
-          resource = resource + '&';
+          imageConfig = imageConfig + '&';
 
           if (config.width !== undefined) {
-            resource = resource + 'width=' + config.width;
+            imageConfig = imageConfig + 'width=' + config.width;
           } else {
-            resource = resource + 'width=' + modifiers.width;
+            imageConfig = imageConfig + 'width=' + modifiers.width;
           }
+        }else{
+          imageConfig = '?redirect=' + modifiers.redirect +
+                         '&type=' + modifiers.type +
+                         '&height=' + modifiers.height +
+                         '&width=' + modifiers.width;
         }
-        _this.apiCallbackWrapper(resource, function(image) {
+        return imageConfig;
+      };
+
+      _this.getUserImageById = function(id, config, callback) {
+        var resource = '/' + id + '/picture';
+        var imageConfig = _this.imageConfigToAttributes(config);
+        _this.apiCallbackWrapper(resource + imageConfig, function(image) {
           callback(id, image);
         });
       };
 
-      _this.getUserImage = function(callback) {
-        _this.apiCallbackWrapper('/me/picture', callback);
+      _this.getUserImage = function(config, callback) {
+        var imageConfig = _this.imageConfigToAttributes(config);
+        _this.apiCallbackWrapper('/me/picture' + imageConfig, callback);
       };
 
       _this.getUserInfo = function(callback) {

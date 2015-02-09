@@ -16,13 +16,23 @@ define(['controllerModule', 'angular'], function(controllers) {
         class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
       };
 
+      var profileSaved = {
+        text:'Profile saved.', //[Optional] Label text
+        class:'status-profile-saved', // CSS Class available to angular, not automatically applied
+        callback: function() {
+          setTimeout(function() {
+            StatusService.setStatus(StatusService.ready);
+          }, 250);
+        }
+      };
+
       $scope.updateUserProfile = function(event, user) {
         $scope.updatingProfile = true;
         StatusService.setStatus(StatusService.loading);
 
         ILCServerService.setProfile(user).then(function() {
           $scope.updatingProfile = false;
-          StatusService.setStatus(StatusService.ready);
+          StatusService.setStatus(profileSaved);
           $scope.$broadcast('user profile updated');
         });
 

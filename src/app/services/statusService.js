@@ -78,7 +78,7 @@ function(services, angular, Firebase, requestAnimationFrame) {
       _this.status = newStatus;
       _this.processLowercaseStatusFrames();
       if (typeof _this.status.callback === 'function') {
-        _this.status.callback();
+        _this.status.callback(_this);
       }
       if (_this.runningAnimator !== true) {
         _this.animator();

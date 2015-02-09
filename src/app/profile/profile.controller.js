@@ -32,24 +32,28 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.save(profile)
     };
 
-    $scope.removeInterest = function(interest) {
+    $scope.removeInterest = function(interest, interests) {
       var removeAtIndex = null;
-      for (var i = $scope.interests.length - 1; i >= 0; i--) {
-        if(interest.toLowerCase() === $scope.interests[i].toLowerCase()){
+      if(interests === undefined || interest === undefined){
+        return;
+      }
+      for (var i = interests.length - 1; i >= 0; i--) {
+        if(interest.toLowerCase() === interests[i].toLowerCase()){
           continue;
         }
       }
-      $scope.interests.splice(removeAtIndex,1);
+      interests.splice(removeAtIndex,1);
     };
 
     $scope.checkInterest = function(interest, interests) {
-      if(interests === undefined){
+      debugger;
+      if (interests === undefined) {
         return true;
       }
-      if(interest !== undefined && interest !== ''){
-        for (var i = interests.interests.length - 1; i >= 0; i--) {
-          if(interest.toLowerCase() === $scope.interests[i].toLowerCase()){
-            return "That interest already Exists, silly."
+      if (interest !== '') {
+        for (var i = interests.length - 1; i >= 0; i--) {
+          if(interest.toLowerCase() === interests[i].toLowerCase()){
+            return $scope.Strings.interestExists;
           }
         }
         return true;

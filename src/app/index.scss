@@ -34,6 +34,9 @@ div.button{
 }
 [ng-click]{
   cursor:pointer;
+  &.no-touch{
+    cursor:default!important;
+  }
 }
 .reveal-modal.matches{
   height: 410px;
@@ -88,6 +91,8 @@ div.button{
   animation-fill-mode: forwards;
   animation-iterations:1;
   animation-duration: 10s;
+  position:absolute;
+  width:90%;
 }
 .status.status-error{
   color:#F66;

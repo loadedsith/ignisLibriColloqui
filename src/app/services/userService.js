@@ -82,7 +82,13 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     _this.userInfoCallback = function(response) {
       // console.log('_this Info Found: ', response);
       _this.user.info = response;
-      FacebookService.getUserImage(_this.updateUserImage);
+      var imageConfig = {
+        redirect: false,
+        height: 320,
+        width: 160,
+        type: 'normal'
+      };
+      FacebookService.getUserImage(imageConfig, _this.updateUserImage);
       _this.attachProfileToLocalUser(response);
       UserManagementService.userExists(_this.user.info, _this.userExists, _this.userDoesntExist);
     };
