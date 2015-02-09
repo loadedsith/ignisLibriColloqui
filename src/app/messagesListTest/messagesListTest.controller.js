@@ -13,8 +13,6 @@ define(['controllerModule'], function(controllers) {
       MessagesService.username = $scope.username;
       MessagesService.currentRoom = $scope.currentRoom;
 
-      MessagesService.updateMessagesRef();
-
       $scope.messageInput = function() {
         var successful = MessagesService.sendMessage($scope.message, $scope.currentRoom);
         if (successful) {
@@ -25,7 +23,6 @@ define(['controllerModule'], function(controllers) {
       $scope.updateMessagesRef = function(event) {
         MessagesService.username = $scope.username;
         MessagesService.currentRoom = $scope.currentRoom;
-        MessagesService.updateMessagesRef();
       }
     }]);
 });

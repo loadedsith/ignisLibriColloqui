@@ -14,26 +14,25 @@ define(['controllerModule'], function(controllers) {
           }
         }
       });
-      
-      
+
+
       $scope.$on('MessagesService:MessageSent', function(event, message) {
         $scope.message = '';
       });
-      
+
       $scope.$on('MessagesService:SetCurrentRoom', function(event, room) {
         $scope.currentRoom = room;
       });
-      
+
       $scope.$on('UserService:Update', function(event, user) {
         var username = (((user || {}).info || {}).id || 'no username');
         if (username !== 'no username') {
           $scope.username = username;
-          $scope.updateMessagesRef();
         }
       });
 
       $scope.messageInput = function(message, currentRoom) {
-        
+
         var successful = MessagesService.sendMessage(message, currentRoom);
         if (successful) {
           $scope.message = '';
@@ -41,10 +40,8 @@ define(['controllerModule'], function(controllers) {
       }
 
       $scope.updateMessagesRef = function(event) {
-        MessagesService.username = $scope.username;
         MessagesService.currentRoom = $scope.currentRoom;
         MessagesService.updateMessagesRef();
       }
-
     }]);
 });

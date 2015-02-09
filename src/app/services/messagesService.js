@@ -15,10 +15,6 @@ define(['services/serviceModule'], function(services) {
           return false;
         }
 
-        if (_this.currentRoomRef === undefined) {
-          _this.updateMessagesRef();
-        }
-
         if (_this.currentRoomRef !== undefined) {
           _this.currentRoomRef.push({
             name: _this.username,
@@ -92,10 +88,6 @@ define(['services/serviceModule'], function(services) {
           _this.rooms[snapshot.room].push(snapshot.snapshot)
         }
         $rootScope.$broadcast('MessagesService:MessageUpdate', snapshot);
-      };
-
-      _this.updateMessagesRef = function() {
-        console.log('updateMessagesRef is depreciated, you shouldn\'t use it, nor see any of these either... eventually I guess');
       };
 
       return _this;
