@@ -6,11 +6,11 @@ define(['controllerModule', 'angular'], function(controllers) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.user = {};
-      
+
       $scope.userId = "default user id, did facebook login fail?";
-      
+
       StatusService.setStatus(StatusService.loading);
-      
+
       var profileIncomplete = {
         text:'Please complete your profile before moving on.', //[Optional] Label text
         class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
@@ -39,7 +39,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           }
         }
       });
-      
+
       $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
@@ -60,7 +60,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.showMatches = (Config.showMatches || false);
 
       $scope.showMessages = (Config.showMessages || false);
-      
+
       $scope.showProfile = (Config.showProfile || false);
 
       $scope.toggleProfile = function(value) {
@@ -88,7 +88,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.useIlcServer = true;
-      
+
       $scope.toggleMessages = function(value) {
         if (value === undefined) {
           $scope.showMessages = !$scope.showMessages;
@@ -106,7 +106,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       });
 
       $scope.parseInt = parseInt;
-      
+
       var userLoginState = UserService.checkLoginState();
 
       userLoginState.then(function(response) {

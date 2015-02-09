@@ -2,8 +2,7 @@ define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('ProfileController', ['$scope', 'Config', function($scope, Config) {
     $scope.Strings = Config.strings;
-    console.log('$scope.Strings.errors.noName', $scope.Strings.errors.noName);
-    
+
     $scope.checkName = function(data) {
       if (data===undefined||data===''||data.length===0){
         return $scope.Strings.errors.noName;
@@ -14,7 +13,9 @@ define(['controllerModule', 'angular'], function(controllers) {
       debugger;
       $scope.$emit('ProfileController:UpdateUserProfile',profile);
     };
-    
+
+
+
     $scope.addInterest = function(interest, profile) {
       if (profile.interests === undefined){
         profile.interests = []
@@ -23,9 +24,9 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.addInterestPlaceholder = '';
       $scope.save(profile)
     };
-    
+
     $scope.interests = ['cats','frogs','baboon'];
-    
+
     $scope.removeInterest = function(interest) {
       var removeAtIndex = null;
       for (var i = $scope.interests.length - 1; i >= 0; i--) {
@@ -35,7 +36,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       $scope.interests.splice(removeAtIndex,1);
     };
-    
+
     $scope.checkInterest = function(interest) {
       if(interest !== undefined && interest !== ''){
         for (var i = $scope.interests.length - 1; i >= 0; i--) {
