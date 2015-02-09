@@ -8,10 +8,17 @@ define(['controllerModule', 'angular'], function(controllers) {
         return $scope.Strings.errors.noName;
       }
     };
-    
+    $scope.saving = false;
+    $scope.$on('user profile updated',function() {
+      console.log('profile saved');
+      $scope.saving = false;
+    });
+
     $scope.save = function(profile) {
-      debugger;
-      $scope.$emit('ProfileController:UpdateUserProfile',profile);
+      $scope.saving = true;
+
+      //not actually required because the form has direct access to the user object
+      // $scope.$emit('ProfileController:UpdateUserProfile',profile);
     };
 
 

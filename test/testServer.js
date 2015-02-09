@@ -24,6 +24,10 @@ server.get(/.*/, restify.serveStatic({
 io.sockets.on('connection', function(socket) {
   var socketId = socket.id;
   console.log('Server: user connected');
+  socket.on('set profile', function(data) {
+    console.log('set profile', data);
+    socket.emit('user profile update', data);
+  });
   socket.on('ping', function(data) {
     console.log('Server: ping');
     socket.emit('pong', data);

@@ -15,26 +15,33 @@ define(['controllerModule', 'angular'], function(controllers) {
         text:'Please complete your profile before moving on.', //[Optional] Label text
         class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
       };
-      
-      $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
-        debugger;
-        UserService.updateProfile(user);
-      })
-      $scope.$on('UserService:UpdateUserProfile', function(event, user) {
+
+      $scope.updateUserProfile = function(event, user) {
+        $scope.updatingProfile = true;
+        StatusService.setStatus(StatusService.loading);
+
+        ILCServerService.setProfile(user).then(function() {
+          $scope.updatingProfile = false;
+          StatusService.setStatus(StatusService.ready);
+          $scope.$broadcast('user profile updated');
+        });
+
         $scope.user.profile = user.profile;
         if ((user.profile.interests||[]).length === 0){
           $scope.showProfile = true;
           StatusService.setStatus(profileIncomplete);
         }
-      });
-      
+      };
+
+      $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
+
       $scope.$watch('showProfile',function(newValue, oldValue) {
         var complete = UserService.isProfileComplete();
         if (newValue === false) {
           if (complete !== true) {
             $scope.showProfile = true;
             var missing = complete;
-            profileIncomplete.text = 'Please complete your profile before moving on. Missing: '+missing.toString()
+            profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
             StatusService.setStatus(profileIncomplete);
           }
         }
@@ -43,18 +50,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
+
       $scope.$on('UserService:Update', function(event, user) {
-        if (user.profile !== undefined){
-          //skip the inital setting
-          if ($scope.user.profile !== undefined){
-            if($scope.user.profile!==user.profile){
-              debugger;
-              
-            }
-          } 
-        }
+        console.log('---UserService:Update', user);
         $scope.user = user;
-        
       });
 
       $scope.showMatches = (Config.showMatches || false);

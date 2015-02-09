@@ -26,6 +26,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       'rooms update',
       'user disconnected',
       'user profile',
+      'user profile updated'
     ]
 
     beforeEach(module('ignisLibriColloqui.services', function(Config, $socketProvider) {
@@ -63,6 +64,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       })
     });
 
+
     describe('ILCServer Validation', function() {
       it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
         socket.emit('ping',{})
@@ -93,6 +95,37 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
     });
 
+    describe('send user profile',function() {
+      var mockValidProfile = {
+        'profile' : {
+          'id' : '1396362880657353',
+          'test':'dummyObject',
+        }
+      };
+      beforeEach(function() {
+        spyOn(ilcServerService, 'setProfile').and.callThrough();
+        spyOn($rootScope, '$broadcast').and.callThrough();
+      });
+      it('should have a promise confirming ilcServerService.setProfile()', function(done) {
+        ilcServerService.setProfile(mockValidProfile).then(function() {
+          done();
+        });
+      });
+      it('should set updatingProfile flag to indicate profile save state', function(done) {
+        //1: not updating
+        expect(ilcServerService.updatingProfile).toBe(false);
+        //2: start updating
+        ilcServerService.setProfile(mockValidProfile).then(function() {
+          //4: done updating
+          expect(ilcServerService.updatingProfile).toBe(false);
+          done();
+        });
+        //3: updating
+        it('should be updating',function() {
+          expect(ilcServerService.updatingProfile).toBe(true);
+        })
+      });
+    })
 
     describe('user profile event', function() {
       var mockUserProfileEvent = {

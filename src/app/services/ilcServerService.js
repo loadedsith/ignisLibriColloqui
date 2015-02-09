@@ -1,9 +1,24 @@
 define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
   return services.service('ILCServerService',
-  ['Config', 'MessagesService', 'UserService', 'MatchMakerService', '$socket',
-   function(Config, MessagesService, UserService, MatchMakerService, $socket) {
+  ['$q', 'Config', 'MessagesService', 'UserService', 'MatchMakerService', '$socket',
+   function($q, Config, MessagesService, UserService, MatchMakerService, $socket) {
     var _this = this;
+
+    _this.updatingProfile = false;
+    _this.updatingProfilePromise = $q.defer();
+    _this.setProfile = function(user) {
+      console.log('ilc setProfile',user);
+      _this.updatingProfile = true;
+      $socket.emit('set profile',user);
+      return _this.updatingProfilePromise.promise;
+    };
+
+    $socket.on('user profile update', function(data) {
+      console.log('user profile updated');
+      _this.updatingProfile = false;
+      _this.updatingProfilePromise.resolve(data);
+    });
 
     _this.getProfile = function(user) {
       if (_this.accessToken === undefined) {
@@ -49,28 +64,27 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     })
 
     $socket.on('rooms set', function(rooms) {
-      console.log('ilc rooms Set', rooms);
+      // console.log('ilc rooms Set', rooms);
       MessagesService.setRooms(rooms);
     });
 
     $socket.on('got user matchList', function(matchList) {
-      console.log('ilc got user matchList', matchList);
+      // console.log('ilc got user matchList', matchList);
       UserService.setMatchList(matchList)
     });
 
     $socket.on('message sent', function(message) {
-      console.log('message sent', message);
+      // console.log('message sent', message);
       MessagesService.messageSent(message);
     });
 
     $socket.on('room update', function(room) {
-      console.log('ilc room update', room);
+      // console.log('ilc room update', room);
       MessagesService.roomUpdate(room);
-      // $scope.messages[room.room] = room;
     });
 
     $socket.on('room set', function(room) {
-      console.log('ilc room set', room);
+      // console.log('ilc room set', room);
       MessagesService.roomSet(room);
     });
 

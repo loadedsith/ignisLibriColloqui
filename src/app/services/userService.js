@@ -48,10 +48,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       FacebookService.login(_this.loginCallback);
     };
 
-    _this.updateProfile = function(profile) {
-      _this.user.profile = profile;
-    };
-
     _this.updateUserImage = function(response) {
       console.log('updateUserImage', response);
       if (response && !response.error) {
@@ -118,9 +114,14 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.profiles[user.data['user_id']] = user.profile;
       if (_this.user.info !== undefined) {
          if (_this.user.info.id === user.data.user_id){
+
+           if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
+             debugger;$rootScope.$broadcast('UserService:UpdateUserProfile', user);
+           }else{
+             console.log('Red strange Octopus');
+           }
            _this.user.profile = user.profile;
-           $rootScope.$broadcast('UserService:UpdateUserProfile', user);
-         }else {
+         }else{
            $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
          }
       }else{
@@ -163,10 +164,19 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.getUser = function() {return _this.user}
 
-    //Watch for changes, and like a boss, update any listeners.
-    $rootScope.$watch(_this.getUser, function() {
+    _this.skipFirstProfile = true;
+    $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
+      if(!angular.equals(newUser.profile, oldUser.profile)){
+        //profile change
+        if(oldUser.profile !== undefined){
+          //if oldUser.profile exists we arent setting the initial profile
+          $rootScope.$broadcast('UserService:UpdateUserProfile', newUser);
+        }else{
+          console.log('ignoring user update because old user was undefined');
+        }
+      }
       $rootScope.$broadcast('UserService:Update', _this.user);
-    }, true)
+    }, true);
 
     return _this;
   }]);
