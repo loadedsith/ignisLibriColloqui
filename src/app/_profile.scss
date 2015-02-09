@@ -11,8 +11,14 @@ input[type="text"]{
 }
 .interests.row, .blacklist.row{
   ul.inline-list{
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin:0 auto 0.0625rem auto;
+    li{
+      margin-top:0px;
+      margin-left:0px;
+      margin-right: 12px;
+    }
   }
 }
 .small{
@@ -46,7 +52,7 @@ input[type="text"]{
 .editable-error{
   font-size: 11px;
 }
-li#addInterest {
+li#addInterest,li#addBlacklist {
   color:$primary-color;
 }
 .interestWrapper, .blacklistedWrapper {
