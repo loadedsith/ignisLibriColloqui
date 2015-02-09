@@ -11,9 +11,12 @@ define(['angular'], function() {
     strings: {
       aboutMe: 'About Me',
       addInterest:'+',
+      addBlacklist:'+',
       interests:'Interests',
       interestExists:'I already know you\'re interested in that, silly',
       currentRoom: 'Current Room',
+      blacklist:'Blacklist',
+      blacklistedExists:'I already grok you aren\'t interested in receiving messages from them.',
       buttonLabel: {
         sendMessage: 'Send Message',
         name: 'Name',

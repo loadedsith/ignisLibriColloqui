@@ -23,6 +23,46 @@ define(['controllerModule', 'angular'], function(controllers) {
 
 
 
+    $scope.addBlacklist = function(blacklisted, profile) {
+      if (profile.blacklist === undefined){
+        profile.blacklist = []
+      }
+      profile.blacklist.push(blacklisted);
+      $scope.addBlacklistPlaceholder = '';
+      $scope.save(profile)
+    };
+
+    $scope.removeBlacklist = function(blacklisted, blacklist) {
+      var removeAtIndex = null;
+      if(blacklist === undefined || blacklisted === undefined){
+        return;
+      }
+      for (var i = blacklist.length - 1; i >= 0; i--) {
+        if(blacklisted.toLowerCase() === blacklist[i].toLowerCase()){
+          continue;
+        }
+      }
+      blacklist.splice(removeAtIndex,1);
+    };
+
+    $scope.checkBlacklist = function(blacklisted, blacklist) {
+      debugger;
+      if (blacklist === undefined) {
+        return true;
+      }
+      if (blacklisted !== '') {
+        for (var i = blacklist.length - 1; i >= 0; i--) {
+          if(blacklisted.toLowerCase() === blacklist[i].toLowerCase()){
+            return $scope.Strings.blacklistedExists;
+          }
+        }
+        return true;
+      }else{
+        return false
+      }
+    };
+
+
     $scope.addInterest = function(interest, profile) {
       if (profile.interests === undefined){
         profile.interests = []

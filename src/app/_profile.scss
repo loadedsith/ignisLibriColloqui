@@ -9,7 +9,7 @@ label{
 input[type="text"]{
   height: 1.3125rem;
 }
-.interests.row{
+.interests.row, .blacklist.row{
   ul.inline-list{
     padding-left: 0.9375rem;
     padding-right: 0.9375rem;
@@ -49,7 +49,7 @@ input[type="text"]{
 li#addInterest {
   color:$primary-color;
 }
-.interestWrapper {
+.interestWrapper, .blacklistedWrapper {
   display:inline-block;
   padding-left: 1.3em;
   padding-right: 1em;
@@ -73,7 +73,7 @@ li#addInterest {
       opacity: 1;
     }
   }
-  #addInterest{
+  #addInterest, #addBlacklist{
     padding-top: 2px;
   }
   .remove{
@@ -92,7 +92,7 @@ li#addInterest {
       color: $alert-color;
     }
   }
-  .interest{
+  .interest,.blacklisted{
     transition:0.2s 0.3s color linear;
     display: inline-block;
   }

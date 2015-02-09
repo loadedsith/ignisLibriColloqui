@@ -59,6 +59,35 @@
           </ul>
         </div>
       </div>
+      <div class="row blacklist">
+        <div class="small-12 medium-3 columns">
+          <label>{{Strings.blacklist}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <ul class="inline-list">
+            <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist">
+              <a class="blacklisted"
+                href="#"
+                editable-text="blacklisted"
+                buttons="no"
+                onbeforesave="checkBlacklist($data, user.profile.blacklist)"
+                onaftersave="addBlacklist($data, user.profile)"
+                >
+                {{blacklisted}}
+              </a>
+              <span class="remove" ng-click="removeBlacklist(blacklisted, user.profile.blacklist)">&times;</span>
+            </li>
+            <li id="addBlacklist"
+              href="#"
+              editable-text="addBlacklistPlaceholder"
+              buttons="no"
+              onbeforesave="checkBlacklist($data, user.profile.blacklist)"
+              onaftersave="addBlacklist($data, user.profile)">
+              {{Strings.addBlacklist}}
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class="row aboutMe">
         <div class="small-12 medium-3 columns">
           <label for="aboutMe">{{Strings.aboutMe}}</label>
