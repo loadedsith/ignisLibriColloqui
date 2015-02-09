@@ -40,8 +40,6 @@ define(['services/serviceModule'], function(services) {
       };
 
       _this.setRooms = function(snapshot) {
-        console.log('roomListUpdated');
-
         _this.roomsReady = false;
         var rooms;
         if(typeof snapshot.val === 'function'){

@@ -43,7 +43,6 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       if (user.matches) {
         $scope.processMatches(user.matches);
         $scope.matchList = user.matches;
-        console.log('$scope.matchList', $scope.matchList);
       } else {
         console.debug('got service update for match controller, but no matches!')
       }

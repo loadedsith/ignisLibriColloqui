@@ -102,15 +102,12 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.gotBlacklist = function(blacklist) {
-      console.log('UserService.GotBlacklist: ', blacklist);
-
       _this.blacklist = blacklist;
       //add the current user to the blacklist
       UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
     };
 
     _this.setUserProfile = function(user) {
-      console.log('UserService.setUserProfile: ', user);
       _this.profiles[user.data['user_id']] = user.profile;
       if (_this.user.info !== undefined) {
          if (_this.user.info.id === user.data.user_id){
@@ -118,7 +115,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
            if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
              debugger;$rootScope.$broadcast('UserService:UpdateUserProfile', user);
            }else{
-             console.log('Red strange Octopus');
+             //skip update because the profiles were equal, or perhaps this.user.profile === undefined
            }
            _this.user.profile = user.profile;
          }else{
@@ -131,12 +128,10 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.gotMatches = function(matches) {
-      console.log('UserService.gotMatches: ', matches);
       _this.user.matches = matches;
     };
 
     _this.setMatchList = function(matchList) {
-      console.log('UserService.setMatchList: ', matchList);
       _this.user.matches = matchList;
     };
 
@@ -145,7 +140,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.loginCallback = function(response) {
-      console.log('user.loginCallback', response);
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';

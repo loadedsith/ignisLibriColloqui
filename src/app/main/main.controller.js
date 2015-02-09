@@ -52,7 +52,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       });
 
       $scope.$on('UserService:Update', function(event, user) {
-        console.log('---UserService:Update', user);
         $scope.user = user;
       });
 
