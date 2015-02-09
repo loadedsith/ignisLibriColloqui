@@ -1,7 +1,9 @@
-@import 'settings';
-@import 'cards';
-@import 'messages';
-@import 'profile';
+@import './styles/settings';
+@import './styles/cards';
+@import './styles/messages';
+@import './styles/profile';
+@import './styles/fonts';
+
 div.button{
   @extend a.button;
 }

@@ -1,6 +1,6 @@
 @import '../../bower_components/foundation/scss/normalize';
 @import '../../bower_components/foundation/scss/foundation/functions';
-@import 'settings';
+@import './styles/settings';
 @import '../../bower_components/foundation/scss/foundation';
 .sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div{
 /*  @extend .sub-nav dt.active div;*/
