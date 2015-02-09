@@ -57,18 +57,23 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     _this.isProfileComplete = function() {
       var missing = [];
       if (!_this.user.profile) {
-        missing.push('profile')
-      } else {
-        if (!_this.user.profile.name) {
-          missing.push('name');
-        }
-        if (!_this.user.profile.interests) {
-          missing.push('interests');
-        }
-        if (!_this.user.profile.blacklist) {
-          missing.push('blacklist');
-        }
+        _this.user.profile = {}
       }
+      if (_this.user.profile.name===undefined || _this.user.profile.name === '') {
+        missing.push('name');
+      }
+      if (_this.user.profile.interests === undefined) {
+        _this.user.profile.interests = []
+      }
+      if (_this.user.profile.interests.length === 0){
+        missing.push('an interest');
+      }
+
+      if (!_this.user.profile.blacklist) {
+        missing.push('blacklist');
+        _this.user.profile = []
+      }
+
       return (missing.length === 0) ? true : missing;
     };
     _this.attachProfileToLocalUser = function(response) {
@@ -119,7 +124,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
          if (_this.user.info.id === user.data.user_id){
 
            if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
-             debugger;$rootScope.$broadcast('UserService:UpdateUserProfile', user);
+             $rootScope.$broadcast('UserService:UpdateUserProfile', user);
            }else{
              //skip update because the profiles were equal, or perhaps this.user.profile === undefined
            }

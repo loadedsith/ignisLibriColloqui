@@ -4,17 +4,17 @@
     <div class="wrapper {{status.class}}">
       <p class="status {{status.class}}" ng-click="status.action()" ng-show="!showProfile && !showMatches && !showMessages">{{status.currentFrame || status.text}}</p>
       <div class="reveal-modal profile" ng-class="{open:showProfile}" data-reveal>
-        <div class="close" ng-click="showProfile = false">&times;</div>
+        <div class="close" ng-if="Config.defaultView !== 'profile'" ng-click="toggleNavBar('profile', false)">&times;</div>
         <p class="status {{status.class}}" ng-click="status.action()" ng-show="showProfile">{{status.currentFrame || status.text}}</p>
         <div ng-include="'app/profile/profile.html'"></div>
       </div>
       <div class="reveal-modal matches" ng-class="{open:showMatches}" data-reveal>
-        <div class="close" ng-click="showMatches = false">&times;</div>
+        <div class="close" ng-if="Config.defaultView !== 'matches'" ng-click="toggleNavBar('matches', false)">&times;</div>
         <p class="status {{status.class}}" ng-click="status.action()" ng-show="showMatches">{{status.currentFrame || status.text}}</p>
         <div ng-include="'app/matches/matches.html'"></div>
       </div>
       <div class="reveal-modal messages" ng-class="{open:showMessages}" data-reveal>
-        <div class="close" ng-click="showMessages = false">&times;</div>
+        <div class="close" ng-if="Config.defaultView !== 'messages'" ng-click="toggleNavBar('messages', false)">&times;</div>
         <p class="status {{status.class}}" ng-click="status.action()" ng-show="showMessages">{{status.currentFrame || status.text}}</p>
         <div ng-include="'app/messages/messages.html'"></div>
       </div>

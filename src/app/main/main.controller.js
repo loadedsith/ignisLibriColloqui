@@ -5,6 +5,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     function($scope, $timeout, FacebookService, StatusService, FirebaseService, UserService, ILCServerService, Config) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
+      $scope.Config = Config;
       $scope.user = {};
 
       $scope.userId = "default user id, did facebook login fail?";
@@ -71,26 +72,6 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.showProfile = (Config.showProfile || false);
 
-      $scope.toggleNavBar = function(itemName, value) {
-        var complete = UserService.isProfileComplete()
-        if (complete === true) {
-          if (itemName === 'matches'){
-            $scope.toggleMatches(value);
-          }
-          if (itemName === 'messages') {
-            $scope.toggleMessages(value);
-          }
-          if (itemName === 'profile'){
-            $scope.toggleProfile(value);
-          }
-        }else{
-          var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
-          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
-          StatusService.setStatus(profileIncomplete);
-          $scope.toggleProfile(true);
-        }
-      };
-
       $scope.toggleProfile = function(value) {
         if (value === undefined) {
           $scope.showProfile = !$scope.showProfile;
@@ -115,8 +96,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
-      $scope.useIlcServer = true;
-
       $scope.toggleMessages = function(value) {
         if (value === undefined) {
           $scope.showMessages = !$scope.showMessages;
@@ -128,6 +107,35 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.showProfile = false;
         }
       };
+
+      $scope.toggleNavBar = function(itemName, value) {
+        var complete = UserService.isProfileComplete()
+        if (complete === true) {
+          if (itemName === 'matches'){
+            $scope.toggleMatches(value);
+          }
+          if (itemName === 'messages') {
+            $scope.toggleMessages(value);
+          }
+          if (itemName === 'profile'){
+            $scope.toggleProfile(value);
+          }
+        }else{
+          var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
+          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
+          StatusService.setStatus(profileIncomplete);
+          $scope.toggleProfile(true);
+        }
+        if ($scope.showProfile  === false &&
+            $scope.showMatches  === false &&
+            $scope.showMessages === false
+        ){
+          $scope.toggleNavBar(Config.defaultView || 'profile',true);
+        }
+      };
+
+      $scope.toggleNavBar($scope.Strings.defaultView || 'profile',true);
+
 
       $scope.$on('MatchCard:AvailableForProcessing', function(event, match) {
         ILCServerService.getProfile(match.facebookId);

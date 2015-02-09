@@ -2,7 +2,7 @@
   <h3>{{Strings.profile}}</h3>
   <!-- editable username (text with validation) -->
   <!-- <span editable-text="user.profile.name" e-name="name" onbeforesave="checkName($data)" buttons="no">{{ user.profile.name || 'no name' }}</span>   -->
-  <div class="row photo">
+  <div class="row photo" ng-cloak>
     <div class="small-12 show-for-medium-up medium-3 columns">
       <img ng-src="{{user.profilePicture.data.url}}" class="no-touch" ng-click="facebookHandlesImagesWarning = true"/>
       <div class="small error" ng-if="facebookHandlesImagesWarning">

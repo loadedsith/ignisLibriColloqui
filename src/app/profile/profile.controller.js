@@ -46,7 +46,6 @@ define(['controllerModule', 'angular'], function(controllers) {
     };
 
     $scope.checkBlacklist = function(blacklisted, blacklist) {
-      debugger;
       if (blacklist === undefined) {
         return true;
       }
@@ -86,7 +85,6 @@ define(['controllerModule', 'angular'], function(controllers) {
     };
 
     $scope.checkInterest = function(interest, interests) {
-      debugger;
       if (interests === undefined) {
         return true;
       }
