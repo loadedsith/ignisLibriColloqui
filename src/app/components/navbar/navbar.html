@@ -9,14 +9,14 @@
       <li>
         <a ui-sref="home">Home</a>
       </li>
-      <li>
-        <a class="" ng-click="toggleMatches()">{{Strings.matches}}</a>
+      <li ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
+        <a href="#">{{Strings.matches}}</a>
       </li>
-      <li>
-        <a class="" ng-click="toggleMessages()">{{Strings.messages}}</a>
+      <li ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
+        <a href="#">{{Strings.messages}}</a>
       </li>
-      <li>
-        <a class="" ng-click="toggleProfile()">{{Strings.profile}}</a>
+      <li ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
+        <a href="#">{{Strings.profile}}</a>
       </li>
       <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
         <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>

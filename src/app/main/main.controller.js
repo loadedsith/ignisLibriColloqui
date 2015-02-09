@@ -50,7 +50,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         if (newValue === false) {
           if (complete !== true) {
             $scope.showProfile = true;
-            var missing = complete;
+            var missing = complete;//if complete is not a true, it is then a list of what is missing from a valid profile
             profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
             StatusService.setStatus(profileIncomplete);
           }
@@ -70,6 +70,26 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.showMessages = (Config.showMessages || false);
 
       $scope.showProfile = (Config.showProfile || false);
+
+      $scope.toggleNavBar = function(itemName, value) {
+        var complete = UserService.isProfileComplete()
+        if (complete === true) {
+          if (itemName === 'matches'){
+            $scope.toggleMatches(value);
+          }
+          if (itemName === 'messages') {
+            $scope.toggleMessages(value);
+          }
+          if (itemName === 'profile'){
+            $scope.toggleProfile(value);
+          }
+        }else{
+          var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
+          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
+          StatusService.setStatus(profileIncomplete);
+          $scope.toggleProfile(true);
+        }
+      };
 
       $scope.toggleProfile = function(value) {
         if (value === undefined) {
