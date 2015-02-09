@@ -7,9 +7,12 @@ define(['angular'], function() {
     showMatches: false,//show automatically
     showMessages: false,//show automatically
     showProfile: true,//show automatically
-    devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
+    // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
+      aboutMe: 'About Me',
+      addInterest:'+',
       interests:'Interests',
+      interestExists:'I already know you\'re interested in that, silly',
       currentRoom: 'Current Room',
       buttonLabel: {
         sendMessage: 'Send Message',
@@ -23,6 +26,7 @@ define(['angular'], function() {
       errors:{
         noName:'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
+      facebookHandlesImagesWarning:'Facebook Handles what images are shown to the users.',
       matches: 'Matches',
       messages: 'Messages',
       name:'Name',
