@@ -1,7 +1,4 @@
 <div ng-controller="ProfileController" class="profile">
-  <h3>{{Strings.profile}}</h3>
-  <!-- editable username (text with validation) -->
-  <!-- <span editable-text="user.profile.name" e-name="name" onbeforesave="checkName($data)" buttons="no">{{ user.profile.name || 'no name' }}</span>   -->
   <div class="row photo" ng-cloak>
     <div class="small-12 show-for-medium-up medium-3 columns">
       <img ng-src="{{user.profilePicture.data.url}}" class="no-touch" ng-click="facebookHandlesImagesWarning = true"/>
@@ -94,7 +91,7 @@
         </div>
         <div class="small-12 medium-9 columns">
           <a href="#" editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
-              <pre>{{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}</pre>
+            <p>{{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}</p>
           </a>
         </div>
       </div>
