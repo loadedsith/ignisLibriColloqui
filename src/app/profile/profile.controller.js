@@ -32,8 +32,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.save(profile)
     };
 
-    $scope.interests = ['cats','frogs','baboon'];
-
     $scope.removeInterest = function(interest) {
       var removeAtIndex = null;
       for (var i = $scope.interests.length - 1; i >= 0; i--) {
@@ -44,9 +42,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.interests.splice(removeAtIndex,1);
     };
 
-    $scope.checkInterest = function(interest) {
+    $scope.checkInterest = function(interest, interests) {
+      if(interests === undefined){
+        return true;
+      }
       if(interest !== undefined && interest !== ''){
-        for (var i = $scope.interests.length - 1; i >= 0; i--) {
+        for (var i = interests.interests.length - 1; i >= 0; i--) {
           if(interest.toLowerCase() === $scope.interests[i].toLowerCase()){
             return "That interest already Exists, silly."
           }

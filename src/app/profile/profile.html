@@ -30,12 +30,12 @@
           </div>
           <div class="small-9 columns">
             <ul class="inline-list">
-              <li class="interestWrapper" ng-repeat="interest in interests">
+              <li class="interestWrapper" ng-repeat="interest in user.profile.interests">
                 <a class="interest"
                   href="#"
                   editable-text="addInterestPlaceholder"
                   buttons="no"
-                  onbeforesave="checkInterest($data)"
+                  onbeforesave="checkInterest($data, user.profile.interests)"
                   onaftersave="addInterest($data, user.profile)"
                   >
                   {{interest}}
