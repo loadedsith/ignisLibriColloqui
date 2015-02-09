@@ -7,7 +7,7 @@ define(['angular'], function() {
     showMatches: false,//show automatically
     showMessages: false,//show automatically
     showProfile: true,//show automatically
-    defaultView: 'messages',
+    defaultView: 'matches',
     // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       aboutMe: 'About Me',
