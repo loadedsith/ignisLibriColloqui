@@ -16,7 +16,6 @@ define(['controllerModule', 'angular'], function(controllers) {
 
     $scope.save = function(profile) {
       $scope.saving = true;
-
       //not actually required because the form has direct access to the user object
       // $scope.$emit('ProfileController:UpdateUserProfile',profile);
     };
@@ -64,7 +63,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
     $scope.addInterest = function(interest, profile) {
       if (profile.interests === undefined){
-        profile.interests = []
+        profile.interests = [];
       }
       profile.interests.push(interest);
       $scope.addInterestPlaceholder = '';

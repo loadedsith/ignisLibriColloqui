@@ -45,16 +45,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
             });
           }
         });
-        //Something like this should work for live matching
-        // FirebaseService.usersRef.orderByChild('id').equalTo(userId).once('on', function(value) {
-        //   if (typeof callback === 'function') {
-        //     value.forEach(function(a) {
-        //       var blacklist = a.val().blacklist;
-        //       console.log('got blacklist:', blacklist);
-        //       callback(blacklist);
-        //     });
-        //   }
-        // });
       };
 
       _this.userExists = function(user, success, failure) {

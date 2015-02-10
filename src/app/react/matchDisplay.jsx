@@ -1,10 +1,10 @@
 define(['react'], function(React) {
   'use strict';
   return React.createClass({
-   
+
     render: function() {
       var imageUrl;
-      
+
       //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
       var imageData = (((this.props.data || {}).image || {}).data || {});
 
@@ -25,7 +25,7 @@ define(['react'], function(React) {
 
       </div>
       /*jshint ignore:end */
-      
+
     }
   });
 });
