@@ -1,7 +1,7 @@
 define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('UserManagementService', ['MatchMakerService', 'FirebaseService',
-    function(MatchMakerService, FirebaseService) {
+  return services.service('UserManagementService', ['FirebaseService',
+    function(FirebaseService) {
       var _this = this;
 
       _this.createUser = function(user) {
@@ -19,15 +19,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
         FirebaseService.usersRef.push(sanitizedUser);
 
-      };
-
-      _this.getMatches = function(userId, blacklist, topics, callback) {
-        return MatchMakerService.createMatchList(blacklist, topics,
-           function(response) {
-            console.log('getMatches success', response);
-            callback(response);
-          }
-        );
       };
 
       _this.getBlacklist = function(userId, callback) {

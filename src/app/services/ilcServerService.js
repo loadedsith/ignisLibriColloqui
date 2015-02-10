@@ -1,8 +1,8 @@
 define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
   return services.service('ILCServerService',
-  ['$q', 'Config', 'MessagesService', 'UserService', 'MatchMakerService', '$socket',
-   function($q, Config, MessagesService, UserService, MatchMakerService, $socket) {
+  ['$q', 'Config', 'MessagesService', 'UserService', '$socket',
+   function($q, Config, MessagesService, UserService, $socket) {
     var _this = this;
 
     _this.updatingProfile = false;

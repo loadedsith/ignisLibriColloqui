@@ -115,7 +115,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     _this.gotBlacklist = function(blacklist) {
       _this.blacklist = blacklist;
       //add the current user to the blacklist
-      UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
+      // UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
     };
 
     _this.setUserProfile = function(user) {
