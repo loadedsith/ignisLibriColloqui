@@ -2,9 +2,6 @@
   <div class="row photo" ng-cloak>
     <div class="small-12 show-for-medium-up medium-3 columns">
       <img ng-src="{{user.profilePicture.data.url}}" class="no-touch" ng-click="facebookHandlesImagesWarning = true"/>
-      <div class="small error" ng-if="facebookHandlesImagesWarning">
-        {{Strings.facebookHandlesImagesWarning}}
-      </div>
     </div>
     <div class="small-12 medium-9 columns">
       <div class="row name">
@@ -81,6 +78,12 @@
           </a>
         </div>
       </div>
-    </div>
+      <div class="row facebookWarning">
+        <div class="small-12 columns">
+          <div class="small error" ng-if="facebookHandlesImagesWarning">
+            {{Strings.facebookHandlesImagesWarning}}
+          </div>
+        </div>
+      </div>
   </div>
 </div>
