@@ -1,7 +1,20 @@
-@import '../../bower_components/foundation/scss/normalize';
-@import '../../bower_components/foundation/scss/foundation/functions';
+@import 'normalize';
+/*@import '../../bower_components/foundation/scss/foundation';*/
+@import 'foundation/_settings.scss';
+@import 'foundation/_functions.scss';
 @import './styles/settings';
-@import '../../bower_components/foundation/scss/foundation';
+@import 'foundation/components/global';
+@import 'foundation/components/block-grid';
+@import 'foundation/components/buttons';
+@import 'foundation/components/clearing';
+@import 'foundation/components/forms';
+@import 'foundation/components/sub-nav';
+@import 'foundation/components/top-bar';
+@import 'foundation/components/reveal';
+@import 'foundation/components/inline-lists';
+@import 'foundation/components/type';
+@import 'foundation/components/visibility';
+
 .sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div{
 /*  @extend .sub-nav dt.active div;*/
   $font-color: $sub-nav-font-color;

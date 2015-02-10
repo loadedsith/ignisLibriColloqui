@@ -10,10 +10,17 @@ function handleError(err) {
   console.error(err.toString());
   this.emit('end');
 }
+var fs = require('fs'),
+    path = require('path');
+
+var dirString = path.dirname(fs.realpathSync(__filename));
 
 gulp.task('styles', [],  function() {
   return gulp.src('src/{app, components}/**/*.scss')
-    .pipe($.sass({style: 'expanded'}))
+    .pipe($.sass({
+      style: 'expanded',
+      includePaths:[ dirString + '/../bower_components/foundation/scss' ]
+    }))
     .on('error', handleError)
     .pipe($.autoprefixer('last 1 version'))
     .pipe(gulp.dest('.tmp'))
