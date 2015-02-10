@@ -38,7 +38,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         });
 
         $scope.user.profile = user.profile;
-        if ((user.profile.interests||[]).length === 0){
+        if (!UserService.isProfileComplete()) {
           $scope.showProfile = true;
           StatusService.setStatus(profileIncomplete);
         }
@@ -134,8 +134,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
-      $scope.toggleNavBar($scope.Strings.defaultView || 'profile',true);
-
+      $scope.toggleNavBar(Config.defaultView || 'profile',true);
+      console.log('Config.defaultView', Config.defaultView);
 
       $scope.$on('MatchCard:AvailableForProcessing', function(event, match) {
         ILCServerService.getProfile(match.facebookId);
