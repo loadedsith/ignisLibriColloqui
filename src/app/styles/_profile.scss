@@ -10,6 +10,7 @@ input[type="text"]{
   height: 1.3125rem;
 }
 .interests.row, .blacklist.row{
+  margin-bottom:20px;
   ul.inline-list{
     padding-left: 0;
     padding-right: 0;
@@ -17,7 +18,10 @@ input[type="text"]{
     li{
       margin-top:0px;
       margin-left:0px;
-      margin-right: 12px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+      cursor: default;
+      color: $primary-color;
     }
   }
 }
@@ -55,11 +59,16 @@ input[type="text"]{
   &:hover{
     border-bottom:1px dashed darken($primary-color,20%);
   }
+  &:not(.noGlyph):after{
+    @extend .glyph;
+  	content: "\e600";
+  }
 }
 .editable-error{
   font-size: 11px;
 }
-li#addInterest,li#addBlacklist {
+#addInterest, #addBlacklist{
+  padding-top: 2px;
   color:$primary-color;
 }
 .interestWrapper, .blacklistedWrapper {
@@ -86,9 +95,7 @@ li#addInterest,li#addBlacklist {
       opacity: 1;
     }
   }
-  #addInterest, #addBlacklist{
-    padding-top: 2px;
-  }
+
   .remove{
     transition: 0.3s 0.1s opacity linear, 0.3s 0.0s color linear;
     opacity: 0;

@@ -34,21 +34,14 @@
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
             <li class="interestWrapper" ng-repeat="interest in user.profile.interests">
-              <a class="interest"
-                href="#"
-                editable-text="interest"
-                buttons="no"
-                onbeforesave="checkInterest($data, user.profile.interests)"
-                onaftersave="addInterest($data, user.profile)"
-                >
-                {{interest}}
-              </a>
+              {{interest}}
               <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
             </li>
             <li id="addInterest"
               href="#"
               editable-text="addInterestPlaceholder"
               buttons="no"
+              class="noGlyph"
               onbeforesave="checkInterest($data, user.profile.interests)"
               onaftersave="addInterest($data, user.profile)">
               {{Strings.addInterest}}
@@ -63,21 +56,14 @@
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
             <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist">
-              <a class="blacklisted"
-                href="#"
-                editable-text="blacklisted"
-                buttons="no"
-                onbeforesave="checkBlacklist($data, user.profile.blacklist)"
-                onaftersave="addBlacklist($data, user.profile)"
-                >
-                {{blacklisted}}
-              </a>
+              {{blacklisted}}
               <span class="remove" ng-click="removeBlacklist(blacklisted, user.profile.blacklist)">&times;</span>
             </li>
             <li id="addBlacklist"
               href="#"
               editable-text="addBlacklistPlaceholder"
               buttons="no"
+              class="noGlyph"
               onbeforesave="checkBlacklist($data, user.profile.blacklist)"
               onaftersave="addBlacklist($data, user.profile)">
               {{Strings.addBlacklist}}
@@ -91,7 +77,7 @@
         </div>
         <div class="small-12 medium-9 columns">
           <a href="#" editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
-            <p>{{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}</p>
+            {{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}
           </a>
         </div>
       </div>

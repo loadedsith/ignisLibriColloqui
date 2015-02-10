@@ -37,7 +37,10 @@ define([
       }
       return input;
     };
-  }).run(function(editableOptions) {
+  }).run(function(editableOptions, editableThemes) {
     editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    // overwrite submit button template
+    editableThemes['default'].submitTpl = '<button type="submit"><span class="icon-checkmark"></button>';
+
   });
 });
