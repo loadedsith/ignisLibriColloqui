@@ -4,9 +4,9 @@ define(['angular'], function() {
     firebaseUrl: 'https://resplendent-fire-9421.firebaseIO.com',
     ilcServerUrl: 'http://0.0.0.0:5000',
     ilcTestServerUrl: 'http://0.0.0.0:5001',
-    showMatches: false,//show automatically
+    showMatches: true,//show automatically
     showMessages: false,//show automatically
-    showProfile: true,//show automatically
+    showProfile: false,//show automatically
     defaultView: 'matches',
     // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
