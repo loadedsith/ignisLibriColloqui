@@ -135,11 +135,8 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.toggleNavBar(Config.defaultView || 'profile',true);
-      console.log('Config.defaultView', Config.defaultView);
 
-      $scope.$on('MatchCard:AvailableForProcessing', function(event, match) {
-        ILCServerService.getProfile(match.facebookId);
-      });
+      console.log('Config.defaultView', Config.defaultView);
 
       $scope.parseInt = parseInt;
 

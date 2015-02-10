@@ -1,11 +1,11 @@
 define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'UserManagementService',
-  function($rootScope, $cookies, $q, FacebookService, UserManagementService) {
+  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService',
+  function($rootScope, $cookies, $q, FacebookService) {
     'use strict';
     var _this = this;
 
-    _this.currentTopic = 0;
+    _this.currentTopic = "Gold mining";//TODO: This needs to be an updatable state varible, or array of variables
 
     _this.profiles = {};
 
@@ -76,13 +76,10 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
       return (missing.length === 0) ? true : missing;
     };
-    _this.attachProfileToLocalUser = function(response) {
-      if (_this.user.profiles===undefined){
-        if (_this.profiles[response.id] !== undefined) {
-          _this.user.profile = _this.profiles[response.id]
-        }
-      }
-    }
+
+    _this.setUser = function(user) {
+      _this.user = user;
+    };
 
     _this.userInfoCallback = function(response) {
       // console.log('_this Info Found: ', response);
@@ -94,34 +91,17 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
         type: 'normal'
       };
       FacebookService.getUserImage(imageConfig, _this.updateUserImage);
-      _this.attachProfileToLocalUser(response);
-      UserManagementService.userExists(_this.user.info, _this.userExists, _this.userDoesntExist);
-    };
-
-    _this.userExists = function(user) {
-      console.log('User service User Exists');
-
-      var kiis = Object.keys(user);
-
-      var u = user[kiis[0]];
-
-      _this.topics = u.topics ? u.topics : [];
-      _this.currentTopic = _this.topics ? _this.topics[0] : '-1';
-      _this.blacklist = u.blacklist ? u.blacklist : [];
-
-      UserManagementService.getBlacklist(_this.user.info.id, _this.gotBlacklist);
-    };
-
-    _this.gotBlacklist = function(blacklist) {
-      _this.blacklist = blacklist;
-      //add the current user to the blacklist
-      // UserManagementService.getMatches(_this.user.info.id, _this.blacklist, _this.topics, _this.gotMatches);
     };
 
     _this.setUserProfile = function(user) {
+      debugger;
+      if (user === undefined || angular.equals(user, {})) {
+        console.log('not sure why set user was called with undefined, but it was');
+        return;
+      }
       _this.profiles[user.data['user_id']] = user.profile;
-      if (_this.user.info !== undefined) {
-         if (_this.user.info.id === user.data.user_id){
+      if (_this.user.data !== undefined) {
+         if (_this.user.data['user_id'] === user.data.user_id){
 
            if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
              $rootScope.$broadcast('UserService:UpdateUserProfile', user);
@@ -146,11 +126,9 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.user.matches = matchList;
     };
 
-    _this.userDoesntExist = function() {
-      console.log('User service User DOESNT Exists');
-    };
 
     _this.loginCallback = function(response) {
+
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';

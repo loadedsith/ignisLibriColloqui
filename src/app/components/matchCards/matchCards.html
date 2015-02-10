@@ -1,15 +1,16 @@
 <div ng-controller="MatchCardsController" id="matchCards" >
   <div class="cardsWrapper">
     <div ng-controller="CardsController" id="Cards" >
+      <pre>{{matchList|json}}</pre>
       <ul class="cards">
         <pre ng-repeat="card in matchList">
           card:{{card|json}}
           profiles{{profiles|json}}
-          profile{{profiles[card.facebookId]|json}}
         </pre>
         <card-gph
-          ng-repeat="card in matchList"
+          ng-repeat="card in matchList[currentTopic]"
           card='card'
+          ng-if="!blacklisted(card.id)"
           profile=''
           duration="250"
           max-drag="250"

@@ -9,7 +9,6 @@ define([
   'services/firebaseService',
   'services/matchMakerService',
   'services/statusService',
-  'services/userManagementService',
   'services/userService',
   'services/messagesService',
   'services/ilcServerService'

@@ -10,16 +10,18 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       var matches = $scope.matchList;
       var matchesKeys = Object.keys($scope.matchList);
       for (var i = matchesKeys.length - 1; i >= 0; i--) {
-        var match = matchesKeys[i];
-        if (matches[match].facebookId === id) {
-          matches[match].image = image;
-          matches[match].fetching = 'fetched';//lol
-          return;
+        var interest = matchesKeys[i];
+        for (var ii = matches[interest].length - 1; ii >= 0; ii--) {
+          var interestedUser = matches[interest][ii];
+         if (interestedUser.id === id) {
+           interestedUser.image = image;
+           interestedUser.fetching = 'fetched';//lol
+          }
         }
       }
     };
     $scope.profiles = {};
-    
+
     $scope.$on('UserService:UpdateMatchProfile', function(event, user) {
       var userId = user.data['user_id'];
       if ($scope.profiles[userId] !== undefined) {
@@ -30,15 +32,15 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         }
       }
     });
-    
-    $scope.$watch('profiles',function(newValue, oldValue) {
-      //because profiles come from ILC, and the rest from FB
-      //they can show up out of sync, if the matchlist is an object of this type
-      //it has already been processed, if not, it hasn't.
-      // if ($scope.matchList[UserService.currentTopic] !== undefined){
-      //   $scope.attachProfilesToMatchList();
-      // }
-    })
+
+    // $scope.$watch('profiles',function(newValue, oldValue) {
+    //// because profiles come from ILC, and the rest from FB
+    //// they can show up out of sync, if the matchlist is an object of this type
+    //// it has already been processed, if not, it hasn't.
+    //// if ($scope.matchList[UserService.currentTopic] !== undefined){
+    ////   $scope.attachProfilesToMatchList();
+    //// }
+    // })
     $scope.$on('UserService:Update', function(event, user) {
       if (user.matches) {
         $scope.processMatches(user.matches);
@@ -53,27 +55,26 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       width: w,
       height: h
     };
-    
+    $scope.currentTopic = UserService.currentTopic;
     $scope.processMatches = function(matches) {
       if (matches === undefined) {
         return undefined;
       }
-
       matches = matches[UserService.currentTopic];
-
+      $scope.currentTopic = UserService.currentTopic;
+      if(matches === undefined){
+        return $scope.matchList;
+      }
       for (var i = matches.length - 1; i >= 0; i--) {
         var match = matches[i];
-        if ($scope.matchList[match] === undefined) {
-          $scope.matchList[match] = {
-            facebookId:match
-          };
+        if ($scope.profiles[match.id] === undefined) {
+          $scope.profiles[match.id] = {};
         }
-
-        if ($scope.matchList[match].fetching === undefined) {
-          $scope.$emit('MatchCard:AvailableForProcessing', $scope.matchList[match]);
-          $scope.matchList[match].fetching = true;
-          $scope.matchList[match].image =
-            facebookService.getUserImageById(match, facebookImageConfig, imageMatchLookup);
+        if ($scope.profiles[match.id].fetching === undefined) {
+          $scope.profiles[match.id].fetching = true;
+          $scope.profiles[match.id].image =
+            facebookService.getUserImageById(match.id, facebookImageConfig, imageMatchLookup);
+          $scope.$emit('MatchCard:AvailableForProcessing', $scope.profiles[match.id]);
         }
 
       }

@@ -45,6 +45,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       }
       // listen for confirmation of a valid user
       $socket.on('user valid', function(user) {
+        UserService.setUser(user);
         var config = {
           'userId': user.data['user_id'],
           'accessToken': _this.accessToken

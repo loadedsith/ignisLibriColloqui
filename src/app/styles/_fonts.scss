@@ -24,7 +24,6 @@
 [class^="icon-"], [class*=" icon-"] {
   @extend .glyph;
 }
-
 .icon-pencil:before {
 	content: "\e600";
 }
@@ -57,7 +56,10 @@
 	content: "\e607";
 }
 
+.icon-checkmark:before {
+	content: "\e601";
+}
+
 .icon-facebook:before {
 	content: "\e608";
 }
-

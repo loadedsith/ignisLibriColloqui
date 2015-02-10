@@ -15,22 +15,18 @@ define(['react'], function(React) {
         imageUrl = imageData.url||'./assets/images/FBProfile.jpg';
       }
       /*jshint ignore:start */
-      var styles = {
+      var styles = {//JsIgnore because unused
         backgroundImage:'url(' + imageUrl + ')'
       };
-      /* <p>FBID:{this.props.data.facebookId}</p>*/
-      /** <p>fetching:{this.props.data.fetching}</p>*/
-      // <img src={imageUrl} className='matchImage'/>
-      var profile;
-
-      if(this.props.data.profile!==undefined){
-        profile = <div class="userInfo">
-          <div class="name">name{this.props.data.profile.name}</div>
-          <div class="about">about{this.props.data.profile.aboutMe}</div>
+      var profile;//JsIgnore because unused
+      if(this.props.data!==undefined){
+        profile = <div className="userInfo">
+          <div className="name">name{this.props.data.profile.name}</div>
+          <div className="about">about{this.props.data.profile.aboutMe}</div>
         </div>;
       }else{
         console.log('profile empty');
-        profile = <div class="userInfo">userinfo</div>;
+        profile = <div className="userInfo">userinfo</div>;
       }
 
       return <div className='matchDisplay' style={styles}>
