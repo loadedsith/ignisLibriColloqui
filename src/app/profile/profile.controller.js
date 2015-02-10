@@ -38,10 +38,13 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       for (var i = blacklist.length - 1; i >= 0; i--) {
         if(blacklisted.toLowerCase() === blacklist[i].toLowerCase()){
+          removeAtIndex=i;
           continue;
         }
       }
-      blacklist.splice(removeAtIndex,1);
+      if (removeAtIndex !== null) {
+        blacklist.splice(removeAtIndex,1);
+      }
     };
 
     $scope.checkBlacklist = function(blacklisted, blacklist) {
@@ -77,10 +80,13 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       for (var i = interests.length - 1; i >= 0; i--) {
         if(interest.toLowerCase() === interests[i].toLowerCase()){
+          removeAtIndex=i;
           continue;
         }
       }
-      interests.splice(removeAtIndex,1);
+      if (removeAtIndex !== null) {
+        interests.splice(removeAtIndex,1);
+      }
     };
 
     $scope.checkInterest = function(interest, interests) {
