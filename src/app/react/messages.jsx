@@ -32,6 +32,7 @@ define(['react'], function(React) {
       var rows = [];
 
       var messages = this.props.data;
+      var localUser= this.props.localUser;
         /*jshint ignore:start */
       var errorElement = <p>messages failed to load. Sorry!</p>;
 
@@ -47,19 +48,18 @@ define(['react'], function(React) {
         if(datum.user===undefined){
           continue;
         }
-        var messageIsFromLocalUser = false;
-        if (messages.localUser !== undefined) {
-          if (messages.localUser.info !== undefined) {
-            if (datum.user !== undefined){
-              classes = 'user user-' + datum.user.data['user_id'];
-              if(String(messages.localUser.info.id) === String(datum.user.data['user_id'])){
-                messageIsFromLocalUser = true;
-                classes = classes+' local';
-              } else {
-                classes = classes+' remote';
-              }
-            }
-          }
+
+        var userName = "me";
+        var messageIsFromLocalUser;
+        var remoteUser = this.getRemoteUserFromLocalUserMatches(datum.user.data['user_id'])
+        classes = 'user user-' + datum.user.data['user_id'];
+        if (remoteUser !== false) {
+          messageIsFromLocalUser = false;
+          userName = remoteUser.profile.name
+          classes = classes+' remote';
+        } else {
+          messageIsFromLocalUser = true;
+          classes = classes+' local';
         }
 
         var timeStamp = false;
@@ -83,14 +83,16 @@ define(['react'], function(React) {
             </span>
           );
         }
-        
+
+
+
         rows.push(
-          <p 
-            className='messageBubble' 
+          <p
+            className='messageBubble'
             key={messageKey}
             >
             <span className={classes}>
-              {messageIsFromLocalUser?"me":"remoteUserName"}:
+              {userName}:
             </span>&nbsp;
             <span className="message">
               {datum.message}
