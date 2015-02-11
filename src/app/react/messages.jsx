@@ -3,6 +3,31 @@
 define(['react'], function(React) {
   'use strict';
   return React.createClass({
+    getRemoteUserFromLocalUserMatches : function(userId) {
+      var remoteUser;
+      var localUser= this.props.localUser;
+      if (localUser.data['user_id'] === userId) {
+        return false;
+      }
+      if (localUser.matches !== undefined) {
+        var matchTopics = localUser.matches;
+        if (typeof matchTopics === 'object') {
+          for (var matchKey in matchTopics) {
+            var matches = matchTopics[matchKey]
+            if (matches.length > 0) {
+              for (var i = matches.length - 1; i >= 0; i--) {
+                var match = matches[i];
+                if (match.id === userId){
+                  return match;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return false
+    },
     render: function() {
       var rows = [];
 
