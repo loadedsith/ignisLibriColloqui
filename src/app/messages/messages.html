@@ -1,9 +1,6 @@
 <div ng-controller="MessagesController">
   <div class="Messages" ng-show="showMessages">
-    <h1>{{Strings.messages}}</h1>
     <div ng-show="rooms.length > 0" ng-include="'app/components/messagesList/messagesList.html'"></div>
-
-  
     <div class="row collapse postfix-round" ng-if="currentRoom">
       <div class="small-9 columns">
         <input type="text" ng-model="message" placeholder="{{Strings.message}}" />

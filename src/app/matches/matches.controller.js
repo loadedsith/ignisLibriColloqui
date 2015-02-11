@@ -6,15 +6,10 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.Strings = Config.strings;
 
-      $scope.swipeLeft = function(card, cardData) {
-        card.returnCard();
-        var scope = $scope;
-      };
-      
       $scope.$on('set matchList', function(matchList) {
         $scope.matchList = matchList;
       });
-      
+
       $scope.swipeRight = function(card, cardData, cardControl) {
         card.fadeOut(function(card) {
           cardControl.removeCard(cardData);
@@ -22,7 +17,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.swipeLeft = function(card, cardData, cardControl) {
-        card.returnCard();
+        // card.returnCard();
+        card.fadeOut(function(card) {
+          cardControl.removeCard(cardData);
+        });
       };
 
     }]);

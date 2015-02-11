@@ -21,6 +21,22 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       return deferred.promise;
     };
 
+    _this.userFoundAMatch = function(match) {
+      if (_this.user.profile !== undefined) {
+        if(_this.user.profile.rooms){
+          if (_this.user.profile.rooms.indexOf(match) === -1) {
+            _this.user.profile.rooms.push(match);
+          }
+        }else{
+          _this.user.profile.rooms = [ match ];
+        }
+      }else{
+        console.log('ignoring user match because profile undefined');
+      }
+      console.log('UserService.user', _this.user,match);
+      $rootScope.$broadcast('UserService:UpdateUserProfile', _this.user);
+    };
+
     _this.loginFailure = function(response) {
       if (response.status === 'not_authorized') {
         // the user is logged in to Facebook,

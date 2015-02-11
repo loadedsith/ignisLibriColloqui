@@ -127,7 +127,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
 
     $scope.swipeRight = function(card, cardData) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
-
+      UserService.userFoundAMatch(cardData.id)
       if (typeof $scope.$parent.swipeRight === 'function') {
         card.removeCard = $scope.removeCard;
         $scope.$parent.swipeRight(card, cardData, $scope.cardControl)

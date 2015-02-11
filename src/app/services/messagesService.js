@@ -73,8 +73,10 @@ define(['services/serviceModule'], function(services) {
       _this.roomSet = function(snapshot) {
         //receive new message
         // will be called for each new message
-        if(snapshot.room){
-          _this.messages[snapshot.room] = snapshot.snapshot[snapshot.room]
+        if (snapshot.room !== undefined) {
+          if (snapshot.snapshot !== null) {
+            _this.messages[snapshot.room] = snapshot.snapshot[snapshot.room]
+          }
         }
         $rootScope.$broadcast('MessagesService:MessagesSet', snapshot);
       };
