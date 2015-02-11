@@ -7,10 +7,24 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.updatingProfile = false;
     _this.updatingProfilePromise = $q.defer();
+
     _this.setProfile = function(user) {
       console.log('ilc setProfile',user);
       _this.updatingProfile = true;
-      $socket.emit('set profile',user);
+      var config = {
+        user:user,
+        accessToken: _this.accessToken
+      }
+      if(_this.accessToken === undefined){
+        console.log('cant make any requests without an access token');
+        return _this.updatingProfilePromise.promise;//TODO: These seem wrong, maybe no big deal, but there's no difference between accepted and rejected
+      }
+      if (user.profile === undefined) {
+        console.log('cant set a profile if it doenst exist');
+        return _this.updatingProfilePromise.promise;//TODO: These seem wrong, maybe no big deal, but there's no difference between accepted and rejected
+      }
+      $socket.emit('set profile', config);
+      console.log('emit set profile', config);
       return _this.updatingProfilePromise.promise;
     };
 
@@ -52,7 +66,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         };
         //found a valid user, so stash the token
         _this.accessToken = accessToken;
-        $socket.emit('get user matches', config);
       });
     }
 

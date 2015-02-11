@@ -4,7 +4,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     '$scope', 'Config', 'ILCServerService', '$socket',
     function($scope, Config, ILCServer, $socket) {
       $scope.Strings = Config.strings;
-      
+
       //test user open_fnvwvuk_user@tfbnw.net's access id,
       //created using https://developers.facebook.com/apps/[APP API KEY]/roles/test-users/
       $scope.fakedToken = 'CAAJnbZAScLU4BACHW9SZB1GIe0xDTYrRJ544RjcZAAYtJZBhTiZCsxBWqe8ETO' +

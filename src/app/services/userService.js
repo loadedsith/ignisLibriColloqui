@@ -68,12 +68,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (_this.user.profile.interests.length === 0){
         missing.push('an interest');
       }
-
-      if (!_this.user.profile.blacklist) {
-        missing.push('blacklist');
-        _this.user.profile = []
-      }
-
       return (missing.length === 0) ? true : missing;
     };
 
@@ -94,7 +88,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.setUserProfile = function(user) {
-      debugger;
       if (user === undefined || angular.equals(user, {})) {
         console.log('not sure why set user was called with undefined, but it was');
         return;
