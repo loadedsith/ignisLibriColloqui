@@ -1,42 +1,67 @@
-<nav class="top-bar row" ng-controller="NavbarController">
-  <ul class="title-area ">
-    <li class="name">
-      <!-- <h1>{{Strings.siteTitle}}</h1> -->
-      <h1>&nbsp;<span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span></h1>
-    </li>
-  </ul>
-  <section class="top-bar-section">
-    <ul class="left">
-      <li ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
-        <!-- <a href="#">{{Strings.matches}}</a> -->
-        <a href="#" class="skew">
-          <div class='iconWrapper unskew'>
-            <span class="icon-users"></span>
+<div ng-controller="NavbarController">
+  <nav class="top-bar row">
+    <ul class="title-area">
+      <li class="name left show-for-medium-up">
+        <!-- <h1>{{Strings.siteTitle}}</h1> -->
+        <h1>
+          <div>
+            <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
           </div>
-        </a>
-      </li>
-      <li ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
-        <!-- <a href="#" class="skew">{{Strings.messages}}</a> -->
-        <a href="#" class="skew">
-          <div class='iconWrapper unskew'>
-            <span class="icon-chat"></span>
-          </div>
-        </a>
-      </li>
-      <li ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
-        <!-- <a href="#" class="skew">{{Strings.profile}}</a> -->
-        <a href="#" class="skew">
-          <div class='iconWrapper unskew'>
-            <span class="icon-pencil"></span>
-          </div>
-        </a>
-      </li>
-      <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
-        <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
+        </h1>
       </li>
     </ul>
-    <ul class="right">
-      <li ng-include="'app/components/user/user.html'" ></li>
-    </ul>
-  </section>
-</nav>
+    <section class="top-bar-section ">
+      <ul class="left show-for-medium-up">
+        <li ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
+          <!-- <a href="#">{{Strings.matches}}</a> -->
+          <a href="#" class="skew">
+            <div class='iconWrapper unskew'>
+              <span class="icon-users"></span>
+            </div>
+          </a>
+        </li>
+        <li ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
+          <!-- <a href="#" class="skew">{{Strings.messages}}</a> -->
+          <a href="#" class="skew">
+            <div class='iconWrapper unskew'>
+              <span class="icon-chat"></span>
+            </div>
+          </a>
+        </li>
+        <li ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
+          <!-- <a href="#" class="skew">{{Strings.profile}}</a> -->
+          <a href="#" class="skew">
+            <div class='iconWrapper unskew'>
+              <span class="icon-pencil"></span>
+            </div>
+          </a>
+        </li>
+        <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
+          <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
+        </li>
+      </ul>
+      <ul class="right show-for-small-only">
+        <li ng-include="'app/components/user/user.html'" ></li>
+        <li class='active' ng-click="showMobileNav = !(!!showMobileNav)">
+          <a href="#">
+            <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </nav>
+  <div class="icon-bar three-up show-for-small-only" ng-show="showMobileNav">
+    <a class="item" ng-click="toggleNavBar('matches')">
+      <span class="icon-users"></span>
+      <label>Matches</label>
+    </a>
+    <a class="item" ng-click="toggleNavBar('messages')">
+      <span class="icon-chat"></span>
+      <label>Messages</label>
+    </a>
+    <a class="item" ng-click="toggleNavBar('profile')">
+      <span class="icon-pencil"></span>
+      <label>Profile</label>
+    </a>
+  </div>
+</div>

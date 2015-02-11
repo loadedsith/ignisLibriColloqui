@@ -2,8 +2,9 @@
 define(['controllerModule', 'angular'], function(controllers) {
   controllers
     .controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
+      $scope.fallbackImage = './assets/images/FBProfile.jpg';
+      $scope.profilePicture = $scope.fallbackImage;
 
-      $scope.debugUser = false;
       $scope.checkLoginState = UserService.checkLoginState;
 
       $scope.userInitialized = function() {
@@ -28,6 +29,17 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
+
+        // this annotation means if user.profilePicture.data.url exists, use that, if not use the fallback image
+        var newProfilePicture = ((user.profilePicture || {}).data || {} ).url||$scope.fallbackImage;
+
+        //TODO: this wouldnt update the image if somehow facebook changed the image, maybe it should
+
+        //if you used the fallback image, there's no need to update
+        if (newProfilePicture !== $scope.fallbackImage) {
+          //it the profile picture is the fall back, use user.profilePicture.data.url or the fallback image.
+          $scope.profilePicture = newProfilePicture;
+        }
       })
     }]);
 });

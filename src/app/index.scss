@@ -60,38 +60,80 @@ div.button{
 }
 
 .top-bar{
-  .left{
-    margin-left: 24px;
-  }
   .name{
     h1{
       color:#fff;
+      padding-left:10px;
+      padding-right:18px;
     }
   }
-  .top-bar-section ul li {
-
-  &.active{
-    &:not(.has-form) a:not(.button).skew{
-      background-color:lighten($primary-color, 10%);
-      &:hover{
-        background-color:$secondary-color;
-        color:black;
+  .right.show-for-small-only{
+    li a{
+      width:auto;
+      float:right;
+      text-align:center;
+      display:inline-block;
+      padding:12px;
+      &.profilePicture{
+        border:2px solid $primary-color;
+        padding:0;
       }
     }
   }
+  .top-bar-section ul li {
+    background-color:transparent;
 
-  &:not(.has-form) a:not(.button).skew{
-    transition:0.3s 0.1s background-color, 0.3s 0.1s color;
-    background-color:$primary-color;
-    &:hover{
-      background-color:lighten($primary-color,10%);
+    &.active{
+      border-right:3px solid $secondary-color;
+      &:not(.has-form) a:not(.button).skew{
+        background-color:lighten($primary-color, 10%);
+        &:hover{
+          background-color:$secondary-color;
+          color:black;
+        }
+      }
+      &:last-child a{
+        border-right:none!important;
+      }
     }
-  }
+    &:last-child{
+      border-right:none!important;
+    }
 
+    &:not(.has-form) a:not(.button).skew{
+      transition:0.3s 0.1s background-color, 0.3s 0.1s color;
+      background-color:$primary-color;
+      border-right:3px solid $secondary-color;
+      &:hover{
+        background-color:lighten($primary-color,10%);
+      }
+      &:last-child a{
+        border-right:none!important;
+      }
+
+    }
 
     a span{
       font-size: 20px;
       vertical-align: sub;
+    }
+  }
+}
+.icon-bar{
+  label{
+    transition:0.3s 0.1s color,0.3s 0.1s background-color;
+  }
+  a.item{
+    background-color:#333333;
+    color:white;
+    transition:0.3s 0.1s color, 0.3s 0.1s background-color;
+    &:hover{
+      color:black;
+      background-color:$secondary-color;
+      label{
+        transition:0.3s 0.1s color, 0.3s 0.1s background-color;
+        color:black;
+      }
     }
   }
 }
