@@ -14,16 +14,16 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       var profileIncomplete = {
         text:'Please complete your profile before moving on.', //[Optional] Label text
-        class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
+        class:'status-profile-incomplete status-ready' // CSS Class available to angular, not automatically applied
       };
 
       var profileSaved = {
-        text:'Profile saved.', //[Optional] Label text
-        class:'status-profile-saved', // CSS Class available to angular, not automatically applied
+        text:'Profile updated.', //[Optional] Label text
+        class:'status-profile-saved status-ready', // CSS Class available to angular, not automatically applied
         callback: function() {
           setTimeout(function() {
             StatusService.setStatus(StatusService.ready);
-          }, 250);
+          }, 1000);
         }
       };
 
