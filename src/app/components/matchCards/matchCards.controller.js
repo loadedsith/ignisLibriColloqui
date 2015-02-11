@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular', 'react/matchDisplay'], function(controllers, angular, MatchDisplay) {
   'use strict';
   return controllers.controller('MatchCardsController',
-  ['$scope', '$timeout', 'UserService', 'FacebookService',
-  function($scope, $timeout, UserService, facebookService) {
+  ['$scope', '$timeout', 'UserService', 'FacebookService','Config',
+  function($scope, $timeout, UserService, facebookService, Config) {
     $scope.matchList = {};
     $scope.MatchDisplay = MatchDisplay;
 
@@ -48,9 +48,10 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       } else {
         console.debug('got service update for match controller, but no matches!')
       }
-    })
-    var w = 400 / 2;
-    var h = 558 / 2;
+    });
+
+    var w = (Config.cardSize.width || 400) / 2;
+    var h =  (Config.cardSize.height || 558) / 2;
     var facebookImageConfig = {
       width: w,
       height: h

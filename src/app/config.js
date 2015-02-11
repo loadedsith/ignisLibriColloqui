@@ -7,6 +7,10 @@ define(['angular'], function() {
     showMessages: false,//show automatically
     showProfile: false,//show automatically
     defaultView: 'matches',
+    cardSize:{
+      height:558,
+      width:400
+    },
     // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       aboutMe: 'About Me',
