@@ -19,7 +19,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     }
     return element;
   };
-  
+
   var topOfTheStack = function(card) {
     if (card.nextSibling === null) {
       return true;
@@ -60,7 +60,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         transform: 'rotate(' + rotation + 'deg)'
       };
       var initialPosition = this.props.config.initialPosition;
-      
+
       var cardTemplate;
       //card template must be a react object, if it is it's type is a function.
       try {
@@ -70,9 +70,9 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       } catch (error) {
         cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>
       }
-    
+
       return <li
-              onMouseDown= {this.handelMouse} 
+              onMouseDown= {this.handelMouse}
               className='card'
               style={styles}
               initialPosition={initialPosition}
@@ -82,7 +82,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
               </li>;
            /*jshint ignore:end */
               // <img src="{this.props.data.image.data.url}" alt="" />
-//                             
+//
     },
     componentDidUpdate: function(props, state) {
       if (this.state.dragging && !state.dragging) {
@@ -108,7 +108,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       }
       var now = new Date().getTime();
       var completeness = (now - this.state.fadeStart) / duration;
-      
+
       if (completeness < 1) {
         this.setState({
           opacity:(1-completeness)
@@ -118,7 +118,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         this.setState({
           opacity:0
         });
-        
+
         if (typeof this.state.fadeCallback === 'function') {
           this.state.fadeCallback(this);
         }
@@ -142,7 +142,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
             rotation: this.state.rotation * (1 - completeness),
             pos:{
               // offset + current position * completeness
-              x: this.state.droppedPos.x - (distance * (completeness)) 
+              x: this.state.droppedPos.x - (distance * (completeness))
             }
           });
           requestAnimationFrame(this.returnCard);
@@ -197,7 +197,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
             //dragged out right
             if (typeof this.props.config.swipeRight === 'function') {
               this.props.config.swipeRight(this, this.props.data);
-              
+
             } else {
               this.returnCard();
             }
@@ -235,13 +235,13 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
               }
             });
           }
-          
+
           break;
         default :
           return;//dont stopPropagation or preventDefault
       }
       event.stopPropagation();
       event.preventDefault();
-    }    
+    }
   });
 });

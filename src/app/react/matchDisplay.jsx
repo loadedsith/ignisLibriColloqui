@@ -24,7 +24,6 @@ define(['react'], function(React) {
         };
         this.state.openOrClose='close';
       }
-      console.log('bad house mouse');
     },
     render: function() {
       var imageUrl;
@@ -50,7 +49,6 @@ define(['react'], function(React) {
           <div className="about" style={this.state.aboutStyles}>{this.props.data.profile.aboutMe}</div>
         </div>;
       }else{
-        console.log('profile empty');
         profile = <div className="userInfo">userinfo</div>;
       }
 
