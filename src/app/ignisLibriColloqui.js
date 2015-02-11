@@ -40,7 +40,8 @@ define([
   }).run(function(editableOptions, editableThemes) {
     editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
     // overwrite submit button template
-    editableThemes['default'].submitTpl = '<button type="submit"><span class="icon-checkmark"></button>';
+    editableThemes['default'].submitTpl = '<button type="submit"><span class="icon-checkmark"></span></button>';
+    editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()"><span class="icon-blocked"></span></button>';
 
   });
 });
