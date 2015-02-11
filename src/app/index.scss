@@ -7,6 +7,12 @@
 div.button{
   @extend a.button;
 }
+.mainView{
+  display:none;
+  &.open{
+    display:block;
+  }
+}
 .close{
   position:absolute;
   top:0;
@@ -19,6 +25,7 @@ div.button{
   transition:0.3s 0.1s color linear,0.3s 0.1s font-weight linear;
   font-size:150%;
   font-weight:100;
+  z-index:1000;
   &:hover{
     color:$alert-color;
     font-weight:700;
