@@ -8,7 +8,9 @@ div.button{
   @extend a.button;
 }
 .mainView{
-  display:none;
+  display: none;
+  padding: 0.98em 0px;
+
   &.open{
     display:block;
   }
@@ -91,7 +93,6 @@ div.button{
     background-color:transparent;
 
     &.active{
-      border-right:3px solid $secondary-color;
       &:not(.has-form) a:not(.button).skew{
         background-color:lighten($primary-color, 10%);
         &:hover{
@@ -99,11 +100,12 @@ div.button{
           color:black;
         }
       }
-      &:last-child a{
+      &:last-child{
         border-right:none!important;
       }
     }
-    &:last-child{
+
+    &:last-child a{
       border-right:none!important;
     }
 
@@ -114,10 +116,6 @@ div.button{
       &:hover{
         background-color:lighten($primary-color,10%);
       }
-      &:last-child a{
-        border-right:none!important;
-      }
-
     }
 
     a span{
