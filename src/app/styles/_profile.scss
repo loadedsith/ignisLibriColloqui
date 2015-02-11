@@ -31,6 +31,9 @@ input[type="text"]{
 .error{
   color:$alert-color;
 }
+.editable-click:hover, a.editable-click:hover{
+  border-bottom:none!important;
+}
 .name.row,.email.row{
   form.editable-wrap {
     width: 100%;
@@ -70,6 +73,7 @@ input[type="text"]{
 #addInterest, #addBlacklist{
   padding-top: 2px;
   color:$primary-color;
+  cursor:pointer;
 }
 .interestWrapper, .blacklistedWrapper {
   display:inline-block;

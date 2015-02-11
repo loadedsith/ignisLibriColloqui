@@ -15,7 +15,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
           var interestedUser = matches[interest][ii];
          if (interestedUser.id === id) {
            interestedUser.image = image;
-           interestedUser.fetching = 'fetched';//lol
+           interestedUser.fetching = 'done';
           }
         }
       }

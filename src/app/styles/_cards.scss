@@ -17,7 +17,7 @@ $maxCardRotation : 0.6deg;
   display:block;
   overflow:hidden;
   width :400 / 2 * 1px;
-  height:558 / 2 * 1px; 
+  height:558 / 2 * 1px;
   position:absolute;
   top:10px;
   cursor: pointer;
@@ -30,7 +30,25 @@ $maxCardRotation : 0.6deg;
     width :400 / 2 * 1px;
     height:558 / 2 * 1px;
     .description{
-    
+
+    }
+    .userInfo {
+      position: absolute;
+      bottom:0px;
+      background-color: rgba(0,0,0,0.3);
+      color: white;
+      width: 100%;
+      .name,.more,.about{
+        padding: 3px 11px;
+      }
+      .more{
+        display:block;
+        bottom: 0px;
+        background-color: rgba(0,0,0,0.3);
+        color: white;
+        width: 100%;
+        text-align:center;
+      }
     }
   }
   @for $cardI from 1 through 10 {

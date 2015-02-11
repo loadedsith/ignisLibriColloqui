@@ -1,7 +1,31 @@
 define(['react'], function(React) {
   'use strict';
   return React.createClass({
-
+    getInitialState: function() {
+      return {
+        'openOrClose':'?',
+        'aboutStyles' : {
+          height:'0em',
+          opacity:'0.3'
+        }
+      }
+    },
+    more : function() {
+      if (this.state.aboutStyles.opacity === '1') {
+        this.state.aboutStyles = {
+          height:'0em',
+          opacity:'0.3'
+        };
+        this.state.openOrClose='?';
+      } else {
+        this.state.aboutStyles = {
+          height:'auto',
+          opacity:'1'
+        };
+        this.state.openOrClose='close';
+      }
+      console.log('bad house mouse');
+    },
     render: function() {
       var imageUrl;
 
@@ -21,8 +45,9 @@ define(['react'], function(React) {
       var profile;//JsIgnore because unused
       if(this.props.data!==undefined){
         profile = <div className="userInfo">
-          <div className="name">name{this.props.data.profile.name}</div>
-          <div className="about">about{this.props.data.profile.aboutMe}</div>
+          <div className="name">{this.props.data.profile.name}</div>
+          <div className="more" onClick={this.more} >{this.state.openOrClose}</div>
+          <div className="about" style={this.state.aboutStyles}>{this.props.data.profile.aboutMe}</div>
         </div>;
       }else{
         console.log('profile empty');
