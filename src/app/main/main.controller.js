@@ -144,6 +144,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       var userLoginState = UserService.checkLoginState();
 
       userLoginState.then(function(response) {
+        //logged in
         StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
         ILCServerService.login(response.authResponse.accessToken);
         $scope.userId = response.authResponse.userID;

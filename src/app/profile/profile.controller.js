@@ -1,6 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
-  return controllers.controller('ProfileController', ['$scope', 'Config', function($scope, Config) {
+  return controllers.controller('ProfileController', [
+    '$scope', 'Config', 'MessagesService',
+    function($scope, Config, MessagesService) {
     $scope.Strings = Config.strings;
 
     $scope.checkName = function(data) {
@@ -19,32 +21,25 @@ define(['controllerModule', 'angular'], function(controllers) {
       //not actually required because the form has direct access to the user object
       // $scope.$emit('ProfileController:UpdateUserProfile',profile);
     };
-
-
-
-    $scope.addBlacklist = function(blacklisted, profile) {
-      if (profile.blacklist === undefined){
-        profile.blacklist = []
-      }
-      profile.blacklist.push(blacklisted);
-      $scope.addBlacklistPlaceholder = '';
-      $scope.save(profile)
+    $scope.roomNames = [];
+    $scope.populateRoomNames = function() {
+      MessagesService.populateRoomNames(undefined, $scope.user, $scope.currentTopic);
+      $scope.roomNames = MessagesService.roomNames;
     };
 
-    $scope.removeBlacklist = function(blacklisted, blacklist) {
-      var removeAtIndex = null;
-      if(blacklist === undefined || blacklisted === undefined){
-        return;
+
+
+    $scope.addBlacklist = function(blacklisted) {
+      if ($scope.user.profile.blacklist === undefined){
+        $scope.user.profile.blacklist = [];
       }
-      for (var i = blacklist.length - 1; i >= 0; i--) {
-        if(blacklisted.toLowerCase() === blacklist[i].toLowerCase()){
-          removeAtIndex=i;
-          continue;
-        }
-      }
-      if (removeAtIndex !== null) {
-        blacklist.splice(removeAtIndex,1);
-      }
+      $scope.user.profile.blacklist.push(blacklisted);
+      $scope.addBlacklistPlaceholder = '';
+      $scope.save();
+    };
+
+    $scope.removeBlacklist = function(index) {
+      $scope.user.profile.blacklist.splice(index,1);
     };
 
     $scope.checkBlacklist = function(blacklisted, blacklist) {

@@ -19,7 +19,7 @@
           <label for="email">{{Strings.email}}</label>
         </div>
         <div class="small-12 medium-9 columns">
-          <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.email">
+          <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-email="user.profile.email">
             {{ user.profile.email || Strings.email }}
           </a>
         </div>
@@ -53,21 +53,37 @@
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
             <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist">
-              {{blacklisted}}
-              <span class="remove" ng-click="removeBlacklist(blacklisted, user.profile.blacklist)">&times;</span>
-            </li>
-            <li id="addBlacklist"
-              href="#"
-              editable-text="addBlacklistPlaceholder"
-              buttons="no"
-              class="noGlyph"
-              onbeforesave="checkBlacklist($data, user.profile.blacklist)"
-              onaftersave="addBlacklist($data, user.profile)">
-              {{Strings.addBlacklist}}
+              {{blacklisted.name}}
+              <!-- TODO: Expose this info on hover -->
+              <!-- <div class="hover">({{blacklisted.id}})</div> -->
+              <span class="remove" ng-click="removeBlacklist($index)">&times;</span>
             </li>
           </ul>
+          <div ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
+            {{Strings.addBlacklist}}
+          </div>
+          <div class="blacklistSelector" ng-show="showBlacklistSelector">
+            <ul class="inline-list">
+              <li class="blacklistSelector">
+                <!-- <dt class="sub-nav">
+                  Block these users by clicking on the Shield icon(<span class="icon-shield"></span>)
+                </dt> -->
+                <dl class="sub-nav">
+                  <dd ng-repeat="(key,room) in roomName">
+                    <div>
+                      <!-- TODO: Avoid repeating already listed items -->
+                      <span class="icon-shield" ng-click="addBlacklist({id:key,name:room});"></span>
+                      {{room}}
+                    </div>
+                  </dd>
+                </dl>
+              </li>
+            </ul>
+            <p ng-click="showBlacklistSelector = !showBlacklistSelector;" class="small button"><span class="icon-checkmark"></span></p>
+          </div>
         </div>
       </div>
+              <pre>roomNames{{roomNames|json}}</pre>
       <div class="row aboutMe">
         <div class="small-12 medium-3 columns">
           <label for="aboutMe">{{Strings.aboutMe}}</label>

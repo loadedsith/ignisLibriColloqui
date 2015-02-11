@@ -18,23 +18,9 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.currentRoom = name;
       };
 
-      $scope.roomNames = {};
 
-      $scope.getRoomName = function(room) {
-        if ($scope.currentTopic !== undefined) {
-          if ($scope.user.matches !== undefined) {
-            var matches = $scope.user.matches[$scope.currentTopic];
-            for (var i = matches.length - 1; i >= 0; i--) {
-              var match = matches[i];
-              if (String(match.id) === String(room)){
-                return match.profile.name;
-              }
-            }
-          }
-        }
-        return room;
-      }
 
+     
       $scope.$on('MessagesService:MessageSent', function(event, message) {
         $scope.message = '';
       });
@@ -66,10 +52,8 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('MessagesService:UpdateRooms', function(event, rooms) {
         $scope.rooms = rooms;
         $scope.roomsReady = true;
-        for (var i = rooms.length - 1; i >= 0; i--) {
-          var room = rooms[i];
-          $scope.roomNames[room] = $scope.getRoomName(room);
-        }
+        MessagesService.populateRoomNames(rooms, $scope.user, $scope.currentTopic)
+        $scope.roomNames = MessagesService.roomNames;
       });
 
     }]);

@@ -67,9 +67,31 @@ define(['services/serviceModule'], function(services) {
         console.log('messages service currentRoom, name', _this.currentRoom, name);
         _this.currentRoom = name;
         $rootScope.$broadcast('MessagesService:SetCurrentRoom', name);
-
-      }
-
+      };
+      _this.getRoomName = function(room, user, currentTopic) {
+        if (currentTopic !== undefined) {
+          if (user.matches !== undefined) {
+            var matches = user.matches[currentTopic];
+            for (var i = matches.length - 1; i >= 0; i--) {
+              var match = matches[i];
+              if (String(match.id) === String(room)){
+                return match.profile.name;
+              }
+            }
+          }
+        }
+        return room;
+      };
+      _this.roomNames = {};
+      _this.populateRoomNames = function(rooms, user, currentTopic) {
+        if (rooms === undefined) {
+          rooms = _this.rooms;
+        }
+        for (var i = rooms.length - 1; i >= 0; i--) {
+          var room = rooms[i];
+          _this.roomNames[room] = _this.getRoomName(room, user, currentTopic);
+        }
+      };
       _this.roomSet = function(snapshot) {
         //receive new message
         // will be called for each new message
