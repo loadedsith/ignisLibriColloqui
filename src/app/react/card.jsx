@@ -178,7 +178,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
             this.setState({
               initialPos:this.props.config.initialPosition,
               dragging: true,
-              rotation:0,
+              rotation:this.state.rot,
               rel: {
                 x: event.pageX,
                 // y: event.pageY - pos.top
