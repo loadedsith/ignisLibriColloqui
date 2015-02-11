@@ -1,11 +1,11 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('MessagesListController',
-    ['$scope', '$timeout', 'Config', 'MessagesService', 'FirebaseService',
-    function($scope, $timeout, Config, MessagesService, FirebaseService) {
+    ['$scope', '$timeout', 'Config', 'MessagesService',
+    function($scope, $timeout, Config, MessagesService) {
 
       $scope.Strings = Config.strings;
-      
+
       $scope.messages = {};
       $scope.rooms = [];
 
@@ -17,7 +17,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         MessagesService.setCurrentRoom(name);
         $scope.currentRoom = name;
       };
-         
+
       $scope.$on('MessagesService:MessageSent', function(event, message) {
         $scope.message = '';
       });

@@ -9,7 +9,7 @@ define(['react'], function(React) {
       var messages = this.props.data;
         /*jshint ignore:start */
       var errorElement = <p>messages failed to load. Sorry!</p>;
-      
+
       if (messages === undefined) {
         console.log('data is undefined in messages.jsx');
         return errorElement;
@@ -39,7 +39,7 @@ define(['react'], function(React) {
 
         var timeStamp = false;
         var datumTime = new Date(datum.date).toDateString();
-        
+
         if (lastTime === undefined) {
           lastTime = datumTime;
           timeStamp = true;
@@ -48,7 +48,7 @@ define(['react'], function(React) {
           lastTime = datumTime;
           timeStamp = true;
         }
-        
+
 
         /*jshint ignore:start */
         if(timeStamp){
@@ -77,10 +77,10 @@ define(['react'], function(React) {
       return (
         /*jshint ignore:start */
         <div>
-          {rows} 
+          {rows}
         </div>
         /*jshint ignore:end */
       );
     }
-  });  
+  });
 });

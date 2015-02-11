@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('MainController', [
-    '$scope', '$timeout', 'FacebookService', 'StatusService', 'FirebaseService', 'UserService', 'ILCServerService', 'Config',
-    function($scope, $timeout, FacebookService, StatusService, FirebaseService, UserService, ILCServerService, Config) {
+    '$scope', '$timeout', 'FacebookService', 'StatusService', 'UserService', 'ILCServerService', 'Config',
+    function($scope, $timeout, FacebookService, StatusService, UserService, ILCServerService, Config) {
       //ensure that status calls reference the current status
       $scope.Strings = Config.strings;
       $scope.Config = Config;
