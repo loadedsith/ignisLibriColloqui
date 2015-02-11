@@ -64,6 +64,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
+        $scope.currentTopic = UserService.currentTopic;
       });
 
       $scope.showMatches = (Config.showMatches || false);
