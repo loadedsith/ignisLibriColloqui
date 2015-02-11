@@ -39,7 +39,9 @@ define(['react'], function(React) {
       }
       /*jshint ignore:start */
       var styles = {//JsIgnore because unused
-        backgroundImage:'url(' + imageUrl + ')'
+        backgroundImage:'url(' + imageUrl + ')',
+        backgroundSize:'cover',
+        backgroundPosition:'center center'
       };
       var profile;//JsIgnore because unused
       if(this.props.data!==undefined){

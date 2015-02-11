@@ -2,21 +2,32 @@ $randA : 7, 9, 2, 5, 8, 8, 3, 8, 6, 2, 5, 3, 7, 5, 8, 8, 6, 0, 3, 4, 2, 8, 4, 2,
 $randB : 8, 7, 5, 0, 0, 0, 4, 7, 9, 9, 2, 9, 4, 3, 1, 1, 7, 4, 8, 7, 9, 4, 1, 7, 2, 6, 7, 7, 9, 4, 1, 6, 5, 5, 7, 3, 3;
 
 $maxCardRotation : 0.6deg;
+$cardScale : 1;
+
+$retinaCardWidth: 600px * $cardScale;
+$cardWidth: $retinaCardWidth / 2;
+$retinaCardHeight: 882px * $cardScale;
+$cardHeight: $retinaCardHeight / 2;
 
 .cards{
-  position:absolute;
-  height:auto;
+  position:relative;
+  height:$cardHeight + 20px;
+  width:$cardWidth + 20px;
   background:#999;
-  top:50%;
-  left:50%;
-  transform:translateX(-50%) translateY(50%);
+/*  top:50%;*/
+/*  left:50%;*/
+/*  position:absolute;*/
+/*  margin-top:$topbar-height;//Centering to count the topbar-height*/
+/*  transform:translateX(-50%) translateY(25%);*/
+  margin-bottom:0;
   margin-right: auto;
   margin-left: auto;
 }
 .card{
   display:block;
   overflow:hidden;
-  height: auto;
+  width : $cardWidth;
+  height: $cardHeight;
   position:absolute;
   top:10px;
   cursor: pointer;
@@ -26,7 +37,8 @@ $maxCardRotation : 0.6deg;
   .matchDisplay{
     background-size:cover;
     background-position: 50% 50%;
-    height: auto;
+    width :$cardWidth;
+    height:$cardHeight;
     .description{
 
     }
