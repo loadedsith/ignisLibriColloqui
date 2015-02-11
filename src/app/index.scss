@@ -76,17 +76,25 @@ div.button{
       padding-left:10px;
       padding-right:18px;
     }
+    margin: 0 47px;
   }
+
   .right.show-for-small-only{
     li a{
-      width:auto;
+      height:$topbar-height;
+      width:33.333333333%;
       float:right;
       text-align:center;
       display:inline-block;
       padding:12px;
+      font-size:$topbar-height/4;
+      line-height:$topbar-height / 2 + 10;
       &.profilePicture{
         border:2px solid $primary-color;
-        padding:0;
+        height:$topbar-height;
+        padding:0 0 0 0;
+        width:auto;
+        background-color:transparent;
       }
     }
   }
@@ -118,24 +126,25 @@ div.button{
         background-color:lighten($primary-color,10%);
       }
     }
-
-    a span{
-      font-size: 20px;
-      vertical-align: sub;
-    }
   }
 }
-.icon-bar{
+.icon-bar.show-for-small-only{
   label{
     transition:0.3s 0.1s color,0.3s 0.1s background-color;
   }
   a.item{
-    background-color:#333333;
+    background-color:darken($primary-color,20%);
     color:white;
     transition:0.3s 0.1s color, 0.3s 0.1s background-color;
+    &.active{
+      background-color:darken($primary-color,10%);
+      &:hover{
+        background-color:$secondary-color;
+      }
+    }
     &:hover{
       color:black;
-      background-color:$secondary-color;
+      background-color:$primary-color;
       label{
         transition:0.3s 0.1s color, 0.3s 0.1s background-color;
         color:black;
@@ -192,7 +201,7 @@ div.button{
   color:#F66;
 }
 section.top-bar-section ul.right li img{
-  max-height: 42px;
+  max-height: $topbar-height - 4;
 }
 
 .reveal-modal.open{

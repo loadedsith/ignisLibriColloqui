@@ -41,7 +41,6 @@
         </li>
       </ul>
       <ul class="right show-for-small-only">
-        <li ng-include="'app/components/user/user.html'" ></li>
         <li class='active' ng-click="showMobileNav = !(!!showMobileNav)">
           <a href="#">
             <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
@@ -51,15 +50,15 @@
     </section>
   </nav>
   <div class="icon-bar three-up show-for-small-only" ng-show="showMobileNav">
-    <a class="item" ng-click="toggleNavBar('matches')">
+    <a class="item" ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
       <span class="icon-users"></span>
       <label>Matches</label>
     </a>
-    <a class="item" ng-click="toggleNavBar('messages')">
+    <a class="item" ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
       <span class="icon-chat"></span>
       <label>Messages</label>
     </a>
-    <a class="item" ng-click="toggleNavBar('profile')">
+    <a class="item" ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
       <span class="icon-pencil"></span>
       <label>Profile</label>
     </a>
