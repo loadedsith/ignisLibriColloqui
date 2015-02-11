@@ -9,10 +9,11 @@ div.button{
 }
 .mainView{
   display: none;
-  padding: 0.98em 0px;
-  min-width:480px;
   &.open{
     display:block;
+    position:relative;
+    padding: 0.98em 0px;
+    min-width:480px;
   }
 }
 .close{
