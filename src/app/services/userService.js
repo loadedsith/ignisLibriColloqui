@@ -64,6 +64,16 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       FacebookService.login(_this.loginCallback);
     };
 
+    _this.logoutOfFacebook = function() {
+      var deferred = $q.defer();
+      FacebookService.logout(deferred);
+      deferred.promise.then(function() {
+        console.log('Facebook logout successful');
+        $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+        _this.user = {};
+      });
+    };
+
     _this.updateUserImage = function(response) {
       console.log('updateUserImage', response);
       if (response && !response.error) {
@@ -89,6 +99,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.setUser = function(user) {
       _this.user = user;
+      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
     };
 
     _this.userInfoCallback = function(response) {
@@ -137,7 +148,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
 
     _this.loginCallback = function(response) {
-
+      $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';

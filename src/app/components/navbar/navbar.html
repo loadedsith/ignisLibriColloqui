@@ -40,12 +40,16 @@
           <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
         </li>
       </ul>
+      <ul class="right show-for-medium-up">
+        <div ng-include="'app/components/user/user.html'" ></div>
+      </ul>
       <ul class="right show-for-small-only">
         <li class='active' ng-click="showMobileNav = !(!!showMobileNav)">
           <a href="#">
             <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
           </a>
         </li>
+        <div ng-include="'app/components/user/user.html'" ></div>
       </ul>
     </section>
   </nav>

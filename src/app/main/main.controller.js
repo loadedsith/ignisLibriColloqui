@@ -4,9 +4,13 @@ define(['controllerModule', 'angular'], function(controllers) {
     '$scope', '$timeout', 'FacebookService', 'StatusService', 'UserService', 'ILCServerService', 'Config',
     function($scope, $timeout, FacebookService, StatusService, UserService, ILCServerService, Config) {
       //ensure that status calls reference the current status
+      $scope.loginWithFacebook = UserService.loginToFacebook;
+      
       $scope.Strings = Config.strings;
       $scope.Config = Config;
       $scope.user = {};
+
+      $scope.loggedIn = false;
 
       $scope.userId = "default user id, did facebook login fail?";
 
@@ -43,8 +47,16 @@ define(['controllerModule', 'angular'], function(controllers) {
           StatusService.setStatus(profileIncomplete);
         }
       };
-
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
+
+      $scope.$on('UserService:FacebookLoggedIn', function() {
+        $scope.loggedIn=true;
+      });
+
+      $scope.$on('UserService:FacebookLoggedOut', function() {
+        debugger;
+        $scope.loggedIn=true;
+      });
 
       $scope.$watch('showProfile',function(newValue, oldValue) {
         var complete = UserService.isProfileComplete();
@@ -65,6 +77,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
         $scope.currentTopic = UserService.currentTopic;
+      });
+
+      $scope.$on('UserService:FacebookLoginSuccess', function(event, user) {
+        $scope.login();
       });
 
       $scope.showMatches = (Config.showMatches || false);
@@ -141,18 +157,20 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.parseInt = parseInt;
 
-      var userLoginState = UserService.checkLoginState();
+      $scope.login = function() {
+        var userLoginState = UserService.checkLoginState();
+        userLoginState.then(function(response) {
+          //logged in
+          StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
+          ILCServerService.login(response.authResponse.accessToken);
+          $scope.userId = response.authResponse.userID;
+        }, function(response) {
+          StatusService.setStatus(StatusService.ready);
+          console.log('maincontroller responding to facebook login fail', response);
+        });
+      }
 
-      userLoginState.then(function(response) {
-        //logged in
-        StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
-        ILCServerService.login(response.authResponse.accessToken);
-        $scope.userId = response.authResponse.userID;
-      }, function(response) {
-        StatusService.setStatus(StatusService.ready);
-        console.log('maincontroller responding to facebook login fail', response);
-      });
-
+      $scope.login();
       if (window.location.host === 'localhost:3000') {
         var useRealHostToTestFacebook = {
           text:'You must use example.com:3000 to test Facebook integration',

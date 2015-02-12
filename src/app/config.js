@@ -47,7 +47,8 @@ define(['angular'], function() {
       profile: 'Profile',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
-      messageList: 'Messages List'
+      messageList: 'Messages List',
+      welcomeTo:'Welcome to'
     }
   });
 });

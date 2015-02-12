@@ -95,6 +95,14 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         _this.apiCallbackWrapper('/me', callback);
       };
 
+      _this.logout = function(deferred) {
+        FB.logout(function(response) {
+          deferred.resolve(response);
+          $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+        });
+        return deferred;
+      };
+
       _this.login = function(callback, scope) {
         if (scope === undefined) {
           scope = 'public_profile, email';
@@ -103,6 +111,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           FB.login(callback, {scope: scope});
         } else {
           FB.login(function(response) {
+            $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
             console.log('facebookService.login response', response);
             if (response.status === 'connected') {
               // Logged into your app and Facebook.

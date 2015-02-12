@@ -78,6 +78,15 @@ div.button{
     }
     margin: 0 47px;
   }
+  .fb-logout{
+/*          display:none;*/
+    background-color:$primary-color;
+  }
+  a.fb-login.tiny.button,a.fb-logout.tiny.button{
+    font-size:14px;
+    width:auto;
+    height:$topbar-height;
+  }
 
   .right.show-for-small-only{
     li a{
@@ -97,6 +106,7 @@ div.button{
         background-color:transparent;
       }
     }
+
   }
   .top-bar-section ul li {
     background-color:transparent;

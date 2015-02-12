@@ -1,8 +1,13 @@
-<div class="" ng-controller="UserController">
-  <a href="" ng-show="loggedIn()" class="profilePicture">
-    <img  title="Welcome {{user.info.first_name}}" ng-src="{{profilePicture}}"/>
-  </a>
-  <a href="" ng-show="!loggedIn()">
-    <div  class="fb-login tiny button" ng-click="loginToFacebook()">Login to Facebook</div>
-  </a>
+<div class="" ng-controller="UserController" ng-if="loggedIn">
+  <li ng-show="showLogoutButton" class="show-for-medium-up">
+    <a class="fb-logout" ng-click="logoutOfFacebook()">Logout</a>
+  </li>
+  <li ng-click="showLogoutButton = !showLogoutButton">
+    <a href="" ng-show="loggedIn()" class="profilePicture">
+      <img title="Welcome {{user.info.first_name}}" ng-src="{{profilePicture}}"/>
+    </a>
+  </li>
+  <li ng-show="showLogoutButton" class="show-for-small-only">
+    <a class="fb-logout" ng-click="logoutOfFacebook()">Logout</a>
+  </li>
 </div>

@@ -17,6 +17,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         return true;
       };
 
+      $scope.logoutOfFacebook = UserService.logoutOfFacebook;
       $scope.loginToFacebook = UserService.loginToFacebook;
 
       $scope.loggedIn = function() {
