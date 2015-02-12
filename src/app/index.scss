@@ -100,9 +100,9 @@ div.button{
   }
   .top-bar-section ul li {
     background-color:transparent;
-
     &.active{
       &:not(.has-form) a:not(.button).skew{
+        font-size:22px;
         background-color:lighten($primary-color, 10%);
         &:hover{
           background-color:$secondary-color;
@@ -119,6 +119,7 @@ div.button{
     }
 
     &:not(.has-form) a:not(.button).skew{
+      font-size:22px;
       transition:0.3s 0.1s background-color, 0.3s 0.1s color;
       background-color:$primary-color;
       border-right:3px solid $secondary-color;
