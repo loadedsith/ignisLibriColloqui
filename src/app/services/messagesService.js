@@ -43,16 +43,14 @@ define(['services/serviceModule'], function(services) {
         }else{
           rooms = snapshot;
         }
-
         _this.rooms = [];
-        angular.forEach(rooms, function(value, key) {
-          // value.key = key;
-          _this.rooms.push(value);
-        });
+        for (var i = rooms.length - 1; i >= 0; i--) {
+          _this.rooms.push(rooms[i]);
+        }
         _this.roomsReady = true;
 
         if (_this.rooms[0] !== '' && _this.rooms[0] !== undefined) {
-          _this.setCurrentRoom(_this.rooms[0].key);
+          _this.setCurrentRoom(_this.rooms[0]);
         }
 
         $rootScope.$broadcast('MessagesService:UpdateRooms', _this.rooms);
