@@ -85,6 +85,10 @@ input[type="text"]{
   padding-left: 1.3em;
   padding-right: 1em;
   background-color:rgba($primary-color,0.3);
+  &.facebook{
+    background-color:rgba($secondary-color,0.3);
+
+  }
   form{
     display:inline-block;
   }

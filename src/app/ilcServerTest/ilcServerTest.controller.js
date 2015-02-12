@@ -100,7 +100,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         console.log('pong', data);
       });
       $scope.ping = function() {
-        var data = {"test key":"test value"};
+        var data = {'test key':'test value'};
         console.log('ping', data);
         $socket.emit('ping', data);
       }

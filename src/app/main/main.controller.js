@@ -5,7 +5,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     function($scope, $timeout, FacebookService, StatusService, UserService, ILCServerService, Config) {
       //ensure that status calls reference the current status
       $scope.loginWithFacebook = UserService.loginToFacebook;
-      
+
       $scope.Strings = Config.strings;
       $scope.Config = Config;
       $scope.user = {};
@@ -54,7 +54,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       });
 
       $scope.$on('UserService:FacebookLoggedOut', function() {
-        debugger;
         $scope.loggedIn=true;
       });
 
