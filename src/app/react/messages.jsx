@@ -13,7 +13,7 @@ define(['react'], function(React) {
         var matchTopics = localUser.matches;
         if (typeof matchTopics === 'object') {
           for (var matchKey in matchTopics) {
-            var matches = matchTopics[matchKey]
+            var matches = matchTopics[matchKey];
             if (matches.length > 0) {
               for (var i = matches.length - 1; i >= 0; i--) {
                 var match = matches[i];
@@ -26,7 +26,7 @@ define(['react'], function(React) {
         }
       }
 
-      return false
+      return false;
     },
     render: function() {
       var rows = [];
@@ -49,13 +49,13 @@ define(['react'], function(React) {
           continue;
         }
 
-        var userName = "me";
+        var userName = 'me';
         var messageIsFromLocalUser;
-        var remoteUser = this.getRemoteUserFromLocalUserMatches(datum.user.data['user_id'])
+        var remoteUser = this.getRemoteUserFromLocalUserMatches(datum.user.data['user_id']);
         classes = 'user user-' + datum.user.data['user_id'];
         if (remoteUser !== false) {
           messageIsFromLocalUser = false;
-          userName = remoteUser.profile.name
+          userName = remoteUser.profile.name;
           classes = classes+' remote';
         } else {
           messageIsFromLocalUser = true;
@@ -78,7 +78,7 @@ define(['react'], function(React) {
         /*jshint ignore:start */
         if(timeStamp){
           rows.push(
-            <span className="time">
+            <span className='time'>
               {datumTime}
             </span>
           );
@@ -94,7 +94,7 @@ define(['react'], function(React) {
             <span className={classes}>
               {userName}:
             </span>&nbsp;
-            <span className="message">
+            <span className='message'>
               {datum.message}
             </span>
           </p>

@@ -8,7 +8,7 @@ define(['react'], function(React) {
           height:'0em',
           opacity:'0.3'
         }
-      }
+      };
     },
     more : function() {
       if (this.state.aboutStyles.opacity === '1') {

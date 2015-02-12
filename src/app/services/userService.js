@@ -167,7 +167,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.getUser = function() {return _this.user}
 
-    _this.skipFirstProfile = true;
     $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
       if(!angular.equals(newUser.profile, oldUser.profile)){
         //profile change
