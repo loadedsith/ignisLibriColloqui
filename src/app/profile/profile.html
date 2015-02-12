@@ -70,7 +70,7 @@
         </div>
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
-            <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist">
+            <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist track by $index">
               {{blacklisted.name}}
               <!-- TODO: Expose this info on hover -->
               <!-- <div class="hover">({{blacklisted.id}})</div> -->
