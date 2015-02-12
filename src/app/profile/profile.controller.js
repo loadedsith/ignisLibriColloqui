@@ -27,7 +27,16 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.roomNames = MessagesService.roomNames;
     };
 
-
+    $scope.roomIsAlreadyBlacklisted = function(room,key) {
+      if ($scope.user.profile.blacklist !== undefined) {
+        for (var i = $scope.user.profile.blacklist.length - 1; i >= 0; i--) {
+          if($scope.user.profile.blacklist[i].id === key){
+            return true;
+          }
+        }
+      }
+      return false;
+    }
 
     $scope.addBlacklist = function(blacklisted) {
       if ($scope.user.profile.blacklist === undefined){

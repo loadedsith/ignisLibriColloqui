@@ -83,16 +83,20 @@
           <div class="blacklistSelector" ng-show="showBlacklistSelector">
             <ul class="inline-list">
               <li class="blacklistSelector">
-                <!-- <dt class="sub-nav">
-                  Block these users by clicking on the Shield icon(<span class="icon-shield"></span>)
-                </dt> -->
-                <dl class="sub-nav">
-                  <dd ng-repeat="(key,room) in roomName">
+                <!-- ng-if="roomNames.length < user.profile.blacklist.length" -->
+                <dl class="sub-nav" >
+                  <!-- ng-if="!roomIsAlreadyBlacklisted(room)" -->
+                  <dd ng-repeat="room in roomNames track by $index" >
                     <div>
                       <!-- TODO: Avoid repeating already listed items -->
-                      <span class="icon-shield" ng-click="addBlacklist({id:key,name:room});"></span>
+                      <span class="icon-shield" ng-click="addBlacklist(room);"></span>
                       {{room}}
                     </div>
+                  </dd>
+                </dl>
+                <dl class="sub-nav" ng-if="roomNames.length === user.profile.blacklist.length">
+                  <dd>
+                    I believe you have blacklisted every single user. Nice job, you friendly person you.
                   </dd>
                 </dl>
               </li>
