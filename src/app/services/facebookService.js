@@ -128,7 +128,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           FB.login(callback, {scope: scope});
         } else {
           FB.login(function(response) {
-            $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+            $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
             console.log('facebookService.login response', response);
             if (response.status === 'connected') {
               // Logged into your app and Facebook.
