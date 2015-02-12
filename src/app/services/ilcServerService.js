@@ -46,17 +46,21 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       }
     }
 
+    _this.sendMessage = function(config) {
+      if (_this.accessToken === undefined) {
+        config.accessToken = _this.accessToken;
+        $socket.emit('send message', config);
+      }else{
+        console.log('couldnt set that message because the access token was undefined: ',config );
+      }
+    }
+
     _this.login = function(accessToken) {
       // send access token
       $socket.emit('login validator', accessToken);
-      MessagesService.sendMessage = function(message, currentRoom) {
-        var config = {
-          message:message,
-          accessToken:accessToken,
-          room:currentRoom
-        }
-        $socket.emit('send message', config);
-      }
+
+      MessagesService.sendMessageEventListener = _this.sendMessage;
+
       // listen for confirmation of a valid user
       $socket.on('user valid', function(user) {
         UserService.setUser(user);

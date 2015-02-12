@@ -9,20 +9,19 @@ define(['services/serviceModule'], function(services) {
 
       _this.currentRoom = '';
 
-      _this.sendMessage = function(message) {
-        if (_this.currentRoom === undefined || _this.currentRoom === '') {
-          console.debug('Talking to yourself again?');
-          return false;
-        }
-
-        if (_this.currentRoomRef !== undefined) {
-          _this.currentRoomRef.push({
-            name: _this.username,
-            message: message
-          });
-        }
-        return true;
+      _this.sendMessageEventListener = function() {
+        console.log('default sendMessageEventListener');
       }
+      _this.sendMessage = function(message, currentRoom) {
+        var config = {
+          message:message,
+          room:currentRoom
+        };
+
+        if(typeof sendMessageEventListener === 'function'){
+          _this.sendMessageEventListener(config);
+        }
+      };
 
       _this.roomAdded = function(snapshot) {
         //receive new message
