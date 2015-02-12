@@ -88,9 +88,9 @@
           <label for="aboutMe">{{Strings.aboutMe}}</label>
         </div>
         <div class="small-12 medium-9 columns">
-          <a href="#" editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
+          <blockquote editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
             {{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}
-          </a>
+          </blockquote>
         </div>
       </div>
       <div class="row facebookWarning">
