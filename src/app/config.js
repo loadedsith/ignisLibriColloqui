@@ -33,7 +33,9 @@ define(['angular'], function() {
       errors:{
         noName:'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
+      suggestionsFromFacebook:'Suggestions from ',
       facebookHandlesImagesWarning:'Facebook Handles what images are shown to the users.',
+      facebookInterestsError:'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this data (or don\'t use this feature).',
       matches: 'Matches',
       messages: 'Messages',
       name:'Name',
@@ -44,6 +46,7 @@ define(['angular'], function() {
       send: 'Send',
       sendMessage: 'Send Message',
       siteTitle: '🔥 📖 💬',
+      suggestFacebookInterests:'Suggest Facebook Interests?',
       profile: 'Profile',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
