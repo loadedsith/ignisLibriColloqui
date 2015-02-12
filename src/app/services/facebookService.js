@@ -91,13 +91,18 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         _this.apiCallbackWrapper('/me/picture' + imageConfig, callback);
       };
 
-      _this.getUserLikes = function(deferred, paging, beforeOrAfter) {
+      _this.getUserLikes = function(deferred, paging, beforeOrAfter, limit) {
         var resource = '/me/likes';
+        if (limit !== undefined) {
+          resource = resource + '?limit=' + limit;
+        }else{
+          resource = resource + '?limit=' + 10;
+        }
         if(paging !== undefined && beforeOrAfter !== undefined){
           if(beforeOrAfter === 'before'){
-            resource = resource + '?before=' + paging.cursors.before
+            resource = resource + '&before=' + paging.cursors.before
           }else if(beforeOrAfter === 'after'){
-            resource = resource + '?after=' + paging.cursors.after
+            resource = resource + '&after=' + paging.cursors.after
           }else{
             console.log('beforeOrAfter was defined, but not before or after. Derp');
           }

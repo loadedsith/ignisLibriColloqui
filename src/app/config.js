@@ -11,6 +11,7 @@ define(['angular'], function() {
       height:558,
       width:400
     },
+    interestsLimit:10,
     // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       aboutMe: 'About Me',

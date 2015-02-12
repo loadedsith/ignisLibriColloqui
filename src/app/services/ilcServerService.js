@@ -67,7 +67,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         //found a valid user, so stash the token
         _this.accessToken = accessToken;
       });
-    }
+    };
 
     $socket.on('user disconnected', function(value) {
       console.log('disconnected',value);

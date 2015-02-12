@@ -114,7 +114,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     $scope.suggestFacebookInterests = function(paging, beforeOrAfter) {
       var deferred = $q.defer();
       $scope.facebookInterestsLoading = true;
-      FacebookService.getUserLikes(deferred, paging, beforeOrAfter);
+      FacebookService.getUserLikes(deferred, paging, beforeOrAfter, (Config.interestsLimit || 10));
       deferred.promise.then(function(results) {
         console.log('likes results', results);
         $scope.likes = results.data;
@@ -122,7 +122,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.facebookInterestsLoading = false;
         if (results.error !== undefined) {
           console.log('results.error', results.error);
-          $scope.facebookInterestsError = Strings.facebookInterestsError;
+          $scope.facebookInterestsError = $scope.Strings.facebookInterestsError;
         }
       });
     };
