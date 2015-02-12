@@ -40,6 +40,9 @@ div.button{
 .unskew{
   transform:skewX(-33deg);
 }
+.inline{
+  display:inline-block!important;
+}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
