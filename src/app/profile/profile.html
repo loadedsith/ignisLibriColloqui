@@ -44,6 +44,24 @@
               {{Strings.addInterest}}
             </li>
           </ul>
+          <div class="button tiny secondary" ng-click="showFacebookInterests = !showFacebookInterests;suggestFacebookInterests()" ng-hide="showFacebookInterests">
+            {{Strings.suggestFacebookInterests}}
+          </div>
+          <div ng-show="showFacebookInterests">
+            <ul class="inline-list" ng-hide="facebookInterestsLoading">
+              <li>
+                {{Strings.suggestionsFromFacebook}}<span class="inline icon-facebook"></span>:
+              </li>
+              <li class="interestWrapper facebook" ng-repeat="like in likes">
+                {{like.name}}
+                <span class="inline" ng-click="addInterest(like.name, user.profile)">{{Strings.addInterest}}</span>
+              </li>
+            </ul>
+            <div ng-show="facebookInterestsLoading">Loading...</div>
+
+            <button ng-class="{disabled:facebookInterestsLoading}" ng-disabled="facebookInterestsLoading" ng-click="suggestFacebookInterests(likesPaging,'before')">&larr;</button>
+            <button ng-class="{disabled:facebookInterestsLoading}" ng-disabled="facebookInterestsLoading" ng-click="suggestFacebookInterests(likesPaging,'after')">&rarr;</button>
+          </div>
         </div>
       </div>
       <div class="row blacklist">

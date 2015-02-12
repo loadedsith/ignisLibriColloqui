@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('ProfileController', [
-    '$scope', 'Config', 'MessagesService',
-    function($scope, Config, MessagesService) {
+    '$scope','$q', 'Config', 'MessagesService', 'FacebookService',
+    function($scope, $q, Config, MessagesService, FacebookService) {
     $scope.Strings = Config.strings;
 
     $scope.checkName = function(data) {
@@ -99,8 +99,27 @@ define(['controllerModule', 'angular'], function(controllers) {
         return false
       }
     };
+
+    $scope.facebookInterestsPage = 0;
+    $scope.facebookInterestsLoading = false;
+    $scope.suggestFacebookInterests = function(paging, beforeOrAfter) {
+      var deferred = $q.defer();
+      $scope.facebookInterestsLoading = true;
+      FacebookService.getUserLikes(deferred, paging, beforeOrAfter);
+      deferred.promise.then(function(results) {
+        console.log('likes results', results);
+        $scope.likes = results.data;
+        $scope.likesPaging = results.paging;
+        $scope.facebookInterestsLoading = false;
+        if (results.error !== undefined) {
+          console.log('results.error', results.error);
+          $scope.facebookInterestsError = Strings.facebookInterestsError;
+        }
+      });
+    };
     $scope.showInterests = function() {
       return $scope.interests;
-    }
+    };
+
   }]);
 });

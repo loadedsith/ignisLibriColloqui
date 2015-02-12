@@ -91,6 +91,23 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         _this.apiCallbackWrapper('/me/picture' + imageConfig, callback);
       };
 
+      _this.getUserLikes = function(deferred, paging, beforeOrAfter) {
+        var resource = '/me/likes';
+        if(paging !== undefined && beforeOrAfter !== undefined){
+          if(beforeOrAfter === 'before'){
+            resource = resource + '?before=' + paging.cursors.before
+          }else if(beforeOrAfter === 'after'){
+            resource = resource + '?after=' + paging.cursors.after
+          }else{
+            console.log('beforeOrAfter was defined, but not before or after. Derp');
+          }
+        }
+        _this.apiCallbackWrapper(resource, function(response) {
+          deferred.resolve(response);
+        });
+        return deferred;
+      };
+
       _this.getUserInfo = function(callback) {
         _this.apiCallbackWrapper('/me', callback);
       };
@@ -105,7 +122,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
 
       _this.login = function(callback, scope) {
         if (scope === undefined) {
-          scope = 'public_profile, email';
+          scope = 'public_profile, email, user_likes';
         }
         if (typeof callback === 'function') {
           FB.login(callback, {scope: scope});
