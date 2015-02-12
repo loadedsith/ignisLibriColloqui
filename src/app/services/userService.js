@@ -17,7 +17,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     _this.checkLoginState = function() {
       var deferred = $q.defer();
       FacebookService.checkLoginState(deferred);
-      deferred.promise.then(_this.loginSuccess, _this.loginFailure)
       return deferred.promise;
     };
 
