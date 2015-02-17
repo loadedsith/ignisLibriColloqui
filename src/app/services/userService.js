@@ -32,7 +32,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       }else{
         console.log('ignoring user match because profile undefined');
       }
-      console.log('UserService.user', _this.user,match);
+      console.log('UserService.user', _this.user, match);
       $rootScope.$broadcast('UserService:UpdateUserProfile', _this.user);
     };
 
