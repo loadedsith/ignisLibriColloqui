@@ -1,7 +1,7 @@
 define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
   'use strict';
-  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService',
-  function($rootScope, $cookies, $q, FacebookService) {
+  return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'Config',
+  function($rootScope, $cookies, $q, FacebookService, Config) {
     'use strict';
     var _this = this;
 
@@ -85,6 +85,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       console.log('updateUserImage', response);
       if (response && !response.error) {
         _this.user.profilePicture = response;
+        _this.imageMatchLookup(_this.user.info.id, response);
       }
     };
     _this.isProfileComplete = function() {
@@ -165,10 +166,62 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       $rootScope.$broadcast('UserService:FacebookLoginSuccess',response);
     };
 
+    _this.matchList = {};
+
+    _this.processMatches = function(matches) {
+      var w = (Config.cardSize.width || 400) / 2;
+      var h =  (Config.cardSize.height || 558) / 2;
+      var facebookImageConfig = {
+        width: w,
+        height: h
+      };
+      if (matches === undefined) {
+        return undefined;
+      }
+      matches = matches[_this.currentTopic];
+      if(matches === undefined){
+        return _this.matchList;
+      }
+      for (var i = matches.length - 1; i >= 0; i--) {
+        var match = matches[i];
+        if (_this.profiles[match.id] === undefined) {
+          _this.profiles[match.id] = {};
+        }
+        if (_this.profiles[match.id].fetching === undefined) {
+          _this.profiles[match.id].fetching = true;
+          _this.profiles[match.id].image =
+            FacebookService.getUserImageById(match.id, facebookImageConfig, _this.imageMatchLookup);
+        }
+
+      }
+      return _this.matchList;
+    };
+
+    _this.imageMatchLookup = function(id, image) {
+      var matches = _this.user.matches;
+      var matchesKeys = Object.keys(matches);
+      for (var i = matchesKeys.length - 1; i >= 0; i--) {
+        var interest = matchesKeys[i];
+        for (var ii = matches[interest].length - 1; ii >= 0; ii--) {
+          var interestedUser = matches[interest][ii];
+          _this.profiles[id].image = image;
+          _this.profiles[id].fetching = 'done';
+
+          if (interestedUser.id === id) {
+            interestedUser.image = image;
+            interestedUser.fetching = 'done';
+          }
+        }
+      }
+      $rootScope.$broadcast('UserService:UpdateMatchProfiles',true);
+    };
+
     _this.getUser = function() {return _this.user}
 
     $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
-
+      if (newUser.matches!==undefined){
+        _this.processMatches(newUser.matches)
+      }
       if(!angular.equals(newUser.profile, oldUser.profile)){
         //profile change
         if(oldUser.profile !== undefined && oldUser.info !== undefined){

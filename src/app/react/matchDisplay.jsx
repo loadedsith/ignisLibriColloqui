@@ -26,18 +26,27 @@ define(['react'], function(React) {
       }
     },
     render: function() {
-      var imageUrl;
+      var defaultImageUrl = './assets/images/FBProfile.jpg';
+      var imageUrl = defaultImageUrl;
 
       //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
-      var imageData = (((this.props.data || {}).image || {}).data || {});
 
-
-      if(imageData['is_silhouette'] === true){
-        imageUrl = './assets/images/FBProfile.jpg';
-      } else {
-        imageUrl = imageData.url||'./assets/images/FBProfile.jpg';
+      if(this.props.profile.fetching !== undefined){
+        //Remote User Image
+        if((this.props.profile.image||{}).data !== undefined){
+          var imageData = this.props.profile.image.data;
+          if(imageData['is_silhouette'] !== true){
+            imageUrl = imageData.url||defaultImageUrl;
+          }
+        }
       }
+
       /*jshint ignore:start */
+      if((this.props.profile.image||{}).data !== undefined){
+        //Local User Image, techically this shouldnt happen, cuz who has their own card in their stack? lol
+        imageUrl = this.props.profile.image.data.url;
+      }
+
       var styles = {//JsIgnore because unused
         backgroundImage:'url(' + imageUrl + ')',
         backgroundSize:'cover',

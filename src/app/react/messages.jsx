@@ -72,8 +72,6 @@ define(['react'], function(React) {
           lastTime = datumTime;
           timeStamp = true;
         }
-
-
         /*jshint ignore:start */
         if(timeStamp){
           rows.push(
@@ -100,11 +98,23 @@ define(['react'], function(React) {
           );
         /*jshint ignore:end */
       }
+      //TODO: This is supposed to have a profile object now
+      var profileImage;
+      var profile = (this.props.profile||{}); //profile or empty
+      if(profile.image!==undefined){
+        if(profile.image.data['is_silhouette'] === true){
+          profile.image.data.url = './assets/images/fbProfile.jpg';
+        }
+        profileImage = <img className='profileImage' src={profile.image.data.url}/>
+      }
       return (
         /*jshint ignore:start */
         <div>
           <div className="controls">
-            {(this.props.remoteUser.profile||{}).name||''}
+            {profileImage}
+            <span className="name">
+              {(this.props.remoteUser.profile||{}).name||''}
+            </span>
           </div>
           <div className="messageWrapper">{rows}</div>
         </div>

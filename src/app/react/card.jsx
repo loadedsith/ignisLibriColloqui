@@ -42,6 +42,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         rotation: originalRotation,
         originalRotation: originalRotation,
         easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
+        profile:this.props.config.profile||{},
         opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
@@ -65,12 +66,11 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       //card template must be a react object, if it is it's type is a function.
       try {
         cardTemplate = React.createElement(this.props.config.cardTemplate, {
-          data: this.props.data
+          data: this.props.data, profile: this.props.config.profile
         }, this.props.data, " ");
       } catch (error) {
         cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>
       }
-
       return <li
               onMouseDown= {this.handelMouse}
               className='card'

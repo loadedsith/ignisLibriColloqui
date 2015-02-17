@@ -60,6 +60,10 @@ define(['services/serviceModule'], function(services) {
         $rootScope.$broadcast('MessagesService:MessageSent', message);
       };
 
+      _this.closeRoom = function(room, userId) {
+        $rootScope.$broadcast('MessagesService:CloseRoom', room, userId);
+      };
+
       _this.setCurrentRoom = function(name) {
         console.log('messages service currentRoom, name', _this.currentRoom, name);
         _this.currentRoom = name;

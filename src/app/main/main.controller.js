@@ -49,6 +49,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
+      $scope.$on('UserService:UpdateMatchProfiles', function(event, value) {
+        $scope.profiles = UserService.profiles;
+      });
+
       $scope.$on('UserService:FacebookLoggedIn', function() {
         var userLoginState = UserService.checkLoginState();
         ILCServerService.login(UserService.auth);

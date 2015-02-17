@@ -55,8 +55,17 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
             config:config,
             children:el
           }), el[0]);
-
         }, true);
+        scope.$watch('profile', function(newValue) {//extraAttr: oldValue
+          config.profile = profile;
+
+          React.render(new CardFactory({
+            data: scope.card,
+            config:config,
+            children:el
+          }), el[0]);
+        }, true);
+
       }
     };
   });

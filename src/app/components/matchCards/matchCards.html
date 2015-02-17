@@ -5,8 +5,8 @@
         <card-gph
           ng-repeat="card in matchList[currentTopic]"
           card='card'
-          ng-if="!blacklisted(card.id)"
-          profile=''
+          ng-if="!blacklisted(card.id) && card.id !== user.info.id"
+          profile='profiles[card.id]'
           duration="250"
           max-drag="250"
           initial-position="{x:10, y:10}"

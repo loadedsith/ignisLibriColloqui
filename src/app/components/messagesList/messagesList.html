@@ -8,6 +8,7 @@
   <div ng-repeat="room in rooms">
     <div ng-if="parseInt(room) < parseInt(userId)">
       <messages-gph
+        profile="profiles[room]"
         close-room="closeRoom(room, userId)"
         scroll-glue="glued"
         local-user="user"
@@ -17,6 +18,7 @@
     </div>
     <div ng-if="parseInt(room) > parseInt(userId)">
       <messages-gph
+        profile="profiles[room]"
         close-room="closeRoom(room, userId)"
         scroll-glue="glued"
         local-user="user"

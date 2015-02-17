@@ -8,15 +8,23 @@ messages-gph{
   position: relative;
   display: block;
   .controls {
-      display:block;
-      position:absolute;
-      z-index: 12;
-      background-color:rgba($secondary-color,0.8);
-      color:black;
-      width:100%;
-      line-height:$control-height;
-      height:$control-height;
-      padding-left:10px;
+    display:block;
+    position:absolute;
+    z-index: 12;
+    background-color:rgba($secondary-color,0.8);
+    color:black;
+    width:100%;
+    line-height:$control-height;
+    height:$control-height;
+    padding-left:10px;
+    font-size:11px;
+    img.profileImage{
+      max-height: 35px;
+      display: inline-block;
+      padding-top: 0px;
+      padding-bottom: 3px;
+      margin-right: 3px;
+    }
   }
   & .messageWrapper{
     margin-top:$control-height;
