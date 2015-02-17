@@ -66,7 +66,9 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       //card template must be a react object, if it is it's type is a function.
       try {
         cardTemplate = React.createElement(this.props.config.cardTemplate, {
-          data: this.props.data, profile: this.props.config.profile
+          data: this.props.data,
+          profile: this.props.config.profile,
+          userProfile:this.props.config.userProfile
         }, this.props.data, " ");
       } catch (error) {
         cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>

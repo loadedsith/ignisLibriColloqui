@@ -189,8 +189,8 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
         }
         if (_this.profiles[match.id].fetching === undefined) {
           _this.profiles[match.id].fetching = true;
-          _this.profiles[match.id].image =
-            FacebookService.getUserImageById(match.id, facebookImageConfig, _this.imageMatchLookup);
+          _this.profiles[match.id].image = FacebookService.getUserImageById(match.id,
+            facebookImageConfig, _this.imageMatchLookup);
         }
 
       }

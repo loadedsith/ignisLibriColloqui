@@ -9,6 +9,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         duration: '=',
         card: '=',
         profile: '=',
+        userProfile: '=',
         swipeRight: '=',
         swipeLeft: '=',
         cardTemplate:'='
@@ -20,6 +21,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         var initialPosition = scope.initialPosition;
         var cardTemplate = scope.cardTemplate;//React Template!
         var profile = scope.profile;
+        var userProfile = scope.userProfile;
         var swipeRight;
         var swipeLeft;
 
@@ -46,6 +48,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
           swipeLeft:swipeLeft,
           swipeRight:swipeRight,
           profile:profile,
+          userProfile:userProfile,
           cardTemplate:cardTemplate
         };
 
@@ -56,9 +59,18 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
             children:el
           }), el[0]);
         }, true);
+
+        scope.$watch('userProfile', function(newValue) {//extraAttr: oldValue
+          config.userProfile = userProfile;
+          React.render(new CardFactory({
+            data: scope.card,
+            config:config,
+            children:el
+          }), el[0]);
+        }, true);
+
         scope.$watch('profile', function(newValue) {//extraAttr: oldValue
           config.profile = profile;
-
           React.render(new CardFactory({
             data: scope.card,
             config:config,
