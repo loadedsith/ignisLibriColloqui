@@ -59,7 +59,6 @@ define(['react'], function(React) {
           if (angular.equals(cardProfile.interests, userProfile.interests)) {
             return cardProfile.interests;
           }
-          debugger;
           for (var i = userProfile.interests.length - 1; i >= 0; i--) {
             var userInterest = userProfile.interests[i];
             for (var ii = cardProfile.interests.length - 1; ii >= 0; ii--) {

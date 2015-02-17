@@ -18,21 +18,33 @@
     <!-- build:js scripts/modernizr.js -->
     <script src="../bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
-    
-    <script src="app/env.js"></script>
-    
 
-    
+    <script src="app/env.js"></script>
+
+
+
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ui-view></div>
+    <div ui-view ng-cloak></div>
 
+    <div ng-hide='true'>
+      <nav class="top-bar row">
+      </nav>
+      <div class="row" ng-show="(!loggedIn)">
+        <div class="small-6 end columns small-centered text-center">
+          <h3 class="subtitle">Welcome To </h3>
+          <h1 class="subtitle">
+            <span class="icon-fire">🔥</span>&nbsp;<span class="icon-book">📖</span>&nbsp;<span class="icon-chat">💬</span>
+          </h1>
+        </div>
+      </div>
+    </div>
     <script src="../bower_components/requirejs/require.js"  data-main="app/require.config"></script>
-            
+
     <!-- build:js({.tmp,src}) scripts/app.js -->
     <!-- inject:partials -->
     <!-- angular templates will be automaticaly converted in js and inserted here -->
