@@ -9,7 +9,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       $scope.currentTopic = UserService.currentTopic;
 
       $scope.blacklisted = function(id) {
-        console.log('hook up blacklisted function');
+        //TODO: this is getting called alot, at least cache the results
         var scope = $scope;
         if((($scope.user||{}).profile||{}).blacklist !== undefined){
           for (var i = $scope.user.profile.blacklist.length - 1; i >= 0; i--) {

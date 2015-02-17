@@ -35,10 +35,10 @@ div.button{
   }
 }
 .skew{
-  transform:skewX(33deg);
+  transform: skewX(30deg);
 }
 .unskew{
-  transform:skewX(-33deg);
+  transform: skewX(-30deg);
 }
 .inline{
   display:inline-block!important;
@@ -111,6 +111,43 @@ div.button{
     }
 
   }
+  .left{
+    li{
+      &:hover{
+        .iconWrapper span.glyph{
+          display: inline-block;
+          opacity: 0;
+          visibility:hidden;
+        }
+        .iconWrapper span.subtitle{
+          display: inline-block;
+        }
+      }
+
+      .iconWrapper span.glyph{
+        display:inline-block;
+        width:1em;
+      }
+      .iconWrapper span.subtitle{
+        display: none;
+        position: absolute;
+        left: 0%;
+        top: $topbar-height / 4;
+
+        height: 0px;
+        width: $topbar-height + 10px;
+
+        text-align: center;
+        text-indent: 0;
+        font-size: 13px;
+        color: white;
+
+        transform: rotateZ(60deg);
+        z-index: 1000;
+
+      }
+    }
+  }
   .top-bar-section ul li {
     background-color:transparent;
     &.active{
@@ -166,6 +203,7 @@ div.button{
     }
   }
 }
+
 .wrapper{
   &.status-loading{
     display:none;

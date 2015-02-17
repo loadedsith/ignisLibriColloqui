@@ -31,6 +31,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
+      $scope.lastUserProfile;
       $scope.updateUserProfile = function(event, user) {
         $scope.updatingProfile = true;
         StatusService.setStatus(StatusService.loading);
@@ -63,18 +64,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.loggedIn=false;
       });
 
-      $scope.$watch('showProfile',function(newValue, oldValue) {
-        var complete = UserService.isProfileComplete();
-        if (newValue === false) {
-          if (complete !== true) {
-            $scope.showProfile = true;
-            var missing = complete;//if complete is not a true, it is then a list of what is missing from a valid profile
-            profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
-            StatusService.setStatus(profileIncomplete);
-          }
-        }
-      });
-
       $scope.$on('StatusService:Update', function(event, status) {
         $scope.status = status;
       });
@@ -94,59 +83,31 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.showProfile = (Config.showProfile || false);
 
-      $scope.toggleProfile = function(value) {
-        if (value === undefined) {
-          $scope.showProfile = !$scope.showProfile;
-        } else {
-          $scope.showProfile = !!value;
-        }
-        if ($scope.showProfile) {
-          $scope.showMessages = false;
-          $scope.showMatches = false;
-        }
-      };
-
-      $scope.toggleMatches = function(value) {
-        if (value === undefined) {
-          $scope.showMatches = !$scope.showMatches;
-        } else {
-          $scope.showMatches = !!value;
-        }
-        if ($scope.showMatches) {
-          $scope.showMessages = false;
-          $scope.showProfile = false;
-        }
-      };
-
-      $scope.toggleMessages = function(value) {
-        if (value === undefined) {
-          $scope.showMessages = !$scope.showMessages;
-        } else {
-          $scope.showMessages = !!value;
-        }
-        if ($scope.showMessages) {
-          $scope.showMatches = false;
-          $scope.showProfile = false;
-        }
-      };
-
-      $scope.toggleNavBar = function(itemName, value) {
-        var complete = UserService.isProfileComplete()
+      $scope.closeProfile = function() {
+        var complete = UserService.isProfileComplete();
         if (complete === true) {
-          if (itemName === 'matches'){
-            $scope.toggleMatches(value);
-          }
-          if (itemName === 'messages') {
-            $scope.toggleMessages(value);
-          }
-          if (itemName === 'profile'){
-            $scope.toggleProfile(value);
-          }
-        }else{
+          $scope.toggleNavBar('profile', false);//false = hide
+        } else {
           var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
           profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
+          console.log('incompleteProfile');
           StatusService.setStatus(profileIncomplete);
-          $scope.toggleProfile(true);
+        }
+      }
+
+      $scope.toggleNavBar = function(itemName, value) {
+        if(value===undefined){
+          value = true;
+        }
+        $scope.showProfile = false;
+        $scope.showMessages = false;
+        $scope.showMatches = false;
+        if (itemName === 'matches'){
+          $scope.showMatches = !!value;
+        }else if (itemName === 'messages') {
+          $scope.showMessages = !!value;
+        } else if (itemName === 'profile'){
+          $scope.showProfile = !!value;
         }
         if ($scope.showProfile  === false &&
             $scope.showMatches  === false &&
@@ -154,11 +115,10 @@ define(['controllerModule', 'angular'], function(controllers) {
         ){
           $scope.toggleNavBar(Config.defaultView || 'profile',true);
         }
+
       };
 
       $scope.toggleNavBar(Config.defaultView || 'profile',true);
-
-      console.log('Config.defaultView', Config.defaultView);
 
       $scope.parseInt = parseInt;
 
