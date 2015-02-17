@@ -50,11 +50,13 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
       $scope.$on('UserService:FacebookLoggedIn', function() {
+        var userLoginState = UserService.checkLoginState();
+        ILCServerService.login(UserService.auth);
         $scope.loggedIn=true;
       });
 
       $scope.$on('UserService:FacebookLoggedOut', function() {
-        $scope.loggedIn=true;
+        $scope.loggedIn=false;
       });
 
       $scope.$watch('showProfile',function(newValue, oldValue) {

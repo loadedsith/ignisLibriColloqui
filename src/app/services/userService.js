@@ -50,6 +50,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.loginSuccess = function(response) {
+      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
       _this.loginStatus = '👍 Logged In!';
       FacebookService.getUserInfo(_this.userInfoCallback);
       _this.loggedIn = true;
@@ -60,6 +61,10 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.loginToFacebook = function() {
+      _this.loggedIn = false;
+      _this.user = {};
+      _this.auth = '';
+      _this.profilePicture = undefined;
       FacebookService.login(_this.loginCallback);
     };
 
@@ -69,7 +74,10 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       deferred.promise.then(function() {
         console.log('Facebook logout successful');
         $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+        _this.loggedIn = false;
         _this.user = {};
+        _this.auth = '';
+        _this.profilePicture = undefined;
       });
     };
 
@@ -98,7 +106,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.setUser = function(user) {
       _this.user = user;
-      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
     };
 
     _this.userInfoCallback = function(response) {
@@ -147,29 +154,24 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
 
     _this.loginCallback = function(response) {
-      $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+      // $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
       if (response.authResponse === undefined) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';
         return;
       }
-
       FacebookService.getUserInfo(_this.userInfoCallback);
-
-      _this.auth = response.authResponse;
-
-      _this.user.loggedIn = true;
-      _this.loginStatus = '👍 Logged In!';
-
-      $cookies.userAuth = JSON.stringify(_this.auth);
+      _this.loginSuccess(response);
+      $rootScope.$broadcast('UserService:FacebookLoginSuccess',response);
     };
 
     _this.getUser = function() {return _this.user}
 
     $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
+
       if(!angular.equals(newUser.profile, oldUser.profile)){
         //profile change
-        if(oldUser.profile !== undefined){
+        if(oldUser.profile !== undefined && oldUser.info !== undefined){
           //if oldUser.profile exists we arent setting the initial profile
           $rootScope.$broadcast('UserService:UpdateUserProfile', newUser);
         }else{

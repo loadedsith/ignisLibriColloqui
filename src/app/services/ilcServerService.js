@@ -58,11 +58,12 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.login = function(accessToken) {
       // send access token
       $socket.emit('login validator', accessToken);
-
+      // UserService.userInfoCallback();
       MessagesService.sendMessageEventListener = _this.sendMessage;
 
       // listen for confirmation of a valid user
       $socket.on('user valid', function(user) {
+        UserService.loginSuccess(user);
         UserService.setUser(user);
         var config = {
           'userId': user.data['user_id'],

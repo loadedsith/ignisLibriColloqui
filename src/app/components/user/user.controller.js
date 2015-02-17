@@ -29,7 +29,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.$on('UserService:Update', function(event, user) {
-        $scope.user = user;
 
         // this annotation means if user.profilePicture.data.url exists, use that, if not use the fallback image
         var newProfilePicture = ((user.profilePicture || {}).data || {} ).url||$scope.fallbackImage;
@@ -41,6 +40,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           //it the profile picture is the fall back, use user.profilePicture.data.url or the fallback image.
           $scope.profilePicture = newProfilePicture;
         }
+        $scope.user = user;
       })
     }]);
 });

@@ -120,7 +120,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
       _this.logout = function(deferred) {
         FB.logout(function(response) {
           deferred.resolve(response);
-          $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
+          // $rootScope.$broadcast('UserService:FacebookLoggedOut', true);
         });
         return deferred;
       };
@@ -133,7 +133,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           FB.login(callback, {scope: scope});
         } else {
           FB.login(function(response) {
-            $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
+            // $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
             console.log('facebookService.login response', response);
             if (response.status === 'connected') {
               // Logged into your app and Facebook.
