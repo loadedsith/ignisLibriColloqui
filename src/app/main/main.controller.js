@@ -76,6 +76,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:FacebookLoginSuccess', function(event, user) {
         $scope.login();
       });
+      
+      $scope.$on('MessagesService:CloseRoom',function(event, config) {
+        ILCServerService.closeRoom(config);
+      });
 
       $scope.showMatches = (Config.showMatches || false);
 

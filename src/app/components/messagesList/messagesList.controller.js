@@ -18,8 +18,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.currentRoom = name;
       };
 
-      $scope.closeRoom = function(room, userId) {
-        MessagesService.closeRoom(room, userId);
+      $scope.closeRoom = function(event, room) {
+        MessagesService.closeRoom(room);
       }
 
       $scope.getRoomName = MessagesService.getRoomName;

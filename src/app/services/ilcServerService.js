@@ -46,6 +46,23 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       }
     }
 
+    _this.closeRoom = function(room) {
+      if (room === undefined) {
+        console.log('close room was invoked with the wrong arguments. Expects room to be set');
+        return;
+      }else{
+        var config = {
+          room:room
+        }
+        if (_this.accessToken !== undefined) {
+          config.accessToken = _this.accessToken;
+          $socket.emit('close room', config);
+        }else{
+          console.log('couldnt close the room because the access token was undefined: ', room );
+        }
+      }
+    };
+
     _this.sendMessage = function(config) {
       if (_this.accessToken === undefined) {
         config.accessToken = _this.accessToken;

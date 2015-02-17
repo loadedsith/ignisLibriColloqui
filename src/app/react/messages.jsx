@@ -107,11 +107,16 @@ define(['react'], function(React) {
         }
         profileImage = <img className='profileImage' src={profile.image.data.url}/>
       }
+      var boundClick = function(remoteUser, event) {
+        this.props.closeRoom(event,  remoteUser.id);
+      }
+
       return (
         /*jshint ignore:start */
         <div>
           <div className="controls">
             {profileImage}
+            <span className="close" onClick={boundClick.bind(this, this.props.remoteUser)}>&times;</span>
             <span className="name">
               {(this.props.remoteUser.profile||{}).name||''}
             </span>

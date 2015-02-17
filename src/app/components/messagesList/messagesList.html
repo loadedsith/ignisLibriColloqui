@@ -9,7 +9,7 @@
     <div ng-if="parseInt(room) < parseInt(userId)">
       <messages-gph
         profile="profiles[room]"
-        close-room="closeRoom(room, userId)"
+        close-room="closeRoom"
         scroll-glue="glued"
         local-user="user"
         messages="messages[room + '+' + userId]"
@@ -19,7 +19,7 @@
     <div ng-if="parseInt(room) > parseInt(userId)">
       <messages-gph
         profile="profiles[room]"
-        close-room="closeRoom(room, userId)"
+        close-room="closeRoom"
         scroll-glue="glued"
         local-user="user"
         messages="messages[userId + '+' + room]"
