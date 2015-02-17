@@ -3,27 +3,39 @@
   margin-left:auto;
   margin-right:auto;
 }
+$control-height: 40px;
 messages-gph{
   position: relative;
   display: block;
-
-  &:before {
-    display: block;
-    position:absolute;
-    top:0;
-    left:0;
-    max-width:100%;
-    width:100%;
-    content: "";
-    background: url(/assets/images/messageFade.png) repeat-x;
-    height:30px;
+  .controls {
+      display:block;
+      position:absolute;
+      z-index: 12;
+      background-color:rgba($secondary-color,0.8);
+      color:black;
+      width:100%;
+      line-height:$control-height;
+      height:$control-height;
+      padding-left:10px;
   }
-  &.messageWrapper{
+  & .messageWrapper{
+    margin-top:$control-height;
     max-height: 100%;
     height: 350px;
     max-width:480px;
     width:100%;
     overflow-x: scroll;
+    &:before {
+      display: block;
+      position:absolute;
+      top:0;
+      left:0;
+      max-width:100%;
+      width:100%;
+      content: "";
+      background: url(/assets/images/messageFade.png) repeat-x;
+      height:30px;
+    }
     .time{
       font-size:13px;
       display:block;

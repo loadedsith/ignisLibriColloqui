@@ -25,7 +25,6 @@ define(['react'], function(React) {
           }
         }
       }
-
       return false;
     },
     render: function() {
@@ -51,11 +50,11 @@ define(['react'], function(React) {
 
         var userName = 'me';
         var messageIsFromLocalUser;
-        var remoteUser = this.getRemoteUserFromLocalUserMatches(datum.user.data['user_id']);
+        this.props.remoteUser = this.getRemoteUserFromLocalUserMatches(datum.user.data['user_id']);
         classes = 'user user-' + datum.user.data['user_id'];
-        if (remoteUser !== false) {
+        if (this.props.remoteUser !== false) {
           messageIsFromLocalUser = false;
-          userName = remoteUser.profile.name;
+          userName = this.props.remoteUser.profile.name;
           classes = classes+' remote';
         } else {
           messageIsFromLocalUser = true;
@@ -104,7 +103,10 @@ define(['react'], function(React) {
       return (
         /*jshint ignore:start */
         <div>
-          {rows}
+          <div className="controls">
+            {(this.props.remoteUser.profile||{}).name||''}
+          </div>
+          <div className="messageWrapper">{rows}</div>
         </div>
         /*jshint ignore:end */
       );

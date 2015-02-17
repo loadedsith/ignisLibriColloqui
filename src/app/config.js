@@ -17,6 +17,7 @@ define(['angular'], function() {
       aboutMe: 'About Me',
       addInterest:'+',
       addBlacklist:'+',
+      chattingWith:'with',
       interests:'Interests',
       interestExists:'I already know you\'re interested in that, silly',
       currentRoom: 'Current Room',

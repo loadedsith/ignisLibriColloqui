@@ -69,10 +69,12 @@ define(['services/serviceModule'], function(services) {
         if (currentTopic !== undefined) {
           if (user.matches !== undefined) {
             var matches = user.matches[currentTopic];
-            for (var i = matches.length - 1; i >= 0; i--) {
-              var match = matches[i];
-              if (String(match.id) === String(room)){
-                return match.profile.name;
+            if (matches !== undefined) {
+              for (var i = matches.length - 1; i >= 0; i--) {
+                var match = matches[i];
+                if (String(match.id) === String(room)){
+                  return match.profile.name;
+                }
               }
             }
           }
