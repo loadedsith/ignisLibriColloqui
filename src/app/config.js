@@ -38,6 +38,7 @@ define(['angular'], function() {
       suggestionsFromFacebook:'Suggestions from ',
       facebookHandlesImagesWarning:'Facebook Handles what images are shown to the users.',
       facebookInterestsError:'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this data (or don\'t use this feature).',
+      noMatches: 'No matches, check back later...',
       matches: 'Matches',
       messages: 'Messages',
       name:'Name',

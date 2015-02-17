@@ -13,16 +13,29 @@ $cardHeight: $retinaCardHeight / 2;
   position:relative;
   height:$cardHeight + 20px;
   width:$cardWidth + 20px;
-  background:#999;
-/*  top:50%;*/
-/*  left:50%;*/
-/*  position:absolute;*/
-/*  margin-top:$topbar-height;//Centering to count the topbar-height*/
-/*  transform:translateX(-50%) translateY(25%);*/
   margin-bottom:0;
   margin-right: auto;
   margin-left: auto;
+  .bottom{
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: table;
+    vertical-align: middle;
+    &>div{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    p.glyphs {
+      font-size:65px;
+    }
+    p.copy {
+      font-size:24px;
+    }
+  }
 }
+
 .card{
   display:block;
   overflow:hidden;
