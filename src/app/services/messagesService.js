@@ -79,14 +79,14 @@ define(['services/serviceModule'], function(services) {
         }
         return room;
       };
-      _this.roomNames = {};
       _this.populateRoomNames = function(rooms, user, currentTopic) {
+        _this.roomNames = [];
         if (rooms === undefined) {
           rooms = _this.rooms;
         }
         for (var i = rooms.length - 1; i >= 0; i--) {
           var room = rooms[i];
-          _this.roomNames[room] = _this.getRoomName(room, user, currentTopic);
+          _this.roomNames.push({id:room, name:_this.getRoomName(room, user, currentTopic)});
         }
       };
       _this.roomSet = function(snapshot) {

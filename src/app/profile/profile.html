@@ -86,11 +86,11 @@
                 <!-- ng-if="roomNames.length < user.profile.blacklist.length" -->
                 <dl class="sub-nav" >
                   <!-- ng-if="!roomIsAlreadyBlacklisted(room)" -->
-                  <dd ng-repeat="room in roomNames track by $index" >
+                  <dd ng-repeat="room in roomNames track by room.id" ng-if="checkBlacklist(room.id)">
                     <div>
                       <!-- TODO: Avoid repeating already listed items -->
                       <span class="icon-shield" ng-click="addBlacklist(room);"></span>
-                      {{room}}
+                      {{room.name}}
                     </div>
                   </dd>
                 </dl>
