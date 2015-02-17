@@ -14,7 +14,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         cardTemplate:'='
       },
       link: function(scope, el) {//extraAttr: attrs
-        var MyComponent = React.createFactory(Card);
+        var CardFactory = React.createFactory(Card);
         var maxDrag = scope.maxDrag;
         var duration = scope.duration;
         var initialPosition = scope.initialPosition;
@@ -50,7 +50,7 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         };
 
         scope.$watch('card', function(newValue) {//extraAttr: oldValue
-          React.render(new MyComponent({
+          React.render(new CardFactory({
             data: newValue,
             config:config,
             children:el
