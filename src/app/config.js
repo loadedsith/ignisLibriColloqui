@@ -17,6 +17,7 @@ define(['angular'], function() {
       aboutMe: 'About Me',
       addInterest:'+',
       addBlacklist:'+',
+      allLikesAreAlreadyAdded:'Wunderbar! All Likes are already added.',
       chattingWith:'with',
       interests:'Interests',
       interestExists:'I already know you\'re interested in that, silly',

@@ -104,7 +104,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           }else if(beforeOrAfter === 'after'){
             resource = resource + '&after=' + paging.cursors.after
           }else{
-            console.log('beforeOrAfter was defined, but not before or after. Derp');
+            console.log('beforeOrAfter was defined, but not `before` or `after`.');
           }
         }
         _this.apiCallbackWrapper(resource, function(response) {

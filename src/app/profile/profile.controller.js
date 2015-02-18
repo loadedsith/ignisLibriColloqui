@@ -4,7 +4,30 @@ define(['controllerModule', 'angular'], function(controllers) {
     '$scope','$q', 'Config', 'MessagesService', 'FacebookService',
     function($scope, $q, Config, MessagesService, FacebookService) {
     $scope.Strings = Config.strings;
-
+    $scope.allLikesAreAlreadyAdded = function(likes, interests ) {
+      var similar = [];
+      if (likes === undefined){
+        return false;
+      }
+      for (var i = likes.length - 1; i >= 0; i--) {
+        if($scope.isInInterests(likes[i].name, interests)){
+          similar.push(likes[i].name)
+        }
+      }
+      if(similar.length === likes.length){
+        return true;
+      }
+      return false;
+    }
+    $scope.isInInterests = function(interest, interests) {
+      for (var i = (interests||[]).length - 1; i >= 0; i--) {
+        if(interests[i] === interest){
+          return true;
+          debugger;
+        };
+      }
+      return false;
+    }
     $scope.checkName = function(data) {
       if (data===undefined||data===''||data.length===0){
         return $scope.Strings.errors.noName;
@@ -111,11 +134,17 @@ define(['controllerModule', 'angular'], function(controllers) {
 
     $scope.facebookInterestsPage = 0;
     $scope.facebookInterestsLoading = false;
+    $scope.facebookFirstCursor;
+    $scope.facebookBeforeCursor;
     $scope.suggestFacebookInterests = function(paging, beforeOrAfter) {
       var deferred = $q.defer();
       $scope.facebookInterestsLoading = true;
       FacebookService.getUserLikes(deferred, paging, beforeOrAfter, (Config.interestsLimit || 10));
       deferred.promise.then(function(results) {
+        if ($scope.facebookFirstCursor === undefined){
+          $scope.facebookFirstCursor = results.paging.cursors.before;
+        }
+        $scope.facebookBeforeCursor = results.paging.cursors.before;
         console.log('likes results', results);
         $scope.likes = results.data;
         $scope.likesPaging = results.paging;
