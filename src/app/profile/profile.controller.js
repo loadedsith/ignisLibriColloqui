@@ -67,11 +67,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       $scope.user.profile.blacklist.push(blacklisted);
       $scope.addBlacklistPlaceholder = '';
-      $scope.save();
+      $scope.save($scope.user.profile);
     };
 
     $scope.removeBlacklist = function(index) {
       $scope.user.profile.blacklist.splice(index,1);
+      $scope.save($scope.user.profile);
     };
 
     $scope.checkBlacklist = function(blacklisted, blacklist) {
@@ -114,6 +115,8 @@ define(['controllerModule', 'angular'], function(controllers) {
       if (removeAtIndex !== null) {
         interests.splice(removeAtIndex,1);
       }
+
+      $scope.save($scope.user.profile);
     };
 
     $scope.checkInterest = function(interest, interests) {
