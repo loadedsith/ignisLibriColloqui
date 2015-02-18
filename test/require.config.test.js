@@ -122,7 +122,8 @@ require.config({
 
     'socket.io-client': 'bower_components/socket.io-client/socket.io',
     'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
-    'ng-socket': 'bower_components/ng-socket/ngSocket',
+    'ng-socket': 'src/vendor/ng-socket-gph',
+    // 'ng-socket': 'bower_components/ng-socket/ngSocket',
     'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
     facebook: 'test/vendor/mockFb',
     // facebook: '//connect.facebook.net/en_US/all',
