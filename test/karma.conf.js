@@ -7,13 +7,13 @@ module.exports = function(config) {
 
     files : [
         {pattern: 'bower_components/**/*.js', included: false},
-        {pattern: 'src/components/**/*.js', included: false,watched: true},
-        {pattern: 'src/app/**/*.js', included: false,watched: true},
+        {pattern: 'src/components/**/*.js', included: false, watched: true},
+        {pattern: 'src/app/**/*.js', included: false, watched: true},
         {pattern: '.tmp/components/**/*.js', included: false},
         {pattern: '.tmp/app/**/*.js', included: false},
-        {pattern: 'test/**/*spec.js', included: false,watched: true},
-        {pattern: 'test/vendor/*.js',included: false},
-        {pattern: 'test/mock/*.js',included: false},
+        {pattern: 'test/**/*spec.js', included: false, watched: true},
+        {pattern: 'test/vendor/*.js', included: false},
+        {pattern: 'test/mock/*.js', included: false},
         'test/require.config.test.js',
         'test/reactPolyfillForPhantomJS.js'
     ],
@@ -44,7 +44,7 @@ module.exports = function(config) {
          base: 'Chrome',
          flags: ['--disable-web-security']
        }
-     },*/
+     }, */
     browsers: ['PhantomJS'], //'Chrome', 'Chrome_without_security'
 
     //example.com has been added to etc/hosts as the localhost,

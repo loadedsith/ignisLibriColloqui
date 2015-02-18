@@ -7,9 +7,9 @@ gulp.task('test-server', function() {
     script: './test/testServer.js',
     ext: 'html js',
     nodeArgs:['--debug'],
-    ignore: ['bower_components','node_modules','gulp/*.js']
+    ignore: ['bower_components', 'node_modules', 'gulp/*.js']
   })
-   .on('restart', function () {
+   .on('restart', function() {
      console.log('restarted!')
    });
  });

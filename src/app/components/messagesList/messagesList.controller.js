@@ -38,11 +38,11 @@ define(['controllerModule', 'angular'], function(controllers) {
         if (messages.snapshot !== null) {
           if (messages.snapshot[messages.room]) {
             $scope.messages[messages.room] = messages.snapshot[messages.room];
-          }else{
-            if( $scope.messages[messages.room] === undefined) {
-              $scope.messages[messages.room]=[];
+          } else {
+            if ($scope.messages[messages.room] === undefined) {
+              $scope.messages[messages.room] = [];
             }
-            for(var messageKey in messages.snapshot){
+            for (var messageKey in messages.snapshot) {
               var message = messages.snapshot[messageKey];
               $scope.messages[messages.room].push(message);
             }

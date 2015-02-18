@@ -33,7 +33,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         $socket.emit('get user matches', config);
       };
 
-
       $scope.setProfile = function() {
         var config = {
           'userId': $scope.fakeUserId,
@@ -96,7 +95,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.messages[room.room] = room.snapshot;
       });
 
-      $socket.on('pong', function (data) {
+      $socket.on('pong', function(data) {
         console.log('pong', data);
       });
       $scope.ping = function() {

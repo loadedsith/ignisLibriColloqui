@@ -69,7 +69,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
           } else {
             imageConfig = imageConfig + 'width=' + modifiers.width;
           }
-        }else{
+        } else {
           imageConfig = '?redirect=' + modifiers.redirect +
                          '&type=' + modifiers.type +
                          '&height=' + modifiers.height +
@@ -95,15 +95,15 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         var resource = '/me/likes';
         if (limit !== undefined) {
           resource = resource + '?limit=' + limit;
-        }else{
+        } else {
           resource = resource + '?limit=' + 10;
         }
-        if(paging !== undefined && beforeOrAfter !== undefined){
-          if(beforeOrAfter === 'before'){
+        if (paging !== undefined && beforeOrAfter !== undefined) {
+          if (beforeOrAfter === 'before') {
             resource = resource + '&before=' + paging.cursors.before
-          }else if(beforeOrAfter === 'after'){
+          } else if (beforeOrAfter === 'after') {
             resource = resource + '&after=' + paging.cursors.after
-          }else{
+          } else {
             console.log('beforeOrAfter was defined, but not `before` or `after`.');
           }
         }

@@ -15,7 +15,6 @@ define(['controllerModule'], function(controllers) {
         }
       });
 
-
       $scope.$on('MessagesService:MessageSent', function(event, message) {
         $scope.message = '';
       });

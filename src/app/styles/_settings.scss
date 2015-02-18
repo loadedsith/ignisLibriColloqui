@@ -481,7 +481,7 @@ $body-font-family: $font-family-sans-serif;
 // We use these to set the background colors for parts of Clearing.
 // $clearing-bg: $oil;
 // $clearing-caption-bg: $clearing-bg;
-// $clearing-carousel-bg: rgba(51,51,51,0.8);
+// $clearing-carousel-bg: rgba(51, 51, 51, 0.8);
 // $clearing-img-bg: $clearing-bg;
 
 // We use these to style the close button
@@ -501,7 +501,7 @@ $body-font-family: $font-family-sans-serif;
 // $clearing-active-img-height: 85%;
 // $clearing-carousel-height: 120px;
 // $clearing-carousel-thumb-width: 120px;
-// $clearing-carousel-thumb-active-border: 1px solid rgb(255,255,255);
+// $clearing-carousel-thumb-active-border: 1px solid rgb(255, 255, 255);
 
 // 08. Dropdown
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -552,7 +552,6 @@ $body-font-family: $font-family-sans-serif;
 
 // Default radius for dropdown.
 // $f-dropdown-radius: $global-radius;
-
 
 // 09. Dropdown Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -622,7 +621,7 @@ $body-font-family: $font-family-sans-serif;
 // $form-label-small-transform: capitalize;
 // $form-label-bottom-margin: 0;
 // $input-font-family: inherit;
-// $input-font-color: rgba(0,0,0,0.75);
+// $input-font-color: rgba(0, 0, 0, 0.75);
 // $input-font-size: rem-calc(14);
 // $input-bg-color: $white;
 // $input-focus-bg-color: scale-color($white, $lightness: -2%);
@@ -633,7 +632,7 @@ $body-font-family: $font-family-sans-serif;
 // $input-border-radius: $global-radius;
 // $input-disabled-bg: $gainsboro;
 // $input-disabled-cursor: $cursor-default-value;
-// $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+// $input-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 
 // We use these to style the fieldset border and spacing.
 // $fieldset-border-style: solid;
@@ -748,7 +747,7 @@ $body-font-family: $font-family-sans-serif;
 // $joyride-tip-close-weight: $font-weight-normal;
 
 // When Joyride is filling the screen, we use this style for the bg
-// $joyride-screenfill: rgba(0,0,0,0.5);
+// $joyride-screenfill: rgba(0, 0, 0, 0.5);
 
 // 15. Keystrokes
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -875,7 +874,7 @@ $body-font-family: $font-family-sans-serif;
 
 // We use these to control the caption styles
 // $orbit-container-bg: none;
-// $orbit-caption-bg: rgba(51,51,51, 0.8);
+// $orbit-caption-bg: rgba(51, 51, 51, 0.8);
 // $orbit-caption-font-color: $white;
 // $orbit-caption-font-size: rem-calc(14);
 // $orbit-caption-position: "bottom"; // Supported values: "bottom", "under"
@@ -884,12 +883,12 @@ $body-font-family: $font-family-sans-serif;
 
 // We use these to control the left/right nav styles
 // $orbit-nav-bg: transparent;
-// $orbit-nav-bg-hover: rgba(0,0,0,0.3);
+// $orbit-nav-bg-hover: rgba(0, 0, 0, 0.3);
 // $orbit-nav-arrow-color: $white;
 // $orbit-nav-arrow-color-hover: $white;
 
 // We use these to control the timer styles
-// $orbit-timer-bg: rgba(255,255,255,0.3);
+// $orbit-timer-bg: rgba(255, 255, 255, 0.3);
 // $orbit-timer-show-progress-bar: true;
 
 // We use these to control the bullet nav styles
@@ -898,7 +897,7 @@ $body-font-family: $font-family-sans-serif;
 // $orbit-bullet-radius: rem-calc(9);
 
 // We use these to controls the style of slide numbers
-// $orbit-slide-number-bg: rgba(0,0,0,0);
+// $orbit-slide-number-bg: rgba(0, 0, 0, 0);
 // $orbit-slide-number-font-color: $white;
 // $orbit-slide-number-padding: rem-calc(5);
 
@@ -1094,7 +1093,7 @@ $body-font-family: $font-family-sans-serif;
 // $reveal-default-width: 80%;
 // $reveal-max-width: $row-width;
 // $reveal-modal-padding: rem-calc(20);
-// $reveal-box-shadow: 0 0 10px rgba($black,.4);
+// $reveal-box-shadow: 0 0 10px rgba($black, .4);
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(40);
@@ -1161,7 +1160,7 @@ $body-font-family: $font-family-sans-serif;
 // $split-button-function-factor: 10%;
 // $split-button-pip-color: $white;
 // $split-button-pip-color-alt: $oil;
-// $split-button-active-bg-tint: rgba(0,0,0,0.1);
+// $split-button-active-bg-tint: rgba(0, 0, 0, 0.1);
 
 // We use these to control tiny split buttons
 // $split-button-padding-tny: $button-pip-tny * 10;
@@ -1320,8 +1319,8 @@ $body-font-family: $font-family-sans-serif;
 // $thumb-border-style: solid;
 // $thumb-border-width: 4px;
 // $thumb-border-color: $white;
-// $thumb-box-shadow: 0 0 0 1px rgba($black,.2);
-// $thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color,0.5);
+// $thumb-box-shadow: 0 0 0 1px rgba($black, .2);
+// $thumb-box-shadow-hover: 0 0 6px 1px rgba($primary-color, 0.5);
 
 // Radius and transition speed for thumbs
 // $thumb-radius: $global-radius;

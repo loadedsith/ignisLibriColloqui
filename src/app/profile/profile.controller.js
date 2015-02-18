@@ -1,40 +1,39 @@
 define(['controllerModule', 'angular'], function(controllers) {
   'use strict';
   return controllers.controller('ProfileController', [
-    '$scope','$q', 'Config', 'MessagesService', 'FacebookService',
+    '$scope', '$q', 'Config', 'MessagesService', 'FacebookService',
     function($scope, $q, Config, MessagesService, FacebookService) {
     $scope.Strings = Config.strings;
-    $scope.allLikesAreAlreadyAdded = function(likes, interests ) {
+    $scope.allLikesAreAlreadyAdded = function(likes, interests) {
       var similar = [];
-      if (likes === undefined){
+      if (likes === undefined) {
         return false;
       }
       for (var i = likes.length - 1; i >= 0; i--) {
-        if($scope.isInInterests(likes[i].name, interests)){
+        if ($scope.isInInterests(likes[i].name, interests)) {
           similar.push(likes[i].name)
         }
       }
-      if(similar.length === likes.length){
+      if (similar.length === likes.length) {
         return true;
       }
       return false;
     }
     $scope.isInInterests = function(interest, interests) {
-      for (var i = (interests||[]).length - 1; i >= 0; i--) {
-        if(interests[i] === interest){
+      for (var i = (interests || []).length - 1; i >= 0; i--) {
+        if (interests[i] === interest) {
           return true;
-          debugger;
         };
       }
       return false;
     }
     $scope.checkName = function(data) {
-      if (data===undefined||data===''||data.length===0){
+      if (data === undefined || data === '' || data.length === 0) {
         return $scope.Strings.errors.noName;
       }
     };
     $scope.saving = false;
-    $scope.$on('user profile updated',function() {
+    $scope.$on('user profile updated', function() {
       console.log('profile saved');
       $scope.saving = false;
     });
@@ -42,7 +41,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     $scope.save = function(profile) {
       $scope.saving = true;
       //not actually required because the form has direct access to the user object
-      $scope.$emit('ProfileController:UpdateUserProfile',$scope.user);
+      $scope.$emit('ProfileController:UpdateUserProfile', $scope.user);
     };
     $scope.roomNames = [];
     $scope.populateRoomNames = function() {
@@ -50,10 +49,10 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.roomNames = MessagesService.roomNames;
     };
 
-    $scope.roomIsAlreadyBlacklisted = function(room,key) {
+    $scope.roomIsAlreadyBlacklisted = function(room, key) {
       if ($scope.user.profile.blacklist !== undefined) {
         for (var i = $scope.user.profile.blacklist.length - 1; i >= 0; i--) {
-          if($scope.user.profile.blacklist[i].id === key){
+          if ($scope.user.profile.blacklist[i].id === key) {
             return true;
           }
         }
@@ -62,7 +61,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     }
 
     $scope.addBlacklist = function(blacklisted) {
-      if ($scope.user.profile.blacklist === undefined){
+      if ($scope.user.profile.blacklist === undefined) {
         $scope.user.profile.blacklist = [];
       }
       $scope.user.profile.blacklist.push(blacklisted);
@@ -71,7 +70,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     };
 
     $scope.removeBlacklist = function(index) {
-      $scope.user.profile.blacklist.splice(index,1);
+      $scope.user.profile.blacklist.splice(index, 1);
       $scope.save($scope.user.profile);
     };
 
@@ -81,19 +80,18 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       if (blacklisted !== '') {
         for (var i = blacklist.length - 1; i >= 0; i--) {
-          if(blacklisted.toLowerCase() === blacklist[i].toLowerCase()){
+          if (blacklisted.toLowerCase() === blacklist[i].toLowerCase()) {
             return $scope.Strings.blacklistedExists;
           }
         }
         return true;
-      }else{
+      } else {
         return false
       }
     };
 
-
     $scope.addInterest = function(interest, profile) {
-      if (profile.interests === undefined){
+      if (profile.interests === undefined) {
         profile.interests = [];
       }
       profile.interests.push(interest);
@@ -103,17 +101,17 @@ define(['controllerModule', 'angular'], function(controllers) {
 
     $scope.removeInterest = function(interest, interests) {
       var removeAtIndex = null;
-      if(interests === undefined || interest === undefined){
+      if (interests === undefined || interest === undefined) {
         return;
       }
       for (var i = interests.length - 1; i >= 0; i--) {
-        if(interest.toLowerCase() === interests[i].toLowerCase()){
-          removeAtIndex=i;
+        if (interest.toLowerCase() === interests[i].toLowerCase()) {
+          removeAtIndex = i;
           continue;
         }
       }
       if (removeAtIndex !== null) {
-        interests.splice(removeAtIndex,1);
+        interests.splice(removeAtIndex, 1);
       }
 
       $scope.save($scope.user.profile);
@@ -125,12 +123,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       if (interest !== '') {
         for (var i = interests.length - 1; i >= 0; i--) {
-          if(interest.toLowerCase() === interests[i].toLowerCase()){
+          if (interest.toLowerCase() === interests[i].toLowerCase()) {
             return $scope.Strings.interestExists;
           }
         }
         return true;
-      }else{
+      } else {
         return false
       }
     };
@@ -144,7 +142,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.facebookInterestsLoading = true;
       FacebookService.getUserLikes(deferred, paging, beforeOrAfter, (Config.interestsLimit || 10));
       deferred.promise.then(function(results) {
-        if ($scope.facebookFirstCursor === undefined){
+        if ($scope.facebookFirstCursor === undefined) {
           $scope.facebookFirstCursor = results.paging.cursors.before;
         }
         $scope.facebookBeforeCursor = results.paging.cursors.before;

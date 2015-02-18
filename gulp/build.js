@@ -43,7 +43,7 @@ notify.on('click', function(options) {
 });
 
 gulp.task('jscs', function() {
-  return  gulp.src(['src/{app, components}/**/*.js','!src/{app, components}/**/*spec.js'])
+  return  gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])
     .pipe($.jscs({
         "preset": "google",
         "fileExtensions": [ ".js", "jscs" ],
@@ -63,12 +63,12 @@ gulp.task('jscs', function() {
             "test/data/**"
         ]
     }
-  )).on('error',function(e){
+  )).on('error', function(e) {
     this.end();
   })
 })
 gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
-  gulp.src(['src/{app, components}/**/*.js','!src/{app, components}/**/*spec.js'])
+  gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify({

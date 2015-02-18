@@ -32,11 +32,11 @@ io.sockets.on('connection', function(socket) {
     console.log('Server: ping');
     socket.emit('pong', data);
   });
-  socket.on('test event',function(mockEvent) {
+  socket.on('test event', function(mockEvent) {
     console.log('Server: got event: ', mockEvent.name, mockEvent.data);
-    socket.emit(mockEvent.name,mockEvent.data);
+    socket.emit(mockEvent.name, mockEvent.data);
   });
-  socket.on('disconnect',function() {
+  socket.on('disconnect', function() {
     console.log('Server: disconnect you');
     socket.disconnect();
   });

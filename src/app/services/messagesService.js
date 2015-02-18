@@ -18,7 +18,7 @@ define(['services/serviceModule'], function(services) {
           room:currentRoom
         };
 
-        if(typeof sendMessageEventListener === 'function'){
+        if (typeof sendMessageEventListener === 'function') {
           _this.sendMessageEventListener(config);
         }
       };
@@ -37,9 +37,9 @@ define(['services/serviceModule'], function(services) {
       _this.setRooms = function(snapshot) {
         _this.roomsReady = false;
         var rooms;
-        if(typeof snapshot.val === 'function'){
+        if (typeof snapshot.val === 'function') {
           rooms = snapshot.val();
-        }else{
+        } else {
           rooms = snapshot;
         }
         _this.rooms = [];
@@ -76,7 +76,7 @@ define(['services/serviceModule'], function(services) {
             if (matches !== undefined) {
               for (var i = matches.length - 1; i >= 0; i--) {
                 var match = matches[i];
-                if (String(match.id) === String(room)){
+                if (String(match.id) === String(room)) {
                   return match.profile.name;
                 }
               }
@@ -110,7 +110,7 @@ define(['services/serviceModule'], function(services) {
         //receive new message
         // will be called for each new message
         // _this.rooms[snapshot.room] = snapshot.snapshot
-        if(snapshot.snapshot!==undefined){
+        if (snapshot.snapshot !== undefined) {
           _this.rooms[snapshot.room] = [];
           _this.rooms[snapshot.room].push(snapshot.snapshot)
         }

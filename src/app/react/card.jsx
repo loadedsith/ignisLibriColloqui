@@ -37,12 +37,12 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     getInitialState: function() {
       var originalRotation = Math.floor((Math.random()*6)-3);
       return {
-        pos: this.props.config.initialPosition||{x:0, y:0},
-        duration:this.props.config.duration||250,
+        pos: this.props.config.initialPosition || {x:0, y:0},
+        duration:this.props.config.duration || 250,
         rotation: originalRotation,
         originalRotation: originalRotation,
         easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
-        profile:this.props.config.profile||{},
+        profile:this.props.config.profile || {},
         opacity:1,
         dragging: false,
         rel: null // position relative to the cursor
@@ -83,8 +83,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
               {cardTemplate}
               </li>;
            /*jshint ignore:end */
-              // <img src="{this.props.data.image.data.url}" alt="" />
-//
     },
     componentDidUpdate: function(props, state) {
       if (this.state.dragging && !state.dragging) {
@@ -97,7 +95,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     },
     fadeOut: function(callback) {
       //apply an animiation cardSlideRight
-      var duration = this.props.config.duration||250;//ms
+      var duration = this.props.config.duration || 250;//ms
       if (this.state.fadeStart === undefined) {
         this.setState({
           fadeCallback: callback
@@ -127,7 +125,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       }
     },
     returnCard: function() {
-      var duration = this.props.config.duration||250;//ms
+      var duration = this.props.config.duration || 250;//ms
       if (this.state.dragging === false) {
         if (this.state.startTime === undefined) {
           this.setState({
@@ -220,7 +218,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
           var opacity = 1;
           if (xPos > (maxDrag/2)) {
             var ratio = maxDrag/xPos;
-            if ( ratio >= 0) {
+            if (ratio >= 0) {
               opacity = ratio;
             }
           }else if (xPos < (-1 * (maxDrag/2))) {

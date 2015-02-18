@@ -9,19 +9,23 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.updatingProfilePromise = $q.defer();
 
     _this.setProfile = function(user) {
-      console.log('ilc setProfile',user);
+      console.log('ilc setProfile', user);
       _this.updatingProfile = true;
       var config = {
         user:user,
         accessToken: _this.accessToken
       }
-      if(_this.accessToken === undefined){
+      if (_this.accessToken === undefined) {
         console.log('cant make any requests without an access token');
-        return _this.updatingProfilePromise.promise;//TODO: These seem wrong, maybe no big deal, but there's no difference between accepted and rejected
+        //TODO: These seem wrong, maybe no big deal,
+        //  but there's no difference between accepted and rejected
+        return _this.updatingProfilePromise.promise;
       }
       if (user.profile === undefined) {
         console.log('cant set a profile if it doenst exist');
-        return _this.updatingProfilePromise.promise;//TODO: These seem wrong, maybe no big deal, but there's no difference between accepted and rejected
+        //TODO: These seem wrong, maybe no big deal,
+        //  but there's no difference between accepted and rejected
+        return _this.updatingProfilePromise.promise;
       }
       $socket.emit('set profile', config);
       console.log('emit set profile', config);
@@ -31,12 +35,12 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.getProfile = function(user) {
       if (_this.accessToken === undefined) {
         console.log('gotta have a successful login before you go requesting profiles, son.');
-      } else{
+      } else {
         var config = {
-          user:user,
-          accessToken:_this.accessToken,
+          user: user,
+          accessToken: _this.accessToken,
         }
-        $socket.emit('get profile',config);
+        $socket.emit('get profile', config);
       }
     };
 
@@ -44,15 +48,15 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       if (room === undefined) {
         console.log('close room was invoked with the wrong arguments. Expects room to be set');
         return;
-      }else{
+      } else {
         var config = {
           room:room
         }
         if (_this.accessToken !== undefined) {
           config.accessToken = _this.accessToken;
           $socket.emit('close room', config);
-        }else{
-          console.log('couldnt close the room because the access token was undefined: ', room );
+        } else {
+          console.log('couldnt close the room because the access token was undefined: ', room);
         }
       }
     };
@@ -61,8 +65,8 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       if (_this.accessToken === undefined) {
         config.accessToken = _this.accessToken;
         $socket.emit('send message', config);
-      }else{
-        console.log('couldnt set that message because the access token was undefined: ',config );
+      } else {
+        console.log('couldnt set that message because the access token was undefined: ', config);
       }
     }
 
@@ -71,6 +75,10 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       var socket = $socket.socket();
       if (socket.disconnected === true) {
         socket.io.connect();
+      }
+      if (accessToken === null || accessToken === undefined) {
+        console.log('dont validate, but what caused this?');
+        return;
       }
       $socket.emit('login validator', accessToken);
       // UserService.userInfoCallback();
@@ -90,7 +98,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     };
 
     _this.disconnectMe = function() {
-      // $socket.emit('disconnectMe',_this.accessToken);
+      // $socket.emit('disconnectMe', _this.accessToken);
       $socket.socket().io.disconnect();
     };
 
@@ -165,7 +173,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       MessagesService.roomSet(room);
     });
 
-    $socket.on('pong', function (data) {
+    $socket.on('pong', function(data) {
       console.log('ilc pong', data);
     });
     return _this;

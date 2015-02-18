@@ -24,9 +24,9 @@ define([
     'ignisLibriColloqui.config',
     'xeditable',
     'ngSocket'
-  ]).config(['Config','$socketProvider', function (Config, $socketProvider) {
+  ]).config(['Config', '$socketProvider', function(Config, $socketProvider) {
     var server;
-    if((Config||{}).ilcServerUrl !== undefined){
+    if ((Config || {}).ilcServerUrl !== undefined) {
       server = Config.ilcServerUrl;
     }
 /*
@@ -41,11 +41,12 @@ Options:
       and `connect_timeout` events are emitted (20000)
 */
     var config = {
-      reconnection:true,//[true]
-      reconnectionDelay:1000,//[1000]
-      reconnectionDelayMax:5000,//[5000]
-      timeout:20000//[20000]
-    }
+      reconnection:true, //[true]
+      reconnectionDelay:1000, //[1000]
+      reconnectionDelayMax:5000, //[5000]
+      timeout:20000 //[20000]
+    };
+
     $socketProvider.setUrl(server);
     $socketProvider.setConfig(config);
 
@@ -59,8 +60,12 @@ Options:
   }).run(function(editableOptions, editableThemes) {
     editableOptions.theme = 'default'; // bootstrap3 theme. Can be also 'bs2', 'default'
     // overwrite submit button template
-    editableThemes['default'].submitTpl = '<button type="submit"><span class="icon-checkmark"></span></button>';
-    editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()"><span class="icon-blocked"></span></button>';
+    editableThemes['default'].submitTpl = '<button type="submit">' +
+        '<span class="icon-checkmark"></span>' +
+      '</button>';
+    editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()">' +
+        '<span class="icon-blocked"></span>' +
+      '</button>';
 
   });
 });

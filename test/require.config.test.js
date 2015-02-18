@@ -5,7 +5,7 @@ for (var file in window.__karma__.files) {
       console.log('file', file);
       for (var i = skips.length - 1; i >= 0; i--) {
         var skip = skips[i];
-        if(file !== skip){
+        if (file !== skip) {
           tests.push(file);
         }
       }

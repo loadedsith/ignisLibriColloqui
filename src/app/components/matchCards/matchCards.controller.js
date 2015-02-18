@@ -1,7 +1,7 @@
 define(['controllerModule', 'angular'], function(controllers, angular) {
   'use strict';
   return controllers.controller('MatchCardsController',
-  ['$scope', '$timeout', 'UserService', 'FacebookService','Config',
+  ['$scope', '$timeout', 'UserService', 'FacebookService', 'Config',
   function($scope, $timeout, UserService, facebookService, Config) {
     $scope.matchList = {};
     $scope.profiles = {};
@@ -14,7 +14,6 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
         console.debug('got service update for match controller, but no matches!')
       }
     });
-
 
     $scope.removeCard = function(card) {
       console.log('removeCard');

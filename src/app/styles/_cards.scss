@@ -58,20 +58,20 @@ $cardHeight: $retinaCardHeight / 2;
     .userInfo {
       position: absolute;
       bottom:0px;
-      background-color: rgba(0,0,0,0.3);
+      background-color: rgba(0, 0, 0, 0.3);
       color: white;
       width: 100%;
       .about{
         overflow:hidden;
         cursor:default;
       }
-      .name,.more,.about{
+      .name, .more, .about{
         padding: 3px 11px;
       }
       .more{
         display:block;
         bottom: 0px;
-        background-color: rgba(0,0,0,0.3);
+        background-color: rgba(0, 0, 0, 0.3);
         color: white;
         width: 100%;
         text-align:center;

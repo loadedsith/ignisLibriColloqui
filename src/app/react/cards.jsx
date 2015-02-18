@@ -32,7 +32,7 @@
        var cardSlideRightRules = findKeyframesRule('cardSlideRight');
        
        var keyframeString = [];
-       for(var i = 0; i < cardSlideRightRules.cssRules.length; i ++)
+       for (var i = 0; i < cardSlideRightRules.cssRules.length; i ++)
        {
          keyframeString.push(cardSlideRightRules[i].keyText); 
        }
@@ -44,7 +44,6 @@
        });
 }
 */ 
-
 
 define(['react', 'bezier-easing', 'react/card'], function(React, BezierEasing, CARD) {
   'use strict';

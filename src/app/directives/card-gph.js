@@ -42,34 +42,34 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         }
 
         var config = {
-          maxDrag:maxDrag,
-          duration:duration,
-          initialPosition:initialPosition,
-          swipeLeft:swipeLeft,
-          swipeRight:swipeRight,
-          profile:profile,
-          userProfile:userProfile,
-          cardTemplate:cardTemplate
+          maxDrag: maxDrag,
+          duration: duration,
+          initialPosition: initialPosition,
+          swipeLeft: swipeLeft,
+          swipeRight: swipeRight,
+          profile: profile,
+          userProfile: userProfile,
+          cardTemplate: cardTemplate
         };
 
-        scope.$watch('card', function(newValue) {//extraAttr: oldValue
+        scope.$watch('card', function(newValue) {
           React.render(new CardFactory({
             data: newValue,
-            config:config,
-            children:el
+            config: config,
+            children: el
           }), el[0]);
         }, true);
 
-        scope.$watch('userProfile', function(newValue) {//extraAttr: oldValue
+        scope.$watch('userProfile', function() {
           config.userProfile = userProfile;
           React.render(new CardFactory({
             data: scope.card,
-            config:config,
-            children:el
+            config: config,
+            children: el
           }), el[0]);
         }, true);
 
-        scope.$watch('profile', function(newValue) {//extraAttr: oldValue
+        scope.$watch('profile', function() {
           config.profile = profile;
           React.render(new CardFactory({
             data: scope.card,

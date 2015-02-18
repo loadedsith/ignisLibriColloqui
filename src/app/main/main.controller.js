@@ -12,17 +12,17 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.loggedIn = false;
 
-      $scope.userId = "default user id, did facebook login fail?";
+      $scope.userId = 'default user id, did facebook login fail?';
       $scope.disconnectedStatus = {
         text:'🚫 Disconnected from server. Try reconnecting?', //[Optional] Label text
         class:'status status-disconnected', // CSS Class available to angular, not automatically applied
-        action: function () {
+        action: function() {
           $scope.login();
         },
       };
-      $scope.connectionEvent = function(event,value) {
-        console.log('connectionEvent: event,value:', event,value);
-        switch(event){
+      $scope.connectionEvent = function(event, value) {
+        console.log('connectionEvent: event, value:', event, value);
+        switch (event) {
         case 'disconnect':
           StatusService.setStatus($scope.disconnectedStatus);
           break;
@@ -39,10 +39,10 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       }
 
-      ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this,'timeout');
-      ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this,'error');
-      ILCServerService.disconnectEvent = $scope.connectionEvent.bind(this,'disconnect');
-      ILCServerService.connectedEvent = $scope.connectionEvent.bind(this,'connected');
+      ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this, 'timeout');
+      ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this, 'error');
+      ILCServerService.disconnectEvent = $scope.connectionEvent.bind(this, 'disconnect');
+      ILCServerService.connectedEvent = $scope.connectionEvent.bind(this, 'connected');
 
       StatusService.setStatus(StatusService.loading);
 
@@ -87,13 +87,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       });
 
       $scope.$on('UserService:FacebookLoggedIn', function() {
-        var userLoginState = UserService.checkLoginState();
-        ILCServerService.login(UserService.auth);
-        $scope.loggedIn=true;
+        $scope.loggedIn = true;
       });
 
       $scope.$on('UserService:FacebookLoggedOut', function() {
-        $scope.loggedIn=false;
+        ILCServerService.disconnectMe();
+        $scope.loggedIn = false;
       });
 
       $scope.$on('StatusService:Update', function(event, status) {
@@ -109,7 +108,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.login();
       });
 
-      $scope.$on('MessagesService:CloseRoom',function(event, config) {
+      $scope.$on('MessagesService:CloseRoom', function(event, config) {
         ILCServerService.closeRoom(config);
       });
 
@@ -132,29 +131,29 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
 
       $scope.toggleNavBar = function(itemName, value) {
-        if(value===undefined){
+        if (value === undefined) {
           value = true;
         }
         $scope.showProfile = false;
         $scope.showMessages = false;
         $scope.showMatches = false;
-        if (itemName === 'matches'){
+        if (itemName === 'matches') {
           $scope.showMatches = !!value;
-        }else if (itemName === 'messages') {
+        } else if (itemName === 'messages') {
           $scope.showMessages = !!value;
-        } else if (itemName === 'profile'){
+        } else if (itemName === 'profile') {
           $scope.showProfile = !!value;
         }
         if ($scope.showProfile  === false &&
             $scope.showMatches  === false &&
             $scope.showMessages === false
-        ){
-          $scope.toggleNavBar(Config.baseView || 'profile',true);
+        ) {
+          $scope.toggleNavBar(Config.baseView || 'profile', true);
         }
 
       };
 
-      $scope.toggleNavBar(Config.baseView || 'profile',true);
+      $scope.toggleNavBar(Config.baseView || 'profile', true);
 
       $scope.parseInt = parseInt;
 
@@ -162,9 +161,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         UserService.checkLoginState().then(function(response) {
           //logged in
 
-          // TODO: set status to  "connected to facebook, trying ILC server"
+          // TODO: set status to  'connected to facebook, trying ILC server'
           StatusService.setStatus(StatusService.ready);
-
           ILCServerService.login(response.authResponse.accessToken);
 
           $scope.userId = response.authResponse.userID;

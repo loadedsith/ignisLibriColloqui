@@ -1,5 +1,5 @@
 var FB = {
-  init : function (attribute) {
+  init : function(attribute) {
     console.log('Mock fb.js Init;');
       return true;
   },

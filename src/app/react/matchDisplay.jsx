@@ -29,20 +29,20 @@ define(['react'], function(React) {
       var defaultImageUrl = './assets/images/FBProfile.jpg';
       var imageUrl = defaultImageUrl;
 
-      //This is essentailly the same as if(___===undefined){} blocks. getting this.props.data.image.data
+      //This is essentailly the same as if (___===undefined) {} blocks. getting this.props.data.image.data
 
-      if(this.props.profile.fetching !== undefined){
+      if (this.props.profile.fetching !== undefined) {
         //Remote User Image
-        if((this.props.profile.image||{}).data !== undefined){
+        if ((this.props.profile.image || {}).data !== undefined) {
           var imageData = this.props.profile.image.data;
-          if(imageData['is_silhouette'] !== true){
-            imageUrl = imageData.url||defaultImageUrl;
+          if (imageData['is_silhouette'] !== true) {
+            imageUrl = imageData.url || defaultImageUrl;
           }
         }
       }
 
       /*jshint ignore:start */
-      if((this.props.profile.image||{}).data !== undefined){
+      if ((this.props.profile.image || {}).data !== undefined) {
         //Local User Image, techically this shouldnt happen, cuz who has their own card in their stack? lol
         imageUrl = this.props.profile.image.data.url;
       }
@@ -63,7 +63,7 @@ define(['react'], function(React) {
             var userInterest = userProfile.interests[i];
             for (var ii = cardProfile.interests.length - 1; ii >= 0; ii--) {
               var cardInterest = cardProfile.interests[ii];
-              if (cardInterest === userInterest){
+              if (cardInterest === userInterest) {
                 if (interests.indexOf(cardInterest) === -1) {
                   interests.push(cardInterest);
                 }
@@ -74,7 +74,7 @@ define(['react'], function(React) {
         return interests;
       }
       var profile;//JsIgnore because unused
-      if(this.props.data!==undefined){
+      if (this.props.data!==undefined) {
         var matches;
         if (this.props.userProfile !== undefined) {
           var interests = getInterests(this.props.userProfile, this.props.data.profile);
@@ -101,7 +101,7 @@ define(['react'], function(React) {
             </div>
           </div>
         </div>;
-      }else{
+      } else {
         profile = <div className="userInfo">userinfo</div>;
       }
 

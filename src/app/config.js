@@ -3,9 +3,9 @@ define(['angular'], function() {
   angular.module('ignisLibriColloqui.config', []).constant('Config', {
     ilcServerUrl: 'http://0.0.0.0:5000',
     ilcTestServerUrl: 'http://0.0.0.0:5001',
-    showMatches: true,//show automatically
-    showMessages: false,//show automatically
-    showProfile: false,//show automatically
+    showMatches: true, //show automatically
+    showMessages: false, //show automatically
+    showProfile: false, //show automatically
     baseView: 'matches',
     cardSize:{
       height:558,
@@ -38,7 +38,8 @@ define(['angular'], function() {
       },
       suggestionsFromFacebook:'Suggestions from ',
       facebookHandlesImagesWarning:'Facebook Handles what images are shown to the users.',
-      facebookInterestsError:'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this data (or don\'t use this feature).',
+      facebookInterestsError:'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
+        ' data (or don\'t use this feature).',
       noMatches: 'No matches, check back later...',
       matches: 'Matches',
       messages: 'Messages',

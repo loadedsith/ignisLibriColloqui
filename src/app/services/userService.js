@@ -5,7 +5,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     'use strict';
     var _this = this;
 
-    _this.currentTopic = "Gold mining";//TODO: This needs to be an updatable state varible, or array of variables
+    _this.currentTopic = 'Gold mining';//TODO: This needs to be an updatable state varible, or array of variables
 
     _this.profiles = {};
 
@@ -22,14 +22,14 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
 
     _this.userFoundAMatch = function(match) {
       if (_this.user.profile !== undefined) {
-        if(_this.user.profile.rooms){
+        if (_this.user.profile.rooms !== undefined) {
           if (_this.user.profile.rooms.indexOf(match) === -1) {
             _this.user.profile.rooms.push(match);
           }
-        }else{
-          _this.user.profile.rooms = [ match ];
+        } else {
+          _this.user.profile.rooms = [match];
         }
-      }else{
+      } else {
         console.log('ignoring user match because profile undefined');
       }
       console.log('UserService.user', _this.user, match);
@@ -50,7 +50,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
     };
 
     _this.loginSuccess = function(response) {
-      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
       _this.loginStatus = '👍 Logged In!';
       FacebookService.getUserInfo(_this.userInfoCallback);
       _this.loggedIn = true;
@@ -58,6 +57,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (_this.auth !== $cookies.userAuth) {
         $cookies.userAuth = JSON.stringify(_this.auth);
       }
+      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
     };
 
     _this.loginToFacebook = function() {
@@ -93,13 +93,13 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       if (!_this.user.profile) {
         _this.user.profile = {}
       }
-      if (_this.user.profile.name===undefined || _this.user.profile.name === '') {
+      if (_this.user.profile.name === undefined || _this.user.profile.name === '') {
         missing.push('name');
       }
       if (_this.user.profile.interests === undefined) {
         _this.user.profile.interests = []
       }
-      if (_this.user.profile.interests.length === 0){
+      if (_this.user.profile.interests.length === 0) {
         missing.push('an interest');
       }
       return (missing.length === 0) ? true : missing;
@@ -128,18 +128,18 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       }
       _this.profiles[user.data['user_id']] = user.profile;
       if (_this.user.data !== undefined) {
-         if (_this.user.data['user_id'] === user.data.user_id){
+        if (_this.user.data['user_id'] === user.data['user_id']) {
 
-           if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
-             $rootScope.$broadcast('UserService:UpdateUserProfile', user);
-           }else{
-             //skip update because the profiles were equal, or perhaps this.user.profile === undefined
-           }
-           _this.user.profile = user.profile;
-         }else{
-           $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
-         }
-      }else{
+          if (!angular.equals(_this.user.profile, user.profile) && _this.user.profile !== undefined) {
+            $rootScope.$broadcast('UserService:UpdateUserProfile', user);
+          } else {
+            //skip update because the profiles were equal, or perhaps this.user.profile === undefined
+          }
+          _this.user.profile = user.profile;
+        } else {
+          $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
+        }
+      } else {
         $rootScope.$broadcast('UserService:UpdateMatchProfile', user);
       }
 
@@ -153,7 +153,6 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       _this.user.matches = matchList;
     };
 
-
     _this.loginCallback = function(response) {
       // $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
       if (response.authResponse === undefined) {
@@ -163,7 +162,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
       }
       FacebookService.getUserInfo(_this.userInfoCallback);
       _this.loginSuccess(response);
-      $rootScope.$broadcast('UserService:FacebookLoginSuccess',response);
+      $rootScope.$broadcast('UserService:FacebookLoginSuccess', response);
     };
 
     _this.matchList = {};
@@ -179,7 +178,7 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
         return undefined;
       }
       matches = matches[_this.currentTopic];
-      if(matches === undefined){
+      if (matches === undefined) {
         return _this.matchList;
       }
       for (var i = matches.length - 1; i >= 0; i--) {
@@ -213,21 +212,21 @@ define(['services/serviceModule', 'angular', 'firebase'], function(services, ang
           }
         }
       }
-      $rootScope.$broadcast('UserService:UpdateMatchProfiles',true);
+      $rootScope.$broadcast('UserService:UpdateMatchProfiles', true);
     };
 
     _this.getUser = function() {return _this.user}
 
     $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
-      if (newUser.matches!==undefined){
-        _this.processMatches(newUser.matches)
+      if (newUser.matches !== undefined) {
+        _this.processMatches(newUser.matches);
       }
-      if(!angular.equals(newUser.profile, oldUser.profile)){
+      if (!angular.equals(newUser.profile, oldUser.profile)) {
         //profile change
-        if(oldUser.profile !== undefined && oldUser.info !== undefined){
+        if (oldUser.profile !== undefined && oldUser.info !== undefined) {
           //if oldUser.profile exists we arent setting the initial profile
           $rootScope.$broadcast('UserService:UpdateUserProfile', newUser);
-        }else{
+        } else {
           console.log('ignoring user update because old user was undefined');
         }
       }

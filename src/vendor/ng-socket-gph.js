@@ -11,7 +11,7 @@
 
 // Module for provide Socket.io support
 
-(function () {
+(function() {
   'use strict';
 
   angular.module('ngSocket', [])
@@ -67,12 +67,12 @@
       }
 
       function angularCallback(callback) {
-        return function () {
+        return function() {
           if (callback) {
             var args = arguments;
-            $timeout(function () {
+            $timeout(function() {
               callback.apply(socket, args);
-            },0);
+            }, 0);
           }
         };
       }
@@ -87,7 +87,7 @@
         socket.on(name, angularCallback(callback));
 
         if (scope !== null) {
-          scope.$on('$destroy', function () {
+          scope.$on('$destroy', function() {
             removeListener(name, callback);
           });
         }
@@ -119,7 +119,7 @@
         once: addListenerOnce,
         removeListener: removeListener,
         removeAllListeners: removeAllListeners,
-        socket:function(){return socket},
+        socket:function() {return socket},
         emit: emit
       };
 

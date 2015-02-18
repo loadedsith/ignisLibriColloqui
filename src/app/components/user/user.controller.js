@@ -31,7 +31,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:Update', function(event, user) {
 
         // this annotation means if user.profilePicture.data.url exists, use that, if not use the fallback image
-        var newProfilePicture = ((user.profilePicture || {}).data || {} ).url||$scope.fallbackImage;
+        var newProfilePicture = ((user.profilePicture || {}).data || {}).url || $scope.fallbackImage;
 
         //TODO: this wouldnt update the image if somehow facebook changed the image, maybe it should
 

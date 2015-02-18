@@ -15,7 +15,6 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     var $timeout;
     var $rootScope;
 
-
     var events = [
       'got user matchList',
       'message sent',
@@ -42,7 +41,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       $timeout = _$timeout_;
       $rootScope = _$rootScope_;
       socket = $socket;
-      spyOn(socket,'on').and.callThrough();
+      spyOn(socket, 'on').and.callThrough();
     }));
     describe('ilcServerService start', function() {
       it('should execute normally', function() {
@@ -54,7 +53,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     });
 
     describe('has many socket connections', function() {
-      it('expects each event be mapped to an socket.on call',function() {
+      it('expects each event be mapped to an socket.on call', function() {
         for (var i = events.length - 1; i >= 0; i--) {
           var event = events[i];
           it('should listen for event['+i+']: on(\'' + event + '\')', function() {
@@ -64,11 +63,10 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       })
     });
 
-
     describe('ILCServer Validation', function() {
       it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
-        socket.emit('ping',{})
-        socket.on('pong',function(data) {
+        socket.emit('ping', {})
+        socket.on('pong', function(data) {
           done();
         });
       });
@@ -95,7 +93,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
     });
 
-    describe('send user profile',function() {
+    describe('send user profile', function() {
       var mockValidProfile = {
         'profile' : {
           'id' : '1396362880657353',
@@ -121,7 +119,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           done();
         });
         //3: updating
-        it('should be updating',function() {
+        it('should be updating', function() {
           expect(ilcServerService.updatingProfile).toBe(true);
         })
       });
@@ -143,7 +141,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
       it('should trigger UserService.setUserProfile and trigger \'UserService:UpdateMatchProfile\'',
         function(done) {
-          $rootScope.$on('UserService:UpdateMatchProfile',function() {
+          $rootScope.$on('UserService:UpdateMatchProfile', function() {
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']]).toBeDefined();
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].id).toBe(mockUserProfileEvent.data.profile.id);
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].test).toBe(mockUserProfileEvent.data.profile.test);
@@ -176,7 +174,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
       it('should trigger MessagesService.setRooms and trigger \'MessagesService:UpdateRooms\'',
         function(done) {
-          $rootScope.$on('MessagesService:UpdateRooms',function() {
+          $rootScope.$on('MessagesService:UpdateRooms', function() {
             expect(messagesService.rooms).toEqual(mockRoomsSetEvent.data);
             done();
           });
@@ -189,7 +187,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         function(done) {
           var mockGotUserMatchListEvent = {
             name:'got user matchList',
-            data:['test','dummyObject']
+            data:['test', 'dummyObject']
           };
           spyOn(userService, 'setMatchList').and.callFake(function() {
             expect(true);
@@ -202,16 +200,16 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         function(done) {
           var mockGotUserMatchListEvent = {
             name:'got user matchList',
-            data:['test','dummyObject']
+            data:['test', 'dummyObject']
           };
           setInterval(function() {
-            if(userService.user.matches && mockGotUserMatchListEvent.data){
+            if (userService.user.matches && mockGotUserMatchListEvent.data) {
               expect(userService.user.matches).toEqual(mockGotUserMatchListEvent.data)
               done();
-            }else{
+            } else {
               console.log('waiting');
             };
-          },100);
+          }, 100);
           socket.emit('test event', mockGotUserMatchListEvent);
         }
       );
@@ -219,7 +217,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     describe('message sent confirmation', function() {
       it('should trigger messages service \'\'',
         function(done) {
-          var mockMessageSent={
+          var mockMessageSent = {
             name:'message sent',
             data:{
               snapshot:{}
@@ -234,13 +232,13 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
       it('should trigger messages service, which should trigger a rootScope broadcast \'MessagesService:MessageSent\'',
         function(done) {
-          var mockMessageSent={
+          var mockMessageSent = {
             name:'message sent',
             data:{
               snapshot:{}
             }
           };
-          $rootScope.$on('MessagesService:MessageSent',function() {
+          $rootScope.$on('MessagesService:MessageSent', function() {
             expect(true);
             done();
           })
@@ -249,7 +247,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
     });
     describe('room set events ', function() {
-      it('expects on(\'room update\') to trigger messagesService\'s room update',function(done) {
+      it('expects on(\'room update\') to trigger messagesService\'s room update', function(done) {
         var mockRoomUpdate = {
           name:'room update',
           data:{
@@ -291,8 +289,8 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
 
           //it should run twice, and there should be 2 messages
           var first = true;
-          $rootScope.$on('MessagesService:MessageUpdate',function() {
-            if(first === true){
+          $rootScope.$on('MessagesService:MessageUpdate', function() {
+            if (first === true) {
               first = false;//ignore the first run
               return;
             }
@@ -310,7 +308,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       );
     });
     describe('room set events ', function() {
-      it('expects on(\'room set\') to trigger messagesService\'s room set',function(done) {
+      it('expects on(\'room set\') to trigger messagesService\'s room set', function(done) {
         var mockRoomSet = {
           name:'room set',
           data:{
@@ -348,51 +346,14 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
               }
             }
           };
-          $rootScope.$on('MessagesService:MessagesSet',function(event, room) {
+          $rootScope.$on('MessagesService:MessagesSet', function(event, room) {
             expect(room).toEqual(mockRoomSet.data);
             expect(messagesService.messages[room.room]).toEqual(mockRoomSet.data.snapshot[mockRoomSet.data.room]);
             done();
           })
-          socket.emit('test event',mockRoomSet);
+          socket.emit('test event', mockRoomSet);
         }
       );
     });
-    // it('tears down the connection',function(done) {
-//       console.log('Start connecting');
-//
-//       for (var i = events.length - 1; i >= 0; i--) {
-//         var event = events[i];
-//         socket.removeAllListeners(event);
-//       }
-
-      // if(io(url).connected === true){
- //        io(url).emit('disconnectMe');
- //        io(url).disconnect();
- //        done();
- //        io(url).on('disconnect',function() {s
- //          console.log('disconnect event');
- //          io(url).on('connectification',function() {
- //            console.log('connected');
- //            done();
- //          });
- //          io(url).on('connect_failed',function(error) {
- //            console.log('1error', error);
- //            done();
- //          });
- //          io.connect(url);
- //        })
- //      }else{
- //        console.log('Galley slave California Condor');
- //        io(url).on('connectification',function() {
- //          console.log('connected');
- //          done();
- //        });
- //        io(url).on('connect_failed',function(error) {
- //          console.log('1error', error);
- //          done();
- //        });
- //        io.connect(url);
- //      }
-    // })
   });
 });

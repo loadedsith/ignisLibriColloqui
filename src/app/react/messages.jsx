@@ -17,7 +17,7 @@ define(['react'], function(React) {
             if (matches.length > 0) {
               for (var i = matches.length - 1; i >= 0; i--) {
                 var match = matches[i];
-                if (match.id === userId){
+                if (match.id === userId) {
                   return match;
                 }
               }
@@ -44,7 +44,7 @@ define(['react'], function(React) {
       var lastTime;
       for (var messageKey in messages) {
         var datum = messages[messageKey];
-        if(datum.user===undefined){
+        if (datum.user===undefined) {
           continue;
         }
 
@@ -73,15 +73,13 @@ define(['react'], function(React) {
           timeStamp = true;
         }
         /*jshint ignore:start */
-        if(timeStamp){
+        if (timeStamp) {
           rows.push(
             <span className='time'>
               {datumTime}
             </span>
           );
         }
-
-
 
         rows.push(
           <p
@@ -100,16 +98,19 @@ define(['react'], function(React) {
       }
       //TODO: This is supposed to have a profile object now
       var profileImage;
-      var profile = (this.props.profile||{}); //profile or empty
-      if(profile.image!==undefined){
-        if(profile.image.data['is_silhouette'] === true){
+      var profile = (this.props.profile || {}); //profile or empty
+      if (profile.image !== undefined) {
+        if (profile.image.data['is_silhouette'] === true) {
           profile.image.data.url = './assets/images/fbProfile.jpg';
         }
+        /*jshint ignore:start */
         profileImage = <img className='profileImage' src={profile.image.data.url}/>
+        /*jshint ignore:end */
       }
+
       var boundClick = function(remoteUser, event) {
         this.props.closeRoom(event,  remoteUser.id);
-      }
+      };
 
       return (
         /*jshint ignore:start */
@@ -118,7 +119,7 @@ define(['react'], function(React) {
             {profileImage}
             <span className="close" onClick={boundClick.bind(this, this.props.remoteUser)}>&times;</span>
             <span className="name">
-              {(this.props.remoteUser.profile||{}).name||''}
+              {(this.props.remoteUser.profile || {}).name || ''}
             </span>
           </div>
           <div className="messageWrapper">{rows}</div>
