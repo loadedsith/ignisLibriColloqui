@@ -7,6 +7,7 @@
 div.button{
   @extend a.button;
 }
+
 .mainView{
   display: none;
   &.open{
@@ -15,6 +16,7 @@ div.button{
     padding: 0.98em 0px;
     min-width:480px;
   }
+
 }
 .close{
   position:absolute;
@@ -245,6 +247,26 @@ div.button{
   }
 }
 
+.status-disconnected{
+  .mainView{
+    opacity:0.7;
+    pointer-events:none;
+    .messageWrapper {
+      pointer-events: all;
+    }
+  }
+}
+.status{
+  position:absolute;
+  width:100%;
+  top:0px;
+  left:0px;
+  font-size:14px;
+  &>p{
+    text-align:center;
+    background:rgba(0,0,0,0.3);
+  }
+}
 .status.status-loading{
   color:#666;
 }
@@ -255,9 +277,6 @@ div.button{
   animation-fill-mode: forwards;
   animation-iterations:1;
   animation-duration: 10s;
-  position:absolute;
-  width:90%;
-  top:0px;
 }
 .status.status-error{
   color:#F66;
