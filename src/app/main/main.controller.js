@@ -149,12 +149,12 @@ define(['controllerModule', 'angular'], function(controllers) {
             $scope.showMatches  === false &&
             $scope.showMessages === false
         ){
-          $scope.toggleNavBar(Config.defaultView || 'profile',true);
+          $scope.toggleNavBar(Config.baseView || 'profile',true);
         }
 
       };
 
-      $scope.toggleNavBar(Config.defaultView || 'profile',true);
+      $scope.toggleNavBar(Config.baseView || 'profile',true);
 
       $scope.parseInt = parseInt;
 

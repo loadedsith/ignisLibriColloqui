@@ -6,7 +6,7 @@ define(['angular'], function() {
     showMatches: true,//show automatically
     showMessages: false,//show automatically
     showProfile: false,//show automatically
-    defaultView: 'matches',
+    baseView: 'matches',
     cardSize:{
       height:558,
       width:400
