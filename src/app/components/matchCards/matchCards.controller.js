@@ -10,7 +10,6 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
       $scope.profiles = UserService.profiles;
       if (user.matches) {
         $scope.matchList = user.matches;
-        console.log('user.matches[\'Gold mining\'][0]', user.matches['Gold mining'][0]);
       } else {
         console.debug('got service update for match controller, but no matches!')
       }

@@ -12,6 +12,14 @@
     </ul>
     <section class="top-bar-section ">
       <ul class="left show-for-medium-up" ng-show="loggedIn">
+        <li ng-click="disconnectMe()">
+          <a href="#" class="skew">
+            <div class='iconWrapper unskew'>
+              <span class="icon-block"></span>
+              <span class='subtitle'>Disconnect Me</span>
+            </div>
+          </a>
+        </li>
         <li ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
           <a href="#" class="skew">
             <div class='iconWrapper unskew'>

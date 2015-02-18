@@ -42,7 +42,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     $scope.save = function(profile) {
       $scope.saving = true;
       //not actually required because the form has direct access to the user object
-      // $scope.$emit('ProfileController:UpdateUserProfile',profile);
+      $scope.$emit('ProfileController:UpdateUserProfile',$scope.user);
     };
     $scope.roomNames = [];
     $scope.populateRoomNames = function() {

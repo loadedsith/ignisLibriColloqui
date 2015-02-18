@@ -10,7 +10,6 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
 
       $scope.alreadyOpenRoom = function(id) {
         //TODO: this is getting called alot, at least cache the results
-
         if((($scope.user||{}).profile||{}).rooms !== undefined){
           for (var i = $scope.user.profile.rooms.length - 1; i >= 0; i--) {
             var openRoom = $scope.user.profile.rooms[i];

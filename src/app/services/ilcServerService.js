@@ -28,12 +28,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       return _this.updatingProfilePromise.promise;
     };
 
-    $socket.on('user profile update', function(data) {
-      console.log('user profile updated');
-      _this.updatingProfile = false;
-      _this.updatingProfilePromise.resolve(data);
-    });
-
     _this.getProfile = function(user) {
       if (_this.accessToken === undefined) {
         console.log('gotta have a successful login before you go requesting profiles, son.');
@@ -44,7 +38,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         }
         $socket.emit('get profile',config);
       }
-    }
+    };
 
     _this.closeRoom = function(room) {
       if (room === undefined) {
@@ -74,6 +68,10 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.login = function(accessToken) {
       // send access token
+      var socket = $socket.socket();
+      if (socket.disconnected === true) {
+        socket.io.connect();
+      }
       $socket.emit('login validator', accessToken);
       // UserService.userInfoCallback();
       MessagesService.sendMessageEventListener = _this.sendMessage;
@@ -91,13 +89,56 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       });
     };
 
-    $socket.on('user disconnected', function(value) {
-      console.log('disconnected',value);
-    })
+    _this.disconnectMe = function() {
+      // $socket.emit('disconnectMe',_this.accessToken);
+      $socket.socket().io.disconnect();
+    };
+
+    _this.connectTimeoutEvent;
+    $socket.on('connect_timeout', function(value) {
+      if (typeof _this.connectTimeoutEvent === 'function') {
+        _this.connectTimeoutEvent(value)
+      } else {
+        console.log('connect_timeout', value);
+      }
+    });
+
+    _this.disconnectEvent;
+    $socket.on('disconnect', function(value) {
+      if (typeof _this.disconnectEvent === 'function') {
+        _this.disconnectEvent(value)
+      } else {
+        console.log('disconnect', value);
+      }
+    });
+
+    _this.connectEvent;
+    $socket.on('connect', function(value) {
+      if (typeof _this.connectEvent === 'function') {
+        _this.connectEvent(value)
+      } else {
+        console.log('connect', value);
+      }
+    });
+
+    _this.connectErrorEvent;
+    $socket.on('connect_error', function(value) {
+      if (typeof _this.connectErrorEvent === 'function') {
+        _this.connectErrorEvent(value)
+      } else {
+        console.log('connect_error', value);
+      }
+    });
+
+    $socket.on('user profile update', function(data) {
+      console.log('user profile updated');
+      _this.updatingProfile = false;
+      _this.updatingProfilePromise.resolve(data);
+    });
 
     $socket.on('user profile', function(user) {
       UserService.setUserProfile(user);
-    })
+    });
 
     $socket.on('rooms set', function(rooms) {
       // console.log('ilc rooms Set', rooms);

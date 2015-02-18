@@ -13,6 +13,36 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.loggedIn = false;
 
       $scope.userId = "default user id, did facebook login fail?";
+      $scope.disconnectedStatus = {
+        text:'🚫 Disconnected from server. Try reconnecting?', //[Optional] Label text
+        class:'status status-disconnected', // CSS Class available to angular, not automatically applied
+        action: function () {
+          $scope.login();
+        },
+      };
+      $scope.connectionEvent = function(event,value) {
+        console.log('connectionEvent: event,value:', event,value);
+        switch(event){
+        case 'disconnect':
+          StatusService.setStatus($scope.disconnectedStatus);
+          break;
+        case 'timeout':
+          StatusService.setStatus($scope.disconnectedStatus);
+          break;
+        case 'error':
+          StatusService.setStatus($scope.disconnectedStatus);
+          break;
+        default:
+          StatusService.setStatus(StatusService.ready);
+          break;
+        }
+
+      }
+
+      ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this,'timeout');
+      ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this,'error');
+      ILCServerService.disconnectEvent = $scope.connectionEvent.bind(this,'disconnect');
+      ILCServerService.connectedEvent = $scope.connectionEvent.bind(this,'connected');
 
       StatusService.setStatus(StatusService.loading);
 
@@ -31,23 +61,25 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
+      $scope.disconnectMe = function() {
+        ILCServerService.disconnectMe();
+      };
+
       $scope.lastUserProfile;
       $scope.updateUserProfile = function(event, user) {
-        $scope.updatingProfile = true;
-        StatusService.setStatus(StatusService.loading);
-
-        ILCServerService.setProfile(user).then(function() {
-          $scope.updatingProfile = false;
-          StatusService.setStatus(profileSaved);
-          $scope.$broadcast('user profile updated');
-        });
-
         $scope.user.profile = user.profile;
         if (!UserService.isProfileComplete()) {
           $scope.showProfile = true;
           StatusService.setStatus(profileIncomplete);
         }
       };
+      $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
+        ILCServerService.setProfile(user).then(function() {
+          $scope.updatingProfile = false;
+          StatusService.setStatus(profileSaved);
+          $scope.$broadcast('user profile updated');
+        });
+      });
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
       $scope.$on('UserService:UpdateMatchProfiles', function(event, value) {
@@ -76,7 +108,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('UserService:FacebookLoginSuccess', function(event, user) {
         $scope.login();
       });
-      
+
       $scope.$on('MessagesService:CloseRoom',function(event, config) {
         ILCServerService.closeRoom(config);
       });
@@ -127,11 +159,14 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.parseInt = parseInt;
 
       $scope.login = function() {
-        var userLoginState = UserService.checkLoginState();
-        userLoginState.then(function(response) {
+        UserService.checkLoginState().then(function(response) {
           //logged in
-          StatusService.setStatus(StatusService.ready);// TODO: set status to  "connected to facebook, trying ILC server"
+
+          // TODO: set status to  "connected to facebook, trying ILC server"
+          StatusService.setStatus(StatusService.ready);
+
           ILCServerService.login(response.authResponse.accessToken);
+
           $scope.userId = response.authResponse.userID;
         }, function(response) {
           StatusService.setStatus(StatusService.ready);

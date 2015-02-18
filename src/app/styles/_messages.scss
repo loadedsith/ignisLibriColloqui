@@ -22,10 +22,13 @@ messages-gph{
 
     padding-left:10px;
 
+    vertical-align:middle;
     line-height:$control-height;
-    color:rgba(139,139,128);
+    color:#666;
     font-size:19px;
-
+    .name{
+      margin-left:10px;
+    }
     img.profileImage{
       max-height: 35px;
       display: inline-block;
