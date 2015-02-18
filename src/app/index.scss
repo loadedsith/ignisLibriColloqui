@@ -7,6 +7,26 @@
 div.button{
   @extend a.button;
 }
+[ui-view]{
+  height: 80%;
+}
+.welcome{
+  min-height: 80%;
+}
+
+
+.valign-middle {
+  display: table;
+
+  > .columns {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  > .columns, > [class*="column"] + [class*="column"]:last-child {
+    float: none;
+  }
+}
 
 .mainView{
   display: none;
@@ -27,7 +47,7 @@ div.button{
   text-align:center;
   line-height:36px;
   vertical-align:middle;
-  transition:0.3s 0.1s color linear,0.3s 0.1s font-weight linear;
+  transition:0.3s 0.1s color linear, 0.3s 0.1s font-weight linear;
   font-size:150%;
   font-weight:100;
   z-index:1000;
@@ -87,7 +107,7 @@ div.button{
 /*          display:none;*/
     background-color:$primary-color;
   }
-  a.fb-login.tiny.button,a.fb-logout.tiny.button{
+  a.fb-login.tiny.button, a.fb-logout.tiny.button{
     font-size:14px;
     width:auto;
     height:$topbar-height;
@@ -134,7 +154,7 @@ div.button{
         display:inline-block;
         width:1em;
         opacity:1;
-        transition:0.3s 0.1s color,0.3s 0.1s opacity;
+        transition:0.3s 0.1s color, 0.3s 0.1s opacity;
 
       }
       .iconWrapper span.subtitle{
@@ -155,7 +175,7 @@ div.button{
 
         transform: rotateZ(60deg);
         z-index: 1000;
-        transition:0.3s 0.1s color,0.3s 0.1s opacity;
+        transition:0.3s 0.1s color, 0.3s 0.1s opacity;
       }
     }
   }
@@ -186,21 +206,21 @@ div.button{
       background-color:$primary-color;
       border-right:3px solid $secondary-color;
       &:hover{
-        background-color:lighten($primary-color,10%);
+        background-color:lighten($primary-color, 10%);
       }
     }
   }
 }
 .icon-bar.show-for-small-only{
   label{
-    transition:0.3s 0.1s color,0.3s 0.1s background-color;
+    transition:0.3s 0.1s color, 0.3s 0.1s background-color;
   }
   a.item{
-    background-color:darken($primary-color,20%);
+    background-color:darken($primary-color, 20%);
     color:white;
     transition:0.3s 0.1s color, 0.3s 0.1s background-color;
     &.active{
-      background-color:darken($primary-color,10%);
+      background-color:darken($primary-color, 10%);
       &:hover{
         background-color:$secondary-color;
       }
@@ -264,7 +284,7 @@ div.button{
   font-size:14px;
   &>p{
     text-align:center;
-    background:rgba(0,0,0,0.3);
+    background:rgba(0, 0, 0, 0.3);
   }
 }
 .status.status-loading{
@@ -307,6 +327,4 @@ section.top-bar-section ul.right li img{
     display:none;
   }
 }
-
-
 

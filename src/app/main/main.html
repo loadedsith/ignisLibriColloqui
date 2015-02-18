@@ -23,14 +23,16 @@
   </div>
 </div>
 
-<div class="row" ng-show="(!loggedIn)">
-  <div class="small-6 end columns small-centered text-center">
-    <h3 class="subtitle">{{Strings.welcomeTo}}</h3>
-    <h1 class="subtitle">
-      <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
-    </h1>
-  </div>
-  <div class="small-6 end columns small-centered text-center">
-    <div class="button centered" ng-click="loginWithFacebook()">Login with Facebook</div>
+<div class="row welcome valign-middle" ng-show="(!loggedIn)">
+  <div class="small-12 columns">
+    <div class="small-6 end columns small-centered text-center">
+      <h3 class="subtitle">{{Strings.welcomeTo}}</h3>
+      <h1 class="subtitle">
+        <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
+      </h1>
+    </div>
+    <div class="small-6 end columns small-centered text-center">
+      <div class="button centered" ng-click="loginWithFacebook()">Login with Facebook</div>
+    </div>
   </div>
 </div>
