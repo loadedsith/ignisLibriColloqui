@@ -36,7 +36,7 @@ io.sockets.on('connection', function(socket) {
     console.log('Server: got event: ', mockEvent.name, mockEvent.data);
     socket.emit(mockEvent.name, mockEvent.data);
   });
-  socket.on('disconnect', function() {
+  socket.on('disconnectMe', function() {
     console.log('Server: disconnect you');
     socket.disconnect();
   });

@@ -72,7 +72,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.login = function(accessToken) {
       // send access token
-      var socket = $socket.socket();
+      var socket = $socket.socket;
       if (socket.disconnected === true) {
         socket.io.connect();
       }
@@ -99,7 +99,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.disconnectMe = function() {
       // $socket.emit('disconnectMe', _this.accessToken);
-      $socket.socket().io.disconnect();
+      $socket.socket.io.disconnect();
     };
 
     _this.connectTimeoutEvent;
