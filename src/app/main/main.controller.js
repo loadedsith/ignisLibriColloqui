@@ -9,7 +9,6 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.Strings = Config.strings;
       $scope.Config = Config;
       $scope.user = {};
-
       $scope.loggedIn = false;
 
       $scope.userId = 'default user id, did facebook login fail?';
@@ -159,7 +158,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       var connectedToFacebookStatus = {
         text: $scope.Strings.connectedToFacebook,
-        class: 'status status-ready' // CSS Class available to angular, not automatically applied
+        class: 'status-facebook' // CSS Class available to angular, not automatically applied
       };
 
       $scope.login = function() {
