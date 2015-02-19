@@ -5,16 +5,42 @@
 define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function() {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
   localStorage.debug = 'ERROR';
+
+  var url;
+
+  beforeEach(module('ignisLibriColloqui.services', function(Config, $socketProvider) {
+    $socketProvider.setUrl(Config.ilcTestServerUrl);
+    Config.ilcServerUrl = Config.ilcTestServerUrl;
+    url = Config.ilcTestServerUrl;
+  }));
+
   describe('ILC Server Services', function() {
-    var socket;
-    var url;
+    var scope;
+    var interval;
+
     var ilcServerService;
     var messagesService;
     var userService;
-    var scope;
+
+    var mockAccessToken = 'OopoodIvIbooqoO';
+
     var $timeout;
     var $rootScope;
-    var interval;
+    var socket;
+
+    beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
+      ilcServerService = ILCServerService;
+      messagesService = MessagesService;
+      userService = UserService;
+
+      $timeout = _$timeout_;
+      $rootScope = _$rootScope_;
+      socket = $socket;
+
+      spyOn(socket, 'on').and.callThrough();
+    }));
+
+    var mockToken = 'ApIoObdI>({[]})<IbdOoIqA';
 
     var events = [
       'got user matchList',
@@ -27,23 +53,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       'user disconnected',
       'user profile',
       'user profile updated'
-    ]
-
-    beforeEach(module('ignisLibriColloqui.services', function(Config, $socketProvider) {
-      $socketProvider.setUrl(Config.ilcTestServerUrl);
-      Config.ilcServerUrl = Config.ilcTestServerUrl;
-      url = Config.ilcTestServerUrl;
-    }));
-
-    beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
-      ilcServerService = ILCServerService;
-      messagesService = MessagesService;
-      userService = UserService;
-      $timeout = _$timeout_;
-      $rootScope = _$rootScope_;
-      socket = $socket;
-      spyOn(socket, 'on').and.callThrough();
-    }));
+    ];
 
     afterEach(function() {
       if (interval !== undefined) {
@@ -60,6 +70,16 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       });
     });
 
+    describe('ILCServer Validation', function() {
+      it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
+        socket.on('pong', function(data) {
+          console.log('pong');
+          done();
+        });
+        socket.emit('ping', {data:'goober'});
+      });
+    });
+
     describe('has many socket connections', function() {
       it('expects each event be mapped to an socket.on call', function() {
         for (var i = events.length - 1; i >= 0; i--) {
@@ -69,15 +89,6 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           });
         }
       })
-    });
-
-    describe('ILCServer Validation', function() {
-      it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
-        socket.emit('ping', {})
-        socket.on('pong', function(data) {
-          done();
-        });
-      });
     });
 
     describe('login', function() {
@@ -113,11 +124,13 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         spyOn($rootScope, '$broadcast').and.callThrough();
       });
       it('should have a promise confirming ilcServerService.setProfile()', function(done) {
-        ilcServerService.setProfile(mockValidProfile).then(function() {
+        ilcServerService.accessToken = mockAccessToken;
+        ilcServerService.setProfile({profile:mockValidProfile}).then(function() {
           done();
         });
       });
       it('should set updatingProfile flag to indicate profile save state', function(done) {
+        ilcServerService.accessToken = mockAccessToken;
         //1: not updating
         expect(ilcServerService.updatingProfile).toBe(false);
         //2: start updating
@@ -210,7 +223,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
             name:'got user matchList',
             data:['test', 'dummyObject']
           };
-          setInterval(function() {
+          interval = setInterval(function() {
             if (userService.user.matches && mockGotUserMatchListEvent.data) {
               expect(userService.user.matches).toEqual(mockGotUserMatchListEvent.data)
               done();
