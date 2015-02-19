@@ -69,11 +69,9 @@ require.config({
     'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
-    // 'ng-socket': '../bower_components/ng-socket/ngSocket',
     'ng-socket-gph': '/vendor/ng-socket-gph',
     'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue',
     'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable',
-    firebase: '../bower_components/firebase/firebase'
   },
   packages: [
 
