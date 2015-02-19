@@ -14,6 +14,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     var scope;
     var $timeout;
     var $rootScope;
+    var interval;
 
     var events = [
       'got user matchList',
@@ -43,6 +44,13 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       socket = $socket;
       spyOn(socket, 'on').and.callThrough();
     }));
+
+    afterEach(function() {
+      if (interval !== undefined) {
+        clearInterval(interval);
+      }
+    });
+
     describe('ilcServerService start', function() {
       it('should execute normally', function() {
         expect(true);// just by getting here you've verified the callback (it was done())
