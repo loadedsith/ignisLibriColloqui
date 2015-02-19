@@ -8,7 +8,7 @@ define([
   'services/serviceIndex',
   'directives/directiveIndex',
   'components/componentIndex',
-  'ng-socket',
+  'ng-socket-gph',
   'angular-xeditable',
   'config'
 ], function(angular) {

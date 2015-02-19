@@ -1,8 +1,5 @@
 require.config({
   shim: {
-    firebase: {
-      exports: 'Firebase'
-    },
     facebook: {
       exports: 'FB'
     },
@@ -15,7 +12,7 @@ require.config({
         'angular'
       ]
     },
-    'ng-socket': {
+    'ng-socket-gph': {
       deps: [
         './startSocketIo',
         'angular'
@@ -62,7 +59,6 @@ require.config({
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
     'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
-    firebase: '../bower_components/firebase/firebase',
     foundation: '../bower_components/foundation/js/foundation',
     fastclick: '../bower_components/fastclick/lib/fastclick',
     modernizr: '../bower_components/modernizr/modernizr',
@@ -73,9 +69,11 @@ require.config({
     'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
-    'ng-socket': '../bower_components/ng-socket/ngSocket',
+    // 'ng-socket': '../bower_components/ng-socket/ngSocket',
+    'ng-socket-gph': '/vendor/ng-socket-gph',
     'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue',
-    'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'
+    'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable',
+    firebase: '../bower_components/firebase/firebase'
   },
   packages: [
 

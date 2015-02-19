@@ -29,7 +29,7 @@ require.config({
         'angular'
       ]
     },
-    'ng-socket': {
+    'ng-socket-gph': {
       deps: [
         'angular',
         'src/app/startSocketIo'
@@ -122,7 +122,7 @@ require.config({
 
     'socket.io-client': 'bower_components/socket.io-client/socket.io',
     'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
-    'ng-socket': 'src/vendor/ng-socket-gph',
+    'ng-socket-gph': 'src/vendor/ng-socket-gph',
     // 'ng-socket': 'bower_components/ng-socket/ngSocket',
     'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
     facebook: 'test/vendor/mockFb',
