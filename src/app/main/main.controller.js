@@ -157,12 +157,16 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.parseInt = parseInt;
 
+      var connectedToFacebookStatus = {
+        text: $scope.Strings.connectedToFacebook,
+        class: 'status status-ready' // CSS Class available to angular, not automatically applied
+      };
+
       $scope.login = function() {
         UserService.checkLoginState().then(function(response) {
           //logged in
 
-          // TODO: set status to  'connected to facebook, trying ILC server'
-          StatusService.setStatus(StatusService.ready);
+          StatusService.setStatus(connectedToFacebookStatus);
           ILCServerService.login(response.authResponse.accessToken);
 
           $scope.userId = response.authResponse.userID;

@@ -19,6 +19,7 @@ define(['angular'], function() {
       addBlacklist:'+',
       allLikesAreAlreadyAdded:'Wunderbar! All Likes are already added.',
       chattingWith:'with',
+      connectedToFacebook:'Connected To Facebook.',
       interests:'Interests',
       interestExists:'I already know you\'re interested in that, silly',
       currentRoom: 'Current Room',
