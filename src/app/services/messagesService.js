@@ -42,10 +42,8 @@ define(['services/serviceModule'], function(services) {
         } else {
           rooms = snapshot;
         }
-        _this.rooms = [];
-        for (var i = rooms.length - 1; i >= 0; i--) {
-          _this.rooms.push(rooms[i]);
-        }
+        _this.rooms = rooms;
+
         _this.roomsReady = true;
 
         if (_this.rooms[0] !== '' && _this.rooms[0] !== undefined) {
