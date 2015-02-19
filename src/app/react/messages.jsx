@@ -96,7 +96,7 @@ define(['react'], function(React) {
           );
         /*jshint ignore:end */
       }
-      //TODO: This is supposed to have a profile object now
+
       var profileImage;
       var profile = (this.props.profile || {}); //profile or empty
       if (profile.image !== undefined) {

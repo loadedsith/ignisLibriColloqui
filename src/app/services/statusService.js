@@ -24,7 +24,7 @@ function(services, angular, requestAnimationFrame) {
       animation:{
         frames:'🔥📖💬',
         // frames:['😃', '👍'],
-        delay:1500
+        delay:250
       }
     };
 
