@@ -3,61 +3,67 @@ define(['angular'], function() {
   angular.module('ignisLibriColloqui.config', []).constant('Config', {
     ilcServerUrl: 'http://0.0.0.0:5000',
     ilcTestServerUrl: 'http://0.0.0.0:5001',
-    showMatches: true, //show automatically
+    showMatches: false, //show automatically
     showMessages: false, //show automatically
     showProfile: false, //show automatically
-    baseView: 'matches',
-    cardSize:{
-      height:558,
-      width:400
+    showInterests: true, //show automatically
+    baseView: 'interests',
+    cardSize: {
+      height: 558,
+      width: 400
     },
-    interestsLimit:10,
+    interestsLimit: 10,
     // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: {
       aboutMe: 'About Me',
-      addInterest:'+',
-      addBlacklist:'+',
-      allLikesAreAlreadyAdded:'Wunderbar! All Likes are already added.',
-      chattingWith:'with',
-      connectedToFacebook:'Connected To Facebook.',
-      interests:'Interests',
-      interestExists:'I already know you\'re interested in that, silly',
-      currentRoom: 'Current Room',
-      blacklist:'Blacklist',
-      blacklistedExists:'I already grok you aren\'t interested in receiving messages from them.',
+      addBlacklist: '+',
+      addInterest: '+',
+      allLikesAreAlreadyAdded: 'Wunderbar! All Likes are already added.',
+      blacklist: 'Blacklist',
+      blacklistedExists: 'I already grok you aren\'t interested in receiving messages from them.',
       buttonLabel: {
         sendMessage: 'Send Message',
         name: 'Name',
         message: 'Message',
-        messagesListTest:'Messages List Test',
-        ilcServerTest:'ILC Server Test',
-        cardTest:'Card Test'
+        messagesListTest: 'Messages List Test',
+        ilcServerTest: 'ILC Server Test',
+        cardTest: 'Card Test'
       },
-      email:'Email',
-      errors:{
-        noName:'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
+      chattingWith: 'with',
+      checkmarkTip:'Use the Checkmark button to select your current interests.',
+      connectedToFacebook: 'Connected To Facebook.',
+      currentInterest: 'Current Interest',
+      currentInterests: 'Current Interests',
+      currentRoom: 'Current Room',
+      email: 'Email',
+      errors: {
+        noName: 'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
-      suggestionsFromFacebook:'Suggestions from ',
-      facebookHandlesImagesWarning:'Facebook Handles what images are shown to the users.',
-      facebookInterestsError:'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
+      facebookHandlesImagesWarning: 'Facebook Handles what images are shown to the users.',
+      facebookInterestsError: 'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
         ' data (or don\'t use this feature).',
-      noMatches: 'No matches, check back later...',
+      interestExists: 'I already know you\'re interested in that, silly',
+      interests: 'Interests',
       matches: 'Matches',
+      messageList: 'Messages List',
       messages: 'Messages',
-      name:'Name',
+      name: 'Name',
       noCurrentRoom: 'There are no current rooms available to you.  ' +
         'Are you sure you have any one who\'s willing to hear you prattle?',
-      noRooms:'No Messages, sorry Bro.',
+      noMatches: 'No matches, check back later...',
+      noRooms: 'No Messages, sorry Bro.',
+      profile: 'Profile',
       rooms: 'Rooms',
       send: 'Send',
       sendMessage: 'Send Message',
       siteTitle: '🔥 📖 💬',
-      suggestFacebookInterests:'Suggest Facebook Interests?',
-      profile: 'Profile',
+      suggestFacebookInterests: 'Suggest Facebook Interests?',
+      suggestionsFromFacebook: 'Suggestions from ',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
-      messageList: 'Messages List',
-      welcomeTo:'Welcome to'
+      welcomeTo: 'Welcome to',
+      whatAreYouInterestedInChattingAbout:"What are you interested in chatting about?"
+
     }
   });
 });
