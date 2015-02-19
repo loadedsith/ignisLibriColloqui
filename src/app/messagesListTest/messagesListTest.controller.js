@@ -19,10 +19,5 @@ define(['controllerModule'], function(controllers) {
           $scope.message = '';
         }
       }
-
-      $scope.updateMessagesRef = function(event) {
-        MessagesService.username = $scope.username;
-        MessagesService.currentRoom = $scope.currentRoom;
-      }
     }]);
 });

@@ -15,9 +15,6 @@ for (var file in window.__karma__.files) {
 require.config({
   baseUrl:'/base',
   shim: {
-    firebase: {
-      exports: 'Firebase'
-    },
     facebook: {
       exports: 'FB'
     },
@@ -99,12 +96,10 @@ require.config({
     'services/serviceModule': '/base/src/app/services/serviceModule',
     'services/serviceIndex': 'src/app/services/serviceIndex',
     'services/userService':'src/app/services/userService',
-    'services/firebaseService':'src/app/services/firebaseService',
     'services/facebookService':'src/app/services/facebookService',
     'services/messagesService':'src/app/services/messagesService',
     'services/ilcServerService':'src/app/services/ilcServerService',
     'services/statusService':'src/app/services/statusService',
-    'services/matchMakerService':'src/app/services/matchMakerService',
     'messages-gph': 'src/app/directives/fastRepeat',
     'directives/messages-gph': 'src/app/directives/messages-gph',
     'directives/cards-gph': 'src/app/directives/cards-gph',
@@ -131,7 +126,6 @@ require.config({
     'angular-cookies': 'bower_components/angular-cookies/angular-cookies',
     'angular-mocks': 'bower_components/angular-mocks/angular-mocks',
     'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router',
-    firebase: 'bower_components/firebase/firebase',
     foundation: 'bower_components/foundation/js/foundation',
     requestAnimationFrame: 'bower_components/requestAnimationFrame/app/requestAnimationFrame',
     fastclick: 'bower_components/fastclick/lib/fastclick',

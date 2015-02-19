@@ -1,4 +1,4 @@
-define(['services/serviceModule', 'angular', 'firebase'], function(services, angular, Firebase) {
+define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
   return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'Config',
   function($rootScope, $cookies, $q, FacebookService, Config) {

@@ -1,5 +1,5 @@
-define(['services/serviceModule', 'angular', 'firebase', 'requestAnimationFrame'],
-function(services, angular, Firebase, requestAnimationFrame) {
+define(['services/serviceModule', 'angular', 'requestAnimationFrame'],
+function(services, angular, requestAnimationFrame) {
   'use strict';
   return services.service('StatusService', ['$rootScope', '$timeout', function($rootScope, $timeout) {
     'use strict';

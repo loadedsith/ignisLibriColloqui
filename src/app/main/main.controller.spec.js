@@ -6,7 +6,6 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
   describe('Main Controller Spec', function() {
     var scope;
     var facebookService;
-    var firebaseService;
     var statusService;
     var config;
 
@@ -18,9 +17,6 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
 
     beforeEach(inject(function(FacebookService) {
       facebookService = FacebookService;
-    }));
-    beforeEach(inject(function(FirebaseService) {
-      firebaseService = FirebaseService;
     }));
     beforeEach(inject(function(StatusService) {
       statusService = StatusService;
@@ -36,7 +32,6 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
       expect(scope.status).toBeUndefined();
       expect(config).toBeDefined();
       expect(facebookService).toBeDefined();
-      expect(firebaseService).toBeDefined();
       expect(statusService).toBeDefined();
     }));
     it('should have access to the strings object', inject(function($controller) {

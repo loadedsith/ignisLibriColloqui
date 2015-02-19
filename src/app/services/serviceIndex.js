@@ -6,8 +6,6 @@
  **/
 define([
   'services/facebookService',
-  'services/firebaseService',
-  'services/matchMakerService',
   'services/statusService',
   'services/userService',
   'services/messagesService',

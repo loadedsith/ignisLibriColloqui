@@ -38,9 +38,5 @@ define(['controllerModule'], function(controllers) {
         }
       }
 
-      $scope.updateMessagesRef = function(event) {
-        MessagesService.currentRoom = $scope.currentRoom;
-        MessagesService.updateMessagesRef();
-      }
     }]);
 });
