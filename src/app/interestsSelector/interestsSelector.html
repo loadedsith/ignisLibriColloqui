@@ -1,0 +1,23 @@
+<div class="interestsSelector" ng-controller="InterestsSelectorController">
+  <div class="row interests">
+    <div class="small-12 medium-3 columns">
+      <!-- <label>{{Strings.currentInterests}}</label> -->
+      <label>{{Strings.whatAreYouInterestedInChattingAbout}}</label>
+    </div>
+    <div class="small-12 medium-9 columns end">
+      {{user.profile.currentInterest}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-3 columns">
+      <label>{{Strings.interests}}</label>
+    </div>
+    <div class="small-12 medium-9 columns">
+      <ul class="inline-list">
+        <li ng-disabled="updatingCurrentInterest" ng-click="setCurrentInterest(interest)" ng-repeat="interest in user.profile.interests track by $index" >
+          {{interest}}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

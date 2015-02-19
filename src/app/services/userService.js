@@ -5,13 +5,18 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     'use strict';
     var _this = this;
 
-    _this.currentTopic = 'Gold mining';//TODO: This needs to be an updatable state varible, or array of variables
+    _this.currentInterest = 'Gold mining';//TODO: This needs to be an updatable state varible, or array of variables
 
     _this.profiles = {};
 
     _this.user = {
       profilePicture : null,
       loggedIn : false
+    }
+
+    _this.setCurrentInterest = function(interest) {
+      _this.user.profile.currentInterest = interest;
+      $rootScope.$broadcast('UserService:UpdateCurrentInterest', _this.user);
     }
 
     _this.checkLoginState = function() {
@@ -177,7 +182,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       if (matches === undefined) {
         return undefined;
       }
-      matches = matches[_this.currentTopic];
+      matches = matches[_this.currentInterest];
       if (matches === undefined) {
         return _this.matchList;
       }

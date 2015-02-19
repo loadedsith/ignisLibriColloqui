@@ -45,7 +45,7 @@ define(['controllerModule', 'angular'], function(controllers) {
     };
     $scope.roomNames = [];
     $scope.populateRoomNames = function() {
-      MessagesService.populateRoomNames(undefined, $scope.user, $scope.currentTopic);
+      MessagesService.populateRoomNames(undefined, $scope.user, $scope.currentInterest);
       $scope.roomNames = MessagesService.roomNames;
     };
 

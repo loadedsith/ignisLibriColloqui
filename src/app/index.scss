@@ -3,6 +3,7 @@
 @import './styles/messages';
 @import './styles/profile';
 @import './styles/fonts';
+@import './styles/interestsSelector';
 
 div.button{
   @extend a.button;
@@ -30,6 +31,7 @@ div.button{
 
 .mainView{
   display: none;
+  margin-top: 2em;
   &.open{
     display:block;
     position:relative;
@@ -270,7 +272,7 @@ div.button{
 .status-disconnected{
   .mainView{
     opacity:0.7;
-    pointer-events:none;
+/*    pointer-events:none;*/
     .messageWrapper {
       pointer-events: all;
     }

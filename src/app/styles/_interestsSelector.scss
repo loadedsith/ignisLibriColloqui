@@ -1,0 +1,15 @@
+.interestsSelector{
+  li{
+    background-color:#ccc;
+    padding:3px 9px;
+    &.active{
+      background-color:lighten($primary-color,0.3);
+    }
+  }
+  .interests{
+
+    .open{
+      display:block;
+    }
+  }
+}

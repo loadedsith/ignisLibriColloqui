@@ -6,7 +6,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
 
       $scope.Strings = Config.strings;
 
-      $scope.currentTopic = UserService.currentTopic;
+      $scope.currentInterest = UserService.currentInterest;
       
       $scope.$on('UserService:Update', function(event, user) {
         $scope.alreadyOpenCache = {};

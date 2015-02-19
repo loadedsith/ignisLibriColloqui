@@ -10,10 +10,10 @@ define(['react'], function(React) {
         return false;
       }
       if (localUser.matches !== undefined) {
-        var matchTopics = localUser.matches;
-        if (typeof matchTopics === 'object') {
-          for (var matchKey in matchTopics) {
-            var matches = matchTopics[matchKey];
+        var matchInterests = localUser.matches;
+        if (typeof matchInterests === 'object') {
+          for (var matchKey in matchInterests) {
+            var matches = matchInterests[matchKey];
             if (matches.length > 0) {
               for (var i = matches.length - 1; i >= 0; i--) {
                 var match = matches[i];

@@ -3,7 +3,7 @@
     <div ng-controller="CardsController" id="Cards" >
       <ul class="cards">
         <card-gph
-          ng-repeat="card in matchList[currentTopic]"
+          ng-repeat="card in matchList[currentInterest]"
           card='card'
           ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id"
           profile='profiles[card.id]'

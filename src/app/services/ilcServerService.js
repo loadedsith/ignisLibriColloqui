@@ -5,6 +5,42 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
    function($q, Config, MessagesService, UserService, $socket) {
     var _this = this;
 
+    _this.updatingCurrentInterest = false;
+    _this.updatingCurrentInterestPromise = $q.defer();
+
+    _this.setCurrentInterest = function(user) {
+      console.log('setCurrentInterest',user);
+      var config = {
+        user:user,
+        accessToken: _this.accessToken
+      }
+      if (_this.accessToken === undefined) {
+        console.log('cant make any requests without an access token');
+        //TODO: These seem wrong, maybe no big deal,
+        //  but there's no difference between accepted and rejected
+        return _this.updatingCurrentInterestPromise.promise;
+      }
+      if (user.profile === undefined) {
+        console.log('cant set a profile if it doens\'t exist');
+        //TODO: These seem wrong, maybe no big deal,
+        //  but there's no difference between accepted and rejected
+        return _this.updatingCurrentInterestPromise.promise;
+      }
+      if (user.profile.currentInterest === undefined) {
+        console.log('cant set a profile.currentInterest if it doens\'t exist');
+
+      }
+      _this.updatingCurrentInterest = true;
+
+      $socket.emit('set current interest', config);
+      $socket.once('user current interest update',function(results) {
+        _this.updatingCurrentInterestPromise.resolve(results)
+        _this.updatingCurrentInterest = false;
+      });
+      return _this.updatingCurrentInterestPromise.promise;
+    };
+
+
     _this.updatingProfile = false;
     _this.updatingProfilePromise = $q.defer();
 

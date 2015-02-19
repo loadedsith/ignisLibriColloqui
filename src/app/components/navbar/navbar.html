@@ -12,7 +12,7 @@
     </ul>
     <section class="top-bar-section ">
       <ul class="left show-for-medium-up" ng-show="loggedIn">
-        <li ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
+        <li ng-class="{active:shouldShowView('matches')}" ng-click="toggleNavBar('matches')">
           <a href="#" class="skew">
             <div class='iconWrapper unskew'>
               <span class="icon-users"></span>
@@ -20,7 +20,7 @@
             </div>
           </a>
         </li>
-        <li ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
+        <li ng-class="{active:shouldShowView('messages')}" ng-click="toggleNavBar('messages')">
           <a href="#" class="skew">
             <div class='iconWrapper unskew'>
               <span class="icon-chat"></span>
@@ -28,7 +28,7 @@
             </div>
           </a>
         </li>
-        <li ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
+        <li ng-class="{active:shouldShowView('profile')}" ng-click="toggleNavBar('profile')">
           <a href="#" class="skew">
             <div class='iconWrapper unskew'>
               <span class="icon-pencil"></span>
@@ -36,6 +36,15 @@
             </div>
           </a>
         </li>
+        <li ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
+          <a href="#" class="skew">
+            <div class='iconWrapper unskew'>
+              <span class="icon-checkmark"></span>
+              <span class='subtitle'>{{Strings.interests}}</span>
+            </div>
+          </a>
+        </li>
+
         <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
           <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
         </li>
@@ -53,18 +62,22 @@
       </ul>
     </section>
   </nav>
-  <div class="icon-bar three-up show-for-small-only" ng-show="showMobileNav">
-    <a class="item" ng-class="{active:showMatches}" ng-click="toggleNavBar('matches')">
+  <div class="icon-bar four-up show-for-small-only" ng-show="showMobileNav">
+    <a class="item" ng-class="{active:shouldShowView('matches')}" ng-click="toggleNavBar('matches')">
       <span class="icon-users"></span>
-      <label>Matches</label>
+      <label>{{Strings.matches}}</label>
     </a>
-    <a class="item" ng-class="{active:showMessages}" ng-click="toggleNavBar('messages')">
+    <a class="item" ng-class="{active:shouldShowView('messages')}" ng-click="toggleNavBar('messages')">
       <span class="icon-chat"></span>
-      <label>Messages</label>
+      <label>{{Strings.messages}}</label>
     </a>
-    <a class="item" ng-class="{active:showProfile}" ng-click="toggleNavBar('profile')">
+    <a class="item" ng-class="{active:shouldShowView('profile')}" ng-click="toggleNavBar('profile')">
       <span class="icon-pencil"></span>
-      <label>Profile</label>
+      <label>{{Strings.profile}}</label>
+    </a>
+    <a class="item" ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
+      <span class="icon-checkmark"></span>
+      <label>{{Strings.interests}}</label>
     </a>
   </div>
 </div>

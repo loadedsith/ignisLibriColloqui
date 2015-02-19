@@ -10,6 +10,7 @@ define([
   'messages/messages.controller',
   'matches/matches.controller',
   'profile/profile.controller',
+  'interestsSelector/interestsSelector.controller',
   'messagesTest/messagesTest.controller',
   'messagesListTest/messagesListTest.controller',
   'ilcServerTest/ilcServerTest.controller'

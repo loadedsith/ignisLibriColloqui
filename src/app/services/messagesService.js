@@ -67,10 +67,10 @@ define(['services/serviceModule'], function(services) {
         _this.currentRoom = name;
         $rootScope.$broadcast('MessagesService:SetCurrentRoom', name);
       };
-      _this.getRoomName = function(room, user, currentTopic) {
-        if (currentTopic !== undefined) {
+      _this.getRoomName = function(room, user, currentInterest) {
+        if (currentInterest !== undefined) {
           if (user.matches !== undefined) {
-            var matches = user.matches[currentTopic];
+            var matches = user.matches[currentInterest];
             if (matches !== undefined) {
               for (var i = matches.length - 1; i >= 0; i--) {
                 var match = matches[i];
@@ -83,14 +83,14 @@ define(['services/serviceModule'], function(services) {
         }
         return room;
       };
-      _this.populateRoomNames = function(rooms, user, currentTopic) {
+      _this.populateRoomNames = function(rooms, user, currentInterest) {
         _this.roomNames = [];
         if (rooms === undefined) {
           rooms = _this.rooms;
         }
         for (var i = rooms.length - 1; i >= 0; i--) {
           var room = rooms[i];
-          _this.roomNames.push({id:room, name:_this.getRoomName(room, user, currentTopic)});
+          _this.roomNames.push({id:room, name:_this.getRoomName(room, user, currentInterest)});
         }
       };
       _this.roomSet = function(snapshot) {

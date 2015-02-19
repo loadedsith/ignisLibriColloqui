@@ -55,7 +55,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('MessagesService:UpdateRooms', function(event, rooms) {
         $scope.rooms = rooms;
         $scope.roomsReady = true;
-        MessagesService.populateRoomNames(rooms, $scope.user, $scope.currentTopic)
+        MessagesService.populateRoomNames(rooms, $scope.user, $scope.currentInterest)
         $scope.roomNames = MessagesService.roomNames;
       });
 

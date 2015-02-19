@@ -100,7 +100,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.$on('UserService:Update', function(event, user) {
         $scope.user = user;
-        $scope.currentTopic = UserService.currentTopic;
+        $scope.currentInterest = UserService.currentInterest;
       });
 
       $scope.$on('UserService:FacebookLoginSuccess', function(event, user) {
@@ -111,11 +111,14 @@ define(['controllerModule', 'angular'], function(controllers) {
         ILCServerService.closeRoom(config);
       });
 
-      $scope.showMatches = (Config.showMatches || false);
-
-      $scope.showMessages = (Config.showMessages || false);
-
-      $scope.showProfile = (Config.showProfile || false);
+      $scope.$on('UserService:UpdateCurrentInterest',function(event, user) {
+        $scope.updatingCurrentInterest = true;
+        ILCServerService.setCurrentInterest(user).then(function() {
+          $scope.updatingCurrentInterest = false;
+          StatusService.setStatus(profileSaved);
+          $scope.$broadcast('user profile updated');
+        });
+      });
 
       $scope.closeProfile = function() {
         var complete = UserService.isProfileComplete();
@@ -129,26 +132,55 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       }
 
+      $scope.show = [
+        {
+          name:'matches',
+          value:(Config.showMatches || false)
+        },
+        {
+          name:'messages',
+          value:(Config.showMessages || false)
+        },
+        {
+          name:'profile',
+          value:(Config.showProfile || false)
+        },
+        {
+          name:'interests',
+          value:(Config.showInterests || false)
+        },
+      ];
+
+      $scope.setViewState = function(name, state) {
+        for (var i = $scope.show.length - 1; i >= 0; i--) {
+          if($scope.show[i].name === name){
+            $scope.show[i].value = state
+          }
+        }
+      };
+
+      $scope.shouldShowView = function(name) {
+        for (var i = $scope.show.length - 1; i >= 0; i--) {
+          if($scope.show[i].name === name){
+            return $scope.show[i].value;
+          }
+        }
+        return false;
+      };
+
+      $scope.hideAllViews  = function() {
+        for (var i = $scope.show.length - 1; i >= 0; i--) {
+          $scope.show[i].value = false;
+        }
+      };
+
+
       $scope.toggleNavBar = function(itemName, value) {
         if (value === undefined) {
           value = true;
         }
-        $scope.showProfile = false;
-        $scope.showMessages = false;
-        $scope.showMatches = false;
-        if (itemName === 'matches') {
-          $scope.showMatches = !!value;
-        } else if (itemName === 'messages') {
-          $scope.showMessages = !!value;
-        } else if (itemName === 'profile') {
-          $scope.showProfile = !!value;
-        }
-        if ($scope.showProfile  === false &&
-            $scope.showMatches  === false &&
-            $scope.showMessages === false
-        ) {
-          $scope.toggleNavBar(Config.baseView || 'profile', true);
-        }
+        $scope.hideAllViews();
+        $scope.setViewState(itemName, value);
 
       };
 
