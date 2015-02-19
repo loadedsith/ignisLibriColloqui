@@ -60,7 +60,7 @@ gulp.task('jscs', function() {
         "safeContextKeyword": "_this",
 
         "excludeFiles": [
-            "test/data/**"
+          "test/data/**"
         ]
     }
   )).on('error', function(e) {
