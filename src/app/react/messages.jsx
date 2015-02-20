@@ -27,9 +27,16 @@ define(['react', 'strings'], function(React, Strings) {
       }
       return false;
     },
+    getInitialState: function() {
+      return {
+        profileDisplayed : false
+      };
+    },
+    profileDisplayClick : function() {
+      this.setState({profileDisplayed:!this.state.profileDisplayed});
+    },
     render: function() {
       var rows = [];
-
       var messages = this.props.data;
       var localUser= this.props.localUser;
         /*jshint ignore:start */
@@ -111,23 +118,43 @@ define(['react', 'strings'], function(React, Strings) {
       }
 
       var boundClick = function(remoteUser, event) {
-        this.props.closeRoom(event,  remoteUser.id);
+        this.props.closeRoom(event, remoteUser.id);
       };
 
+      var profileDisplayed = this.state.profileDisplayed ? 'profileDisplay' : 'profileHide';
+      /*jshint ignore:start */
       return (
-        /*jshint ignore:start */
         <div>
-          <div className="controls">
+          <div onClick={this.profileDisplayClick} className={("controls ng-click " + profileDisplayed)} >
             {profileImage}
             <span className="close" onClick={boundClick.bind(this, this.props.remoteUser)}>&times;</span>
             <span className="name">
               {(this.props.remoteUser.profile || {}).name || userName || ''}
             </span>
+            <div className="profile">
+              <div className="row">
+                <div className="columns small-4">
+                  <label className="right">{Strings.aboutMe}</label>
+                </div>
+                <div className="columns small-8">
+                  <p>{this.props.remoteUser.profile.aboutMe}</p>
+                </div>
+              </div>
+              <div className="row">
+                <div className="columns small-4">
+                  <label className="right">{Strings.interests}</label>
+                </div>
+                <div className="columns small-8">
+                  <p>{this.props.remoteUser.profile.interests}</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="messageWrapper">{rows}</div>
         </div>
-        /*jshint ignore:end */
-      );
+            )
+      /*jshint ignore:end */
+
     }
   });
 });

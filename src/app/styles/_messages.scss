@@ -20,12 +20,34 @@ messages-gph{
     width:100%;
     height:$control-height;
 
-    padding-left:10px;
+    padding-left:6px;
+    padding-top:0px;
 
     vertical-align:middle;
     line-height:$control-height;
     color:#666;
     font-size:19px;
+
+    &.profileHide {
+      .profile{
+        display:none;
+      }
+    }
+
+    &.profileDisplay{
+      height:auto;
+      padding-top:6px;
+      .profileImage{
+        max-height:80px;
+      }
+      .profile{
+
+        display:block;
+        p{
+           margin-bottom: 0.2rem;
+        }
+      }
+    }
     .name{
       margin-left:10px;
     }

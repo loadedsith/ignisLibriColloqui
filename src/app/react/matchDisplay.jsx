@@ -1,4 +1,4 @@
-define(['react', 'strings'], function(React, Strings) {
+define(['react', 'strings'], function(React, Strings) {/*jshint ignore:line */
   'use strict';
   return React.createClass({
     getInitialState: function() {
@@ -16,13 +16,13 @@ define(['react', 'strings'], function(React, Strings) {
           height:'0em',
           opacity:'0.3'
         };
-        this.state.openOrClose='?';
+        this.state.openOrClose = Strings.open;
       } else {
         this.state.aboutStyles = {
           height:'auto',
           opacity:'1'
         };
-        this.state.openOrClose='close';
+        this.state.openOrClose = Strings.close;
       }
     },
     render: function() {
@@ -105,7 +105,7 @@ define(['react', 'strings'], function(React, Strings) {
       }
 
       return <div className='matchDisplay' style={styles}>
-        {profile}
+      {profile}
       </div>
       /*jshint ignore:end */
 

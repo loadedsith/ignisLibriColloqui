@@ -1,4 +1,4 @@
-define(['react', 'strings'], function(React, Strings) {
+define(['react', 'strings'], function(React, Strings) {/*jshint ignore:line */
   'use strict';
   return React.createClass({
     render: function() {

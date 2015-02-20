@@ -77,7 +77,7 @@ div.button{
 .panel {
   margin-top: 50px;
 }
-[ng-click]{
+[ng-click],.ng-click{
   cursor:pointer;
   &.no-touch{
     cursor:default!important;

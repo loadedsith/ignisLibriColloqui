@@ -6,6 +6,7 @@ define([],function() {
       addInterest: '+',
       allLikesAreAlreadyAdded: 'Wunderbar! All likes on this page are already added.',
       blacklist: 'Blacklist',
+      blacklistEmpty: 'empty',
       blacklistedExists: 'I already grok you aren\'t interested in receiving messages from them.',
       buttonLabel: {
         sendMessage: 'Send Message',
@@ -16,7 +17,7 @@ define([],function() {
         cardTest: 'Card Test'
       },
       chattingWith: 'with',
-      checkmarkTip:'Use the Checkmark button to select your current interests.',
+      close: 'x',
       connectedToFacebook: 'Connected To Facebook.',
       count: 'Count',
       currentInterest: 'Current Interest',
@@ -48,6 +49,7 @@ define([],function() {
       siteTitle: '🔥 📖 💬',
       suggestFacebookInterests: 'Suggest Facebook Interests?',
       suggestionsFromFacebook: 'Suggestions from ',
+      open: '?',
       updateRoom: 'Update Room',
       updateUser: 'Update User',
       welcomeTo: 'Welcome to',

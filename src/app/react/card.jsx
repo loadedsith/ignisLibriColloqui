@@ -170,12 +170,12 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         // requestAnimationFrame(this.returnCard);
       // }
     },
-    moveSiblingCards : function() {
+    moveSiblingCards : function(xPos) {
       //unused but functional
       if (this.getDOMNode().parentNode.classList.contains('topCard')){
         var cards = angular.element(this.getDOMNode().parentElement.parentElement).find('li');
         for (var i = cards.length - 1; i >= 0; i--) {
-          var card = cards[i]
+          var card = cards[i];
           if (!card.parentElement.classList.contains('topCard')) {
             card.style.left = xPos + 'px';
           }
