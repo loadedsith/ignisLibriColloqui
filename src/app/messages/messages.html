@@ -2,12 +2,14 @@
   <div class="Messages">
     <div ng-show="rooms.length > 0" ng-include="'app/components/messagesList/messagesList.html'"></div>
     <div class="row collapse postfix-round" ng-if="currentRoom">
-      <div class="small-9 columns">
-        <input type="text" ng-model="message" placeholder="{{Strings.message}}" />
-      </div>
-      <div class="small-3 columns">
-        <div class="button postfix" ng-click="messageInput(message,currentRoom); message = '';">{{Strings.send}}</div>
-      </div>
+      <form ng-submit="messageInput(message,currentRoom); message = '';">
+        <div class="small-9 columns">
+          <input type="text" ng-model="message" placeholder="{{Strings.message}}" />
+        </div>
+        <div class="small-3 columns">
+          <div class="button postfix" ng-click="messageInput(message,currentRoom); message = '';">{{Strings.send}}</div>
+        </div>
+      </form>
     </div>
     <div ng-show="rooms.length === 0">
       <p>{{Strings.noRooms}}</p>

@@ -98,7 +98,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     };
 
     _this.sendMessage = function(config) {
-      if (_this.accessToken === undefined) {
+      if (_this.accessToken !== undefined) {
         config.accessToken = _this.accessToken;
         $socket.emit('send message', config);
       } else {
