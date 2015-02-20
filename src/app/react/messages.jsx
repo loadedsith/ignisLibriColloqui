@@ -1,6 +1,6 @@
 /* jshint unused: false */
 /* exported MYLIST */
-define(['react'], function(React) {
+define(['react', 'strings'], function(React, Strings) {
   'use strict';
   return React.createClass({
     getRemoteUserFromLocalUserMatches : function(userId) {
@@ -33,7 +33,7 @@ define(['react'], function(React) {
       var messages = this.props.data;
       var localUser= this.props.localUser;
         /*jshint ignore:start */
-      var errorElement = <p>messages failed to load. Sorry!</p>;
+      var errorElement = <p>{Strings.messagesFailedToLoad}</p>;
 
       if (messages === undefined) {
         console.log('data is undefined in messages.jsx');

@@ -18,10 +18,12 @@ define([],function() {
       chattingWith: 'with',
       checkmarkTip:'Use the Checkmark button to select your current interests.',
       connectedToFacebook: 'Connected To Facebook.',
+      count: 'Count',
       currentInterest: 'Current Interest',
       currentInterests: 'Current Interests',
       currentRoom: 'Current Room',
       email: 'Email',
+      emptyUserInfo:'No user info, sorry!',
       errors: {
         noName: 'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
@@ -33,6 +35,7 @@ define([],function() {
       matches: 'Matches',
       messageList: 'Messages List',
       messages: 'Messages',
+      messagesFailedToLoad: 'Messages failed to load. Sorry!',
       name: 'Name',
       noCurrentRoom: 'There are no current rooms available to you.  ' +
         'Are you sure you have any one who\'s willing to hear you prattle?',

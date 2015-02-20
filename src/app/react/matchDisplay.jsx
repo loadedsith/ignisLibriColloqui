@@ -1,4 +1,4 @@
-define(['react'], function(React) {
+define(['react', 'strings'], function(React, Strings) {
   'use strict';
   return React.createClass({
     getInitialState: function() {
@@ -85,7 +85,7 @@ define(['react'], function(React) {
           <div className="about" style={this.state.aboutStyles}>
             <div className="row">
               <div className="small-12 medium-4 columns">
-                <p>Interests</p>
+                <p>{String.interests}</p>
               </div>
               <div className="small-12 medium-8 columns">
                 <p>{interests}</p>
@@ -93,7 +93,7 @@ define(['react'], function(React) {
             </div>
             <div className="row">
               <div className="small-12 medium-4 columns">
-                <p>About Me</p>
+                <p>{String.aboutMe}</p>
               </div>
               <div className="small-12 medium-8 columns">
                 {this.props.data.profile.aboutMe}
@@ -102,7 +102,7 @@ define(['react'], function(React) {
           </div>
         </div>;
       } else {
-        profile = <div className="userInfo">userinfo</div>;
+        profile = <div className="userInfo">{Strings.emptyUserInfo}</div>;
       }
 
       return <div className='matchDisplay' style={styles}>
