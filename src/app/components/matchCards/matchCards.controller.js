@@ -23,6 +23,27 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
       }
     });
 
+    $scope.swipeRightTopCard = function(card, cardData) {
+      $scope.removeTopCard(cardData);
+    };
+    $scope.swipeLeftTopCard = function(card, cardData) {
+      var deckIndex;
+      for (var i = $scope.decks.length - 1; i >= 0; i--) {
+        var deck = $scope.decks[i];
+        if (deck.topCard.name !== undefined) {
+          var name = deck.topCard.name;
+          if (name === cardData.name) {
+            deckIndex = i;
+            continue;
+          }
+        }
+      }
+
+      if (deckIndex !== undefined) {
+        $scope.decks.splice(deckIndex, 1);
+      }
+    };
+
     $scope.makeDecksFromMatchList = function(matchList) {
       if (matchList === undefined) {
         matchList === $scope.matchList;
@@ -40,6 +61,19 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
       })
     }
 
+    $scope.removeTopCard = function(cardData) {
+      for (var i = $scope.decks.length - 1; i >= 0; i--) {
+        var deck = $scope.decks[i];
+        if (deck.topCard.name !== undefined) {
+          var name = deck.topCard.name;
+          if (name === cardData.name) {
+            deck.topCard = undefined
+            debugger;
+            continue;
+          }
+        }
+      }
+    }
     $scope.removeCard = function(card) {
       console.log('removeCard');
       $timeout(function() {
@@ -63,7 +97,6 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.swipeRight = function(card, cardData) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
-      UserService.userFoundAMatch(cardData.id)
       if (typeof $scope.$parent.swipeRight === 'function') {
         card.removeCard = $scope.removeCard;
         $scope.$parent.swipeRight(card, cardData, $scope.cardControl)

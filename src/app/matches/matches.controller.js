@@ -52,8 +52,8 @@ define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'], f
         return false;
       };
 
-
       $scope.swipeRight = function(card, cardData, cardControl) {
+        UserService.userFoundAMatch(cardData.id)
         card.fadeOut(function(card) {
           cardControl.removeCard(cardData);
         });
