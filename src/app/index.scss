@@ -327,7 +327,7 @@ section.top-bar-section ul.right li img{
     opacity: 1;
   }
   40% {
-    transform: scale(1);
+/*    transform: scale(1);*/
   }
   50%{
     opacity:1;
@@ -336,7 +336,7 @@ section.top-bar-section ul.right li img{
     opacity: 0;
   }
   100% {
-    transform: scale(0);
+/*    transform: scale(0);*/
     display:none;
   }
 }
