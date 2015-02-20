@@ -71,7 +71,13 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.showProfile = true;
           StatusService.setStatus(profileIncomplete);
         }
+        ILCServerService.setProfile(user).then(function() {
+          $scope.updatingProfile = false;
+          StatusService.setStatus(profileSaved);
+          $scope.$broadcast('user profile updated');
+        });
       };
+
       $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
         ILCServerService.setProfile(user).then(function() {
           $scope.updatingProfile = false;
@@ -79,6 +85,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.$broadcast('user profile updated');
         });
       });
+
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
       $scope.$on('UserService:UpdateMatchProfiles', function(event, value) {
