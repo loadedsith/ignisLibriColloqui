@@ -24,7 +24,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
     });
 
     $scope.swipeRightTopCard = function(card, cardData) {
-      $scope.removeTopCard(cardData);
+      $scope.removeTopCard(card, cardData);
     };
     $scope.swipeLeftTopCard = function(card, cardData) {
       var deckIndex;
@@ -61,16 +61,17 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
       })
     }
 
-    $scope.removeTopCard = function(cardData) {
+    $scope.removeTopCard = function(card, cardData) {
       for (var i = $scope.decks.length - 1; i >= 0; i--) {
         var deck = $scope.decks[i];
         if (deck.topCard.name !== undefined) {
-          var name = deck.topCard.name;
-          if (name === cardData.name) {
-            deck.topCard = undefined
-            debugger;
-            continue;
-          }
+          card.fadeOut(function(card) {
+            var name = deck.topCard.name;
+            if (name === cardData.name) {
+              deck.topCard = undefined
+            }
+          })
+          continue;
         }
       }
     }

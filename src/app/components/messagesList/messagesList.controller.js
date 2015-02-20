@@ -33,7 +33,8 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.messages[message.room] = [];
         }
         $scope.messages[message.room].push(message.snapshot);
-      })
+      });
+      
       $scope.$on('MessagesService:MessagesSet', function(event, messages) {
         if (messages.snapshot !== null) {
           if (messages.snapshot[messages.room]) {

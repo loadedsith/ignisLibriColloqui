@@ -28,7 +28,6 @@ define(['react', 'strings'], function(React, Strings) {
     render: function() {
       var defaultImageUrl = './assets/images/FBProfile.jpg';
       var imageUrl = defaultImageUrl;
-
       //This is essentailly the same as if (___===undefined) {} blocks. getting this.props.data.image.data
 
       if (this.props.profile.fetching !== undefined) {
@@ -85,7 +84,7 @@ define(['react', 'strings'], function(React, Strings) {
           <div className="about" style={this.state.aboutStyles}>
             <div className="row">
               <div className="small-12 medium-4 columns">
-                <p>{String.interests}</p>
+                <p>{Strings.interests}</p>
               </div>
               <div className="small-12 medium-8 columns">
                 <p>{interests}</p>
@@ -93,7 +92,7 @@ define(['react', 'strings'], function(React, Strings) {
             </div>
             <div className="row">
               <div className="small-12 medium-4 columns">
-                <p>{String.aboutMe}</p>
+                <p>{Strings.aboutMe}</p>
               </div>
               <div className="small-12 medium-8 columns">
                 {this.props.data.profile.aboutMe}

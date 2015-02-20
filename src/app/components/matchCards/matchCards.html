@@ -1,4 +1,5 @@
 <div ng-controller="MatchCardsController" id="matchCards">
+
   <div class="cardsWrapper">
     <ul class="cards">
       <div ng-repeat="deck in decks" ng-if="deck.cards.length > 0">
@@ -14,9 +15,10 @@
           swipe-right="swipeRight"
           card-template="MatchDisplay"
           ng-class="{inDeck: deck.topCard !== undefined}"
+          ng-if="!deck.topCard"
           >
         </card-gph>
-        <!-- ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id" -->
+          <!-- ng-if="!alreadyOpenRoom(card.id)" -->
         <card-gph
           ng-if="deck.topCard"
           card="deck.topCard"
@@ -29,21 +31,21 @@
           card-template="TopCard"
           >
         </card-gph>
-        <h1 class="bottom">
-          <div>
-            <p class="glyphs">
-              <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
-            </p>
-            <p class="copy">
-              {{Strings.noMatches}}
-            </p>
-          </div>
-        </h1>
       </div>
+      <h1 class="bottom">
+        <div>
+          <p class="glyphs">
+            <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
+          </p>
+          <p class="copy">
+            {{Strings.noMatches}}
+          </p>
+        </div>
+      </h1>
     </ul>
     <div ng-controller="CardsController" id="Cards">
-      <ul class="cards">
-        <!-- <card-gph
+     <!-- <ul class="cards">
+         <card-gph
           ng-repeat="card in matchList[deckInterest]"
           card="card"
           ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id"
@@ -66,8 +68,8 @@
               {{Strings.noMatches}}
             </p>
           </div>
-        </h1> -->
-      </ul>
+        </h1>
+      </ul> -->
     </div>
   </div>
 </div>

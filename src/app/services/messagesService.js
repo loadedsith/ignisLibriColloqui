@@ -17,8 +17,7 @@ define(['services/serviceModule'], function(services) {
           message:message,
           room:currentRoom
         };
-
-        if (typeof sendMessageEventListener === 'function') {
+        if (typeof _this.sendMessageEventListener === 'function') {
           _this.sendMessageEventListener(config);
         }
       };

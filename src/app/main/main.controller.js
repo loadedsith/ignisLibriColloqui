@@ -60,9 +60,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       };
 
-      $scope.disconnectMe = function() {
-        ILCServerService.disconnectMe();
-      };
+      $scope.disconnectMe = ILCServerService.disconnectMe;
 
       $scope.lastUserProfile;
       $scope.updateUserProfile = function(event, user) {
