@@ -135,19 +135,19 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.show = [
         {
           name:'matches',
-          value:(Config.showMatches || false)
+          value:false
         },
         {
           name:'messages',
-          value:(Config.showMessages || false)
+          value:false
         },
         {
           name:'profile',
-          value:(Config.showProfile || false)
+          value:false
         },
         {
           name:'interests',
-          value:(Config.showInterests || false)
+          value:false
         },
       ];
 

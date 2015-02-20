@@ -51,6 +51,7 @@ require.config({
     'react/cards': '/app/react/cards',
     'react/messages': '/app/react/messages',
     'react/matchDisplay': '/app/react/matchDisplay',
+    'strings': '/app/strings',
     'services/serviceModule': '/app/services/serviceModule',
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
