@@ -1,4 +1,5 @@
 define([],function() {
+  'use strict';
   return {
       aboutMe: 'About Me',
       addBlacklist: '+',
@@ -47,7 +48,6 @@ define([],function() {
       updateRoom: 'Update Room',
       updateUser: 'Update User',
       welcomeTo: 'Welcome to',
-      whatAreYouInterestedInChattingAbout:"What are you interested in chatting about?"
-
+      whatAreYouInterestedInChattingAbout:'What are you interested in chatting about?'
     };
-})
+});
