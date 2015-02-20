@@ -36,18 +36,18 @@
             </div>
           </a>
         </li>
-        <li ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
+        <!-- <li ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
           <a href="#" class="skew">
             <div class='iconWrapper unskew'>
               <span class="icon-checkmark"></span>
               <span class='subtitle'>{{Strings.interests}}</span>
             </div>
           </a>
-        </li>
+        </li> -->
 
-        <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
+        <!-- <li ng-if="true" class="subtitle" ng-repeat="link in devLinks|orderBy:$index:true">
           <a ui-sref="{{link}}">{{Strings.buttonLabel[link]}}</a>
-        </li>
+        </li> -->
       </ul>
       <ul class="right show-for-medium-up">
         <div ng-include="'app/components/user/user.html'" ></div>
@@ -75,9 +75,9 @@
       <span class="icon-pencil"></span>
       <label>{{Strings.profile}}</label>
     </a>
-    <a class="item" ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
+    <!-- <a class="item" ng-class="{active:shouldShowView('interests')}" ng-click="toggleNavBar('interests')">
       <span class="icon-checkmark"></span>
       <label>{{Strings.interests}}</label>
-    </a>
+    </a> -->
   </div>
 </div>

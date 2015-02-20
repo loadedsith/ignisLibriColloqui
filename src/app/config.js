@@ -9,7 +9,7 @@ define(['angular', 'strings'], function(angular, Strings) {
       width: 400
     },
     interestsLimit: 10,
-    // devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
+    devLinks: ['cardTest', 'messagesListTest', 'ilcServerTest'],
     strings: Strings
   });
 });
