@@ -7,6 +7,7 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
         messages: '=',
         localUser: '=',
         closeRoom: '=',
+        room: '=',
         profile: '='
 
       },
@@ -17,6 +18,7 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
             data: newValue,
             localUser:scope.localUser,
             profile:scope.profile,
+            room:scope.room,
             closeRoom:scope.closeRoom
           }), el[0]);
         }, true);
@@ -25,6 +27,7 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
             data: scope.messages,
             localUser:scope.localUser,
             profile:newValue,
+            room:scope.room,
             closeRoom:scope.closeRoom
           }), el[0]);
         }, true);

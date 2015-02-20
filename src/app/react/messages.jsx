@@ -96,8 +96,10 @@ define(['react', 'strings'], function(React, Strings) {
           );
         /*jshint ignore:end */
       }
-
       var profileImage;
+
+      this.props.remoteUser = this.getRemoteUserFromLocalUserMatches(this.props.room);
+
       var profile = (this.props.profile || {}); //profile or empty
       if (profile.image !== undefined) {
         if (profile.image.data['is_silhouette'] === true) {
@@ -119,7 +121,7 @@ define(['react', 'strings'], function(React, Strings) {
             {profileImage}
             <span className="close" onClick={boundClick.bind(this, this.props.remoteUser)}>&times;</span>
             <span className="name">
-              {(this.props.remoteUser.profile || {}).name || ''}
+              {(this.props.remoteUser.profile || {}).name || userName || ''}
             </span>
           </div>
           <div className="messageWrapper">{rows}</div>

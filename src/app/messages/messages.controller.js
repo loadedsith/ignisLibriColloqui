@@ -1,7 +1,7 @@
 define(['controllerModule'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', 'Config', 'MessagesService',
-    function($scope, Config, MessagesService) {
+  return controllers.controller('MessagesController', ['$scope', 'Config', 'MessagesService', 'UserService',
+    function($scope, Config, MessagesService, UserService) {
 
       $scope.Strings = Config.strings;
 
@@ -24,6 +24,7 @@ define(['controllerModule'], function(controllers) {
       });
 
       $scope.$on('UserService:Update', function(event, user) {
+        $scope.profiles = UserService.profiles;
         var username = (((user || {}).info || {}).id || 'no username');
         if (username !== 'no username') {
           $scope.username = username;
@@ -31,7 +32,6 @@ define(['controllerModule'], function(controllers) {
       });
 
       $scope.messageInput = function(message, currentRoom) {
-
         var successful = MessagesService.sendMessage(message, currentRoom);
         if (successful) {
           $scope.message = '';

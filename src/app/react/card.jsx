@@ -170,6 +170,18 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         // requestAnimationFrame(this.returnCard);
       // }
     },
+    moveSiblingCards : function() {
+      //unused but functional
+      if (this.getDOMNode().parentNode.classList.contains('topCard')){
+        var cards = angular.element(this.getDOMNode().parentElement.parentElement).find('li');
+        for (var i = cards.length - 1; i >= 0; i--) {
+          var card = cards[i]
+          if (!card.parentElement.classList.contains('topCard')) {
+            card.style.left = xPos + 'px';
+          }
+        }
+      }
+    },
     handelMouse: function(event) {
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
@@ -233,6 +245,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
               opacity = maxDrag/(-1 * xPos);
             }
           }
+
           if (this.state.dragging) {
             this.setState({
               rotation: -1 * (window.innerWidth / 2 - event.pageX)/45,
