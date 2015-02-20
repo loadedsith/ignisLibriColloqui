@@ -35,15 +35,20 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       };
     },
     getInitialState: function() {
-      var originalRotation = Math.floor((Math.random()*6)-3);
+      var originalRotation;
+      if ((this.state||{}).originalRotation === undefined){
+        originalRotation = Math.floor((Math.random()*6)-3);
+      }else{
+        originalRotation = this.state.originalRotation;
+      }
       return {
         pos: this.props.config.initialPosition || {x:0, y:0},
-        duration:this.props.config.duration || 250,
-        rotation: originalRotation,
-        originalRotation: originalRotation,
+        duration: this.props.config.duration || 250,
+        rotation: this.props.config.initialPosition.rotation || originalRotation,
+        originalRotation: this.props.config.initialPosition.rotation || originalRotation,
         easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
-        profile:this.props.config.profile || {},
-        opacity:1,
+        profile: this.props.config.profile || {},
+        opacity: 1,
         dragging: false,
         rel: null // position relative to the cursor
       };
@@ -53,6 +58,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       // the vars are included to avoid unused complaints
       /*jshint ignore:start */
       var rotation = this.state.originalRotation + this.state.rotation;
+
       var styles = {
         position: 'absolute',
         left: this.state.pos.x + 'px',
@@ -60,6 +66,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         opacity: this.state.opacity,
         transform: 'rotate(' + rotation + 'deg)'
       };
+
       var initialPosition = this.props.config.initialPosition;
 
       var cardTemplate;
@@ -69,7 +76,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
           data: this.props.data,
           profile: this.props.config.profile,
           userProfile:this.props.config.userProfile
-        }, this.props.data, " ");
+        }, this.props.data, ' ');
       } catch (error) {
         cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>
       }

@@ -1,4 +1,4 @@
-define(['controllerModule', 'angular', 'react/matchDisplay'], function(controllers, angular, MatchDisplay) {
+define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'], function(controllers, angular, MatchDisplay, TopCard) {
   'use strict';
   return controllers.controller('MatchesController', [
     '$scope', 'Config', 'UserService',
@@ -7,12 +7,15 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
       $scope.Strings = Config.strings;
 
       $scope.currentInterest = UserService.currentInterest;
-      
+
+      $scope.MatchDisplay = MatchDisplay;
+      $scope.TopCard = TopCard;
+
       $scope.$on('UserService:Update', function(event, user) {
         $scope.alreadyOpenCache = {};
         $scope.blacklistedCache = {};
       });
-      
+
       $scope.alreadyOpenCache = {};
       $scope.alreadyOpenRoom = function(id) {
         if($scope.alreadyOpenRoom[id] !== undefined){
@@ -49,7 +52,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay'], function(controlle
         return false;
       };
 
-      $scope.MatchDisplay = MatchDisplay;
+
       $scope.swipeRight = function(card, cardData, cardControl) {
         card.fadeOut(function(card) {
           cardControl.removeCard(cardData);

@@ -6,14 +6,38 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
     $scope.matchList = {};
     $scope.profiles = {};
 
+    $scope.decks = [];
+
     $scope.$on('UserService:Update', function(event, user) {
       $scope.profiles = UserService.profiles;
+      if ($scope.deckInterest === undefined && user.profile !== undefined) {
+        if (user.profile.currentInterest !== undefined) {
+          $scope.deckInterest = user.profile.currentInterest;
+        }
+      }
       if (user.matches) {
         $scope.matchList = user.matches;
+        $scope.makeDecksFromMatchList($scope.matchList);
       } else {
         console.debug('got service update for match controller, but no matches!')
       }
     });
+
+    $scope.makeDecksFromMatchList = function(matchList) {
+      if (matchList === undefined) {
+        matchList === $scope.matchList;
+      }
+      $scope.decks = [];
+      angular.forEach(matchList, function(value, key) {
+        $scope.decks.push({
+          name:key,
+          cards:value,
+          topCard:{
+            name:key
+          }
+        });
+      })
+    }
 
     $scope.removeCard = function(card) {
       console.log('removeCard');

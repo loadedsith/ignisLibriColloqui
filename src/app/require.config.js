@@ -51,6 +51,7 @@ require.config({
     'react/cards': '/app/react/cards',
     'react/messages': '/app/react/messages',
     'react/matchDisplay': '/app/react/matchDisplay',
+    'react/topCard': '/app/react/topCard',
     'strings': '/app/strings',
     'services/serviceModule': '/app/services/serviceModule',
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
@@ -72,7 +73,7 @@ require.config({
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
     'ng-socket-gph': '/vendor/ng-socket-gph',
     'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue',
-    'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable',
+    'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'
   },
   packages: [
 

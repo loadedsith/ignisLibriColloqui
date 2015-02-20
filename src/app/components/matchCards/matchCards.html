@@ -1,11 +1,10 @@
-<div ng-controller="MatchCardsController" id="matchCards" >
+<div ng-controller="MatchCardsController" id="matchCards">
   <div class="cardsWrapper">
-    <div ng-controller="CardsController" id="Cards" >
-      <ul class="cards">
+    <ul class="cards">
+      <div ng-repeat="deck in decks" ng-if="deck.cards.length > 0">
         <card-gph
-          ng-repeat="card in matchList[currentInterest]"
+          ng-repeat="card in deck.cards"
           card='card'
-          ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id"
           profile='profiles[card.id]'
           user-profile='user.profile'
           duration="250"
@@ -14,6 +13,17 @@
           swipe-left="swipeLeft"
           swipe-right="swipeRight"
           card-template="MatchDisplay"
+          >
+        </card-gph>
+        <!-- ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id" -->
+        <card-gph
+          card='deck.topCard'
+          duration="250"
+          max-drag="250"
+          initial-position="{x:10, y:10, rotation:0}"
+          swipe-left="swipeLeft"
+          swipe-right="swipeRight"
+          card-template="TopCard"
           >
         </card-gph>
         <h1 class="bottom">
@@ -26,6 +36,34 @@
             </p>
           </div>
         </h1>
+      </div>
+    </ul>
+    <div ng-controller="CardsController" id="Cards">
+      <ul class="cards">
+        <!-- <card-gph
+          ng-repeat="card in matchList[deckInterest]"
+          card='card'
+          ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id"
+          profile='profiles[card.id]'
+          user-profile='user.profile'
+          duration="250"
+          max-drag="250"
+          initial-position="{x:10, y:10}"
+          swipe-left="swipeLeft"
+          swipe-right="swipeRight"
+          card-template="MatchDisplay"
+          >
+        </card-gph> -->
+        <!-- <h1 class="bottom">
+          <div>
+            <p class='glyphs'>
+              <span class="icon-fire"></span>&nbsp;<span class="icon-book"></span>&nbsp;<span class="icon-chat"></span>
+            </p>
+            <p class='copy'>
+              {{Strings.noMatches}}
+            </p>
+          </div>
+        </h1> -->
       </ul>
     </div>
   </div>
