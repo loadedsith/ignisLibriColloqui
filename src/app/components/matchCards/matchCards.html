@@ -13,11 +13,13 @@
           swipe-left="swipeLeft"
           swipe-right="swipeRight"
           card-template="MatchDisplay"
+          ng-class="{inDeck: deck.topCard !== undefined}"
           >
         </card-gph>
         <!-- ng-if="!blacklisted(card.id) && !alreadyOpenRoom(card.id) && card.id !== user.info.id" -->
         <card-gph
           card='deck.topCard'
+          class='deck topCard'
           duration="250"
           max-drag="250"
           initial-position="{x:10, y:10, rotation:0}"

@@ -35,7 +35,11 @@ $cardHeight: $retinaCardHeight / 2;
     }
   }
 }
-
+.inDeck{
+  li{
+    transform:rotate(0)!important;
+  }
+}
 .card{
   display:block;
   overflow:hidden;
