@@ -36,8 +36,10 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     },
     getInitialState: function() {
       var originalRotation;
-      if ((this.state || {}).originalRotation === undefined) {
-        originalRotation = this.props.config.initialPosition.rotation || Math.floor((Math.random()*6)-3);
+      if (this.props.config.initialPosition.rotation === undefined) {
+        originalRotation = Math.floor((Math.random()*6)-3);
+      } else {
+        originalRotation = this.props.config.initialPosition.rotation;
       }
       return {
         pos: this.props.config.initialPosition || {x:0, y:0},

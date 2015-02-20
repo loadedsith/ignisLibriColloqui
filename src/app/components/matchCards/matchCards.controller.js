@@ -33,7 +33,8 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
           name:key,
           cards:value,
           topCard:{
-            name:key
+            name:key,
+            size:value.length
           }
         });
       })

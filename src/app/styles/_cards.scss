@@ -40,6 +40,44 @@ $cardHeight: $retinaCardHeight / 2;
     transform:rotate(0)!important;
   }
 }
+.topCard li.card:nth-child(1) {
+  background-image: url('/assets/images/fire@2x.png');
+}
+.topCard li.card:nth-child(2) {
+  background-image: url('/assets/images/book@2x.png');
+}
+.topCard li.card:nth-child(3) {
+  background-image: url('/assets/images/chat@2x.png');
+}
+.topCard li.card {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+
+  .name {
+    font-size: 30px;
+    text-align: center;
+    padding-top: 20%;
+    color: #555;
+
+  }
+  .size {
+    vertical-align: bottom;
+    height: 100%;
+    padding-top: 70%;
+    text-align: center;
+    padding-bottom: 100%;
+    color: #555;
+    label{
+      line-height:1em;
+    }
+    p{
+      font-size: 40px;
+      line-height:1.3em;
+
+    }
+  }
+}
 .card{
   display:block;
   overflow:hidden;
@@ -48,7 +86,7 @@ $cardHeight: $retinaCardHeight / 2;
   position:absolute;
   top:10px;
   cursor: pointer;
-  border-radius:13px;
+  border-radius: 21px;
   transform:translateZ(0);
   backface-visibility:hidden;
   .matchDisplay{
