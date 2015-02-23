@@ -213,12 +213,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
 
       $scope.login();
-      if (window.location.host === 'localhost:3000') {
+      if (window.location.host !== 'example.com:3000' && window.location.host !== 'ignis-libri-colloqui.herokuapp.com') {
         var useRealHostToTestFacebook = {
-          text:'You must use example.com:3000 to test Facebook integration',
+          text:'You must use example.com:3000 or ignis-libri-colloqui.herokuapp.com to test Facebook integration',
           class:'status-error',
           action: function() {
-            window.location.host = 'example.com:3000';
+            window.location.host = 'ignis-libri-colloqui.herokuapp.com';
           }
         };
         StatusService.setStatus(useRealHostToTestFacebook);

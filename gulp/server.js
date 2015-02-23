@@ -23,6 +23,7 @@ function browserSyncInit(baseDir, files, browser) {
   browserSync.instance = browserSync.init(files, {
     startPath: '/index.html',
     server: {
+      port: process.env.PORT||3000,
       baseDir: baseDir,
       middleware: middleware,
       routes: routes
@@ -51,9 +52,9 @@ gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function() {
     'src/{app,components}/**/*.js',
     '!src/{app,components}/**/*spec.js'
   ]);
-  execute('open http://example.com:3000', function() {
-    console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');
-  });
+  // execute('open http://example.com:3000', function() {
+  //   console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');
+  // });
 });
 
 gulp.task('serve:dist', ['build'], function() {
