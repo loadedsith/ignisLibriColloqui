@@ -45,23 +45,23 @@ notify.on('click', function(options) {
 gulp.task('jscs', function() {
   return  gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])
     .pipe($.jscs({
-        "preset": "google",
-        "fileExtensions": [ ".js", "jscs" ],
+      "preset": "google",
+      "fileExtensions": [ ".js", "jscs" ],
 
-        "requireParenthesesAroundIIFE": true,
-        "maximumLineLength": 120,
-        "validateLineBreaks": null,
-        "validateIndentation": 2,
+      "requireParenthesesAroundIIFE": true,
+      "maximumLineLength": 120,
+      "validateLineBreaks": null,
+      "validateIndentation": 2,
 
-        "disallowKeywords": ["with"],
-        "disallowSpacesInsideObjectBrackets": null,
-        "disallowImplicitTypeConversion": ["string"],
+      "disallowKeywords": ["with"],
+      "disallowSpacesInsideObjectBrackets": null,
+      "disallowImplicitTypeConversion": ["string"],
 
-        "safeContextKeyword": "_this",
+      "safeContextKeyword": "_this",
 
-        "excludeFiles": [
-          "test/data/**"
-        ]
+      "excludeFiles": [
+        "test/data/**"
+      ]
     }
   )).on('error', function(e) {
     this.end();
@@ -81,7 +81,7 @@ gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
       var errors = file.jshint.results.map(function(data) {
         if (data.error) {
           return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
-             'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
+            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
@@ -99,7 +99,7 @@ gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
       var errors = file.jshint.results.map(function(data) {
         if (data.error) {
           return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
-             'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
+            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
@@ -168,11 +168,8 @@ gulp.task('images', function() {
 });
 
 gulp.task('fonts', function() {
-  return gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot, svg, ttf, woff}'))
-    .pipe($.flatten())
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe($.size());
+  return gulp.src('src/assets/fonts/**/*')
+  .pipe($.copy('dist/assets/fonts',{prefix:3}));
 });
 
 gulp.task('misc', function() {
@@ -181,8 +178,24 @@ gulp.task('misc', function() {
     .pipe($.size());
 });
 
+gulp.task('myBower',function() {
+  return gulp.src([
+    'bower_components/**/*'
+  ])
+    .pipe($.copy('dist'));
+});
+gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
+  return gulp.src([
+    'src/app/**/*',
+    'src/vendor/**/*.js',
+    '.tmp/app/**/*.js'
+
+  ])
+    .pipe($.copy('dist', {prefix:1}));
+});
+
 gulp.task('clean', function(done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'require', 'misc']);
+gulp.task('build', [ 'html', 'images', 'fonts', 'misc', 'copy']);
