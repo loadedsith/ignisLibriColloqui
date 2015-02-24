@@ -56,7 +56,7 @@ require.config({
     'services/serviceModule': 'services/serviceModule',
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
-    facebook: 'http://connect.facebook.net/en_US/all',
+    facebook: '//connect.facebook.net/en_US/all',
     angular: '../bower_components/angular/angular',
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
