@@ -8,11 +8,11 @@
     "url": "https://github.com/loadedsith/ignisLibriColloqui.git"
   },
   "engines": {
-    "node": "^0.10.x",
+    "node": "0.10.x",
     "npm": "2.x.x"
   },
   "scripts": {
-    "build": "gulp build",
+    "postinstall": "gulp build",
     "start": "node herokuServer.js"
   },
   "dependencies": {
