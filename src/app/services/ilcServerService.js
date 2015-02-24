@@ -9,7 +9,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.updatingCurrentInterestPromise = $q.defer();
 
     _this.setCurrentInterest = function(user) {
-      console.log('setCurrentInterest',user);
+      console.log('setCurrentInterest', user);
       var config = {
         user:user,
         accessToken: _this.accessToken
@@ -33,13 +33,12 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       _this.updatingCurrentInterest = true;
 
       $socket.emit('set current interest', config);
-      $socket.once('user current interest update',function(results) {
+      $socket.once('user current interest update', function(results) {
         _this.updatingCurrentInterestPromise.resolve(results)
         _this.updatingCurrentInterest = false;
       });
       return _this.updatingCurrentInterestPromise.promise;
     };
-
 
     _this.updatingProfile = false;
     _this.updatingProfilePromise = $q.defer();

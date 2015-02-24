@@ -115,7 +115,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         ILCServerService.closeRoom(config);
       });
 
-      $scope.$on('UserService:UpdateCurrentInterest',function(event, user) {
+      $scope.$on('UserService:UpdateCurrentInterest', function(event, user) {
         $scope.updatingCurrentInterest = true;
         ILCServerService.setCurrentInterest(user).then(function() {
           $scope.updatingCurrentInterest = false;
@@ -157,7 +157,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.setViewState = function(name, state) {
         for (var i = $scope.show.length - 1; i >= 0; i--) {
-          if($scope.show[i].name === name){
+          if ($scope.show[i].name === name) {
             $scope.show[i].value = state;
           }
         }
@@ -165,7 +165,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.shouldShowView = function(name) {
         for (var i = $scope.show.length - 1; i >= 0; i--) {
-          if($scope.show[i].name === name){
+          if ($scope.show[i].name === name) {
             return $scope.show[i].value;
           }
         }
@@ -177,7 +177,6 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.show[i].value = false;
         }
       };
-
 
       $scope.toggleNavBar = function(itemName, value) {
         if (value === undefined) {
@@ -212,9 +211,12 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
 
       $scope.login();
-      if (window.location.host !== 'example.com:3000' && window.location.host !== 'ignis-libri-colloqui.herokuapp.com') {
+      var hostedAtExampleDotCom = window.location.host === 'example.com:3000';
+      var hostedAtHeroku = window.location.host === 'ignis-libri-colloqui.herokuapp.com'
+      if (!hostedAtExampleDotCom && !hostedAtHeroku) {
         var useRealHostToTestFacebook = {
-          text:'You must use example.com:3000 or ignis-libri-colloqui.herokuapp.com to test Facebook integration',
+          text:'You must use example.com:3000 or ignis-libri-colloqui.herokuapp.com' +
+               ' to test Facebook integration',
           class:'status-error',
           action: function() {
             window.location.host = 'ignis-libri-colloqui.herokuapp.com';

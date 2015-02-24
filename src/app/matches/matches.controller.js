@@ -1,4 +1,5 @@
-define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'], function(controllers, angular, MatchDisplay, TopCard) {
+define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'],
+  function(controllers, angular, MatchDisplay, TopCard) {
   'use strict';
   return controllers.controller('MatchesController', [
     '$scope', 'Config', 'UserService',
@@ -18,7 +19,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'], f
 
       $scope.alreadyOpenCache = {};
       $scope.alreadyOpenRoom = function(id) {
-        if($scope.alreadyOpenRoom[id] !== undefined){
+        if ($scope.alreadyOpenRoom[id] !== undefined) {
           return $scope.alreadyOpenRoom[id];
         }
         if ((($scope.user || {}).profile || {}).rooms !== undefined) {
@@ -36,7 +37,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'], f
 
       $scope.blacklistedCache = {};
       $scope.blacklisted = function(id) {
-        if($scope.blacklisted[id] !== undefined){
+        if ($scope.blacklisted[id] !== undefined) {
           return $scope.blacklisted[id];
         }
         if ((($scope.user || {}).profile || {}).blacklist !== undefined) {
