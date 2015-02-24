@@ -203,6 +203,11 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.imageMatchLookup = function(id, image) {
       var matches = _this.user.matches;
+      debugger;
+      if (matches === undefined) {
+        // This is triggered for the user image, but it is already set at this point (it was gotten earlier);
+        return;
+      }
       var matchesKeys = Object.keys(matches);
       for (var i = matchesKeys.length - 1; i >= 0; i--) {
         var interest = matchesKeys[i];

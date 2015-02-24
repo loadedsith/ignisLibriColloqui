@@ -57,6 +57,7 @@ require.config({
     'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
     facebook: '//connect.facebook.net/en_US/all',
+    // facebook: '//connect.facebook.net/en_US/all/debug',
     angular: '../bower_components/angular/angular',
     'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
