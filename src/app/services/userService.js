@@ -5,6 +5,8 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     'use strict';
     var _this = this;
 
+    var Strings = Config.strings;
+
     _this.currentInterest = 'Gold mining';//TODO: This needs to be an updatable state varible, or array of variables
 
     _this.profiles = {};
@@ -99,13 +101,16 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         _this.user.profile = {}
       }
       if (_this.user.profile.name === undefined || _this.user.profile.name === '') {
-        missing.push('name');
+        missing.push(Strings.name);
+      }
+      if (_this.user.profile.aboutMe === undefined || _this.user.profile.aboutMe === '') {
+        missing.push(Strings.aboutMe);
       }
       if (_this.user.profile.interests === undefined) {
         _this.user.profile.interests = []
       }
       if (_this.user.profile.interests.length === 0) {
-        missing.push('an interest');
+        missing.push(Strings.anInterest);
       }
       return (missing.length === 0) ? true : missing;
     };
@@ -160,7 +165,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.loginCallback = function(response) {
       // $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
-      if (response.authResponse === undefined) {
+      if (response.authResponse === undefined||response.authResponse === null) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';
         return;

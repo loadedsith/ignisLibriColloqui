@@ -8,7 +8,9 @@
 <div class="row" ng-show="loggedIn">
   <div class="small-12 small-centered columns">
     <div class="wrapper {{status.class}}">
-      <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
+      <div class="mainView open">
+        <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
+      </div>
       <div class="mainView profile" ng-class="{open:shouldShowView('profile')}">
         <div class="close" ng-show="Config.baseView !== 'profile'" ng-click="closeProfile()">&times;</div>
         <div ng-include="'app/profile/profile.html'"></div>

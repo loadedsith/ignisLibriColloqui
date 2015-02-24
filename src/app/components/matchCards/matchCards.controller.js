@@ -66,9 +66,12 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
         var deck = $scope.decks[i];
         if (deck.topCard.name !== undefined) {
           card.fadeOut(function(card) {
-            var name = deck.topCard.name;
-            if (name === cardData.name) {
-              deck.topCard = undefined
+            if (deck.topCard.name!==undefined){
+              //check again, because stuff can change during a fade
+              var name = deck.topCard.name;
+              if (name === cardData.name) {
+                deck.topCard = undefined
+              }
             }
           })
           continue;

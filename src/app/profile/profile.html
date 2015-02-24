@@ -52,15 +52,18 @@
               <li>
                 {{Strings.suggestionsFromFacebook}}<span class="inline icon-facebook"></span>:
               </li>
+              <li ng-if="facebookInterestsError">
+                <div>{{facebookInterestsError}}</div>
+              </li>
               <li ng-if="allLikesAreAlreadyAdded(likes, (user.profile.interests || []))">
                 {{Strings.allLikesAreAlreadyAdded}}
               </li>
-              <li class="interestWrapper facebook" ng-repeat="like in likes" ng-if="!isInInterests(like.name, (user.profile.interests || []))">
-                {{like.name}}
-                <span class="inline" ng-click="addInterest(like.name, user.profile)">{{Strings.addInterest}}</span>
+              <li class="interestWrapper facebook" ng-repeat="like in likes" ng-if="!isInInterests(like.name||like, (user.profile.interests || []))">
+                {{like.name||like}}
+                <span class="inline" ng-click="addInterest(like.name||like, user.profile)">{{Strings.addInterest}}</span>
               </li>
             </ul>
-            <div ng-show="facebookInterestsLoading">Loading...</div>
+            <div ng-show="facebookInterestsLoading">{{Strings.loading}}</div>
 
             <button
               ng-class="{disabled:facebookInterestsLoading}"

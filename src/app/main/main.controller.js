@@ -46,7 +46,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       StatusService.setStatus(StatusService.loading);
 
       var profileIncomplete = {
-        text:'Please complete your profile before moving on.', //[Optional] Label text
+        text:$scope.Strings.incompleteProfile, //[Optional] Label text
         class:'status-profile-incomplete status-ready' // CSS Class available to angular, not automatically applied
       };
 
@@ -64,23 +64,26 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.updateUserProfile = function(event, user) {
         $scope.user.profile = user.profile;
-        if (!UserService.isProfileComplete()) {
-          $scope.showProfile = true;
+        if (UserService.isProfileComplete() !== true) {
+          $scope.toggleNavBar('profile');
           StatusService.setStatus(profileIncomplete);
+        }else{
+          ILCServerService.setProfile(user).then(function() {
+            $scope.updatingProfile = false;
+            StatusService.setStatus(profileSaved);
+            $scope.$broadcast('user profile updated');
+          });
         }
-        ILCServerService.setProfile(user).then(function() {
-          $scope.updatingProfile = false;
-          StatusService.setStatus(profileSaved);
-          $scope.$broadcast('user profile updated');
-        });
       };
 
       $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
-        ILCServerService.setProfile(user).then(function() {
-          $scope.updatingProfile = false;
-          StatusService.setStatus(profileSaved);
-          $scope.$broadcast('user profile updated');
-        });
+        if(UserService.isProfileComplete()===true){
+          ILCServerService.setProfile(user).then(function() {
+            $scope.updatingProfile = false;
+            StatusService.setStatus(profileSaved);
+            $scope.$broadcast('user profile updated');
+          });
+        }
       });
 
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
@@ -89,7 +92,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.profiles = UserService.profiles;
       });
 
-      $scope.$on('UserService:FacebookLoggedIn', function() {
+      $scope.$on('UserService:FacebookLoggedIn', function(e, a) {
         $scope.loggedIn = true;
       });
 
@@ -124,16 +127,28 @@ define(['controllerModule', 'angular'], function(controllers) {
         });
       });
 
+      $scope.getMissingProfileText = function(missing) {
+        var missingTextCSV = '';
+        if (missing.length > 1) {
+          missingTextCSV = missing.join(', ');
+        }else{
+          missingTextCSV = missing[0];
+        }
+        return $scope.Strings.incompleteProfile + ' ' + $scope.Strings.missing + ': ' + missingTextCSV;
+      };
+
       $scope.closeProfile = function() {
         var complete = UserService.isProfileComplete();
         if (complete === true) {
-          $scope.toggleNavBar('profile', false);//false = hide
-        } else {
-          var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
-          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString();
-          console.log('incompleteProfile');
-          StatusService.setStatus(profileIncomplete);
+          $scope.setViewState('profile', false);//false = hide
+          return true;
         }
+        $scope.setViewState('profile', true);//false = hide
+        //if complete is not a true, it is then a list of what is missing from a valid profile
+        var missingText = $scope.getMissingProfileText(complete);
+        profileIncomplete.text = missingText;
+        StatusService.setStatus(profileIncomplete);
+        return false;
       }
 
       $scope.show = [
@@ -183,7 +198,9 @@ define(['controllerModule', 'angular'], function(controllers) {
           value = true;
         }
         $scope.hideAllViews();
-        $scope.setViewState(itemName, value);
+        if ($scope.closeProfile() === true) {
+          $scope.setViewState(itemName, value);
+        }
 
       };
 
@@ -199,13 +216,11 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.login = function() {
         UserService.checkLoginState().then(function(response) {
           //logged in
-
           StatusService.setStatus(connectedToFacebookStatus);
           ILCServerService.login(response.authResponse.accessToken);
 
           $scope.userId = response.authResponse.userID;
         }, function(response) {
-          StatusService.setStatus(StatusService.ready);
           console.log('maincontroller responding to facebook login fail', response);
         });
       }

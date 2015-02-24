@@ -24,16 +24,22 @@ define([], function() {
       currentInterest: 'Current Interest',
       currentInterests: 'Current Interests',
       currentRoom: 'Current Room',
-      email: 'Email',
+      email: 'Alternate email',
       emptyUserInfo:'No user info, sorry!',
       errors: {
         noName: 'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
+      fallbackLikes: ['Gold mining','Oil Wells', 'Shipping', 'Real Estate'],
       facebookHandlesImagesWarning: 'Facebook Handles what images are shown to the users.',
+      facebookInterestsEmpty: 'Facebook likes were empty, sorry! Here\'s a few interests, just so you wont be lonely',
       facebookInterestsError: 'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
         ' data (or don\'t use this feature).',
       interestExists: 'I already know you\'re interested in that, silly',
       interests: 'Interests',
+      incompleteProfile: 'Please complete your profile before moving on.',
+      loading:'loading',
+      missing: 'Missing',
+      anInterest: 'an interest',
       issues: 'Issues',
       matches: 'Matches',
       messageList: 'Messages List',

@@ -34,13 +34,11 @@ define(['controllerModule', 'angular'], function(controllers) {
     };
     $scope.saving = false;
     $scope.$on('user profile updated', function() {
-      console.log('profile saved');
       $scope.saving = false;
     });
 
     $scope.save = function(profile) {
       $scope.saving = true;
-      //not actually required because the form has direct access to the user object
       $scope.$emit('ProfileController:UpdateUserProfile', $scope.user);
     };
     $scope.roomNames = [];
@@ -142,16 +140,19 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.facebookInterestsLoading = true;
       FacebookService.getUserLikes(deferred, paging, beforeOrAfter, (Config.interestsLimit || 10));
       deferred.promise.then(function(results) {
+      $scope.facebookInterestsLoading = false;
+        if(results.data.length===0){
+          $scope.facebookInterestsError = $scope.Strings.facebookInterestsEmpty;
+          $scope.likes = $scope.Strings.fallbackLikes;
+          return;
+        }
         if ($scope.facebookFirstCursor === undefined) {
           $scope.facebookFirstCursor = results.paging.cursors.before;
         }
         $scope.facebookBeforeCursor = results.paging.cursors.before;
-        console.log('likes results', results);
         $scope.likes = results.data;
         $scope.likesPaging = results.paging;
-        $scope.facebookInterestsLoading = false;
         if (results.error !== undefined) {
-          console.log('results.error', results.error);
           $scope.facebookInterestsError = $scope.Strings.facebookInterestsError;
         }
       });

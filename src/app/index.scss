@@ -35,7 +35,7 @@ div.button{
 
 .mainView{
   display: none;
-  margin-top: 2em;
+/*  margin-top: 2em;*/
   &.open{
     display:block;
     position:relative;
@@ -296,11 +296,9 @@ div.button{
   }
 }
 .status{
-  position:absolute;
-  width:100%;
-  top:0px;
-  left:0px;
   font-size:14px;
+  padding-bottom:0;
+  margin-bottom:0;
   &>p{
     text-align:center;
     background:rgba(0, 0, 0, 0.3);
@@ -329,7 +327,7 @@ div.button{
   color:#F66;
 }
 section.top-bar-section ul.right li img{
-  max-height: $topbar-height - 4;
+  max-height: $topbar-height;
 }
 
 @keyframes fadeOut {
@@ -353,7 +351,7 @@ section.top-bar-section ul.right li img{
 
 #underlay {
   &.shown{
-    opacity:0.4;
+    opacity:0.6;
   }
   transition:0.3s opacity;
   text-align: center;
@@ -362,11 +360,13 @@ section.top-bar-section ul.right li img{
   width: 100%;
   height: 100%;
   opacity: 0;
-  z-index: -1;
+  z-index: 0;
+  pointer-events:none;
   .wrapper{
     position: relative;
     height: 100%;
     font-size: 50px;
+    pointer-events:none;
     .accept{
       position: absolute;
       vertical-align: middle;
