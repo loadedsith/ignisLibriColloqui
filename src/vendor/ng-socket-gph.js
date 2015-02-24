@@ -21,7 +21,7 @@
       this.getUrl = getUrl;
       this.setConfig = setConfig;
       this.getConfig = getConfig;
-      this.$get = ['$rootScope', socketFactory];
+      this.$get = ['$rootScope','$timeout', socketFactory];
 
       function setConfig(value) {
         config = value;
@@ -39,7 +39,7 @@
         return url;
       };
 
-      function socketFactory($rootScope) {
+      function socketFactory($rootScope, $timeout) {
         var _this = this;
 
         _this.initializeSocket = function() {
@@ -58,9 +58,9 @@
           return function () {
             if (callback) {
               var args = arguments;
-              $rootScope.$apply(function () {
+              $timeout(function () {
                 callback.apply(_this.socket, args);
-              });
+              }, 0);
             }
           };
         };
