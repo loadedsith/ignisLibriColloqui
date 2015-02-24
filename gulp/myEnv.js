@@ -3,7 +3,12 @@ var preprocess = require('gulp-preprocess');
 var rename = require('gulp-rename');
 
 //load your custom env.json file,
-var env = require('../env.json');
+var env;
+
+//use (process.env or {}) then .mode
+if (((process.env || {}).mode !== 'heroku') {
+  env = require('../env.json');
+}
 
 //inject env var
 gulp.task('myEnv', function() {
