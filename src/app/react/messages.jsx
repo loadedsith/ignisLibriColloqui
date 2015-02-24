@@ -110,7 +110,7 @@ define(['react', 'strings'], function(React, Strings) {
       var profile = (this.props.profile || {}); //profile or empty
       if (profile.image !== undefined) {
         if (profile.image.data['is_silhouette'] === true) {
-          profile.image.data.url = './assets/images/fbProfile.jpg';
+          profile.image.data.url = './assets/images/FBProfile.jpg';
         }
         /*jshint ignore:start */
         profileImage = <img className='profileImage' src={profile.image.data.url}/>
