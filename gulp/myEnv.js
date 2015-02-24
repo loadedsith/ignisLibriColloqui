@@ -17,7 +17,8 @@ gulp.task('myEnv', function() {
     .pipe(preprocess(
       {
         context: {
-          FB_API_KEY: process.env.fbAppSecret || env.FB_API_KEY
+          FB_API_KEY: (process.env.fbAppSecret || env.FB_API_KEY),
+          ILC_SERVER: (process.env.ilcServer || env.ILC_SERVER)
         }
       }
     ))

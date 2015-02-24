@@ -26,6 +26,7 @@
     "define": true,
     "FB": false,
     "FB_API_KEY": true,
+    "ILC_SERVER": true,
     "spyOn": false,
     "jasmine": false,
     "Firebase": false,

@@ -36,7 +36,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           break;
         }
 
-      }
+      };
 
       ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this, 'timeout');
       ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this, 'error');
@@ -62,7 +62,6 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.disconnectMe = ILCServerService.disconnectMe;
 
-      $scope.lastUserProfile;
       $scope.updateUserProfile = function(event, user) {
         $scope.user.profile = user.profile;
         if (!UserService.isProfileComplete()) {
@@ -131,7 +130,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.toggleNavBar('profile', false);//false = hide
         } else {
           var missing = complete; //if complete is not a true, it is then a list of what is missing from a valid profile
-          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString()
+          profileIncomplete.text = 'Please complete your profile before moving on. Missing: ' + missing.toString();
           console.log('incompleteProfile');
           StatusService.setStatus(profileIncomplete);
         }
@@ -159,7 +158,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.setViewState = function(name, state) {
         for (var i = $scope.show.length - 1; i >= 0; i--) {
           if($scope.show[i].name === name){
-            $scope.show[i].value = state
+            $scope.show[i].value = state;
           }
         }
       };
