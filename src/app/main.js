@@ -13,6 +13,7 @@ define([
    * place operations that need to initialize prior to app start here
    * using the `run` function on the top-level module
    */
+  //TODO: split facebook apps into Client and Server
 
   require(['requirejs-domready!'], function(document) {
     ng.bootstrap(document, ['ignisLibriColloqui']);
