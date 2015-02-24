@@ -10,8 +10,8 @@ var server = restify.createServer({
 
 
 server.get(/.*/, restify.serveStatic({
-  'directory': __dirname+'/dist',
-  'default': './dist/index.html',
+  'directory': __dirname + '/dist',
+  'default': './index.html',
   'maxAge': 0
 }));
 
