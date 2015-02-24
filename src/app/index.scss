@@ -341,3 +341,36 @@ section.top-bar-section ul.right li img{
   }
 }
 
+#underlay {
+  &.shown{
+    opacity:0.4;
+  }
+  transition:0.3s opacity;
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1;
+  .wrapper{
+    position: relative;
+    height: 100%;
+    font-size: 50px;
+    .accept{
+      position: absolute;
+      vertical-align: middle;
+      top: 50%;
+      color: rgba(green,0.5);
+      right: -0.2em;
+      transform: translateY(-1em);
+    }
+    .reject{
+      position: absolute;
+      top: 50%;
+      color: rgba(red,0.5);
+      left: -0.3em;
+      transform: translateY(-1em);
+    }
+  }
+}

@@ -1,4 +1,10 @@
 <div ng-include="'app/components/navbar/navbar.html'"></div>
+<div id="underlay">
+  <div class="wrapper">
+    <span class="reject"><span class="icon-blocked"></span></span>
+    <span class="accept"><span class="icon-checkmark"></span></span>
+  </div>
+</div>
 <div class="row" ng-show="loggedIn">
   <div class="small-12 small-centered columns">
     <div class="wrapper {{status.class}}">

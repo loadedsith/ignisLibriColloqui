@@ -42,6 +42,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         originalRotation = this.props.config.initialPosition.rotation;
       }
       return {
+        underlay: document.getElementById('underlay'),
         pos: this.props.config.initialPosition || {x:0, y:0},
         duration: this.props.config.duration || 250,
         rotation: originalRotation,
@@ -66,6 +67,18 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         opacity: this.state.opacity,
         transform: 'rotate(' + rotation + 'deg)'
       };
+
+      if (this.state.opacity !== 1 && underlay !== undefined) {
+        //If dragging, add shown
+        if (!underlay.classList.contains('shown')) {
+          underlay.className = underlay.className + ' shown';
+        }
+      }else{
+        //If not dragging, remove shown
+        if (underlay.classList.contains('shown')) {
+          underlay.className = underlay.className.replace(/\bshown\b/,'');
+        }
+      }
 
       var initialPosition = this.props.config.initialPosition;
 
