@@ -6,7 +6,7 @@ var rename = require('gulp-rename');
 var env;
 
 //use (process.env or {}) then .mode
-if (((process.env || {}).mode !== 'heroku') {
+if ((process.env || {}).mode !== 'heroku') {
   env = require('../env.json');
 }
 
