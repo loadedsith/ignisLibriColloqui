@@ -51,11 +51,11 @@ define(['controllerModule', 'angular'], function(controllers) {
         $socket.emit('get profile', config);
       });
 
-      $socket.on('user error', function(profile) {
+      $socket.on('user error', function() {//args: profile
         console.log('user error');
       });
 
-      $socket.on('user profile', function(profile) {
+      $socket.on('user profile', function() {//args: profile
         $scope.loginStatus = 'Got Profile!';
         $scope.profile = profile;
       });
@@ -102,6 +102,6 @@ define(['controllerModule', 'angular'], function(controllers) {
         var data = {'test key':'test value'};
         console.log('ping', data);
         $socket.emit('ping', data);
-      }
+      };
     }]);
 });

@@ -165,7 +165,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     _this.loginCallback = function(response) {
       // $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
-      if (response.authResponse === undefined||response.authResponse === null) {
+      if (response.authResponse === undefined || response.authResponse === null) {
         _this.user.loggedIn = false;
         _this.loginStatus = '🚫 Try Again Later';
         return;

@@ -62,10 +62,9 @@ gulp.task('jscs', function() {
       "excludeFiles": [
         "test/data/**"
       ]
-    }
-  )).on('error', function(e) {
-    this.end();
-  })
+    })).on('error', function(e) {
+      this.end();
+    })
 })
 gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
   gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])

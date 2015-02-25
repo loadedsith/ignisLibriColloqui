@@ -67,7 +67,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         if (UserService.isProfileComplete() !== true) {
           $scope.toggleNavBar('profile');
           StatusService.setStatus(profileIncomplete);
-        }else{
+        } else {
           ILCServerService.setProfile(user).then(function() {
             $scope.updatingProfile = false;
             StatusService.setStatus(profileSaved);
@@ -77,7 +77,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.$on('ProfileController:UpdateUserProfile', function(event, user) {
-        if(UserService.isProfileComplete()===true){
+        if (UserService.isProfileComplete() === true) {
           ILCServerService.setProfile(user).then(function() {
             $scope.updatingProfile = false;
             StatusService.setStatus(profileSaved);
@@ -131,7 +131,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         var missingTextCSV = '';
         if (missing.length > 1) {
           missingTextCSV = missing.join(', ');
-        }else{
+        } else {
           missingTextCSV = missing[0];
         }
         return $scope.Strings.incompleteProfile + ' ' + $scope.Strings.missing + ': ' + missingTextCSV;

@@ -140,8 +140,8 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.facebookInterestsLoading = true;
       FacebookService.getUserLikes(deferred, paging, beforeOrAfter, (Config.interestsLimit || 10));
       deferred.promise.then(function(results) {
-      $scope.facebookInterestsLoading = false;
-        if(results.data.length===0){
+        $scope.facebookInterestsLoading = false;
+        if (results.data.length === 0) {
           $scope.facebookInterestsError = $scope.Strings.facebookInterestsEmpty;
           $scope.likes = $scope.Strings.fallbackLikes;
           return;

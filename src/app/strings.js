@@ -29,7 +29,7 @@ define([], function() {
       errors: {
         noName: 'Look bro, I\'m not saying what you have to put in this box, but you have to put something!'
       },
-      fallbackLikes: ['Gold mining','Oil Wells', 'Shipping', 'Real Estate'],
+      fallbackLikes: ['Gold mining', 'Oil Wells', 'Shipping', 'Real Estate'],
       facebookHandlesImagesWarning: 'Facebook Handles what images are shown to the users.',
       facebookInterestsEmpty: 'Facebook likes were empty, sorry! Here\'s a few interests, just so you wont be lonely',
       facebookInterestsError: 'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
