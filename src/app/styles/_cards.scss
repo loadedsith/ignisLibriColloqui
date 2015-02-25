@@ -40,41 +40,48 @@ $cardHeight: $retinaCardHeight / 2;
     transform:rotate(0)!important;
   }
 }
-.topCard li.card:nth-child(1) {
-  background-image: url('/assets/images/fire@2x.png');
-}
-.topCard li.card:nth-child(2) {
-  background-image: url('/assets/images/book@2x.png');
-}
-.topCard li.card:nth-child(3) {
-  background-image: url('/assets/images/chat@2x.png');
-}
-.topCard li.card {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: transparent;
+.topCard{
+  li{
+    &.card{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      position:relative;
+      .name {
+        position:absolute;
+        font-size: 30px;
+        text-align: center;
+        top: 10%;
+        color: #222;
+        text-align: center;
+        width:100%;
 
-  .name {
-    font-size: 30px;
-    text-align: center;
-    padding-top: 20%;
-    color: #222;
+      }
+      .size {
+        position:absolute;
+        vertical-align: bottom;
+        width: 100%;
+        top: 75%;
+        text-align: center;
+        color: #222;
+        label{
+          line-height:1em;
+        }
+        p{
+          font-size: 40px;
+          line-height:1.3em;
 
-  }
-  .size {
-    vertical-align: bottom;
-    height: 100%;
-    padding-top: 70%;
-    text-align: center;
-    padding-bottom: 100%;
-    color: #222;
-    label{
-      line-height:1em;
-    }
-    p{
-      font-size: 40px;
-      line-height:1.3em;
-
+        }
+      }
+      &:nth-child(3) {
+        background-image: url('/assets/images/chat@2x.png');
+      }
+      &:nth-child(2) {
+        background-image: url('/assets/images/book@2x.png');
+      }
+      &:nth-child(1) {
+        background-image: url('/assets/images/fire@2x.png');
+      }
     }
   }
 }
