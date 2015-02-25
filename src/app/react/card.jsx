@@ -54,20 +54,8 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         rel: null // position relative to the cursor
       };
     },
-    render: function() {
-      //ignore react jsx, use the force to lint
-      // the vars are included to avoid unused complaints
-      /*jshint ignore:start */
-      var rotation = this.state.originalRotation + this.state.rotation;
-
-      var styles = {
-        position: 'absolute',
-        left: this.state.pos.x + 'px',
-        top: this.state.pos.y + 'px',
-        opacity: this.state.opacity,
-        transform: 'rotate(' + rotation + 'deg)'
-      };
-
+    showUnderlay: function() {
+      var underlay = this.state.underlay;
       if (this.state.opacity !== 1 && underlay !== undefined) {
         //If dragging, add shown
         if (!underlay.classList.contains('shown')) {
@@ -79,6 +67,22 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
           underlay.className = underlay.className.replace(/\bshown\b/,'');
         }
       }
+
+    },
+    render: function() {
+      //ignore react jsx, use the force to lint
+      // the vars are included to avoid unused complaints
+      /*jshint ignore:start */
+      var rotation = this.state.originalRotation + this.state.rotation;
+      var styles = {
+        position: 'absolute',
+        left: this.state.pos.x + 'px',
+        top: this.state.pos.y + 'px',
+        opacity: this.state.opacity,
+        transform: 'rotate(' + rotation + 'deg)'
+      };
+
+      this.showUnderlay();
 
       var initialPosition = this.props.config.initialPosition;
 
@@ -115,6 +119,10 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     },
     fadeOut: function(callback) {
       //apply an animiation cardSlideRight
+      if (underlay.classList.contains('shown')) {
+        underlay.className = underlay.className.replace(/\bshown\b/,'');
+      }
+
       var duration = this.props.config.duration || 250;//ms
       if (this.state.fadeStart === undefined) {
         this.setState({
@@ -182,18 +190,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         //loop over this function until card is returned.
         // requestAnimationFrame(this.returnCard);
       // }
-    },
-    moveSiblingCards : function(xPos) {
-      //unused but functional
-      if (this.getDOMNode().parentNode.classList.contains('topCard')){
-        var cards = angular.element(this.getDOMNode().parentElement.parentElement).find('li');
-        for (var i = cards.length - 1; i >= 0; i--) {
-          var card = cards[i];
-          if (!card.parentElement.classList.contains('topCard')) {
-            card.style.left = xPos + 'px';
-          }
-        }
-      }
     },
     handelMouse: function(event) {
       var eventType = event.type;
