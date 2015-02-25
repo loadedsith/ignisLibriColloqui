@@ -2,8 +2,8 @@
   <li ng-show="showLogoutButton" class="show-for-medium-up">
     <a class="fb-logout" ng-click="logoutOfFacebook()">Logout</a>
   </li>
-  <li ng-click="showLogoutButton = !showLogoutButton" ng-show="loggedIn()">
-    <a href="" class="profilePicture">
+  <li class="profilePicture" ng-click="showLogoutButton = !showLogoutButton" ng-show="loggedIn()">
+    <a href="">
       <img style="padding: 0;line-height: 0;" title="Welcome {{user.info.first_name}}" ng-src="{{profilePicture}}"/>
     </a>
   </li>

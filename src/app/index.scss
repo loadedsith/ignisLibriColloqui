@@ -4,8 +4,17 @@
 @import './styles/profile';
 @import './styles/fonts';
 @import './styles/interestsSelector';
+$arrow-size: $topbar-height / 2;
+$arrow-color: $primary-color;
+.arrow-bottom-right {
+  width: 0;
+  height: 0;
+  border-left: $arrow-size solid transparent;
+  border-bottom: ($arrow-size * 1.2) solid $arrow-color;
+}
+
 [ng-controller="NavbarController"]{
-  background-color:$topbar-bg;
+  background-color:$primary-color;
 }
 
 div.button{
@@ -141,7 +150,7 @@ div.button{
       padding:12px;
       font-size:$topbar-height/4;
       line-height:$topbar-height / 2 + 10;
-      &.profilePicture{
+      .profilePicture{
         border:2px solid $primary-color;
         height:$topbar-height;
         padding:0 0 0 0;
@@ -149,6 +158,7 @@ div.button{
         background-color:transparent;
       }
     }
+
 
   }
   .left{
@@ -197,11 +207,20 @@ div.button{
       }
     }
   }
+  .top-bar-section li {
+    &.profilePicture{
+      a{
+        width:auto!important;
+        padding:0 0;
+      }
+    }
+  }
   .top-bar-section ul li {
     background-color:transparent;
     backface-visibility:hidden;
     transform:translateZ(0);
     margin-left: -1px;
+
     &.active{
       &:not(.has-form) a:not(.button).skew{
         font-size:22px;
