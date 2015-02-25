@@ -224,7 +224,7 @@ define(['controllerModule', 'angular'], function(controllers) {
 
           $scope.userId = response.authResponse.userID;
         }, function(response) {
-          console.log('maincontroller responding to facebook login fail', response);
+          console.log('user was not logged in', response);
         });
       };
 
