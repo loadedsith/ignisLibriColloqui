@@ -23,11 +23,6 @@ require.config({
         'angular'
       ]
     },
-    'angular-scroll-glue': {
-      deps: [
-        'angular'
-      ]
-    },
     'angular-mocks': {
       exports: 'angular-mocks',
       deps: [
@@ -73,7 +68,6 @@ require.config({
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
     'ng-socket-gph': '../vendor/ng-socket-gph',
-    'angular-scroll-glue': '../bower_components/angular-scroll-glue/src/scrollglue',
     'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'
   },
   packages: [

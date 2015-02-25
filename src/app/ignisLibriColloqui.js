@@ -3,7 +3,6 @@ define([
   'angular',
   'angular-cookies',
   'angular-ui-router',
-  'angular-scroll-glue',
   'controllerIndex',
   'services/serviceIndex',
   'directives/directiveIndex',
@@ -16,7 +15,6 @@ define([
   return angular.module('ignisLibriColloqui', [
     'ui.router',
     'ngCookies',
-    'luegg.directives',
     'ignisLibriColloqui.directives',
     'ignisLibriColloqui.controllers',
     'ignisLibriColloqui.services',

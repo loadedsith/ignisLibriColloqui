@@ -37,11 +37,6 @@ require.config({
       'test/reactPolyfillForPhantomJS'
       ]
     },
-    'angular-scroll-glue':{
-      deps: [
-        'angular'
-      ]
-    },
     'angular-cookies': {
       exports: 'angular-cookies',
       deps: [
@@ -132,7 +127,6 @@ require.config({
     modernizr: 'bower_components/modernizr/modernizr',
     react: 'bower_components/react/react',
     requirejs: 'bower_components/requirejs/require',
-    'angular-scroll-glue': 'bower_components/angular-scroll-glue/src/scrollglue',
     'requirejs-domready': 'bower_components/requirejs-domready/domReady',
     jquery: 'bower_components/jquery/dist/jquery',
     'jquery-placeholder': 'bower_components/jquery-placeholder/jquery.placeholder',
