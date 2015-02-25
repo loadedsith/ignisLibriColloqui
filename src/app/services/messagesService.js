@@ -53,7 +53,6 @@ define(['services/serviceModule'], function(services) {
       };
 
       _this.messageSent = function(message) {
-        console.log('messages service messageSent', message);
         $rootScope.$broadcast('MessagesService:MessageSent', message);
       };
 
@@ -62,7 +61,6 @@ define(['services/serviceModule'], function(services) {
       };
 
       _this.setCurrentRoom = function(name) {
-        console.log('messages service currentRoom, name', _this.currentRoom, name);
         _this.currentRoom = name;
         $rootScope.$broadcast('MessagesService:SetCurrentRoom', name);
       };

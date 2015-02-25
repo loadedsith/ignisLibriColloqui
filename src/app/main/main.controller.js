@@ -88,11 +88,11 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
-      $scope.$on('UserService:UpdateMatchProfiles', function(event, value) {
+      $scope.$on('UserService:UpdateMatchProfiles', function() {
         $scope.profiles = UserService.profiles;
       });
 
-      $scope.$on('UserService:FacebookLoggedIn', function(e, a) {
+      $scope.$on('UserService:FacebookLoggedIn', function() {
         $scope.loggedIn = true;
       });
 
@@ -110,7 +110,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.currentInterest = UserService.currentInterest;
       });
 
-      $scope.$on('UserService:FacebookLoginSuccess', function(event, user) {
+      $scope.$on('UserService:FacebookLoginSuccess', function() {
         $scope.login();
       });
 
@@ -149,7 +149,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         profileIncomplete.text = missingText;
         StatusService.setStatus(profileIncomplete);
         return false;
-      }
+      };
 
       $scope.show = [
         {
@@ -223,11 +223,11 @@ define(['controllerModule', 'angular'], function(controllers) {
         }, function(response) {
           console.log('maincontroller responding to facebook login fail', response);
         });
-      }
+      };
 
       $scope.login();
       var hostedAtExampleDotCom = window.location.host === 'example.com:3000';
-      var hostedAtHeroku = window.location.host === 'ignis-libri-colloqui.herokuapp.com'
+      var hostedAtHeroku = window.location.host === 'ignis-libri-colloqui.herokuapp.com';
       if (!hostedAtExampleDotCom && !hostedAtHeroku) {
         var useRealHostToTestFacebook = {
           text:'You must use example.com:3000 or ignis-libri-colloqui.herokuapp.com' +

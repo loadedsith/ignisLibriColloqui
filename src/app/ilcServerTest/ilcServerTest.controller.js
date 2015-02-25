@@ -42,7 +42,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         $socket.emit('set profile', config);
       };
 
-      $socket.on('user valid', function(user) {
+      $socket.on('user valid', function() {
         $scope.loginStatus = 'Login Success! Getting Local Profile...';
         var config = {
           'userId': $scope.fakeUserId,
@@ -55,7 +55,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         console.log('user error');
       });
 
-      $socket.on('user profile', function() {//args: profile
+      $socket.on('user profile', function(profile) {
         $scope.loginStatus = 'Got Profile!';
         $scope.profile = profile;
       });

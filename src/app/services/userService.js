@@ -37,9 +37,8 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
           _this.user.profile.rooms = [match];
         }
       } else {
-        console.log('ignoring user match because profile undefined');
+        console.debug('ignoring user match because profile undefined');
       }
-      console.log('UserService.user', _this.user, match);
       $rootScope.$broadcast('UserService:UpdateUserProfile', _this.user);
     };
 
@@ -89,7 +88,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     };
 
     _this.updateUserImage = function(response) {
-      console.log('updateUserImage', response);
       if (response && !response.error) {
         _this.user.profilePicture = response;
         _this.imageMatchLookup(_this.user.info.id, response);
@@ -241,7 +239,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
           //if oldUser.profile exists we arent setting the initial profile
           $rootScope.$broadcast('UserService:UpdateUserProfile', newUser);
         } else {
-          console.log('ignoring user update because old user was undefined');
+          console.debug('ignoring user update because old user was undefined');
         }
       }
       $rootScope.$broadcast('UserService:Update', _this.user);

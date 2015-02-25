@@ -44,7 +44,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.updatingProfilePromise = $q.defer();
 
     _this.setProfile = function(user) {
-      console.log('ilc setProfile', user);
       _this.updatingProfile = true;
       var config = {
         user:user,
@@ -63,7 +62,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         return _this.updatingProfilePromise.promise;
       }
       $socket.emit('set profile', config);
-      console.log('emit set profile', config);
       return _this.updatingProfilePromise.promise;
     };
 
