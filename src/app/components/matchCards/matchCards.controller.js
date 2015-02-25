@@ -22,7 +22,9 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
         console.debug('got service update for match controller, but no matches!')
       }
     });
-
+    $scope.hasTopCard = function(deck) {
+      return deck.topCard ? true : false;
+    };
     $scope.swipeRightTopCard = function(card, cardData) {
       $scope.removeTopCard(card, cardData);
     };
@@ -62,21 +64,20 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
     }
 
     $scope.removeTopCard = function(card, cardData) {
-      for (var i = $scope.decks.length - 1; i >= 0; i--) {
-        var deck = $scope.decks[i];
-        if (deck.topCard.name !== undefined) {
-          card.fadeOut(function(card) {
-            if (deck.topCard.name !== undefined) {
-              //check again, because stuff can change during a fade
-              var name = deck.topCard.name;
-              if (name === cardData.name) {
-                deck.topCard = undefined
-              }
+      card.fadeOut(function(card) {
+        //check again, because stuff can change during a fade
+        for (var i = $scope.decks.length - 1; i >= 0; i--) {
+          var deck = $scope.decks[i];
+          if (deck.topCard !== undefined) {
+            if (deck.topCard.name === cardData.name){
+              console.log('deck.topCard.name', deck.topCard.name);
+              console.log('cardData.name', cardData.name);
+              deck.topCard = undefined
             }
-          })
-          continue;
+          }
         }
-      }
+
+      });
     }
     $scope.removeCard = function(card) {
       console.log('removeCard');
