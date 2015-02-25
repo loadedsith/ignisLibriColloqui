@@ -31,6 +31,9 @@ define(['controllerModule', 'angular'], function(controllers) {
         case 'error':
           StatusService.setStatus($scope.disconnectedStatus);
           break;
+        case 'connect':
+          $scope.login();
+          break;
         default:
           StatusService.setStatus(StatusService.ready);
           break;
@@ -41,7 +44,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this, 'timeout');
       ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this, 'error');
       ILCServerService.disconnectEvent = $scope.connectionEvent.bind(this, 'disconnect');
-      ILCServerService.connectedEvent = $scope.connectionEvent.bind(this, 'connected');
+      ILCServerService.connectEvent = $scope.connectionEvent.bind(this, 'connect');
 
       StatusService.setStatus(StatusService.loading);
 
