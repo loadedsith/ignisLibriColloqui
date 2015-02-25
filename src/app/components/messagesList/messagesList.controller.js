@@ -20,6 +20,10 @@ define(['controllerModule', 'angular'], function(controllers) {
         MessagesService.closeRoom(room);
       }
 
+      $scope.$on('set current room', function(event, name) {
+        MessagesService.setCurrentRoom(name);
+      })
+
       $scope.getRoomName = MessagesService.getRoomName;
 
       $scope.$on('MessagesService:MessageSent', function(event, message) {

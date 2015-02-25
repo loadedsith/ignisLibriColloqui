@@ -65,7 +65,6 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.removeTopCard = function(card, cardData) {
       card.fadeOut(function(card) {
-        //check again, because stuff can change during a fade
         for (var i = $scope.decks.length - 1; i >= 0; i--) {
           var deck = $scope.decks[i];
           if (deck.topCard !== undefined) {
@@ -102,6 +101,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.swipeRight = function(card, cardData) {
       console.log('swipeRight: card', card, $scope, $scope.cards);
+      $scope.$emit('open room', cardData);
       if (typeof $scope.$parent.swipeRight === 'function') {
         card.removeCard = $scope.removeCard;
         $scope.$parent.swipeRight(card, cardData, $scope.cardControl)

@@ -229,6 +229,13 @@ define(['controllerModule', 'angular'], function(controllers) {
       };
 
       $scope.login();
+
+      $scope.$on('open room',function(event, card) {
+        // we should look at card.id and ensure the room opens, however adding the room causes the user to be updated, so it happens automagically.
+        // if thats so, just open the display!
+        $scope.toggleNavBar('messages', true);
+        $scope.$broadcast('set current room', card.id);
+      });
       var hostedAtExampleDotCom = window.location.host === 'example.com:3000';
       var hostedAtHeroku = window.location.host === 'ignis-libri-colloqui.herokuapp.com';
       if (!hostedAtExampleDotCom && !hostedAtHeroku) {
