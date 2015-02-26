@@ -26,7 +26,6 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
 
         scope.$watch('messages', function(newValue) {//attr: oldValue
           if (el[0].scrollHeight !== 0) {
-            console.log('helpful Ratcatcher white-tailed deer');
             React.render(new messagesFactory({
               data: newValue,
               localUser: scope.localUser,
@@ -36,8 +35,6 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
             }), el[0]);
           }
         }, true);
-
-
 
         scope.$watch('profile', function(newValue) {//attr: oldValue
           if (el[0].scrollHeight !== 0) {
