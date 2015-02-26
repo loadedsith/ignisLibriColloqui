@@ -1,7 +1,7 @@
 {
   "name": "ignisLibriColloqui",
   "description": "An example work, tying together RequireJS, Angular, React, the Facebook Graph API, Firebase, Karma, and Gulp. The final product should be a clone of Tinder with a few special modifications...",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {},
   "repository": {
     "type": "git",
