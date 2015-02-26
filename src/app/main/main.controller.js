@@ -204,7 +204,9 @@ define(['controllerModule', 'angular'], function(controllers) {
         if ($scope.closeProfile() === true) {
           $scope.setViewState(itemName, value);
         }
-
+        if ($scope.shouldShowView('messages') === true) {
+          $scope.$broadcast('messagesVisible', true);
+        }
       };
 
       $scope.toggleNavBar(Config.baseView || 'profile', true);

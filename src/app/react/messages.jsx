@@ -29,24 +29,43 @@ define(['react', 'strings'], function(React, Strings) {
     },
     getInitialState: function() {
       return {
-        profileDisplayed : false
+        profileDisplayed : false,
+        scroll: true
       };
     },
     profileDisplayClick : function() {
       this.setState({profileDisplayed:!this.state.profileDisplayed});
     },
+    scrollMessages: function() {
+      //store a this ref, and
+      var _this = this;
+      //wait for a paint to do scrolly stuff
+      window.requestAnimationFrame(function() {
+        //if were're auto-scrolling
+        if (_this.state.scroll === true) {
+          //get the messages
+          var node = _this.getDOMNode().getElementsByClassName('messageWrapper')[0];
+          if (node !== undefined) {
+            //and scroll them!
+            node.scrollTop = node.scrollHeight;
+          }
+        }
+      });
+    },
+    componentDidUpdate: function() {
+      this.scrollMessages();
+    },
     render: function() {
       var rows = [];
       var messages = this.props.data;
-      var localUser= this.props.localUser;
-        /*jshint ignore:start */
+      var localUser = this.props.localUser;
+      /*jshint ignore:start */
       var errorElement = <p>{Strings.messagesFailedToLoad}</p>;
-
       if (messages === undefined) {
         console.log('data is undefined in messages.jsx');
         return errorElement;
       }
-        /*jshint ignore:end */
+      /*jshint ignore:end */
       var classes = 'user';
       var lastTime;
       for (var messageKey in messages) {
@@ -122,6 +141,7 @@ define(['react', 'strings'], function(React, Strings) {
       };
 
       var profileDisplayed = this.state.profileDisplayed ? 'profileDisplay' : 'profileHide';
+      this.scrollMessages()
       /*jshint ignore:start */
       return (
         <div>
@@ -134,10 +154,10 @@ define(['react', 'strings'], function(React, Strings) {
             <div className="profile">
               <div className="row">
                 <div className="columns small-4">
-                  <label className="right">{Strings.aboutMe}</label>
+                  <label className="right">{Strings.aboutMe||''}</label>
                 </div>
                 <div className="columns small-8">
-                  <p>{this.props.remoteUser.profile.aboutMe}</p>
+                  <p>{this.props.remoteUser.profile.aboutMe||''}</p>
                 </div>
               </div>
               <div className="row">
