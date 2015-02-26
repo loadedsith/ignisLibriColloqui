@@ -26,7 +26,6 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     }
     return false;
   };
-
   return React.createClass({
     getDefaultProps: function() {
       return {
@@ -42,7 +41,7 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
         originalRotation = this.props.config.initialPosition.rotation;
       }
       return {
-        underlay: document.getElementById('underlay'),
+        underlay : document.getElementById('underlay'),
         pos: this.props.config.initialPosition || {x:0, y:0},
         duration: this.props.config.duration || 250,
         rotation: originalRotation,
@@ -55,16 +54,15 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
       };
     },
     showUnderlay: function() {
-      var underlay = this.state.underlay;
-      if (this.state.opacity !== 1 && underlay !== undefined) {
+      if (this.state.opacity !== 1 && this.state.underlay !== undefined) {
         //If dragging, add shown
-        if (!underlay.classList.contains('shown')) {
-          underlay.className = underlay.className + ' shown';
+        if (!this.state.underlay.classList.contains('shown')) {
+          this.state.underlay.className = this.state.underlay.className + ' shown';
         }
       }else{
         //If not dragging, remove shown
-        if (underlay.classList.contains('shown')) {
-          underlay.className = underlay.className.replace(/\bshown\b/,'');
+        if (this.state.underlay.classList.contains('shown')) {
+          this.state.underlay.className = this.state.underlay.className.replace(/\bshown\b/,'');
         }
       }
 
@@ -119,8 +117,8 @@ define(['react', 'bezier-easing'], function(React, BezierEasing) {
     },
     fadeOut: function(callback) {
       //apply an animiation cardSlideRight
-      if (underlay.classList.contains('shown')) {
-        underlay.className = underlay.className.replace(/\bshown\b/,'');
+      if (this.state.underlay.classList.contains('shown')) {
+        this.state.underlay.className = this.state.underlay.className.replace(/\bshown\b/,'');
       }
 
       var duration = this.props.config.duration || 250;//ms
