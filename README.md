@@ -43,20 +43,25 @@ And in case we didn't emphasize it enough: we love tests!
 
 #Flow
 ---
+
 1. John opens the app.
-*. A social network login is required and optionally stored. (There is a logout button)
-*. John is presented with a list of trending topics, or the option to suggest their own. User Moderated for tag cleanliness.
-*. They select a topic, "The Walking Dead"
-*. John are presented with an individual who has selected to either:
+2. A social network login is required and optionally stored. (There is a logout button)
+3. John is presented with a list of trending topics, or the option to suggest their own. User Moderated for tag cleanliness.
+4. They select a topic, "The Walking Dead"
+5. John are presented with an individual who has selected to either:
     a. show an image.
     b. show a list of the topics they have been interested in.
-*. John can see a text area, the user's profile, by swiping up on the image.
-*. John then can either swipe left (uninterested) or right (interested).
-*. If John swipes right (interested) on user B's profile/image that has already swiped right (interested) on he is "matched" with the user.
-  *. Matching:
-    *. can be removed
-    *. enables a messaging system for the users
-*. John is continually re-presented with a user at a time until all users have been exhausted.
+6. John can see a text area, the user's profile, by swiping up on the image.
+7. John then can either swipe left (uninterested) or right (interested).
+8. If John swipes right (interested) on user B's profile/image that has already swiped right (interested) on he is "matched" with the user.
+
+  a. Matching:
+  
+    i. can be removed
+    
+    ii. enables a messaging system for the users
+    
+9. John is continually re-presented with a user at a time until all users have been exhausted.
   *. Users include current Facebook friends, but more importantly include other users of the app who are geographically close.
 *. Later, as a user has other users sorting them, they will get alerts if you and the other user swiped the same on the same topic. You can then chat with them or, if they agree, send them a text message
 
