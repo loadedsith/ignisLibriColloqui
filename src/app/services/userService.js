@@ -240,7 +240,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
           //if oldUser.profile exists we arent setting the initial profile
           $rootScope.$broadcast('UserService:UpdateUserProfile', newUser);
         } else {
-          console.debug('ignoring user update because old user was undefined');
+          // console.debug('ignoring user update because old user was undefined');
         }
       }
       $rootScope.$broadcast('UserService:Update', _this.user);

@@ -19,9 +19,8 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.login();
         },
       };
-      $scope.connectionEvent = function(event, value) {
-        console.log('connectionEvent: event, value:', event, value);
-        switch (event) {
+      $scope.connectionEvent = function(value) {
+        switch (value) {
         case 'disconnect':
           StatusService.setStatus($scope.disconnectedStatus);
           break;
