@@ -7,7 +7,7 @@ var $ = require('gulp-load-plugins')();
 var karma = require('karma').server;
 var karmaRunner = require('karma').runner;
 
-// you could the 'test-server' task here, but I think its nicer to have in a seperate terminal
+// you could add the 'test-server' task here, but I think its nicer to have in a seperate terminal
 gulp.task('test', ['myEnv', 'karmaTeam'], function(done) {
   gulp.watch('src/{app,components}/**/*.js', ['karmaTeam']);
   // gulp.watch('src/{app,components}/**/*.spec.js', ['karmaRunner']);

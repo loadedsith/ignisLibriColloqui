@@ -141,7 +141,7 @@ define(['react', 'strings'], function(React, Strings) {
       };
 
       var profileDisplayed = this.state.profileDisplayed ? 'profileDisplay' : 'profileHide';
-      this.scrollMessages()
+      this.scrollMessages();
       /*jshint ignore:start */
       return (
         <div>

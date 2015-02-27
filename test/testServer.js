@@ -25,11 +25,11 @@ io.sockets.on('connection', function(socket) {
   var socketId = socket.id;
   console.log('Server: user connected');
   socket.on('set profile', function(data) {
-    console.log('set profile', data);
+    console.log('Server: set profile', data);
     socket.emit('user profile update', data);
   });
   socket.on('ping', function(data) {
-    console.log('Server: ping');
+    console.log('Server: ping, emit pong');
     socket.emit('pong', data);
   });
   socket.on('test event', function(mockEvent) {
