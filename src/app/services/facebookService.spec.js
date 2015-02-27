@@ -1,7 +1,5 @@
-/* jshint undef:true, -W030*/
-/* global describe, it, expect, beforeEach, inject */
-'use strict';
-define(['services/serviceModule', 'angular-mocks'], function(controllers) {
+define(['services/serviceModule', 'angular-mocks'], function() {
+  'use strict';
   describe('facebook services', function() {
     var facebookService;
 
@@ -61,8 +59,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
 
       beforeEach(function(done) {
         spyOn(FB, 'api').and.callFake(function() {
-          done()
-        })
+          done();
+        });
         facebookService.apiCallbackWrapper(apiResource, done);
       });
 
@@ -81,8 +79,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
 
       beforeEach(function(done) {
         spyOn(FB, 'login').and.callFake(function() {
-          done()
-        })
+          done();
+        });
         facebookService.login(done, fbScope);
       });
 
@@ -100,7 +98,7 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserImageById('1000', defaultImageProperties, done);
       });
       it('getUserImageById should call callback function', function() {
-        expect(true)// just by getting here you've verified the callback (it was done())
+        expect(true);// just by getting here you've verified the callback (it was done())
       });
     });
 
@@ -108,8 +106,8 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
       var userId = '1001';
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
-          done()
-        })
+          done();
+        });
         facebookService.getUserImageById(userId, defaultImageProperties, done);
       });
 
@@ -134,15 +132,15 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserImage(done);
       });
       it('getUserImage should call callback function', function() {
-        expect(true)// just by getting here you've verified the callback (it was done())
+        expect(true);// just by getting here you've verified the callback (it was done())
       });
     });
 
     describe('getUserImage calls the callback with values', function() {
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
-          done()
-        })
+          done();
+        });
         facebookService.getUserImage(done);
       });
 
@@ -160,15 +158,15 @@ define(['services/serviceModule', 'angular-mocks'], function(controllers) {
         facebookService.getUserInfo(done);
       });
       it('getUserInfo should call callback function', function() {
-        expect(true)// just by getting here you've verified the callback (it was done())
+        expect(true);// just by getting here you've verified the callback (it was done())
       });
     });
 
     describe('getUserInfo calls the callback with values', function() {
       beforeEach(function(done) {
         spyOn(facebookService, 'apiCallbackWrapper').and.callFake(function() {
-          done()
-        })
+          done();
+        });
         facebookService.getUserInfo(done);
       });
 

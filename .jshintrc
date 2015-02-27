@@ -22,17 +22,24 @@
   "validthis": true,
   "sub": true,
   "globals": {
+    "afterEach": true,
     "angular": false,
+    "beforeEach": true,
     "define": true,
+    "describe": true,
+    "expect": true,
     "FB": false,
     "FB_API_KEY": true,
-    "ILC_SERVER": true,
-    "spyOn": false,
-    "jasmine": false,
     "Firebase": false,
+    "ILC_SERVER": true,
+    "inject": true,
+    "it": true,
+    "jasmine": false,
+    "module": true,
     "MYLIST": true,
     "React": false,
     "require": true,
+    "spyOn": false,
     "testAPI": false
   }
 }

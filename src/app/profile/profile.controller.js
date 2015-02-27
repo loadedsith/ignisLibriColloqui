@@ -11,22 +11,24 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       for (var i = likes.length - 1; i >= 0; i--) {
         if ($scope.isInInterests(likes[i].name, interests)) {
-          similar.push(likes[i].name)
+          similar.push(likes[i].name);
         }
       }
       if (similar.length === likes.length) {
         return true;
       }
       return false;
-    }
+    };
+
     $scope.isInInterests = function(interest, interests) {
       for (var i = (interests || []).length - 1; i >= 0; i--) {
         if (interests[i] === interest) {
           return true;
-        };
+        }
       }
       return false;
-    }
+    };
+
     $scope.checkName = function(data) {
       if (data === undefined || data === '' || data.length === 0) {
         return $scope.Strings.errors.noName;
@@ -37,7 +39,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.saving = false;
     });
 
-    $scope.save = function(profile) {
+    $scope.save = function() {
       $scope.saving = true;
       $scope.$emit('ProfileController:UpdateUserProfile', $scope.user);
     };
@@ -56,7 +58,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       }
       return false;
-    }
+    };
 
     $scope.addBlacklist = function(blacklisted) {
       if ($scope.user.profile.blacklist === undefined) {
@@ -84,7 +86,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
         return true;
       } else {
-        return false
+        return false;
       }
     };
 
@@ -94,7 +96,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       }
       profile.interests.push(interest);
       $scope.addInterestPlaceholder = '';
-      $scope.save(profile)
+      $scope.save(profile);
     };
 
     $scope.removeInterest = function(interest, interests) {
@@ -127,14 +129,12 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
         return true;
       } else {
-        return false
+        return false;
       }
     };
 
     $scope.facebookInterestsPage = 0;
     $scope.facebookInterestsLoading = false;
-    $scope.facebookFirstCursor;
-    $scope.facebookBeforeCursor;
     $scope.suggestFacebookInterests = function(paging, beforeOrAfter) {
       var deferred = $q.defer();
       $scope.facebookInterestsLoading = true;

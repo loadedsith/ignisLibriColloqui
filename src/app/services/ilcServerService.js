@@ -1,4 +1,4 @@
-define(['services/serviceModule', 'angular'], function(services, angular) {
+define(['services/serviceModule', 'angular'], function(services) {
   'use strict';
   return services.service('ILCServerService',
   ['$q', 'Config', 'MessagesService', 'UserService', '$socket',
@@ -13,7 +13,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       var config = {
         user:user,
         accessToken: _this.accessToken
-      }
+      };
       if (_this.accessToken === undefined) {
         console.log('cant make any requests without an access token');
         //TODO: These seem wrong, maybe no big deal,
@@ -34,7 +34,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
       $socket.emit('set current interest', config);
       $socket.once('user current interest update', function(results) {
-        _this.updatingCurrentInterestPromise.resolve(results)
+        _this.updatingCurrentInterestPromise.resolve(results);
         _this.updatingCurrentInterest = false;
       });
       return _this.updatingCurrentInterestPromise.promise;
@@ -48,7 +48,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       var config = {
         user:user,
         accessToken: _this.accessToken
-      }
+      };
       if (_this.accessToken === undefined) {
         console.log('cant make any requests without an access token');
         //TODO: These seem wrong, maybe no big deal,
@@ -72,7 +72,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         var config = {
           user: user,
           accessToken: _this.accessToken,
-        }
+        };
         $socket.emit('get profile', config);
       }
     };
@@ -83,8 +83,8 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         return;
       } else {
         var config = {
-          room:room
-        }
+          room: room
+        };
         if (_this.accessToken !== undefined) {
           config.accessToken = _this.accessToken;
           $socket.emit('close room', config);
@@ -101,7 +101,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       } else {
         console.log('couldnt set that message because the access token was undefined: ', config);
       }
-    }
+    };
 
     _this.login = function(accessToken) {
       // send access token
@@ -121,10 +121,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       $socket.on('user valid', function(user) {
         UserService.loginSuccess(user);
         UserService.setUser(user);
-        var config = {
-          'userId': user.data['user_id'],
-          'accessToken': _this.accessToken
-        };
         //found a valid user, so stash the token
         _this.accessToken = accessToken;
       });
@@ -135,37 +131,33 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       $socket.socket.io.disconnect();
     };
 
-    _this.connectTimeoutEvent;
     $socket.on('connect_timeout', function(value) {
       if (typeof _this.connectTimeoutEvent === 'function') {
-        _this.connectTimeoutEvent(value)
+        _this.connectTimeoutEvent(value);
       } else {
         console.log('connect_timeout', value);
       }
     });
 
-    _this.disconnectEvent;
     $socket.on('disconnect', function(value) {
       if (typeof _this.disconnectEvent === 'function') {
-        _this.disconnectEvent(value)
+        _this.disconnectEvent(value);
       } else {
         console.log('disconnect', value);
       }
     });
 
-    _this.connectEvent;
     $socket.on('connect', function(value) {
       if (typeof _this.connectEvent === 'function') {
-        _this.connectEvent(value)
+        _this.connectEvent(value);
       } else {
         console.log('connect', value);
       }
     });
 
-    _this.connectErrorEvent;
     $socket.on('connect_error', function(value) {
       if (typeof _this.connectErrorEvent === 'function') {
-        _this.connectErrorEvent(value)
+        _this.connectErrorEvent(value);
       } else {
         console.log('connect_error', value);
       }
@@ -188,7 +180,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
 
     $socket.on('got user matchList', function(matchList) {
       // console.log('ilc got user matchList', matchList);
-      UserService.setMatchList(matchList)
+      UserService.setMatchList(matchList);
     });
 
     $socket.on('message sent', function(message) {

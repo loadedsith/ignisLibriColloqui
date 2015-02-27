@@ -1,8 +1,8 @@
 define(['controllerModule', 'angular'], function(controllers, angular) {
   'use strict';
   return controllers.controller('MatchCardsController',
-  ['$scope', '$timeout', 'UserService', 'FacebookService', 'Config',
-  function($scope, $timeout, UserService, facebookService, Config) {
+  ['$scope', '$timeout', 'UserService',
+  function($scope, $timeout, UserService) {
     $scope.matchList = {};
     $scope.profiles = {};
 
@@ -19,7 +19,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
         $scope.matchList = user.matches;
         $scope.makeDecksFromMatchList($scope.matchList);
       } else {
-        console.debug('got service update for match controller, but no matches!')
+        console.debug('got service update for match controller, but no matches!');
       }
     });
     $scope.hasTopCard = function(deck) {
@@ -48,7 +48,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.makeDecksFromMatchList = function(matchList) {
       if (matchList === undefined) {
-        matchList === $scope.matchList;
+        matchList = $scope.matchList;
       }
       $scope.decks = [];
       angular.forEach(matchList, function(value, key) {
@@ -60,24 +60,25 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
             size:value.length
           }
         });
-      })
-    }
+      });
+    };
 
     $scope.removeTopCard = function(card, cardData) {
-      card.fadeOut(function(card) {
+      card.fadeOut(function() {//args: card
         for (var i = $scope.decks.length - 1; i >= 0; i--) {
           var deck = $scope.decks[i];
           if (deck.topCard !== undefined) {
-            if (deck.topCard.name === cardData.name){
+            if (deck.topCard.name === cardData.name) {
               console.log('deck.topCard.name', deck.topCard.name);
               console.log('cardData.name', cardData.name);
-              deck.topCard = undefined
+              deck.topCard = undefined;
             }
           }
         }
 
       });
-    }
+    };
+
     $scope.removeCard = function(card) {
       console.log('removeCard');
       $timeout(function() {
@@ -87,13 +88,13 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.cardControl = {
       removeCard: $scope.removeCard
-    }
+    };
 
     $scope.swipeLeft = function(card, cardData) {
       console.log('swipeLeft: card', card, cardData, $scope, $scope.cards);
       if (typeof $scope.$parent.swipeLeft === 'function') {
         card.removeCard = $scope.removeCard;
-        $scope.$parent.swipeLeft(card, cardData, $scope.cardControl)
+        $scope.$parent.swipeLeft(card, cardData, $scope.cardControl);
       } else {
         card.returnCard();
       }
@@ -104,7 +105,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
       $scope.$emit('open room', cardData);
       if (typeof $scope.$parent.swipeRight === 'function') {
         card.removeCard = $scope.removeCard;
-        $scope.$parent.swipeRight(card, cardData, $scope.cardControl)
+        $scope.$parent.swipeRight(card, cardData, $scope.cardControl);
       } else {
         card.fadeOut(function(card) {
           console.log('fade out card callback, card: ', card);

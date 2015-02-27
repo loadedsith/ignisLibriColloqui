@@ -230,8 +230,9 @@ define(['controllerModule', 'angular'], function(controllers) {
         });
       };
 
-      $scope.$on('open room',function(event, card) {
-        // we should look at card.id and ensure the room opens, however adding the room causes the user to be updated, so it happens automagically.
+      $scope.$on('open room', function(event, card) {
+        // we should look at card.id and ensure the room opens,
+        // however adding the room causes the user to be updated, so it happens automagically.
         // if thats so, just open the display!
         $scope.toggleNavBar('messages', true);
         $scope.$broadcast('set current room', card.id);

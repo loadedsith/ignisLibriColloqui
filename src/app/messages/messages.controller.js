@@ -15,7 +15,7 @@ define(['controllerModule'], function(controllers) {
         }
       });
 
-      $scope.$on('MessagesService:MessageSent', function(event, message) {
+      $scope.$on('MessagesService:MessageSent', function() {
         $scope.message = '';
       });
 
@@ -36,7 +36,7 @@ define(['controllerModule'], function(controllers) {
         if (successful) {
           $scope.message = '';
         }
-      }
+      };
 
     }]);
 });

@@ -1,5 +1,5 @@
-'use strict';
 define(['controllerModule', 'angular'], function(controllers) {
+  'use strict';
   controllers
     .controller('UserController', ['$scope', 'UserService', function($scope, UserService) {
       $scope.fallbackImage = './assets/images/FBProfile.jpg';
@@ -41,6 +41,6 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.profilePicture = newProfilePicture;
         }
         $scope.user = user;
-      })
+      });
     }]);
 });

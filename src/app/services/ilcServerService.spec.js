@@ -1,8 +1,6 @@
-/* jshint undef:true, -W030*/
-/* global describe, it, expect, beforeEach, inject */
-'use strict';
-
-define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function() {
+define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'],
+function(servicesModule, angularMocks, mockUserProfile) {
+  'use strict';
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
   localStorage.debug = 'ERROR';
 
@@ -15,7 +13,6 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
   }));
 
   describe('ILC Server Services', function() {
-    var scope;
     var interval;
 
     var ilcServerService;
@@ -37,8 +34,6 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       socket = $socket;
       spyOn(socket, 'on').and.callThrough();
     }));
-
-    var mockToken = 'ApIoObdI>({[]})<IbdOoIqA';
 
     var events = [
       'got user matchList',
@@ -88,19 +83,13 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       it('expects each event be mapped to an socket.on call', function() {
         for (var i = events.length - 1; i >= 0; i--) {
           var event = events[i];
-          it('should listen for event['+i+']: on(\'' + event + '\')', function() {
-            expect(socket.on).toHaveBeenCalledWith(event, jasmine.any(Function));
-          });
+          expect(socket.on).toHaveBeenCalledWith(event, jasmine.any(Function));
         }
-      })
+      });
     });
 
     describe('login', function() {
       var mockAccessToken = 'abcd1234';
-      var mockLoginEvent = {
-        name:'login',
-        data:{}
-      };
       it('should trigger an emit to validate login',
         function() {
           spyOn(socket, 'emit');
@@ -150,7 +139,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         });
 
       });
-    })
+    });
 
     describe('user profile event', function() {
       var mockUserProfileEvent = {
@@ -170,8 +159,10 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         function(done) {
           $rootScope.$on('UserService:UpdateMatchProfile', function() {
             expect(userService.profiles[mockUserProfileEvent.data.data['user_id']]).toBeDefined();
-            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].id).toBe(mockUserProfileEvent.data.profile.id);
-            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].test).toBe(mockUserProfileEvent.data.profile.test);
+            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].id)
+              .toBe(mockUserProfileEvent.data.profile.id);
+            expect(userService.profiles[mockUserProfileEvent.data.data['user_id']].test)
+              .toBe(mockUserProfileEvent.data.profile.test);
             done();
           });
           socket.emit('test event', mockUserProfileEvent);
@@ -232,11 +223,11 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           };
           interval = setInterval(function() {
             if (userService.user.matches && mockGotUserMatchListEvent.data) {
-              expect(userService.user.matches).toEqual(mockGotUserMatchListEvent.data)
+              expect(userService.user.matches).toEqual(mockGotUserMatchListEvent.data);
               done();
             } else {
               console.log('waiting');
-            };
+            }
           }, 100);
           socket.emit('test event', mockGotUserMatchListEvent);
         }
@@ -251,7 +242,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
             data:{
               snapshot:{}
             }
-          }
+          };
           spyOn(messagesService, 'messageSent').and.callFake(function() {
             expect(true);
             done();
@@ -270,7 +261,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
           $rootScope.$on('MessagesService:MessageSent', function() {
             expect(true);
             done();
-          })
+          });
           socket.emit('test event', mockMessageSent);
         }
       );
@@ -306,7 +297,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
                       'application' : 'ignisLibriColloqui',
                       'expires_at' : 1421888400,
                       'is_valid' : true,
-                      'scopes' : [ 'public_profile', 'email' ],
+                      'scopes' : ['public_profile', 'email'],
                       'setTime' : 1421881793587,
                       'user_id' : '10101118662asd154115'
                     }
@@ -325,13 +316,13 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
               return;
             }
             expect(messagesService.rooms[mockRoomUpdate.data.room]).not.toBeUndefined();
-            var last = messagesService.rooms[mockRoomUpdate.data.room].length-1;
-            expect(last+1 === 2);//because we sent in 2 updates;
+            var last = messagesService.rooms[mockRoomUpdate.data.room].length - 1;
+            expect(last + 1 === 2);//because we sent in 2 updates;
             expect(messagesService.rooms[mockRoomUpdate.data.room][last]).toEqual(mockRoomUpdate.data.snapshot);
 
             done();
 
-          })
+          });
           socket.emit('test event', mockRoomUpdate);
         }
       );
@@ -367,7 +358,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
                       'application' : 'ignisLibriColloqui',
                       'expires_at' : 1421888400,
                       'is_valid' : true,
-                      'scopes' : [ 'public_profile', 'email' ],
+                      'scopes' : ['public_profile', 'email'],
                       'setTime' : 1421881793587,
                       'user_id' : '10101118662asd154115'
                     }
@@ -376,16 +367,17 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
               }
             }
           };
+
           $rootScope.$on('MessagesService:MessagesSet', function(event, room) {
             expect(room).toEqual(mockRoomSet.data);
             expect(messagesService.messages[room.room]).toEqual(mockRoomSet.data.snapshot[mockRoomSet.data.room]);
             done();
-          })
+          });
+
           socket.emit('test event', mockRoomSet);
         }
       );
     });
-
 
   });
 });

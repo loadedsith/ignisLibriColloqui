@@ -18,15 +18,15 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.closeRoom = function(event, room) {
         MessagesService.closeRoom(room);
-      }
+      };
 
       $scope.$on('set current room', function(event, name) {
         MessagesService.setCurrentRoom(name);
-      })
+      });
 
       $scope.getRoomName = MessagesService.getRoomName;
 
-      $scope.$on('MessagesService:MessageSent', function(event, message) {
+      $scope.$on('MessagesService:MessageSent', function() {
         $scope.message = '';
       });
 
@@ -58,7 +58,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.$on('MessagesService:UpdateRooms', function(event, rooms) {
         $scope.rooms = rooms;
         $scope.roomsReady = true;
-        MessagesService.populateRoomNames(rooms, $scope.user, $scope.currentInterest)
+        MessagesService.populateRoomNames(rooms, $scope.user, $scope.currentInterest);
         $scope.roomNames = MessagesService.roomNames;
       });
 

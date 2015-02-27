@@ -18,9 +18,11 @@ define(['ignisLibriColloqui', 'controllerModule', 'angular-mocks'], function() {
     beforeEach(inject(function(FacebookService) {
       facebookService = FacebookService;
     }));
+
     beforeEach(inject(function(StatusService) {
       statusService = StatusService;
     }));
+
     beforeEach(inject(function(Config) {
       config = Config;
     }));

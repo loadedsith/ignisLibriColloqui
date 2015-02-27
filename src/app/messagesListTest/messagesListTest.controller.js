@@ -18,6 +18,6 @@ define(['controllerModule'], function(controllers) {
         if (successful) {
           $scope.message = '';
         }
-      }
+      };
     }]);
 });

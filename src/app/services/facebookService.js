@@ -100,9 +100,9 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         }
         if (paging !== undefined && beforeOrAfter !== undefined) {
           if (beforeOrAfter === 'before') {
-            resource = resource + '&before=' + paging.cursors.before
+            resource = resource + '&before=' + paging.cursors.before;
           } else if (beforeOrAfter === 'after') {
-            resource = resource + '&after=' + paging.cursors.after
+            resource = resource + '&after=' + paging.cursors.after;
           } else {
             console.log('beforeOrAfter was defined, but not `before` or `after`.');
           }

@@ -44,13 +44,13 @@ gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function() {
     'src',
     '.tmp'
   ], [
-    '.tmp/{app,components}/**/*.css',
-    '.tmp/{app,components}/**/*.js',
+    '.tmp/app/**/*.css',
+    '.tmp/app/**/*.js',
     'src/assets/images/**/*',
     'src/*.html',
-    'src/{app,components}/**/*.html',
-    'src/{app,components}/**/*.js',
-    '!src/{app,components}/**/*spec.js'
+    'src/app/**/*.html',
+    'src/app/**/*.js',
+    '!src/app/**/*spec.js'
   ]);
   // execute('open http://example.com:3000', function() {
   //   console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');

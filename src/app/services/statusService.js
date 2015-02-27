@@ -2,7 +2,6 @@ define(['services/serviceModule', 'angular', 'requestAnimationFrame'],
 function(services, angular, requestAnimationFrame) {
   'use strict';
   return services.service('StatusService', ['$rootScope', '$timeout', function($rootScope, $timeout) {
-    'use strict';
 
     var _this = this;
 
@@ -107,19 +106,19 @@ function(services, angular, requestAnimationFrame) {
         $timeout(function() {
           if (_this.status === undefined) {
             //dont do anything, but do keep animating
-            window.requestAnimationFrame(_this.animation.interval);
+            requestAnimationFrame(_this.animation.interval);
             return;
           }
           if (_this.status.animation === undefined) {
             //dont do anything, but do keep animating
-            window.requestAnimationFrame(_this.animation.interval);
+            requestAnimationFrame(_this.animation.interval);
             return;
           }
           var delta = Math.floor((_this.animation.startTime - now) / _this.status.animation.delay);
 
           //Dont continue if the delta hasn't changed (there's nothing todo as all animations are based off the delta)
           if (delta === _this.animation.lastDelta) {
-            window.requestAnimationFrame(_this.animation.interval);
+            requestAnimationFrame(_this.animation.interval);
             return;
           }
 
@@ -140,7 +139,7 @@ function(services, angular, requestAnimationFrame) {
             _this.status.currentFrame = theFrame;
           }
 
-          window.requestAnimationFrame(_this.animation.interval);
+          requestAnimationFrame(_this.animation.interval);
         }, 0);
       }
     };
@@ -182,16 +181,18 @@ function(services, angular, requestAnimationFrame) {
           console.log('No animation frames or delay defined for animation. Both must be present.');
           return;
         }
-        window.requestAnimationFrame(_this.animation.interval);
+        requestAnimationFrame(_this.animation.interval);
       }
     };
 
-    _this.getStatus = function() {return _this.status}
+    _this.getStatus = function() {
+      return _this.status;
+    };
 
     //Watch for changes, and like a boss, update any listeners.
     $rootScope.$watch(_this.getStatus, function() {
       $rootScope.$broadcast('StatusService:Update', _this.status);
-    }, true)
+    }, true);
 
     return _this;
   }]);

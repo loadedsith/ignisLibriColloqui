@@ -6,5 +6,5 @@
  **/
 define(['angular', 'config', 'angular-cookies', 'ng-socket-gph'], function(ng) {
   'use strict';
-  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config', 'ngCookies', 'ngSocket'])
+  return ng.module('ignisLibriColloqui.services', ['ignisLibriColloqui.config', 'ngCookies', 'ngSocket']);
 });

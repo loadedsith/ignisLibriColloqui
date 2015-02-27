@@ -2,7 +2,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
   'use strict';
   return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'Config',
   function($rootScope, $cookies, $q, FacebookService, Config) {
-    'use strict';
     var _this = this;
 
     var Strings = Config.strings;
@@ -14,12 +13,12 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.user = {
       profilePicture : null,
       loggedIn : false
-    }
+    };
 
     _this.setCurrentInterest = function(interest) {
       _this.user.profile.currentInterest = interest;
       $rootScope.$broadcast('UserService:UpdateCurrentInterest', _this.user);
-    }
+    };
 
     _this.checkLoginState = function() {
       var deferred = $q.defer();
@@ -96,7 +95,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     _this.isProfileComplete = function() {
       var missing = [];
       if (!_this.user.profile) {
-        _this.user.profile = {}
+        _this.user.profile = {};
       }
       if (_this.user.profile.name === undefined || _this.user.profile.name === '') {
         missing.push(Strings.name);
@@ -105,7 +104,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
         missing.push(Strings.aboutMe);
       }
       if (_this.user.profile.interests === undefined) {
-        _this.user.profile.interests = []
+        _this.user.profile.interests = [];
       }
       if (_this.user.profile.interests.length === 0) {
         missing.push(Strings.anInterest);
@@ -227,7 +226,9 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       $rootScope.$broadcast('UserService:UpdateMatchProfiles', true);
     };
 
-    _this.getUser = function() {return _this.user}
+    _this.getUser = function() {
+      return _this.user;
+    };
 
     $rootScope.$watch(_this.getUser, function(newUser, oldUser) {
       if (newUser.matches !== undefined) {

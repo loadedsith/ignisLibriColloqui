@@ -1,6 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
+var map = require('map-stream');
+var notify = require('gulp-notify');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -26,7 +28,7 @@ gulp.task('styles', [],  function() {
     .pipe(gulp.dest('.tmp'))
     .pipe($.size());
 });
-var notify = require('gulp-notify');
+
 
 function execute(command, callback) {
   var exec = require('child_process').exec;
@@ -43,10 +45,15 @@ notify.on('click', function(options) {
 });
 
 gulp.task('jscs', function() {
-  return  gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])
+  return  gulp.src([
+    'src/app/**/*.js'
+    ])
     .pipe($.jscs({
       "preset": "google",
-      "fileExtensions": [ ".js", "jscs" ],
+      "fileExtensions": [
+        ".js",
+        "jscs"
+      ],
 
       "requireParenthesesAroundIIFE": true,
       "maximumLineLength": 120,
@@ -66,43 +73,52 @@ gulp.task('jscs', function() {
       this.end();
     })
 })
-gulp.task('scripts', function() {//add ['test'] here to auto test w/ server
-  gulp.src(['src/{app, components}/**/*.js', '!src/{app, components}/**/*spec.js'])
+gulp.task('scripts', ['jscs'], function() {//add ['test'] here to auto test w/ server
+  gulp.src([
+    './src/app/**/**/*.js',
+  ])
+    .pipe($.jshint())
+    // Use gulp-notify as jshint reporter
+    // .pipe(notify("Found file: <%= file.relative %>!"))
+    // .pipe($.jshint.reporter('default'));
+
+    .pipe(map(function(file, cb) {
+      // console.log('file.jshint', JSON.stringify(file.jshint,2));
+      var message = '';
+      if (!file.jshint.success) {
+        var errors = file.jshint.results.map(function(data) {
+          if (data.error) {
+            return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason + '\n' +
+              'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n';
+          }
+        }).join('\n');
+        message = file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+      }
+      if(message!=='')
+        console.log('message', message);
+      cb(null, file);
+    })
+    );
+
+  gulp.src(['src/app/**/*.jsx'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify({
       title: 'JSHint',
-      message:function(file) {
+      message: function(file) {
       if (file.jshint.success) {
         // Don't show something if success
         return false;
       }
       var errors = file.jshint.results.map(function(data) {
         if (data.error) {
-          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
-            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
+          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason + '\n' +
+            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n';
         }
       }).join('\n');
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-    }, wait:true}));
-  gulp.src(['src/{app, components}/**/*.jsx'])
-    .pipe($.jshint())
-    // Use gulp-notify as jshint reporter
-    .pipe(notify({
-      title: 'JSHint',
-      message:function(file) {
-      if (file.jshint.success) {
-        // Don't show something if success
-        return false;
-      }
-      var errors = file.jshint.results.map(function(data) {
-        if (data.error) {
-          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason+'\n'+
-            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character+'\n';
-        }
-      }).join('\n');
-      return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-    }, wait:true}));
+      }, wait:true
+    }));
 });
 
 gulp.task('partials', function() {

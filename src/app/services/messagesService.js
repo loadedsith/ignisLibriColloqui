@@ -11,7 +11,8 @@ define(['services/serviceModule'], function(services) {
 
       _this.sendMessageEventListener = function() {
         console.log('default sendMessageEventListener');
-      }
+      };
+
       _this.sendMessage = function(message, currentRoom) {
         var config = {
           message:message,
@@ -30,7 +31,7 @@ define(['services/serviceModule'], function(services) {
           room.key = snapshot.key();
           _this.rooms.push(room);
         }, 0);
-        $rootScope.$broadcast('MessagesService:UpdateRooms', _this.rooms)
+        $rootScope.$broadcast('MessagesService:UpdateRooms', _this.rooms);
       };
 
       _this.setRooms = function(snapshot) {
@@ -95,7 +96,7 @@ define(['services/serviceModule'], function(services) {
         // will be called for each new message
         if (snapshot.room !== undefined) {
           if (snapshot.snapshot !== null) {
-            _this.messages[snapshot.room] = snapshot.snapshot[snapshot.room]
+            _this.messages[snapshot.room] = snapshot.snapshot[snapshot.room];
           }
         }
         $rootScope.$broadcast('MessagesService:MessagesSet', snapshot);
@@ -107,7 +108,7 @@ define(['services/serviceModule'], function(services) {
         // _this.rooms[snapshot.room] = snapshot.snapshot
         if (snapshot.snapshot !== undefined) {
           _this.rooms[snapshot.room] = [];
-          _this.rooms[snapshot.room].push(snapshot.snapshot)
+          _this.rooms[snapshot.room].push(snapshot.snapshot);
         }
         $rootScope.$broadcast('MessagesService:MessageUpdate', snapshot);
       };

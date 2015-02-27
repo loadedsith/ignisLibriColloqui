@@ -12,7 +12,7 @@ define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'],
       $scope.MatchDisplay = MatchDisplay;
       $scope.TopCard = TopCard;
 
-      $scope.$on('UserService:Update', function(event, user) {
+      $scope.$on('UserService:Update', function() {
         $scope.alreadyOpenCache = {};
         $scope.blacklistedCache = {};
       });
@@ -54,15 +54,15 @@ define(['controllerModule', 'angular', 'react/matchDisplay', 'react/topCard'],
       };
 
       $scope.swipeRight = function(card, cardData, cardControl) {
-        UserService.userFoundAMatch(cardData.id)
-        card.fadeOut(function(card) {
+        UserService.userFoundAMatch(cardData.id);
+        card.fadeOut(function() {//arg: card
           cardControl.removeCard(cardData);
         });
       };
 
       $scope.swipeLeft = function(card, cardData, cardControl) {
         // card.returnCard();
-        card.fadeOut(function(card) {
+        card.fadeOut(function() {//arg: card
           cardControl.removeCard(cardData);
         });
       };
