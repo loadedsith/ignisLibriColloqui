@@ -209,6 +209,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         }
       );
     });
+
     describe('got user matchList event', function() {
       it('should trigger UserService.setMatchList \'\'',
         function(done) {
@@ -241,6 +242,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         }
       );
     });
+
     describe('message sent confirmation', function() {
       it('should trigger messages service \'\'',
         function(done) {
@@ -273,7 +275,8 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         }
       );
     });
-    describe('room set events ', function() {
+
+    describe('room update events ', function() {
       it('expects on(\'room update\') to trigger messagesService\'s room update', function(done) {
         var mockRoomUpdate = {
           name:'room update',
@@ -330,10 +333,10 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
 
           })
           socket.emit('test event', mockRoomUpdate);
-          socket.emit('test event', mockRoomUpdate);
         }
       );
     });
+
     describe('room set events ', function() {
       it('expects on(\'room set\') to trigger messagesService\'s room set', function(done) {
         var mockRoomSet = {
@@ -382,5 +385,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         }
       );
     });
+
+
   });
 });
