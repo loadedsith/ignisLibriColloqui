@@ -14,14 +14,14 @@
   'use strict';
 
   angular.module('ngSocket', [])
-    .provider('$socket', function() {
+    .provider('$socket', function socketProvider() {
       var url, config;
 
       this.setUrl = setUrl;
       this.getUrl = getUrl;
       this.setConfig = setConfig;
       this.getConfig = getConfig;
-      this.$get = ['$rootScope','$timeout', socketFactory];
+      this.$get = ['$rootScope', socketFactory];
 
       function setConfig(value) {
         config = value;
@@ -39,9 +39,8 @@
         return url;
       };
 
-      function socketFactory($rootScope, $timeout) {
+      function socketFactory($rootScope) {
         var _this = this;
-
         _this.initializeSocket = function() {
           //Check if socket is undefined
           if (typeof _this.socket === 'undefined') {
@@ -58,9 +57,9 @@
           return function () {
             if (callback) {
               var args = arguments;
-              $timeout(function () {
+              // setTimeout(function() {
                 callback.apply(_this.socket, args);
-              }, 0);
+              // }, 0);
             }
           };
         };
@@ -71,9 +70,7 @@
             scope = null;
             callback = arguments[1];
           }
-
           _this.socket.on(name, _this.angularCallback(callback));
-
           if (scope !== null) {
             scope.$on('$destroy', function () {
               _this.removeListener(name, callback);
