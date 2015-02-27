@@ -39,7 +39,7 @@ function execute(command, callback) {
   exec(command, function(error, stdout, stderr) { callback(stdout); });
 };
 
-gulp.task('serve', ['myEnv', 'bower', 'jsx', 'scripts', 'watch'], function() {
+gulp.task('serve', ['myEnv', 'jsx', 'scripts', 'watch'], function() {
   browserSyncInit([
     'src',
     '.tmp'

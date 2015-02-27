@@ -5,7 +5,7 @@ var map = require('map-stream');
 var notify = require('gulp-notify');
 
 var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+  pattern: ['gulp-*', 'del']
 });
 
 function handleError(err) {
@@ -18,7 +18,8 @@ var fs = require('fs'),
 var dirString = path.dirname(fs.realpathSync(__filename));
 
 gulp.task('styles', [],  function() {
-  return gulp.src('src/{app, components}/**/*.scss')
+  console.log('dirString', dirString + '/../bower_components/foundation/scss');
+  return gulp.src('src/app/**/*.scss')
     .pipe($.sass({
       style: 'expanded',
       includePaths:[ dirString + '/../bower_components/foundation/scss' ]
@@ -89,7 +90,7 @@ gulp.task('scripts', ['jscs'], function() {//add ['test'] here to auto test w/ s
         var errors = file.jshint.results.map(function(data) {
           if (data.error) {
             return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason + '\n' +
-              'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n';
+              chalk.red('txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n');
           }
         }).join('\n');
         message = file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
@@ -171,17 +172,6 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function() {
     .pipe($.size());
 });
 
-gulp.task('images', function() {
-  return gulp.src('src/assets/images/**/*')
-    .pipe($.cache($.imagemin({
-      optimizationLevel: 3,
-      progressive: true,
-      interlaced: true
-    })))
-    .pipe(gulp.dest('dist/assets/images'))
-    .pipe($.size());
-});
-
 gulp.task('fonts', function() {
   return gulp.src('src/assets/fonts/**/*')
   .pipe($.copy('dist/assets/fonts',{prefix:3}));
@@ -197,11 +187,12 @@ gulp.task('myBower',function() {
   return gulp.src([
     'bower_components/**/*'
   ])
-    .pipe($.copy('dist'));
+  .pipe($.copy('dist'));
 });
 gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
   return gulp.src([
     'src/app/**/*',
+    'src/assets/**/*',
     'src/vendor/**/*.js',
     '.tmp/app/**/*.js'
 
@@ -209,8 +200,29 @@ gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
     .pipe($.copy('dist', {prefix:1}));
 });
 
+var exec = require('child_process').exec;
+gulp.task('requirejsBuild', function() {
+  $.requirejs({
+    mainConfigFile: 'src/app/require.config.js',
+    baseUrl: 'src/app',
+    out: 'rjsBuild.js',
+    name: 'require.config',
+    build: true,
+    paths:{
+      'env':'../../.tmp/app/env',
+      'react/card': '../../.tmp/react/card',
+      'react/cards': '../../.tmp/react/cards',
+      'react/messages': '../../.tmp/react/messages',
+      'react/matchDisplay': '../../.tmp/react/matchDisplay',
+      'react/topCard': '../../.tmp/react/topCard'
+
+    }
+  })
+  .pipe(gulp.dest('./dist/app/')); // pipe it to the output DIR
+});
+
 gulp.task('clean', function(done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', [ 'html', 'images', 'fonts', 'misc', 'copy']);
+gulp.task('build', [ 'html', 'fonts', 'misc', 'copy','requirejsBuild']);
