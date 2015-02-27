@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var map = require('map-stream');
+var chalk = require('chalk');
 var notify = require('gulp-notify');
 
 var $ = require('gulp-load-plugins')({
@@ -18,7 +19,6 @@ var fs = require('fs'),
 var dirString = path.dirname(fs.realpathSync(__filename));
 
 gulp.task('styles', [],  function() {
-  console.log('dirString', dirString + '/../bower_components/foundation/scss');
   return gulp.src('src/app/**/*.scss')
     .pipe($.sass({
       style: 'expanded',
@@ -74,7 +74,7 @@ gulp.task('jscs', function() {
       this.end();
     })
 })
-gulp.task('scripts', ['jscs'], function() {//add ['test'] here to auto test w/ server
+gulp.task('scripts', function() {//['jscs'] or ['test']
   gulp.src([
     './src/app/**/**/*.js',
   ])
@@ -208,17 +208,24 @@ gulp.task('requirejsBuild', function() {
     out: 'rjsBuild.js',
     name: 'require.config',
     build: true,
+    include:['requireLib'],
+    findNestedDependencies: true,
+    removeCombined: true,
     paths:{
+      'requireLib':'../bower_components/requirejs/require',
       'env':'../../.tmp/app/env',
       'react/card': '../../.tmp/react/card',
       'react/cards': '../../.tmp/react/cards',
       'react/messages': '../../.tmp/react/messages',
       'react/matchDisplay': '../../.tmp/react/matchDisplay',
       'react/topCard': '../../.tmp/react/topCard'
-
     }
   })
-  .pipe(gulp.dest('./dist/app/')); // pipe it to the output DIR
+  // .pipe($.ngAnnotate({
+  //   remove: true
+  // }))
+  // .pipe($.uglify({preserveComments: false}))
+  .pipe(gulp.dest('./.tmp/app/')); // pipe it to the output DIR
 });
 
 gulp.task('clean', function(done) {

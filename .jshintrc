@@ -4,6 +4,8 @@
   "bitwise": true,
   "browser": true,
   "camelcase": true,
+  "devel":true,
+  "debug":true,
   "curly": true,
   "eqeqeq": true,
   "immed": true,

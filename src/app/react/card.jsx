@@ -1,4 +1,4 @@
-define(['react', 'bezier-easing'], function(React, BezierEasing) {
+define(['react', 'bezierEasing'], function(React, BezierEasing) {
   'use strict';
   var getCardFromChild = function(element, maxAttempts) {
     if (element.classList.contains('card')) {

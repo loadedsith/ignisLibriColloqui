@@ -5,7 +5,7 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
     appId      : FB_API_KEY,
   });
   return services
-    .service('FacebookService', function() {
+    .service('FacebookService', ['$q', function($q) {
       var _this = this;
 
       _this.getUserImageByIdModifiers = {
@@ -15,7 +15,8 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         type: 'normal'
       };
 
-      _this.checkLoginState = function(deferred) {
+      _this.checkLoginState = function() {
+        var deferred = $q.defer();
         if (typeof FB === 'undefined') {
           console.log('Facebook was not properly initialized');
         } else {
@@ -27,6 +28,8 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
             }
           });
         }
+
+        return deferred.promise;
       };
 
       _this.apiCallbackWrapper = function(apiResource, callback) {
@@ -150,5 +153,5 @@ define(['services/serviceModule', 'facebook', 'env', 'angular'], function(servic
         }
       };
       return _this;
-    });
+    }]);
 });

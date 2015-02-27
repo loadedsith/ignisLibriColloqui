@@ -3,7 +3,6 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
   return services.service('UserService', ['$rootScope', '$cookies', '$q', 'FacebookService', 'Config',
   function($rootScope, $cookies, $q, FacebookService, Config) {
     var _this = this;
-
     var Strings = Config.strings;
 
     _this.currentInterest = 'Gold mining';//TODO: This needs to be an updatable state varible, or array of variables
@@ -20,11 +19,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       $rootScope.$broadcast('UserService:UpdateCurrentInterest', _this.user);
     };
 
-    _this.checkLoginState = function() {
-      var deferred = $q.defer();
-      FacebookService.checkLoginState(deferred);
-      return deferred.promise;
-    };
+    _this.checkLoginState = FacebookService.checkLoginState;
 
     _this.userFoundAMatch = function(match) {
       if (_this.user.profile !== undefined) {

@@ -229,6 +229,7 @@ define(['controllerModule', 'angular'], function(controllers) {
         });
       };
 
+      $scope.login();
       $scope.$on('open room', function(event, card) {
         // we should look at card.id and ensure the room opens,
         // however adding the room causes the user to be updated, so it happens automagically.

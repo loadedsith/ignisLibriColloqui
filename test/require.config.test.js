@@ -37,8 +37,8 @@ require.config({
       'test/reactPolyfillForPhantomJS'
       ]
     },
-    'angular-cookies': {
-      exports: 'angular-cookies',
+    'angularCookies': {
+      exports: 'angularCookies',
       deps: [
         'angular'
       ]
@@ -49,8 +49,8 @@ require.config({
         'angular'
       ]
     },
-    'angular-ui-router': {
-      exports: 'angular-ui-router',
+    'angularUiRouter': {
+      exports: 'angular-ui-router432',
       deps: [
         'angular'
       ]
@@ -125,13 +125,13 @@ require.config({
     'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
     'ng-socket-gph': 'src/vendor/ng-socket-gph',
     // 'ng-socket': 'bower_components/ng-socket/ngSocket',
-    'bezier-easing': 'bower_components/bezier-easing/bezier-easing',
+    'bezierEasing': 'bower_components/bezier-easing/bezier-easing',
     facebook: 'test/vendor/mockFb',
     // facebook: '//connect.facebook.net/en_US/all',
     angular: 'bower_components/angular/angular',
-    'angular-cookies': 'bower_components/angular-cookies/angular-cookies',
+    'angularCookies': 'bower_components/angular-cookies/angular-cookies',
     'angular-mocks': 'bower_components/angular-mocks/angular-mocks',
-    'angular-ui-router': 'bower_components/angular-ui-router/release/angular-ui-router',
+    'angularUiRouter': 'bower_components/angular-ui-router/release/angular-ui-router',
     foundation: 'bower_components/foundation/js/foundation',
     requestAnimationFrame: 'bower_components/requestAnimationFrame/app/requestAnimationFrame',
     fastclick: 'bower_components/fastclick/lib/fastclick',

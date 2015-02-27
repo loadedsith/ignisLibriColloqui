@@ -3,11 +3,11 @@ require.config({
     facebook: {
       exports: 'FB'
     },
-    angular: {
+    'angular': {
       exports: 'angular'
     },
-    'angular-cookies': {
-      exports: 'angular-cookies',
+    'angularCookies': {
+      exports: 'angularCookies',
       deps: [
         'angular'
       ]
@@ -29,8 +29,8 @@ require.config({
         'angular'
       ]
     },
-    'angular-ui-router': {
-      exports: 'angular-ui-router',
+    'angularUiRouter': {
+      exports: 'angularUiRouter',
       deps: [
         'angular'
       ]
@@ -49,14 +49,13 @@ require.config({
     'react/topCard': 'react/topCard',
     strings: 'strings',
     'services/serviceModule': 'services/serviceModule',
-    'bezier-easing': '../bower_components/bezier-easing/bezier-easing',
+    'bezierEasing': '../bower_components/bezier-easing/index',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
-    facebook: '//connect.facebook.net/en_US/all',
-    // facebook: '//connect.facebook.net/en_US/all/debug',
+    // facebook: '//connect.facebook.net/en_US/all',
+    facebook: '//connect.facebook.net/en_US/all/debug',
     angular: '../bower_components/angular/angular',
-    'angular-cookies': '../bower_components/angular-cookies/angular-cookies',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
-    'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router',
+    'angularUiRouter': '../bower_components/angular-ui-router/release/angular-ui-router',
     foundation: '../bower_components/foundation/js/foundation',
     fastclick: '../bower_components/fastclick/lib/fastclick',
     modernizr: '../bower_components/modernizr/modernizr',
@@ -66,6 +65,7 @@ require.config({
     jquery: '../bower_components/jquery/dist/jquery',
     'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
+    'angularCookies': '../bower_components/angular-cookies/angular-cookies',
     'socket.io-client': '../bower_components/socket.io-client/socket.io',
     'ng-socket-gph': '../vendor/ng-socket-gph',
     'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'

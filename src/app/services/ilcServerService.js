@@ -113,17 +113,18 @@ define(['services/serviceModule', 'angular'], function(services) {
         console.log('dont validate, but what caused this?');
         return;
       }
-      $socket.emit('login validator', accessToken);
+      console.log('accessToken', accessToken);
       // UserService.userInfoCallback();
       MessagesService.sendMessageEventListener = _this.sendMessage;
-
       // listen for confirmation of a valid user
       $socket.on('user valid', function(user) {
+        debugger;
         UserService.loginSuccess(user);
         UserService.setUser(user);
         //found a valid user, so stash the token
         _this.accessToken = accessToken;
       });
+      $socket.emit('login validator', accessToken);
     };
 
     _this.disconnectMe = function() {
@@ -197,6 +198,8 @@ define(['services/serviceModule', 'angular'], function(services) {
       // console.log('ilc room set', room);
       MessagesService.roomSet(room);
     });
+
+    $socket.emit('ping',{signed:'gph'});
 
     $socket.on('pong', function(data) {
       console.log('ilc pong', data);

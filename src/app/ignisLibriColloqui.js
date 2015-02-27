@@ -1,8 +1,8 @@
 //loads sub modules and wraps them up into the main module//this should be used for top-level module definitions only
 define([
   'angular',
-  'angular-cookies',
-  'angular-ui-router',
+  'angularCookies',
+  'angularUiRouter',
   'controllerIndex',
   'services/serviceIndex',
   'directives/directiveIndex',
