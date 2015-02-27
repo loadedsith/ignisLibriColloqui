@@ -23,7 +23,6 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     var userService;
 
     var mockAccessToken = 'OopoodIvIbooqoO';
-
     var $timeout;
     var $rootScope;
     var socket;
@@ -32,11 +31,10 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       ilcServerService = ILCServerService;
       messagesService = MessagesService;
       userService = UserService;
-
       $timeout = _$timeout_;
       $rootScope = _$rootScope_;
-      socket = $socket;
 
+      socket = $socket;
       spyOn(socket, 'on').and.callThrough();
     }));
 
@@ -59,6 +57,12 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
       if (interval !== undefined) {
         clearInterval(interval);
       }
+      socket.socket.removeAllListeners();
+      // wait for socket events
+      setTimeout(function() {
+        // then trigger promises
+        $rootScope.$digest();
+      }, 100);
     });
 
     describe('ilcServerService start', function() {
@@ -73,7 +77,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
     describe('ILCServer Validation', function() {
       it('expects emit(\'ping\') to trigger on(\'pong\')', function(done) {
         socket.on('pong', function(data) {
-          console.log('pong');
+          console.log('pong', data);
           done();
         });
         socket.emit('ping', {data:'goober'});
@@ -120,9 +124,10 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         }
       };
       beforeEach(function() {
-        spyOn(ilcServerService, 'setProfile').and.callThrough();
+        // spyOn(ilcServerService, 'setProfile').and.callThrough();
         spyOn($rootScope, '$broadcast').and.callThrough();
       });
+
       it('should have a promise confirming ilcServerService.setProfile()', function(done) {
         ilcServerService.accessToken = mockAccessToken;
         ilcServerService.setProfile({profile:mockValidProfile}).then(function() {
@@ -134,7 +139,7 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         //1: not updating
         expect(ilcServerService.updatingProfile).toBe(false);
         //2: start updating
-        ilcServerService.setProfile(mockValidProfile).then(function() {
+        ilcServerService.setProfile({profile:mockValidProfile}).then(function() {
           //4: done updating
           expect(ilcServerService.updatingProfile).toBe(false);
           done();
@@ -142,14 +147,15 @@ define(['services/serviceModule', 'angular-mocks', 'mockUserProfile'], function(
         //3: updating
         it('should be updating', function() {
           expect(ilcServerService.updatingProfile).toBe(true);
-        })
+        });
+
       });
     })
 
     describe('user profile event', function() {
       var mockUserProfileEvent = {
-        name:'user profile',
-        data:mockUserProfile
+        name: 'user profile',
+        data: mockUserProfile
       };
       it('should trigger UserService.setUserProfile',
         function(done) {
