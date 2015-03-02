@@ -101,7 +101,7 @@ define(['react', 'strings'], function(React, Strings) {
         /*jshint ignore:start */
         if (timeStamp) {
           rows.push(
-            <span className='time'>
+            <span className='time' key={datumTime}>
               {datumTime}
             </span>
           );
