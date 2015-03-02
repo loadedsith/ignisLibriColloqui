@@ -44,6 +44,8 @@ gulp.task('serve', ['myEnv', 'jsx', 'scripts', 'watch', 'requirejsBuild'], funct
     'src',
     '.tmp'
   ], [
+    '.tmp/index.css',
+    '.tmp/vendor.css',
     '.tmp/app/**/*.css',
     '.tmp/app/**/*.js',
     'src/assets/images/**/*',

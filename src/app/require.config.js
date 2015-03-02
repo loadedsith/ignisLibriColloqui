@@ -29,6 +29,12 @@ require.config({
         'angular'
       ]
     },
+    'angularAnimate': {
+      exports: 'angularAnimate',
+      deps: [
+        'angular'
+      ]
+    },
     'angularUiRouter': {
       exports: 'angularUiRouter',
       deps: [
@@ -57,6 +63,7 @@ require.config({
     facebook: '//connect.facebook.net/en_US/all',
     // facebook: '//connect.facebook.net/en_US/all/debug',
     angular: '../bower_components/angular/angular',
+    'angularAnimate': '../bower_components/angular-animate/angular-animate',
     'angular-mocks': '../bower_components/angular-mocks/angular-mocks',
     'angularUiRouter': '../bower_components/angular-ui-router/release/angular-ui-router',
     foundation: '../bower_components/foundation/js/foundation',

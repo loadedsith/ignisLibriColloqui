@@ -9,10 +9,29 @@ $cardWidth: $retinaCardWidth / 2;
 $retinaCardHeight: 882px * $cardScale;
 $cardHeight: $retinaCardHeight / 2;
 
+card-gph.ng-enter {
+  transform: translate3d(500px, 0, 0);
+  opacity: 0;
+}
+
+card-gph.ng-enter-active {
+  opacity: 1;
+  transform: none;
+}
+
+card-gph{
+  transition:transform, opacity;
+  opacity:1;
+}
+
+card-gph.ng-enter, card-gph.ng-leave li{
+  transition:0.3s linear all;
+}
+
 .cards{
   position:relative;
-  height:$cardHeight + 20px;
-  width:$cardWidth + 20px;
+  height: $cardHeight + 20px;
+  width: $cardWidth + 20px;
   margin-bottom:0;
   margin-right: auto;
   margin-left: auto;

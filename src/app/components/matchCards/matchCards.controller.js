@@ -7,7 +7,6 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
     $scope.profiles = {};
 
     $scope.decks = [];
-
     $scope.$on('UserService:Update', function(event, user) {
       $scope.profiles = UserService.profiles;
       if ($scope.deckInterest === undefined && user.profile !== undefined) {
