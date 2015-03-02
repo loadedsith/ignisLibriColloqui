@@ -15,11 +15,13 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
           $scope.deckInterest = user.profile.currentInterest;
         }
       }
-      if (user.matches) {
+      if (user.matches !== undefined) {
         $scope.matchList = user.matches;
         $scope.makeDecksFromMatchList($scope.matchList);
       } else {
-        console.debug('got service update for match controller, but no matches!');
+        if (user !== undefined) {
+          console.debug('got service update for match controller, but no matches!');
+        }
       }
     });
     $scope.hasTopCard = function(deck) {
