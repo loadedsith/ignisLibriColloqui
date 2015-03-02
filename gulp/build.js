@@ -16,13 +16,11 @@ function handleError(err) {
 var fs = require('fs'),
     path = require('path');
 
-var dirString = path.dirname(fs.realpathSync(__filename));
-
 gulp.task('styles', [],  function() {
   return gulp.src('src/app/**/*.scss')
     .pipe($.sass({
       style: 'expanded',
-      includePaths:[ dirString + '/../bower_components/foundation/scss' ]
+      includePaths:[ './src/bower_components/foundation/scss' ]
     }))
     .on('error', handleError)
     .pipe($.autoprefixer('last 1 version'))
