@@ -204,7 +204,9 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.setViewState(itemName, value);
         }
         if ($scope.shouldShowView('messages') === true) {
-          $scope.$broadcast('messagesVisible', true);
+          window.requestAnimationFrame(function() {
+            $scope.$broadcast('messagesVisible', true);
+          });
         }
       };
 
