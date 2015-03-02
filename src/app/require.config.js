@@ -43,6 +43,9 @@ require.config({
     },
     'bezierEasing':{
       exports:'BezierEasing'
+    },
+    'bezier-easing':{
+      exports:'BezierEasing'
     }
   },
   deps: [
@@ -59,6 +62,7 @@ require.config({
     strings: 'strings',
     'services/serviceModule': 'services/serviceModule',
     'bezierEasing': '../vendor/bezier-easing-gph',
+    'bezier-easing': '../vendor/bezier-easing-gph',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
     facebook: '//connect.facebook.net/en_US/all',
     // facebook: '//connect.facebook.net/en_US/all/debug',
