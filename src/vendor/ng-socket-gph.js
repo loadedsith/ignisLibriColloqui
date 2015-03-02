@@ -34,7 +34,6 @@
         _this.angularCallback =  function(callback){
           return function () {
             if (callback) {
-              debugger;
               var args = arguments;
 
               //Option 1
