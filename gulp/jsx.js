@@ -3,7 +3,7 @@ var react = require('gulp-react');
 
 var rename = require('gulp-rename');
 
-gulp.task('jsx', function() {
+gulp.task('jsx',['requirejsBuild'], function() {
   return gulp.src('src/app/**/*.jsx')
     .pipe(react())
     .pipe(rename({extname:'.js'}))

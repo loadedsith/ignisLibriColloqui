@@ -209,6 +209,8 @@ gulp.task('requirejsBuild', function() {
     build: true,
     include:['requireLib'],
     findNestedDependencies: true,
+    generateSourceMaps:true,
+    preserveLicenseComments:false,
     removeCombined: true,
     paths:{
       'requireLib':'../bower_components/requirejs/require',
@@ -220,10 +222,13 @@ gulp.task('requirejsBuild', function() {
       'react/topCard': '../../.tmp/react/topCard'
     }
   })
-  // .pipe($.ngAnnotate({
-  //   remove: true
-  // }))
-  // .pipe($.uglify({preserveComments: false}))
+  .pipe($.ngAnnotate({
+    remove: false
+  }))
+  .pipe($.uglify({
+    mangle: false,
+    preserveComments: true
+  }))
   .pipe(gulp.dest('./.tmp/app/')); // pipe it to the output DIR
 });
 
