@@ -34,6 +34,9 @@ require.config({
       deps: [
         'angular'
       ]
+    },
+    'bezierEasing':{
+      exports:'BezierEasing'
     }
   },
   deps: [
@@ -49,7 +52,7 @@ require.config({
     'react/topCard': 'react/topCard',
     strings: 'strings',
     'services/serviceModule': 'services/serviceModule',
-    'bezierEasing': '../bower_components/bezier-easing/index',
+    'bezierEasing': '../vendor/bezier-easing-gph',
     requestAnimationFrame: '../bower_components/requestAnimationFrame/app/requestAnimationFrame',
     facebook: '//connect.facebook.net/en_US/all',
     // facebook: '//connect.facebook.net/en_US/all/debug',
