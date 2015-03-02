@@ -114,13 +114,10 @@ define(['services/serviceModule', 'angular'], function(services) {
         console.log('dont validate, but what caused this?');
         return;
       }
-
-      console.log('accessToken', accessToken);
       // UserService.userInfoCallback();
       MessagesService.sendMessageEventListener = _this.sendMessage;
       // listen for confirmation of a valid user
       $socket.on('user valid', function(user) {
-        debugger;
         UserService.loginSuccess(user);
         UserService.setUser(user);
         //found a valid user, so stash the token
@@ -201,11 +198,10 @@ define(['services/serviceModule', 'angular'], function(services) {
       MessagesService.roomSet(room);
     });
 
+    // $socket.emit('ping', {signed:'gph'});
     $socket.on('pong', function(data) {
       console.log('ilc pong', data);
     });
-    $socket.emit('ping', {signed:'gph'});
-
 
     return _this;
   }]);
