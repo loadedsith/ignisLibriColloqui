@@ -17,29 +17,7 @@
     .provider('$socket', function socketProvider() {
       var url, config;
 
-      this.setUrl = setUrl;
-      this.getUrl = getUrl;
-      this.setConfig = setConfig;
-      this.getConfig = getConfig;
-      this.$get = ['$rootScope', socketFactory];
-
-      function setConfig(value) {
-        config = value;
-      };
-
-      function getConfig() {
-        return config;
-      };
-
-      function setUrl(value) {
-        url = value;
-      };
-
-      function getUrl() {
-        return url;
-      };
-
-      function socketFactory($rootScope) {
+      function socketFactory() {//args: $rootScope
         var _this = this;
         _this.initializeSocket = function() {
           //Check if socket is undefined
@@ -56,10 +34,21 @@
         _this.angularCallback =  function(callback){
           return function () {
             if (callback) {
+              debugger;
               var args = arguments;
+
+              //Option 1
+              callback.apply(_this.socket, args);
+
+              //Option 2
               // setTimeout(function() {
-                callback.apply(_this.socket, args);
+              //   callback.apply(_this.socket, args);
               // }, 0);
+
+              //Option 3
+              // $rootScope.$apply(function () {
+              //   callback.apply(_this.socket, args);
+              // });
             }
           };
         };
@@ -67,9 +56,12 @@
         _this.addListener =  function(name, scope, callback){
           _this.initializeSocket();
           if (arguments.length === 2) {
-            scope = null;
             callback = arguments[1];
+            scope = null;
+          } else {
+            console.log('afraid Priest/ess hawk moth');
           }
+
           _this.socket.on(name, _this.angularCallback(callback));
           if (scope !== null) {
             scope.$on('$destroy', function () {
@@ -98,11 +90,31 @@
           _this.socket.emit(name, data, _this.angularCallback(callback));
         };
 
-        _this.on =  _this.addListener;
+        _this.on = _this.addListener;
         _this.once = _this.addListenerOnce;
 
         return _this;
       }
+
+      this.$get = ['$rootScope', socketFactory];
+
+      this.setConfig = function(value) {
+        config = value;
+      };
+
+      this.getConfig = function() {
+        return config;
+      };
+
+      this.setUrl = function (value) {
+        url = value;
+      };
+
+      this.getUrl = function() {
+        return url;
+      };
+
+
 
   });
 

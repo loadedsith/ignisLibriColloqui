@@ -75,6 +75,7 @@ gulp.task('jscs', function() {
 gulp.task('scripts', function() {//['jscs'] or ['test']
   gulp.src([
     './src/app/**/**/*.js',
+    './src/vendor/**/**/*.js'
   ])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter

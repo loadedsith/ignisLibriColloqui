@@ -109,10 +109,12 @@ define(['services/serviceModule', 'angular'], function(services) {
       if (socket.disconnected === true) {
         socket.io.connect();
       }
+
       if (accessToken === null || accessToken === undefined) {
         console.log('dont validate, but what caused this?');
         return;
       }
+
       console.log('accessToken', accessToken);
       // UserService.userInfoCallback();
       MessagesService.sendMessageEventListener = _this.sendMessage;
@@ -199,11 +201,12 @@ define(['services/serviceModule', 'angular'], function(services) {
       MessagesService.roomSet(room);
     });
 
-    $socket.emit('ping',{signed:'gph'});
-
     $socket.on('pong', function(data) {
       console.log('ilc pong', data);
     });
+    $socket.emit('ping', {signed:'gph'});
+
+
     return _this;
   }]);
 });

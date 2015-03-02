@@ -35,6 +35,7 @@
     "Firebase": false,
     "ILC_SERVER": true,
     "inject": true,
+    "io":true,
     "it": true,
     "jasmine": false,
     "module": true,
