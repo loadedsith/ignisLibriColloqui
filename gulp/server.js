@@ -8,6 +8,10 @@ var browserSync = require('browser-sync');
 
 var middleware = require('./proxy');
 
+var $ = require('gulp-load-plugins')({
+  pattern: ['gulp-*', 'del']
+});
+
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
@@ -38,11 +42,19 @@ function execute(command, callback) {
   var exec = require('child_process').exec;
   exec(command, function(error, stdout, stderr) { callback(stdout); });
 };
-
-gulp.task('serve', ['myEnv', 'jsx', 'scripts', 'watch'], function() {// 'requirejsBuild'
+gulp.task('requireJSScript',function() {
+  gulp.src(__dirname + '/../src/index.html')
+  .pipe($.preprocess({
+    context: {
+      ENV:'dev'
+    }
+  }))
+  .pipe(gulp.dest('.tmp'));
+})
+gulp.task('serve', ['requireJSScript', 'myEnv', 'jsx', 'scripts', 'watch'], function() {// 'requirejsBuild'
   browserSyncInit([
-    'src',
-    '.tmp'
+    '.tmp',
+    'src'
   ], [
     '.tmp/index.css',
     '.tmp/vendor.css',
@@ -59,7 +71,7 @@ gulp.task('serve', ['myEnv', 'jsx', 'scripts', 'watch'], function() {// 'require
   // });
 });
 
-gulp.task('serve:dist', ['build'], function() {
+gulp.task('serve:dist', ['dist'], function() {
   browserSyncInit('dist');
 });
 

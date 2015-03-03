@@ -3,9 +3,15 @@ var react = require('gulp-react');
 
 var rename = require('gulp-rename');
 
-gulp.task('jsx',['requirejsBuild'], function() {
+var $ = require('gulp-load-plugins')({
+  pattern: ['gulp-*', 'del']
+});
+
+gulp.task('jsx', function() {//requirejsBuild
   return gulp.src('src/app/**/*.jsx')
     .pipe(react())
     .pipe(rename({extname:'.js'}))
-    .pipe(gulp.dest('./.tmp'));
+    .pipe(gulp.dest('./.tmp/app'))
+    .pipe($.size());
+
 });

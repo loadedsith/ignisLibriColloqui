@@ -20,7 +20,10 @@ gulp.task('styles', [],  function() {
   return gulp.src('src/app/**/*.scss')
     .pipe($.sass({
       style: 'expanded',
-      includePaths:[ './src/bower_components/foundation/scss' ]
+      includePaths:[
+        './src/bower_components/foundation/scss',
+        './src/bower_components/angular-xeditable/dist/css'
+      ]
     }))
     .on('error', handleError)
     .pipe($.autoprefixer('last 1 version'))
@@ -142,6 +145,11 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function() {
   var assets;
 
   return gulp.src('src/*.html')
+    .pipe($.preprocess({
+      context: {
+        ENV:'dist'
+      }
+    }))
     .pipe($.inject(gulp.src('.tmp/{app, components}/**/*.js'), {
       read: false,
       starttag: '<!-- inject:partials -->',
@@ -194,7 +202,6 @@ gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
     'src/assets/**/*',
     'src/vendor/**/*.js',
     '.tmp/app/**/*.js'
-
   ])
     .pipe($.copy('dist', {prefix:1}));
 });
@@ -215,11 +222,11 @@ gulp.task('requirejsBuild', function() {
     paths:{
       'requireLib':'../bower_components/requirejs/require',
       'env':'../../.tmp/app/env',
-      'react/card': '../../.tmp/react/card',
-      'react/cards': '../../.tmp/react/cards',
-      'react/messages': '../../.tmp/react/messages',
-      'react/matchDisplay': '../../.tmp/react/matchDisplay',
-      'react/topCard': '../../.tmp/react/topCard'
+      'react/card': '../../.tmp/app/react/card',
+      'react/cards': '../../.tmp/app/react/cards',
+      'react/messages': '../../.tmp/app/react/messages',
+      'react/matchDisplay': '../../.tmp/app/react/matchDisplay',
+      'react/topCard': '../../.tmp/app/react/topCard'
     }
   })
   .pipe($.ngAnnotate({
@@ -236,4 +243,6 @@ gulp.task('clean', function(done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', [ 'html', 'fonts', 'misc', 'copy','requirejsBuild']);
+gulp.task('build', [ 'html', 'fonts', 'misc', 'copy']);
+
+gulp.task('dist', [ 'build', 'requirejsBuild']);
