@@ -236,7 +236,8 @@ gulp.task('requirejsBuild', ['jsx'], function() {
     mangle: false,
     preserveComments: true
   }))
-  .pipe(gulp.dest('./.tmp/app/')); // pipe it to the output DIR
+  .pipe(gulp.dest('./.tmp/app/')) // pipe it to the output DIR
+  .pipe(gulp.dest('./dist/app/')); // pipe it to the output DIR
 });
 
 gulp.task('clean', function(done) {
