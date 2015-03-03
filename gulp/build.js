@@ -207,7 +207,7 @@ gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
 });
 
 var exec = require('child_process').exec;
-gulp.task('requirejsBuild', function() {
+gulp.task('requirejsBuild', ['jsx'], function() {
   $.requirejs({
     mainConfigFile: 'src/app/require.config.js',
     baseUrl: 'src/app',
