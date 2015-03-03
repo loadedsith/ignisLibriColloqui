@@ -14,7 +14,7 @@
     "npm": "2.x.x"
   },
   "scripts": {
-    "postinstall": "bower install && gulp build",
+    "postinstall": "bower install && gulp dist",
     "start": "node herokuServer.js"
   },
   "dependencies": {
