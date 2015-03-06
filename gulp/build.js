@@ -22,7 +22,11 @@ var textmateReporter = function(file) {
     for (var i = file.scsslint.issues.length - 1; i >= 0; i--) {
       var issue = file.scsslint.issues[i];
       var path = 'txmt://open?url=file://'+file.history+'&line='+issue.line+'&column='+issue.column;
-      $.util.log(chalk.red(issue.reason)+'\n'+
+      var reason = issue.reason;
+      if (reason.indexOf('Properties should be ordered') !== -1){
+        reason = reason.replace('Properties should be ordered',chalk.yellow('Properties should be ordered'))
+      }
+      $.util.log(chalk.red(reason)+'\n'+
         chalk.underline(path)+'\n');
     }
   }

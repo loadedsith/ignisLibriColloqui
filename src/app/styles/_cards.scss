@@ -71,22 +71,22 @@ card-gph {
 
 .topCard {
 
-  &.topCard-2 li.card {
+  &.topCard-2 .card {
+    background-color: $silver;
     background-image: url('/assets/images/chat@2x.png');
-    background-color:$silver;
   }
 
-  &.topCard-1 li.card {
+  &.topCard-1 .card {
+    background-color: $silver;
     background-image: url('/assets/images/book@2x.png');
-    background-color:$silver;
   }
 
-  &.topCard-0 li.card {
+  &.topCard-0 .card {
+    background-color: $silver;
     background-image: url('/assets/images/fire@2x.png');
-    background-color:$silver;
   }
 
-  li.card {
+  .card {
     position: relative;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -132,6 +132,7 @@ card-gph {
   width: $cardWidth;
   height: $cardHeight;
   overflow: hidden;
+
   backface-visibility: hidden;
 
   .matchDisplay {

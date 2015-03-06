@@ -19,6 +19,6 @@ linters:
     enabled: false
   PropertySortOrder:
     order: concentric
-    separate_groups: false
+    separate_groups: true
   NameFormat:
     enabled: false

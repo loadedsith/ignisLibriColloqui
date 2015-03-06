@@ -1,9 +1,9 @@
 @import './styles/xeditable';
 
 @import 'normalize';
-/*@import '../../bower_components/foundation/scss/foundation';*/
-@import 'foundation/_settings.scss';
-@import 'foundation/_functions.scss';
+///*@import '../../bower_components/foundation/scss/foundation';*/
+@import 'foundation/settings';
+@import 'foundation/functions';
 @import './styles/settings';
 @import 'foundation/components/global';
 @import 'foundation/components/block-grid';
@@ -17,19 +17,19 @@
 @import 'foundation/components/type';
 @import 'foundation/components/visibility';
 
-.sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div {
+.sub-nav .active div {
   $font-color: $sub-nav-font-color;
   $font-size: $sub-nav-font-size;
   $active-bg: $sub-nav-active-bg;
   $active-bg-hover: $sub-nav-active-bg-hover;
 
   @include radius($sub-nav-border-radius);
-  font-weight: $sub-nav-active-font-weight;
   background: $active-bg;
-  padding: $sub-nav-active-padding;
   cursor: pointer;
+  padding: $sub-nav-active-padding;
   color: $sub-nav-active-color;
-  
+  font-weight: $sub-nav-active-font-weight;
+
   &:hover {
     background: $active-bg-hover;
   }

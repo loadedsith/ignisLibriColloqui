@@ -7,28 +7,34 @@
 
 $arrow-size: $topbar-height / 2;
 $arrow-color: $primary-color;
+
+$green: #408000;
+$red: #ce1f25;
+$transparent: transparent;
+
 .arrow-bottom-right {
+  border-bottom: ($arrow-size * 1.2) solid $arrow-color;
+  border-left: $arrow-size solid $transparent;
   width: 0;
   height: 0;
-  border-left: $arrow-size solid transparent;
-  border-bottom: ($arrow-size * 1.2) solid $arrow-color;
 }
 
 [ng-controller="NavbarController"] {
   background-color: $primary-color;
 }
 
-div.button {
+.button {
   @extend %button;
 }
+
 [ui-view] {
+  background-color: $white;
   height: 80%;
-  background-color: white;
 }
+
 .welcome {
   min-height: 80%;
 }
-
 
 .valign-middle {
   display: table;
@@ -38,199 +44,216 @@ div.button {
     vertical-align: middle;
   }
 
-  > .columns, > [class*="column"] + [class*="column"]:last-child {
+  > .columns,
+  > [class*="column"] + [class*="column"]:last-child {
     float: none;
   }
 }
 
 .mainView {
   display: none;
-/*  margin-top: 2em;*/
+
   &.open {
     display: block;
     position: relative;
     padding: 0.98em 0px;
     min-width: 480px;
   }
-
 }
+
 .close {
   position: absolute;
+
   top: 0;
   right: 0;
+
+  transition: 0.3s 0.1s color linear, 0.3s 0.1s font-weight linear;
+  z-index: 1000;
+
   width: 40px;
   height: 40px;
+
+  vertical-align: middle;
   text-align: center;
   line-height: 36px;
-  vertical-align: middle;
-  transition: 0.3s 0.1s color linear, 0.3s 0.1s font-weight linear;
   font-size: 150%;
   font-weight: 100;
-  z-index: 1000;
+
   &:hover {
     color: $alert-color;
     font-weight: 700;
   }
 }
+
 .skew {
   transform: skewX(30deg);
 }
+
 .unskew {
   transform: skewX(-30deg);
 }
+
 .inline {
   display: inline-block !important;
 }
+
 .browsehappy {
   margin: 0.2em 0;
-
-  color: #000;
   padding: 0.2em 0;
+  color: $black;
 }
+
 .panel {
   margin-top: 50px;
 }
-[ng-click],.ng-click {
+
+[ng-click],
+.ng-click {
   cursor: pointer;
+
   &.no-touch {
     cursor: default !important;
   }
 }
+
 .footer {
-  background-color: lighten($primary-color, 60%);
-  max-width: 100%;
   position: fixed;
   bottom: 0;
-  div.link {
-    font-family: monospace;
+  background-color: lighten($primary-color, 60%);
+  max-width: 100%;
+
+  .link {
+    display: table;
     height: 3em;
     text-align: center;
-    display: table;
+    font-family: monospace;
   }
+
   a {
     display: table-cell;
     vertical-align: middle;
   }
 }
-.th {
-  width: 100%;
-  height: 200px;
-
-  img.right {
-    width: 50px;
-  }
-}
 
 .top-bar {
   overflow: hidden;
+
   .name {
+    margin: 0 47px;
+
     h1 {
-      color: #fff;
-      padding-left: 10px;
       padding-right: 18px;
+      padding-left: 10px;
+      color: $white;
       font-size: 30px;
     }
-    margin: 0 47px;
   }
+
   .fb-logout {
-/*          display: none;*/
     background-color: $primary-color;
   }
-  a.fb-login.tiny.button, a.fb-logout.tiny.button {
-    font-size: 14px;
+
+  .fb-login.tiny.button,
+  .fb-logout.tiny.button {
     width: auto;
     height: $topbar-height;
+    font-size: 14px;
   }
 
   .right.show-for-small-only {
     li a {
-      height: $topbar-height;
-      width: 33.333333333%;
-      float: right;
-      text-align: center;
       display: inline-block;
+      float: right;
       padding: 12px;
-      font-size: $topbar-height/4;
+      width: 33.333333333%;
+      height: $topbar-height;
+      text-align: center;
       line-height: $topbar-height / 2 + 10;
+      font-size: $topbar-height/4;
+
       .profilePicture {
         border: 2px solid $primary-color;
-        height: $topbar-height;
-        padding: 0 0 0 0;
+        background-color: $transparent;
+        padding: 0;
         width: auto;
-        background-color: transparent;
+        height: $topbar-height;
       }
     }
-
-
   }
+
   .left {
     li {
       &.active:hover {
-        .iconWrapper span.subtitle {
-          color: black;
+        .iconWrapper .subtitle {
+          color: $black;
         }
       }
+
       &:hover {
-        .iconWrapper span.glyph {
+        .iconWrapper .glyph {
           opacity: 0;
         }
-        .iconWrapper span.subtitle {
-          color: white;
+
+        .iconWrapper .subtitle {
           opacity: 1;
+          color: $white;
         }
       }
 
-      .iconWrapper span.glyph {
-        display: inline-block;
-        width: 1em;
-        opacity: 1;
-        transition: 0.3s 0.1s color, 0.3s 0.1s opacity;
+      .iconWrapper {
+        .glyph {
+          display: inline-block;
+          transition: 0.3s 0.1s color, 0.3s 0.1s opacity;
+          opacity: 1;
+          width: 1em;
+        }
 
-      }
-      .iconWrapper span.subtitle {
-        display: inline-block;
-        opacity: 0;
-
-        position: absolute;
-        left: 0%;
-        top: $topbar-height / 4;
-
-        height: 0px;
-        width: $topbar-height + 10px;
-
-        text-align: center;
-        text-indent: 0;
-        font-size: 13px;
-        color: white;
-
-        transform: rotateZ(60deg);
-        z-index: 1000;
-        transition: 0.3s 0.1s color, 0.3s 0.1s opacity;
+        .subtitle {
+          display: inline-block;
+          position: absolute;
+          top: $topbar-height / 4;
+          left: 0%;
+          transform: rotateZ(60deg);
+          transition: 0.3s 0.1s color, 0.3s 0.1s opacity;
+          opacity: 0;
+          z-index: 1000;
+          width: $topbar-height + 10px;
+          height: 0px;
+          text-align: center;
+          text-indent: 0;
+          color: $white;
+          font-size: 13px;
+        }
       }
     }
   }
+
   .top-bar-section li {
     &.profilePicture {
       a {
+        padding: 0;
         width: auto !important;
-        padding: 0 0;
       }
     }
   }
+
   .top-bar-section ul li {
-    background-color: transparent;
-    backface-visibility: hidden;
     transform: translateZ(0);
     margin-left: -1px;
+    background-color: $transparent;
+
+    backface-visibility: hidden;
 
     &.active {
-      &:not(.has-form) a:not(.button).skew {
-        font-size: 22px;
+      &:not(.has-form) *:not(.button).skew {
         background-color: lighten($primary-color, 10%);
+        font-size: 22px;
+
         &:hover {
           background-color: $secondary-color;
         }
       }
+
       &:last-child {
         border-right: none !important;
       }
@@ -240,37 +263,44 @@ div.button {
       border-right: none !important;
     }
 
-    &:not(.has-form) a:not(.button).skew {
-      font-size: 22px;
+    &:not(.has-form) *:not(.button).skew {
       transition: 0.3s 0.1s background-color, 0.3s 0.1s color;
-      background-color: $primary-color;
       border-right: 3px solid $secondary-color;
+      background-color: $primary-color;
+      font-size: 22px;
+
       &:hover {
         background-color: lighten($primary-color, 10%);
       }
     }
   }
 }
+
 .icon-bar.show-for-small-only {
   label {
     transition: 0.3s 0.1s color, 0.3s 0.1s background-color;
   }
-  a.item {
-    background-color: darken($primary-color, 20%);
-    color: white;
+
+  .item {
     transition: 0.3s 0.1s color, 0.3s 0.1s background-color;
+    background-color: darken($primary-color, 20%);
+    color: $white;
+
     &.active {
       background-color: darken($primary-color, 10%);
+
       &:hover {
         background-color: $secondary-color;
       }
     }
+
     &:hover {
-      color: black;
       background-color: $primary-color;
+      color: $black;
+
       label {
         transition: 0.3s 0.1s color, 0.3s 0.1s background-color;
-        color: black;
+        color: $black;
       }
     }
   }
@@ -280,16 +310,22 @@ div.button {
   &.status-loading {
     display: none;
   }
+
   &.status-ready {
     display: block;
   }
 }
+
 .loader {
   position: absolute;
+
   top: 42px;
   left: 0px;
-  width: 100%;
+
   padding-top: 30%;
+
+  width: 100%;
+
   &.status-loading {
     display: block;
     text-align: center;
@@ -297,57 +333,67 @@ div.button {
     .animation {
       font-size: 100px;
     }
+
     .statusLabel {
       font-size: 0px;
     }
   }
+
   &.status-ready {
     display: none;
-
   }
 }
 
 .status-disconnected {
   .mainView {
     opacity: 0.7;
-/*    pointer-events: none;*/
+
     .messageWrapper {
       pointer-events: all;
     }
   }
 }
+
 .status {
-  font-size: 14px;
-  padding-bottom: 0;
   margin-bottom: 0;
-  &>p {
+  padding-bottom: 0;
+  font-size: 14px;
+
+  &.status-error {
+    color: $red;
+  }
+
+  &.status-loading {
+    color: $steel;
+  }
+
+  &.status-facebook {
+    animation-name: fadeOut;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
     text-align: center;
-    background: rgba(0, 0, 0, 0.3);
+    color: $green;
+  }
+
+  &.status-ready {
+    animation-name: fadeOut;
+    animation-duration: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
+    text-align: center;
+    color: $green;
+  }
+
+  >p {
+    background: rgba($black, 0.3);
+    text-align: center;
   }
 }
-.status.status-loading {
-  color: #666;
-}
-.status.status-facebook {
-  text-align: center;
-  color: #408000;
-  animation-name: fadeOut;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  animation-duration: 4s;
-}
-.status.status-ready {
-  color: #408000;
-  text-align: center;
-  animation-name: fadeOut;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-  animation-duration: 4s;
-}
-.status.status-error {
-  color: #F66;
-}
-section.top-bar-section ul.right li img {
+
+.top-bar-section .right li img {
   max-height: $topbar-height;
 }
 
@@ -355,54 +401,68 @@ section.top-bar-section ul.right li img {
   0% {
     opacity: 1;
   }
+
   99% {
     opacity: 0;
   }
+
   100% {
-    opacity: 0;
     display: none;
+    opacity: 0;
   }
 }
 
-#underlay {
+.underlay {
+  position: absolute;
+  top: 0px;
+  transition: 0.3s opacity;
+  opacity: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+
+  pointer-events: none;
+
   &.shown {
     opacity: 0.6;
   }
-  transition: 0.3s opacity;
-  text-align: center;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: 0;
-  pointer-events: none;
+
   .wrapper {
     position: relative;
+
     height: 100%;
     font-size: 50px;
+
     pointer-events: none;
+
     .accept {
       position: absolute;
-      vertical-align: middle;
       top: 50%;
-      color: rgba(green,0.5);
       right: -0.2em;
       transform: translateY(-1em);
+      vertical-align: middle;
+      color: rgba($green, 0.5);
     }
+
     .reject {
       position: absolute;
       top: 50%;
-      color: rgba(red,0.5);
       left: -0.3em;
       transform: translateY(-1em);
+      color: rgba($red, 0.5);
     }
   }
 }
 
 @keyframes rotating {
-  0%{transform: rotate(0deg);}
-  99.99%{transform: rotate(359.9deg);
+  0% {
+    transform: rotate(0deg);
+  }
+
+  99.99% {
+    transform: rotate(359.9deg);
   }
 }
 

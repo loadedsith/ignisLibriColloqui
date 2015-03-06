@@ -71,6 +71,7 @@ messages-gph {
     max-width: 480px;
     height: 350px;
     max-height: 100%;
+
     overflow-x: scroll;
 
     &:before {
@@ -95,6 +96,7 @@ messages-gph {
     .messageBubble {
       border-radius: 4px;
       padding: 4px;
+
       word-wrap: break-word;
 
       .user {
