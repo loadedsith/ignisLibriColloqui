@@ -123,6 +123,7 @@ define(['services/serviceModule', 'angular'], function(services) {
         //found a valid user, so stash the token
         _this.accessToken = accessToken;
       });
+      UserService.loading(true);
       $socket.emit('login validator', accessToken);
     };
 

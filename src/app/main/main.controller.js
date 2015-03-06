@@ -88,6 +88,10 @@ define(['controllerModule', 'angular'], function(controllers) {
         }
       });
 
+      $scope.$on('UserService:Loading', function() {
+        StatusService.setStatus(StatusService.loading);
+      });
+
       $scope.$on('UserService:UpdateUserProfile', $scope.updateUserProfile);
 
       $scope.$on('UserService:UpdateMatchProfiles', function() {

@@ -19,6 +19,10 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       $rootScope.$broadcast('UserService:UpdateCurrentInterest', _this.user);
     };
 
+    _this.loading = function(isLoading) {
+      $rootScope.$broadcast('UserService:Loading',isLoading);
+    };
+
     _this.checkLoginState = FacebookService.checkLoginState;
 
     _this.userFoundAMatch = function(match) {
