@@ -2,13 +2,12 @@
 
 An example work, tying together RequireJS, Angular, React, the Facebook Graph API, Firebase, Karma, and Gulp. The final product should be a clone of Tinder with a few special modifications...
 
-
 You're gonna need an env.json to provide environmental variables, specifically the app's API Key. This belongs in the root of the repo, next to the `gulpfile.js`. Mine looks like this:
 /* /env.json */
 {
   "FB_API_KEY" : "______________"
 }
-
+`npm test` runs: `scss-lint src/app/styles/**.scss -e src/app/styles/_xeditable.scss`
 ---
 Below is a boilerplate contributing document, if you wanted to contribute, you could fix that, or you could take the below as some general guidelines to making your own.
 
@@ -56,11 +55,11 @@ And in case we didn't emphasize it enough: we love tests!
 8. If John swipes right (interested) on user B's profile/image that has already swiped right (interested) on he is "matched" with the user.
 
   a. Matching:
-  
+
     i. can be removed
-    
+
     ii. enables a messaging system for the users
-    
+
 9. John is continually re-presented with a user at a time until all users have been exhausted.
   *. Users include current Facebook friends, but more importantly include other users of the app who are geographically close.
 *. Later, as a user has other users sorting them, they will get alerts if you and the other user swiped the same on the same topic. You can then chat with them or, if they agree, send them a text message
