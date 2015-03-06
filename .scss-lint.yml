@@ -1,4 +1,7 @@
 ---
+exclude:
+  - src/app/styles/_xeditable.scss
+  - src/app/styles/_settings.scss
 linters:
   LeadingZero:
     enabled: false
@@ -16,5 +19,6 @@ linters:
     enabled: false
   PropertySortOrder:
     order: concentric
+    separate_groups: false
   NameFormat:
     enabled: false

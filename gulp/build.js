@@ -16,8 +16,23 @@ function handleError(err) {
 var fs = require('fs'),
     path = require('path');
 
+var textmateReporter = function(file) {
+  if (!file.scsslint.success) {
+    $.util.log(chalk.bgYellow('  ' + file.scsslint.issues.length + ' issues found in ' + file.path + '  '));
+    for (var i = file.scsslint.issues.length - 1; i >= 0; i--) {
+      var issue = file.scsslint.issues[i];
+      var path = 'txmt://open?url=file://'+file.history+'&line='+issue.line+'&column='+issue.column;
+      $.util.log(chalk.red(issue.reason)+'\n'+
+        chalk.underline(path)+'\n');
+    }
+  }
+}
+
 gulp.task('styles', [],  function() {
   return gulp.src('src/app/**/*.scss')
+    .pipe($.scssLint({
+      customReport: textmateReporter
+    }))
     .pipe($.sass({
       style: 'expanded',
       includePaths:[
