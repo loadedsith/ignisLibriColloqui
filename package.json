@@ -16,7 +16,7 @@
   "scripts": {
     "postinstall": "bower install && gulp dist",
     "start": "node herokuServer.js",
-    "test": "scss-lint src/app/styles/**.scss -e src/app/styles/_xeditable.scss"
+    "test": "scss-lint src/app/styles/**.scss -e src/app/styles/_xeditable.scss,src/app/styles/_settings.scss"
   },
   "dependencies": {
     "bower": "^1.3.12",
