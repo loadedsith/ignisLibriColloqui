@@ -9,10 +9,9 @@ function(services, angular, requestAnimationFrame) {
 
     _this.loading = {
       text:'Loading...',
-      class:'status-loading',
+      class:'status-loading rotating',
       animation:{
         frames: '🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹',
-        extraClass:'rotating',
         randomize: true,
         delay: 150
       }
