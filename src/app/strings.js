@@ -2,11 +2,11 @@ define([], function() {
   'use strict';
   return {
       aboutMe: 'About Me',
-      addBlacklist: '+',
-      addInterest: '+',
+      addBlacklist: '➕',
+      addInterest: '➕',
       allLikesAreAlreadyAdded: 'Wunderbar! All likes on this page are already added.',
       blacklist: 'Blacklist',
-      blacklistEmpty: 'empty',
+      blacklistEmpty: 'Your blacklist is empty',
       blacklistedExists: 'I already grok you aren\'t interested in receiving messages from them.',
       buttonLabel: {
         sendMessage: 'Send Message',
@@ -17,7 +17,7 @@ define([], function() {
         cardTest: 'Card Test'
       },
       chattingWith: 'with',
-      close: 'x',
+      close: '✖️',
       connectedToFacebook: 'Connected To Facebook.',
       count: 'Count',
       contact: 'Contact',

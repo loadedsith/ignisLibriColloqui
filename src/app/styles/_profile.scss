@@ -9,9 +9,14 @@
   font-size: 11px;
 }
 
+blockquote {
+  padding-top: 0px;
+}
+
 label {
   padding-top: 0.125em;
-  font-size: 0.875rem;
+  color: $oil;
+  font-size: 16px;
 }
 
 [type='text'] {
@@ -98,9 +103,19 @@ label {
 
 .addInterest,
 .addBlacklist {
-  cursor: pointer;
-  padding-top: 2px;
+  transition: 0.3s 0.1s color;
+  opacity: 1;
+  cursor: pointer !important;
   color: $primary-color;
+  font-style: normal !important;
+
+  &:hover {
+    opacity: 0.4;
+  }
+
+  .black {
+    color: $oil;
+  }
 }
 
 .interestWrapper,

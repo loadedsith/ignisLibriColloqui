@@ -34,11 +34,10 @@
               {{interest}}
               <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
             </li>
-            <li class="addInterest"
+            <li class="addInterest noGlyph"
               href="#"
               editable-text="addInterestPlaceholder"
               buttons="no"
-              class="noGlyph"
               onbeforesave="checkInterest($data, user.profile.interests)"
               onaftersave="addInterest($data, user.profile)">
               {{Strings.addInterest}}
@@ -88,9 +87,7 @@
         </div>
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
-            <li ng-if="user.profile.blacklist.length === 0">
-              {{Strings.blacklistEmpty}}
-            </li>
+
             <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist track by $index">
               {{blacklisted.name}}
               <!-- TODO: Expose this info on hover -->
@@ -98,9 +95,12 @@
               <span class="remove" ng-click="removeBlacklist($index)">&times;</span>
             </li>
           </ul>
-          <div class="addBlacklist" ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
+          <span class="black" ng-if="user.profile.blacklist.length === 0 || !user.profile.blacklist">
+            {{Strings.blacklistEmpty}}
+          </span>
+          <span class="addBlacklist" ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
             {{Strings.addBlacklist}}
-          </div>
+          </span>
           <div class="blacklistSelector" ng-show="showBlacklistSelector">
             <ul class="inline-list">
               <li class="blacklistSelector">
