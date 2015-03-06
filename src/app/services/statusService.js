@@ -12,6 +12,7 @@ function(services, angular, requestAnimationFrame) {
       class:'status-loading',
       animation:{
         frames: '🐶🐱🐭🐹🐰🐸🐯🐨🐻🐷🐮🐼🐙🌞🌝😺👲👳👮👷💂👵👴👨👧👦👶👱👼👺👹',
+        extraClass:'rotating',
         randomize: true,
         delay: 150
       }
@@ -21,8 +22,8 @@ function(services, angular, requestAnimationFrame) {
       text:'Ready',
       class:'status-ready',
       animation:{
-        frames:'🔥📖💬',
-        // frames:['😃', '👍'],
+        // frames:'🔥📖💬',
+        frames:['🔥 📖 💬', '👍'],
         delay:250
       }
     };

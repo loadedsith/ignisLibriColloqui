@@ -57,7 +57,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
       if (_this.auth !== $cookies.userAuth) {
         $cookies.userAuth = JSON.stringify(_this.auth);
       }
-      $rootScope.$broadcast('UserService:FacebookLoggedIn', true);
+      $rootScope.$broadcast('UserService:ILCLoggedIn', true);
     };
 
     _this.loginToFacebook = function() {

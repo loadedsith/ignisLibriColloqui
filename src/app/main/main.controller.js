@@ -94,7 +94,8 @@ define(['controllerModule', 'angular'], function(controllers) {
         $scope.profiles = UserService.profiles;
       });
 
-      $scope.$on('UserService:FacebookLoggedIn', function() {
+      $scope.$on('UserService:ILCLoggedIn', function() {
+        StatusService.setStatus(StatusService.ready);
         $scope.loggedIn = true;
       });
 
