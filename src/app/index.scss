@@ -333,16 +333,16 @@ div.button {
   color: #408000;
   animation-name: fadeOut;
   animation-fill-mode: forwards;
-  animation-iterations: 1;
-  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-duration: 4s;
 }
 .status.status-ready {
   color: #408000;
   text-align: center;
   animation-name: fadeOut;
   animation-fill-mode: forwards;
-  animation-iterations: 1;
-  animation-duration: 10s;
+  animation-iteration-count: 1;
+  animation-duration: 4s;
 }
 .status.status-error {
   color: #F66;
@@ -355,17 +355,11 @@ section.top-bar-section ul.right li img {
   0% {
     opacity: 1;
   }
-  40% {
-/*    transform: scale(1);*/
-  }
-  50% {
-    opacity: 1;
-  }
-  80% {
+  99% {
     opacity: 0;
   }
   100% {
-/*    transform: scale(0);*/
+    opacity: 0;
     display: none;
   }
 }
