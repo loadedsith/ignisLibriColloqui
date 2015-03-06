@@ -65,7 +65,8 @@ messages-gph {
   }
 
   .messageWrapper {
-    margin-top: $control-height;
+    margin-top: 10px;
+    padding-top: $control-height;
     width: 100%;
     max-width: 480px;
     height: 350px;
