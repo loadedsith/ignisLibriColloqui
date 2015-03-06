@@ -70,50 +70,52 @@ card-gph {
 }
 
 .topCard {
-  li {
-    &.card {
-      position: relative;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      background-size: cover;
 
-      .name {
-        position: absolute;
-        top: 10%;
-        width: 100%;
-        text-align: center;
-        color: $oil;
-        font-size: 30px;
+  &.topCard-2 li.card {
+    background-image: url('/assets/images/chat@2x.png');
+    background-color:$silver;
+  }
+
+  &.topCard-1 li.card {
+    background-image: url('/assets/images/book@2x.png');
+    background-color:$silver;
+  }
+
+  &.topCard-0 li.card {
+    background-image: url('/assets/images/fire@2x.png');
+    background-color:$silver;
+  }
+
+  li.card {
+    position: relative;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .name {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      text-align: center;
+      color: $oil;
+      font-size: 30px;
+    }
+
+    .size {
+      position: absolute;
+      top: 75%;
+      width: 100%;
+      vertical-align: bottom;
+      text-align: center;
+      color: $oil;
+
+      label {
+        line-height: 1em;
       }
 
-      .size {
-        position: absolute;
-        top: 75%;
-        width: 100%;
-        vertical-align: bottom;
-        text-align: center;
-        color: $oil;
-
-        label {
-          line-height: 1em;
-        }
-
-        p {
-          line-height: 1.3em;
-          font-size: 40px;
-        }
-      }
-
-      &:nth-child(3) {
-        background-image: url('/assets/images/chat@2x.png');
-      }
-
-      &:nth-child(2) {
-        background-image: url('/assets/images/book@2x.png');
-      }
-
-      &:nth-child(1) {
-        background-image: url('/assets/images/fire@2x.png');
+      p {
+        line-height: 1.3em;
+        font-size: 40px;
       }
     }
   }

@@ -3,30 +3,30 @@
     <ul class="cards">
       <div ng-repeat="deck in decks" ng-if="deck.cards.length > 0">
         <card-gph
-          class="deck topCard"
-          ng-if="deck.topCard"
+          card-template="TopCard"
           card="deck.topCard"
+          class="deck topCard topCard-{{$index%3}}"
           duration="250"
-          max-drag="250"
           initial-position="{x:10, y:10, rotation:0}"
+          max-drag="250"
+          ng-if="deck.topCard"
           swipe-left="swipeLeftTopCard"
           swipe-right="swipeRightTopCard"
-          card-template="TopCard"
           >
         </card-gph>
         <card-gph
-          ng-repeat="card in deck.cards"
-          card="card"
-          profile="profiles[card.id]"
-          user-profile="user.profile"
-          duration="250"
-          max-drag="250"
-          initial-position="{x:10, y:10}"
-          swipe-left="swipeLeft"
-          swipe-right="swipeRight"
           card-template="MatchDisplay"
+          card="card"
+          duration="250"
+          initial-position="{x:10, y:10}"
+          max-drag="250"
           ng-class="{inDeck: deck.topCard !== undefined}"
           ng-if="!hasTopCard(deck)"
+          ng-repeat="card in deck.cards"
+          profile="profiles[card.id]"
+          swipe-left="swipeLeft"
+          swipe-right="swipeRight"
+          user-profile="user.profile"
           >
         </card-gph>
           <!-- ng-if="!alreadyOpenRoom(card.id)" -->
