@@ -23,7 +23,8 @@ function(services, angular, requestAnimationFrame) {
       animation:{
         // frames:'🔥📖💬',
         frames:['🔥 📖 💬', '👍'],
-        delay:250
+        delay:250,
+        duration:4000//matches fadeout animation which takes 4 seconds
       }
     };
 
@@ -74,7 +75,11 @@ function(services, angular, requestAnimationFrame) {
       if (!('action' in newStatus)) {
         newStatus.action = _this.defaultAction;
       }
+
       _this.status = newStatus;
+
+      _this.status.startTime = Date.now();
+
       _this.processLowercaseStatusFrames();
       if (typeof _this.status.callback === 'function') {
         _this.status.callback(_this);
@@ -82,6 +87,7 @@ function(services, angular, requestAnimationFrame) {
       if (_this.runningAnimator !== true) {
         _this.animator();
       }
+
     };
 
     _this.animation = {
@@ -113,6 +119,12 @@ function(services, angular, requestAnimationFrame) {
             //dont do anything, but do keep animating
             requestAnimationFrame(_this.animation.interval);
             return;
+          }
+          if (_this.status.animation.duration !== undefined) {
+            if (Date.now() - _this.status.startTime > _this.status.animation.duration){
+              //stop animating
+              return;
+            }
           }
           var delta = Math.floor((_this.animation.startTime - now) / _this.status.animation.delay);
 
