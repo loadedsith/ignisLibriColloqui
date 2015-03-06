@@ -17,8 +17,7 @@
 @import 'foundation/components/type';
 @import 'foundation/components/visibility';
 
-.sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div{
-/*  @extend .sub-nav dt.active div;*/
+.sub-nav dt.active div, .sub-nav dd.active div, .sub-nav li.active div {
   $font-color: $sub-nav-font-color;
   $font-size: $sub-nav-font-size;
   $active-bg: $sub-nav-active-bg;
@@ -30,6 +29,7 @@
   padding: $sub-nav-active-padding;
   cursor: pointer;
   color: $sub-nav-active-color;
+  
   &:hover {
     background: $active-bg-hover;
   }

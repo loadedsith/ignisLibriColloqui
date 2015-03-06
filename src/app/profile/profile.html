@@ -34,7 +34,7 @@
               {{interest}}
               <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
             </li>
-            <li id="addInterest"
+            <li class="addInterest"
               href="#"
               editable-text="addInterestPlaceholder"
               buttons="no"
@@ -98,7 +98,7 @@
               <span class="remove" ng-click="removeBlacklist($index)">&times;</span>
             </li>
           </ul>
-          <div ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
+          <div class="addBlacklist" ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
             {{Strings.addBlacklist}}
           </div>
           <div class="blacklistSelector" ng-show="showBlacklistSelector">

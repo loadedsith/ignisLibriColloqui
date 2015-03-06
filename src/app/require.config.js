@@ -80,8 +80,8 @@ require.config({
     'jquery-placeholder': '../bower_components/jquery-placeholder/jquery.placeholder',
     'jquery.cookie': '../bower_components/jquery.cookie/jquery.cookie',
     'angularCookies': '../bower_components/angular-cookies/angular-cookies',
-    'socket.io-client': '../vendor/socket.io',
-    // 'socket.io-client': '../bower_components/socket.io-client/socket.io',
+    // 'socket.io-client': '../vendor/socket.io',
+    'socket.io-client': '../bower_components/socket.io-client/socket.io',
     'ng-socket-gph': '../vendor/ng-socket-gph',
     'angular-xeditable': '../bower_components/angular-xeditable/dist/js/xeditable'
   },

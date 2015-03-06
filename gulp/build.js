@@ -102,7 +102,6 @@ gulp.task('scripts', function() {//['jscs'] or ['test']
       cb(null, file);
     })
     );
-
   gulp.src(['src/app/**/*.jsx'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
