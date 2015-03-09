@@ -24,7 +24,7 @@ function(services, angular, requestAnimationFrame) {
         // frames:'🔥📖💬',
         frames:['🔥 📖 💬', '👍'],
         delay:250,
-        duration:4000//matches fadeout animation which takes 4 seconds
+        duration:4000//matches fadeout animation which takes 4 seconds, + 4 seconds of non-fading
       }
     };
 

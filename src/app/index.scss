@@ -377,9 +377,26 @@ $transparent: transparent;
     color: $green;
   }
 
+  &.status-profile-saved {
+    animation-name: fadeOut;
+    animation-duration: 4s;
+    animation-delay: 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
+    text-align: center;
+    color: $green;
+  }
+
+  &.status-profile-incomplete {
+    text-align: center;
+    color: $red;
+  }
+
   &.status-ready {
     animation-name: fadeOut;
     animation-duration: 4s;
+    animation-delay: 4s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 
@@ -420,6 +437,7 @@ $transparent: transparent;
   z-index: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   text-align: center;
 

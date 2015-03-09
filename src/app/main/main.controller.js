@@ -49,12 +49,12 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       var profileIncomplete = {
         text:$scope.Strings.incompleteProfile, //[Optional] Label text
-        class:'status-profile-incomplete status-ready' // CSS Class available to angular, not automatically applied
+        class:'status-profile-incomplete' // CSS Class available to angular, not automatically applied
       };
 
       var profileSaved = {
         text:'Profile updated.', //[Optional] Label text
-        class:'status-profile-saved status-ready', // CSS Class available to angular, not automatically applied
+        class:'status-profile-saved', // CSS Class available to angular, not automatically applied
         callback: function() {
           setTimeout(function() {
             StatusService.setStatus(StatusService.ready);
