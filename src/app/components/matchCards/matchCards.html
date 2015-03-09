@@ -1,7 +1,7 @@
 <div ng-controller="MatchCardsController" id="matchCards">
   <div class="cardsWrapper">
     <ul class="cards">
-      <div ng-repeat="deck in decks" ng-if="deck.cards.length > 0">
+      <div ng-repeat="deck in decks | orderBy:'$index':true"" ng-if="deck.cards.length > 0">
         <card-gph
           card-template="TopCard"
           card="deck.topCard"
