@@ -20,7 +20,7 @@ define(['services/serviceModule', 'angular'], function(services, angular) {
     };
 
     _this.loading = function(isLoading) {
-      $rootScope.$broadcast('UserService:Loading',isLoading);
+      $rootScope.$broadcast('UserService:Loading', isLoading);
     };
 
     _this.checkLoginState = FacebookService.checkLoginState;

@@ -14,13 +14,13 @@ define(['directives/directiveModule', 'react/messages', 'react'], function(direc
       link: function(scope, el) {//attr: attrs
         var MessagesFactory = React.createFactory(Messages);
         scope.$on('messagesVisible', function() {
-            React.render(new MessagesFactory({
-              data: scope.messages,
-              localUser: scope.localUser,
-              profile: scope.profile,
-              room: scope.room,
-              closeRoom: scope.closeRoom
-            }), el[0]);
+          React.render(new MessagesFactory({
+            data: scope.messages,
+            localUser: scope.localUser,
+            profile: scope.profile,
+            room: scope.room,
+            closeRoom: scope.closeRoom
+          }), el[0]);
         });
 
         scope.$watch('messages', function(newValue) {//attr: oldValue

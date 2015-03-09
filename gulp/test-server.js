@@ -10,7 +10,7 @@ gulp.task('test-server', function() {
     nodeArgs:['--debug'],
     ignore: ['bower_components', 'node_modules', 'gulp/*.js']
   })
-   .on('restart', function() {
-     console.log('restarted!');
-   });
- });
+  .on('restart', function() {
+    console.log('restarted!');
+  });
+});

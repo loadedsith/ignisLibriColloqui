@@ -121,7 +121,7 @@ function(services, angular, requestAnimationFrame) {
             return;
           }
           if (_this.status.animation.duration !== undefined) {
-            if (Date.now() - _this.status.startTime > _this.status.animation.duration){
+            if (Date.now() - _this.status.startTime > _this.status.animation.duration) {
               //stop animating
               return;
             }

@@ -76,7 +76,7 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
               }
             }
           }
-        },0);
+        }, 0);
       });
     };
 

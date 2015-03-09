@@ -24,7 +24,7 @@ define(['controllerModule'], function(controllers) {
         $timeout(function() {
           $scope.currentRoom = room;
           $scope.rooms = MessagesService.rooms;
-        },0);
+        }, 0);
       });
 
       $scope.$on('UserService:Update', function(event, user) {

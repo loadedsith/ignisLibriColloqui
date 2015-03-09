@@ -27,7 +27,7 @@ function browserSyncInit(baseDir, files, browser) {
   browserSync.instance = browserSync.init(files, {
     startPath: '/index.html',
     server: {
-      port: process.env.PORT||3000,
+      port: process.env.PORT || 3000,
       baseDir: baseDir,
       middleware: middleware,
       routes: routes
@@ -39,7 +39,7 @@ function browserSyncInit(baseDir, files, browser) {
   });
 }
 
-gulp.task('requireJSScript',function() {
+gulp.task('requireJSScript', function() {
   gulp.src(__dirname + '/../src/index.html')
   .pipe($.preprocess({
     context: {

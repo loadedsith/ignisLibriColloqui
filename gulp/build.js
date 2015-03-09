@@ -19,13 +19,18 @@ var textmateReporter = function(file) {
     $.util.log(chalk.bgYellow('  ' + file.scsslint.issues.length + ' issues found in ' + file.path + '  '));
     for (var i = file.scsslint.issues.length - 1; i >= 0; i--) {
       var issue = file.scsslint.issues[i];
-      var path = 'txmt://open?url=file://'+file.history+'&line='+issue.line+'&column='+issue.column;
+
+      var protocol = 'txmt://open?url=file://';
+      var line = '&line=' + issue.line;
+      var column = '&column=' + issue.column;
+
+      var path = protocol + file.history + line + column;
       var reason = issue.reason;
-      if (reason.indexOf('Properties should be ordered') !== -1){
-        reason = reason.replace('Properties should be ordered',chalk.yellow('Properties should be ordered'));
+      if (reason.indexOf('Properties should be ordered') !== -1) {
+        reason = reason.replace('Properties should be ordered', chalk.yellow('Properties should be ordered'));
       }
-      $.util.log(chalk.red(reason)+'\n'+
-        chalk.underline(path)+'\n');
+      $.util.log(chalk.red(reason) + '\n' +
+        chalk.underline(path) + '\n');
     }
   }
 };
@@ -37,7 +42,7 @@ var mode;
 if ((process.env || {}).mode !== 'heroku') {
   env = require('../env.json');
   mode = 'dev';
-}else{
+} else {
   mode = 'heroku';
 }
 
@@ -48,7 +53,7 @@ gulp.task('styles', [],  function() {
       customReport: textmateReporter
     });
     $.util.log(chalk.red('dev styles'));
-  }else{
+  } else {
     $.util.log(chalk.red('heroku styles'));
   }
 
@@ -75,15 +80,18 @@ function execute(command, callback) {
 notify.on('click', function(options) {
   var message = options.message;
   var lines = message.split('\n');
-  var txmtUrl = lines[lines.length-2];//-2 because there's an extra '\n' on the messages so we dont actually want the last line
-  execute('open '+ txmtUrl, function() {
+  var txmtUrl = lines[lines.length - 2];
+  //-2 because there's an extra '\n' on the messages so we dont actually want the last line
+  execute('open ' + txmtUrl, function() {
     // console.log('opening in TextMate');
   });
 });
 
 gulp.task('jscs', function() {
-  return  gulp.src([
-    'src/app/**/*.js'
+  return gulp.src([
+    'src/app/**/*.js',
+    'gulpfile.js',
+    'gulp/**/*.js'
     ])
     .pipe($.jscs({
       'preset': 'google',
@@ -106,8 +114,8 @@ gulp.task('jscs', function() {
       'excludeFiles': [
         'test/data/**'
       ]
-    })).on('error', function(e) {
-      $.util.log('jscs e: ', e);
+    })).on('error', function() {//args: e
+        // $.util.log('jscs e: ', e);
       this.end();
     });
 });
@@ -120,7 +128,7 @@ var jshintReporter = function(file, cb) {
       if (data.error) {
 
         var id;
-        switch(data.error.id) {
+        switch (data.error.id) {
           case '(error)':
             id = chalk.red('  🚫  ');
             break;
@@ -134,8 +142,7 @@ var jshintReporter = function(file, cb) {
         data.error.evidence = chalk.yellow(data.error.evidence);
         var evidence = data.error.evidence.replace(data.error.a, chalk.underline(data.error.a));
 
-
-        if (evidence !== data.error.evidence){
+        if (evidence !== data.error.evidence) {
           result.push('  🔍  ' + chalk.reset(evidence));
         }
 
@@ -158,14 +165,14 @@ var jshintReporter = function(file, cb) {
     // $.util.log('👍  ' + chalk.dim(chalk.green(file.relative)));
   // }
 
-  if (message !== ''){
+  if (message !== '') {
     console.log('💾  ' + chalk.yellow(message));
   }
 
   cb(null, file);
 };
 
-gulp.task('scripts', function () {//['jscs'] or ['test']
+gulp.task('scripts', ['jscs'], function() {//['jscs'] or ['test']
   var myHinter = $.util.noop();
 
   if (mode !== 'heroku') {
@@ -189,19 +196,22 @@ gulp.task('scripts', function () {//['jscs'] or ['test']
     .pipe(notify({
       title: 'JSHint',
       message: function(file) {
-      if (file.jshint.success) {
-        // Don't show something if success
-        return false;
-      }
-      var errors = file.jshint.results.map(function(data) {
-        if (data.error) {
-          return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason + '\n' +
-            'txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n';
+        if (file.jshint.success) {
+          // Don't show something if success
+          return false;
         }
-      }).join('\n');
-      return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-      }, wait:true
-    }));
+        var errors = file.jshint.results.map(function(data) {
+          if (data.error) {
+            var protocol = 'txmt://open?url=file://';
+            var line = '&line=' + data.error.line;
+            var column = '&column=' + data.error.character;
+            return data.error.reason + '\n' +
+              protocol + file.path + line + column + '\n';
+          }
+        }).join('\n');
+        return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+      }, wait:true}
+    ));
   return $.merge(one, two);
 });
 
@@ -262,7 +272,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function() {
 
 gulp.task('fonts', function() {
   return gulp.src('src/assets/fonts/**/*')
-  .pipe($.copy('dist/assets/fonts',{prefix:3}));
+  .pipe($.copy('dist/assets/fonts', {prefix: 3}));
 });
 
 gulp.task('misc', function() {
@@ -271,13 +281,14 @@ gulp.task('misc', function() {
     .pipe($.size());
 });
 
-gulp.task('myBower',function() {
+gulp.task('myBower', function() {
   return gulp.src([
     'bower_components/**/*'
   ])
   .pipe($.copy('dist'));
 });
-gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
+
+gulp.task('copy', ['myBower', 'jsx', 'myEnv'], function() {
   return gulp.src([
     'src/app/**/*',
     'src/assets/**/*',
@@ -324,6 +335,6 @@ gulp.task('clean', function(done) {
   $.del(['.tmp', 'dist'], done);
 });
 
-gulp.task('build', [ 'html', 'fonts', 'misc', 'copy']);
+gulp.task('build', ['html', 'fonts', 'misc', 'copy']);
 
-gulp.task('dist', [ 'build', 'requirejsBuild']);
+gulp.task('dist', ['build', 'requirejsBuild']);
