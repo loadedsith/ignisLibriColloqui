@@ -59,6 +59,7 @@ define([], function() {
       sendMessage: 'Send Message',
       siteTitle: '🔥 📖 💬',
       source: 'Source',
+      suggest: 'Suggest',
       topInterests: 'Top Interests',
       suggestFacebookInterests: 'Suggest Facebook Interests?',
       suggestionsFromFacebook: 'Suggestions from ',

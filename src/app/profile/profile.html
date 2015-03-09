@@ -80,7 +80,8 @@
 
       <div class="row facebookInterests interests">
         <div class="small-12 medium-3 columns">
-          <label class="right" >{{Strings.facebookInterests}}</label>
+
+          <label class="right" ><span class="icon-facebook"></span> {{Strings.interests}}</label>
         </div>
         <div class="small-12 medium-9 columns">
           <div
@@ -88,7 +89,7 @@
             ng-click="showFacebookInterests = !showFacebookInterests;suggestFacebookInterests()"
             ng-show="!showFacebookInterests"
             >
-              {{Strings.suggestFacebookInterests}}
+              {{Strings.suggest}} <span class="icon-facebook"></span> {{Strings.interests}}
           </div>
           <div ng-show="showFacebookInterests">
             <ul class="inline-list" ng-hide="facebookInterestsLoading">
