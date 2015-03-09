@@ -32,11 +32,26 @@ var textmateReporter = function(file) {
   }
 }
 
+//load your custom env.json file,
+var env;
+
+//use (process.env or {}) then .mode
+if ((process.env || {}).mode !== 'heroku') {
+  env = require('../env.json');
+}
+
 gulp.task('styles', [],  function() {
-  return gulp.src('src/app/**/*.scss')
-    .pipe($.scssLint({
+  var scssLint;
+  if ((process.env || {}).mode !== 'heroku') {
+    scssLint = $.scssLint({
       customReport: textmateReporter
-    }))
+    });
+  }else{
+    scssLint = $.util.noop();
+  }
+
+  return gulp.src('src/app/**/*.scss')
+    .pipe(scssLint)
     .pipe($.sass({
       style: 'expanded',
       includePaths:[

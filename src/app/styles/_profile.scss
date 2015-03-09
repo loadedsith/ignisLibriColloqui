@@ -147,11 +147,11 @@ label {
   padding-left: 1.3em;
 
   &.common {
-    &.disabled{
+    &.disabled {
       background-color: $secondary-color;
 
       div {
-        color: #838383;
+        color: $oil;
       }
     }
   }

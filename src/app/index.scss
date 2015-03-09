@@ -244,8 +244,8 @@ $transparent: transparent;
 
     backface-visibility: hidden;
 
-    &:first-child{
-      background-color:$primary-color;
+    &:first-child {
+      background-color: $primary-color;
     }
 
     &.active {
