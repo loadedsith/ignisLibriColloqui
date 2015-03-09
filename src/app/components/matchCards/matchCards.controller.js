@@ -65,18 +65,18 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
     };
 
     $scope.removeTopCard = function(card, cardData) {
-      card.fadeOut(function() {//args: card
-        for (var i = $scope.decks.length - 1; i >= 0; i--) {
-          var deck = $scope.decks[i];
-          if (deck.topCard !== undefined) {
-            if (deck.topCard.name === cardData.name) {
-              console.log('deck.topCard.name', deck.topCard.name);
-              console.log('cardData.name', cardData.name);
-              deck.topCard = undefined;
+      $timeout(function() {
+        card.fadeOut(function() {//args: card
+          for (var i = $scope.decks.length - 1; i >= 0; i--) {
+            var deck = $scope.decks[i];
+            if (deck.topCard !== undefined) {
+              if (deck.topCard.name === cardData.name) {
+                console.log('remove topCard');
+                deck.topCard = undefined;
+              }
             }
           }
-        }
-
+        },0);
       });
     };
 
