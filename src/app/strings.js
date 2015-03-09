@@ -21,6 +21,7 @@ define([], function() {
       connectedToFacebook: 'Connected To Facebook.',
       count: 'Count',
       contact: 'Contact',
+      commonInterests: 'Common Interests',
       currentInterest: 'Current Interest',
       currentInterests: 'Current Interests',
       currentRoom: 'Current Room',
@@ -31,7 +32,9 @@ define([], function() {
       },
       fallbackLikes: ['Gold mining', 'Oil Wells', 'Shipping', 'Real Estate'],
       facebookHandlesImagesWarning: 'Facebook Handles what images are shown to the users.',
-      facebookInterestsEmpty: 'Facebook likes were empty, sorry! Here\'s a few interests, just so you wont be lonely',
+
+      facebookInterests: 'Facebook Interests',
+      facebookInterestsEmpty: 'Facebook likes were empty, sorry!',
       facebookInterestsError: 'Facebook likes failed. Please ensure you\'ve authorized the app to have access to this' +
         ' data (or don\'t use this feature).',
       interestExists: 'I already know you\'re interested in that, silly',
@@ -56,6 +59,7 @@ define([], function() {
       sendMessage: 'Send Message',
       siteTitle: '🔥 📖 💬',
       source: 'Source',
+      topInterests: 'Top Interests',
       suggestFacebookInterests: 'Suggest Facebook Interests?',
       suggestionsFromFacebook: 'Suggestions from ',
       open: '?',

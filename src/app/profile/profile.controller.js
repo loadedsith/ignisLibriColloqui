@@ -101,6 +101,28 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.save(profile);
     };
 
+    $scope.showTopInterests = function() {
+      var topInterests = $scope.Strings.fallbackLikes;
+      var matchedInterests = [];
+      var userInterests = (($scope.user || {}).profile || {}).interests;
+
+      if ( userInterests === undefined || userInterests.length===0 ){
+        return true;
+      }
+
+      for (var i = topInterests.length - 1; i >= 0; i--) {
+        var topInterest = topInterests[i];
+        if (userInterests.indexOf(topInterest) !== -1) {
+          matchedInterests.push(topInterest);
+        }
+      }
+
+      if (matchedInterests.length < topInterests.length) {
+        return true;
+      }
+      return false;
+    };
+
     $scope.removeInterest = function(interest, interests) {
       var removeAtIndex = null;
       if (interests === undefined || interest === undefined) {

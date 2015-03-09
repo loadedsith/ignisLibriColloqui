@@ -34,17 +34,61 @@
               {{interest}}
               <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
             </li>
+            <li>
+              <form
+                editable-form
+                name="textBtnForm"
+              >
+                <div
+                  editable-text="addInterestPlaceholder"
+                  onbeforesave="checkInterest($data, user.profile.interests)"
+                  onaftersave="addInterest($data, user.profile)">
+                </div>
+              </form>
+            </li>
             <li class="addInterest noGlyph"
               href="#"
-              editable-text="addInterestPlaceholder"
               buttons="no"
-              onbeforesave="checkInterest($data, user.profile.interests)"
-              onaftersave="addInterest($data, user.profile)">
+              e-form="textBtnForm"
+              ng-click="textBtnForm.$show()"
+              ng-show="!textBtnForm.$visible"
+              >
               {{Strings.addInterest}}
             </li>
           </ul>
-          <div class="button tiny secondary" ng-click="showFacebookInterests = !showFacebookInterests;suggestFacebookInterests()" ng-hide="showFacebookInterests">
-            {{Strings.suggestFacebookInterests}}
+        </div>
+      </div>
+
+      <div class="row topInterests interests" ng-if="showTopInterests()===true">
+        <div class="small-12 medium-3 columns">
+          <label class="right" >{{Strings.topInterests}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <ul class="inline-list">
+            <li
+              class="common interestWrapper"
+              ng-repeat="interest in Strings.fallbackLikes"
+              ng-class="{'ng-cloak':user.profile.interests.indexOf(interest) !== -1}"
+              >
+              <!-- ng-class="{disabled:user.profile.interests.indexOf(interest) !== -1}" -->
+                {{interest}}
+                <span class="inline" ng-if="user.profile.interests.indexOf(interest) === -1" ng-click="addInterest(interest, user.profile)">{{Strings.addInterest}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row facebookInterests interests">
+        <div class="small-12 medium-3 columns">
+          <label class="right" >{{Strings.facebookInterests}}</label>
+        </div>
+        <div class="small-12 medium-9 columns">
+          <div
+            class="button tiny secondary"
+            ng-click="showFacebookInterests = !showFacebookInterests;suggestFacebookInterests()"
+            ng-show="!showFacebookInterests"
+            >
+              {{Strings.suggestFacebookInterests}}
           </div>
           <div ng-show="showFacebookInterests">
             <ul class="inline-list" ng-hide="facebookInterestsLoading">

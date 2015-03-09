@@ -103,10 +103,11 @@ label {
 
 .addInterest,
 .addBlacklist {
-  transition: 0.3s 0.1s color;
+  transition: 0.3s 0.1s opacity;
   opacity: 1;
   cursor: pointer !important;
   color: $primary-color;
+  font-size: 100%;
   font-style: normal !important;
 
   &:hover {
@@ -116,6 +117,26 @@ label {
   .black {
     color: $oil;
   }
+
+  &.ng-hide {
+    display: block;
+    opacity: 0;
+  }
+
+  &.ng-enter {
+    transform: translate3d(500px, 0, 0);
+    opacity: 0;
+
+    li {
+      transition: 0.3s linear all;
+    }
+  }
+
+  &.ng-enter-active {
+    transform: none;
+    opacity: 1;
+  }
+
 }
 
 .interestWrapper,
@@ -124,6 +145,16 @@ label {
   background-color: rgba($primary-color, 0.3);
   padding-right: 1em;
   padding-left: 1.3em;
+
+  &.common {
+    &.disabled{
+      background-color: $secondary-color;
+
+      div {
+        color: #838383;
+      }
+    }
+  }
 
   &.facebook {
     background-color: rgba($secondary-color, 0.3);
