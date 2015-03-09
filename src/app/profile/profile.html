@@ -88,11 +88,12 @@
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
 
-            <li class="blacklistedWrapper" ng-repeat="blacklisted in user.profile.blacklist track by $index">
-              {{blacklisted.name}}
-              <!-- TODO: Expose this info on hover -->
-              <!-- <div class="hover">({{blacklisted.id}})</div> -->
-              <span class="remove" ng-click="removeBlacklist($index)">&times;</span>
+            <li
+              class="blacklistedWrapper"
+              ng-repeat="blacklisted in user.profile.blacklist track by $index"
+              >
+                {{blacklisted.name}}
+              <span class="remove"  ng-click="removeBlacklist($index)">&times;</span>
             </li>
           </ul>
           <span class="black" ng-if="user.profile.blacklist.length === 0 || !user.profile.blacklist">
