@@ -2,8 +2,8 @@ define([], function() {
   'use strict';
   return {
       aboutMe: 'About Me',
-      addBlacklist: '➕',
-      addInterest: '➕',
+      addBlacklist: '+',
+      addInterest: '+',
       allLikesAreAlreadyAdded: 'Wunderbar! All likes on this page are already added.',
       blacklist: 'Blacklist',
       blacklistEmpty: 'Your blacklist is empty',
