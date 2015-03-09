@@ -1,7 +1,8 @@
 define(['controllerModule'], function(controllers) {
   'use strict';
-  return controllers.controller('MessagesController', ['$scope', 'Config', 'MessagesService', 'UserService',
-    function($scope, Config, MessagesService, UserService) {
+  return controllers.controller('MessagesController', [
+    '$scope', 'Config', 'MessagesService', 'UserService', '$timeout',
+    function($scope, Config, MessagesService, UserService, $timeout) {
 
       $scope.Strings = Config.strings;
 
@@ -20,7 +21,10 @@ define(['controllerModule'], function(controllers) {
       });
 
       $scope.$on('MessagesService:SetCurrentRoom', function(event, room) {
-        $scope.currentRoom = room;
+        $timeout(function() {
+          $scope.currentRoom = room;
+          $scope.rooms = MessagesService.rooms;
+        },0);
       });
 
       $scope.$on('UserService:Update', function(event, user) {
