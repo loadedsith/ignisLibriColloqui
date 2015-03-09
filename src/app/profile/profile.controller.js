@@ -3,7 +3,9 @@ define(['controllerModule', 'angular'], function(controllers) {
   return controllers.controller('ProfileController', [
     '$scope', '$q', 'Config', 'MessagesService', 'FacebookService',
     function($scope, $q, Config, MessagesService, FacebookService) {
+
     $scope.Strings = Config.strings;
+
     $scope.allLikesAreAlreadyAdded = function(likes, interests) {
       var similar = [];
       if (likes === undefined) {
@@ -120,6 +122,9 @@ define(['controllerModule', 'angular'], function(controllers) {
     $scope.checkInterest = function(interest, interests) {
       if (interests === undefined) {
         return true;
+      }
+      if (interest === undefined || interest === ''){
+        return false;
       }
       if (interest !== '') {
         for (var i = interests.length - 1; i >= 0; i--) {
