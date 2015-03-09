@@ -12,19 +12,19 @@
         <p class="status {{status.class}}" ng-click="status.action()">{{status.currentFrame || status.text}}</p>
       </div>
       <div class="mainView profile" ng-class="{open:shouldShowView('profile')}">
-        <div class="close" ng-show="Config.baseView !== 'profile'" ng-click="closeProfile()">&times;</div>
+        <!-- <div class="close" ng-show="Config.baseView !== 'profile'" ng-click="closeProfile()">&times;</div> -->
         <div ng-include="'app/profile/profile.html'"></div>
       </div>
       <div class="mainView matches" ng-class="{open:shouldShowView('matches')}">
-        <div class="close" ng-show="Config.baseView !== 'matches'" ng-click="toggleNavBar('matches', true)">&times;</div>
+        <!-- <div class="close" ng-show="Config.baseView !== 'matches'" ng-click="toggleNavBar('matches', true)">&times;</div> -->
         <div ng-include="'app/matches/matches.html'"></div>
       </div>
       <div class="mainView messages" ng-class="{open:shouldShowView('messages')}">
-        <div class="close" ng-show="Config.baseView !== 'messages'" ng-click="toggleNavBar('messages', true)">&times;</div>
+        <!-- <div class="close" ng-show="Config.baseView !== 'messages'" ng-click="toggleNavBar('messages', true)">&times;</div> -->
         <div ng-include="'app/messages/messages.html'"></div>
       </div>
       <div class="mainView interests" ng-class="{open:shouldShowView('interests')}">
-        <div class="close" ng-show="Config.baseView !== 'interests'" ng-click="toggleNavBar('interests', true)">&times;</div>
+        <!-- <div class="close" ng-show="Config.baseView !== 'interests'" ng-click="toggleNavBar('interests', true)">&times;</div> -->
         <div ng-include="'app/interestsSelector/interestsSelector.html'"></div>
       </div>
     </div>
