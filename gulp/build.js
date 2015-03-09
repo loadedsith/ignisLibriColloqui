@@ -52,10 +52,7 @@ gulp.task('styles', [],  function() {
     scssLint = $.scssLint({
       customReport: textmateReporter
     });
-    $.util.log(chalk.red('dev styles'));
-  } else {
-    $.util.log(chalk.red('heroku styles'));
-  }
+  }//else use noop instead of linting
 
   return gulp.src('src/app/**/*.scss')
     .pipe(scssLint)
@@ -88,6 +85,9 @@ notify.on('click', function(options) {
 });
 
 gulp.task('jscs', function() {
+  if (mode === 'heroku') {
+    return;
+  }
   return gulp.src([
     'src/app/**/*.js',
     'gulpfile.js',
@@ -172,11 +172,10 @@ var jshintReporter = function(file, cb) {
   cb(null, file);
 };
 
-gulp.task('scripts', ['jscs'], function() {//['jscs'] or ['test']
+gulp.task('scripts', function() {//['jscs'] or ['test']
   var myHinter = $.util.noop();
 
   if (mode !== 'heroku') {
-    $.util.log(chalk.red('dev scripts'));
     myHinter = $.jshint();
   }
   var one = gulp.src([

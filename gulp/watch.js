@@ -11,8 +11,7 @@ gulp.task('watch', ['scripts', 'styles'] , function() {
     './gulp/**/*.js',
     './gulpfile.js'
     ], [
-      'scripts',
-      'jscs'
+      'scripts'
     ]);
   gulp.watch(['src/app/**/*.jsx'], ['jsx', 'scripts']);
   gulp.watch('src/assets/images/**/*', ['images']);
