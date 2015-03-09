@@ -8,6 +8,8 @@ var $ = require('gulp-load-plugins')({
 });
 
 gulp.task('jsx', function() {//requirejsBuild
+  'use strict';
+  
   return gulp.src('src/app/**/*.jsx')
     .pipe(react())
     .pipe(rename({extname:'.js'}))

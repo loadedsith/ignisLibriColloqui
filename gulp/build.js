@@ -13,8 +13,6 @@ function handleError(err) {
   console.error(err.toString());
   this.emit('end');
 }
-var fs = require('fs'),
-    path = require('path');
 
 var textmateReporter = function(file) {
   if (!file.scsslint.success) {
@@ -24,30 +22,34 @@ var textmateReporter = function(file) {
       var path = 'txmt://open?url=file://'+file.history+'&line='+issue.line+'&column='+issue.column;
       var reason = issue.reason;
       if (reason.indexOf('Properties should be ordered') !== -1){
-        reason = reason.replace('Properties should be ordered',chalk.yellow('Properties should be ordered'))
+        reason = reason.replace('Properties should be ordered',chalk.yellow('Properties should be ordered'));
       }
       $.util.log(chalk.red(reason)+'\n'+
         chalk.underline(path)+'\n');
     }
   }
-}
+};
 
 //load your custom env.json file,
 var env;
-
+var mode;
 //use (process.env or {}) then .mode
 if ((process.env || {}).mode !== 'heroku') {
   env = require('../env.json');
+  mode = 'dev';
+}else{
+  mode = 'heroku';
 }
 
 gulp.task('styles', [],  function() {
-  var scssLint;
-  if ((process.env || {}).mode !== 'heroku') {
+  var scssLint = $.util.noop();
+  if (mode !== 'heroku') {
     scssLint = $.scssLint({
       customReport: textmateReporter
     });
+    $.util.log(chalk.red('dev styles'));
   }else{
-    scssLint = $.util.noop();
+    $.util.log(chalk.red('heroku styles'));
   }
 
   return gulp.src('src/app/**/*.scss')
@@ -65,17 +67,16 @@ gulp.task('styles', [],  function() {
     .pipe($.size());
 });
 
-
 function execute(command, callback) {
   var exec = require('child_process').exec;
-  exec(command, function(error, stdout, stderr) { callback(stdout); });
-};
+  exec(command, function(error, stdout) { callback(stdout); });
+}
 
 notify.on('click', function(options) {
   var message = options.message;
   var lines = message.split('\n');
   var txmtUrl = lines[lines.length-2];//-2 because there's an extra '\n' on the messages so we dont actually want the last line
-  execute("open "+ txmtUrl, function() {
+  execute('open '+ txmtUrl, function() {
     // console.log('opening in TextMate');
   });
 });
@@ -85,58 +86,104 @@ gulp.task('jscs', function() {
     'src/app/**/*.js'
     ])
     .pipe($.jscs({
-      "preset": "google",
-      "fileExtensions": [
-        ".js",
-        "jscs"
+      'preset': 'google',
+      'fileExtensions': [
+        '.js',
+        'jscs'
       ],
 
-      "requireParenthesesAroundIIFE": true,
-      "maximumLineLength": 120,
-      "validateLineBreaks": null,
-      "validateIndentation": 2,
+      'requireParenthesesAroundIIFE': true,
+      'maximumLineLength': 120,
+      'validateLineBreaks': null,
+      'validateIndentation': 2,
 
-      "disallowKeywords": ["with"],
-      "disallowSpacesInsideObjectBrackets": null,
-      "disallowImplicitTypeConversion": ["string"],
+      'disallowKeywords': ['with'],
+      'disallowSpacesInsideObjectBrackets': null,
+      'disallowImplicitTypeConversion': ['string'],
 
-      "safeContextKeyword": "_this",
+      'safeContextKeyword': '_this',
 
-      "excludeFiles": [
-        "test/data/**"
+      'excludeFiles': [
+        'test/data/**'
       ]
     })).on('error', function(e) {
+      $.util.log('jscs e: ', e);
       this.end();
-    })
-})
-gulp.task('scripts', function() {//['jscs'] or ['test']
-  gulp.src([
+    });
+});
+
+var jshintReporter = function(file, cb) {
+
+  var message = '';
+  if (!file.jshint.success) {
+    var errors = file.jshint.results.map(function(data) {
+      if (data.error) {
+
+        var id;
+        switch(data.error.id) {
+          case '(error)':
+            id = chalk.red('  🚫  ');
+            break;
+          default:
+            id = chalk.yellow('  [' + data.error.id + ']');
+            break;
+        }
+
+        var result = [];
+
+        data.error.evidence = chalk.yellow(data.error.evidence);
+        var evidence = data.error.evidence.replace(data.error.a, chalk.underline(data.error.a));
+
+
+        if (evidence !== data.error.evidence){
+          result.push('  🔍  ' + chalk.reset(evidence));
+        }
+
+        result.push(id + chalk.reset(data.error.reason));
+
+        var protocol = 'txmt://open?url=file://';
+        var line = '&line=' + data.error.line;
+        var column = '&column=' + data.error.character;
+
+        var link = chalk.red(chalk.underline(protocol + file.path + line + column));
+
+        result.push('  🔗  ' + link);
+
+        return result.join('\n') + '\n';
+      }
+    }).join('\n');
+    message = file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+  }
+  //else {
+    // $.util.log('👍  ' + chalk.dim(chalk.green(file.relative)));
+  // }
+
+  if (message !== ''){
+    console.log('💾  ' + chalk.yellow(message));
+  }
+
+  cb(null, file);
+};
+
+gulp.task('scripts', function () {//['jscs'] or ['test']
+  var myHinter = $.util.noop();
+
+  if (mode !== 'heroku') {
+    $.util.log(chalk.red('dev scripts'));
+    myHinter = $.jshint();
+  }
+  var one = gulp.src([
+    './gulpfile.js',
+    './gulp/**/*.js',
     './src/app/**/**/*.js',
     './src/vendor/**/**/*.js'
   ])
-    .pipe($.jshint())
+    .pipe(myHinter)
     // Use gulp-notify as jshint reporter
-    // .pipe(notify("Found file: <%= file.relative %>!"))
+    // .pipe(notify('Found file: <%= file.relative %>!'))
     // .pipe($.jshint.reporter('default'));
-
-    .pipe(map(function(file, cb) {
-      // console.log('file.jshint', JSON.stringify(file.jshint,2));
-      var message = '';
-      if (!file.jshint.success) {
-        var errors = file.jshint.results.map(function(data) {
-          if (data.error) {
-            return '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason + '\n' +
-              chalk.red('txmt://open?url=file://' + file.path + '&line='+data.error.line + '&column=' + data.error.character + '\n');
-          }
-        }).join('\n');
-        message = file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
-      }
-      if(message!=='')
-        console.log('message', message);
-      cb(null, file);
-    })
-    );
-  gulp.src(['src/app/**/*.jsx'])
+    .pipe(map(jshintReporter));
+  var two = gulp.src(['src/app/**/*.jsx'])
     .pipe($.jshint())
     // Use gulp-notify as jshint reporter
     .pipe(notify({
@@ -155,6 +202,7 @@ gulp.task('scripts', function() {//['jscs'] or ['test']
       return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
       }, wait:true
     }));
+  return $.merge(one, two);
 });
 
 gulp.task('partials', function() {
@@ -239,7 +287,6 @@ gulp.task('copy', ['myBower','jsx', 'myEnv'],function() {
     .pipe($.copy('dist', {prefix:1}));
 });
 
-var exec = require('child_process').exec;
 gulp.task('requirejsBuild', ['jsx'], function() {
   $.requirejs({
     mainConfigFile: 'src/app/require.config.js',

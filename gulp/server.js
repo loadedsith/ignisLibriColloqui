@@ -38,10 +38,7 @@ function browserSyncInit(baseDir, files, browser) {
     browser: browser,
   });
 }
-function execute(command, callback) {
-  var exec = require('child_process').exec;
-  exec(command, function(error, stdout, stderr) { callback(stdout); });
-};
+
 gulp.task('requireJSScript',function() {
   gulp.src(__dirname + '/../src/index.html')
   .pipe($.preprocess({
@@ -50,7 +47,8 @@ gulp.task('requireJSScript',function() {
     }
   }))
   .pipe(gulp.dest('.tmp'));
-})
+});
+
 gulp.task('serve', ['requireJSScript', 'myEnv', 'jsx', 'scripts', 'watch'], function() {// 'requirejsBuild'
   browserSyncInit([
     '.tmp',
@@ -66,6 +64,10 @@ gulp.task('serve', ['requireJSScript', 'myEnv', 'jsx', 'scripts', 'watch'], func
     'src/app/**/*.js',
     '!src/app/**/*spec.js'
   ]);
+  // function execute(command, callback) {
+  //   var exec = require('child_process').exec;
+  //   exec(command, function(error, stdout) { callback(stdout); });
+  // };
   // execute('open http://example.com:3000', function() {
   //   console.log('Opened example.com resource. If it didn\'t use /etc/hosts to map example.com to localhost');
   // });
