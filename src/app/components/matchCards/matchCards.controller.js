@@ -72,11 +72,15 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
             if (deck.topCard !== undefined) {
               if (deck.topCard.name === cardData.name) {
                 console.log('remove topCard');
-                deck.topCard = undefined;
+                requestAnimationFrame(function() {
+                  $timeout(function() {
+                    deck.topCard = undefined;
+                  },0);
+                });
               }
             }
           }
-        }, 0);
+        }, 10);
       });
     };
 

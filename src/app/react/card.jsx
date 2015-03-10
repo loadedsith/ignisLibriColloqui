@@ -42,7 +42,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         originalRotation = this.props.config.initialPosition.rotation;
       }
       return {
-        blur: 3,
+        blur: 2,
         disableDrag: this.props.config.disableDrag,
         dragging: false,
         duration: this.props.config.duration || 250,
@@ -78,12 +78,17 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       // the vars are included to avoid unused complaints
       /*jshint ignore:start */
       var rotation = this.state.originalRotation + this.state.rotation;
+      if (this.state.blur < 2){
+        this.state.blur = 2;
+      }
+      var blurOffset = this.state.blur + 'px ';
+      var blur = blurOffset + blurOffset + this.state.blur * 1.75 + 'px rgba(0, 0, 0, 0.5)';
       var styles = {
         position: 'absolute',
         left: this.state.pos.x + 'px',
         top: this.state.pos.y + 'px',
         opacity: this.state.opacity,
-        boxShadow: this.state.blur + 'px ' + this.state.blur + 'px '+ this.state.blur * 1.75 + 'px rgba(0, 0, 0, 0.3)',
+        boxShadow: blur,
         transform: 'rotate(' + rotation + 'deg)',
         'MozTransform': 'rotate(' + rotation + 'deg)',
         'msTransform': 'rotate(' + rotation + 'deg)',
