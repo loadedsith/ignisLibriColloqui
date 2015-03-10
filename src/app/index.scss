@@ -35,7 +35,10 @@ $transparent: transparent;
 
 [ui-view] {
   background-color: $white;
-  height: 80%;
+  width: 100%;
+  height: auto;
+
+  overflow-y: hidden;
 }
 
 .welcome {
@@ -129,7 +132,9 @@ $transparent: transparent;
 }
 
 .footer {
-  position: fixed;
+  @media #{$medium-up} {
+    position: fixed;
+  }
   bottom: 0;
   background-color: lighten($primary-color, 60%);
   max-width: 100%;
