@@ -13,6 +13,10 @@ $green: #408000;
 $red: #ce1f25;
 $transparent: transparent;
 
+.subtitle {
+  font-weight: 100;
+}
+
 .arrow-bottom-right {
   border-bottom: ($arrow-size * 1.2) solid $arrow-color;
   border-left: $arrow-size solid $transparent;

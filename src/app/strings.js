@@ -44,6 +44,7 @@ define([], function() {
       missing: 'Missing',
       anInterest: 'an interest',
       issues: 'Issues',
+      moreMatchesTip: 'Have you tried adding the suggested interests?',
       matches: 'Matches',
       messageList: 'Messages List',
       messages: 'Messages',

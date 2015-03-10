@@ -14,6 +14,7 @@
           swipe-right="swipeRightTopCard"
           >
         </card-gph>
+
         <card-gph
           ng-repeat="card in deck.cards"
           card="card"
@@ -38,6 +39,9 @@
           </p>
           <p class="copy">
             {{Strings.noMatches}}
+          </p>
+          <p class="subtitle">
+            {{Strings.moreMatchesTip}}
           </p>
         </div>
       </h1>
