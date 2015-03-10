@@ -98,7 +98,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           userProfile:this.props.config.userProfile
         }, this.props.data, ' ');
       } catch (error) {
-        console.log('error', error);
+
         cardTemplate = <div>
           <p>
             Example card Content, set yours with card-template
@@ -216,17 +216,19 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
       var maxDrag = this.props.config.maxDrag;
+      if (maxDrag > window.innerWidth / 4) {
+        maxDrag = window.innerWidth / 4;
+      }
       if (!topOfTheStack(card)) {
         return;
       }
-      console.log('eventType', eventType);
+
+      var eventPageX = (event.pageX || event.touches[0].pageX || 0);
       switch (eventType) {
         case 'mousedown':
         case 'touchstart':
          // only left mouse button
           if (event.button === 0 || event.button === undefined) {
-
-            var eventPageX = (event.pageX||event.touches[0].pageX)
             this.setState({
               initialPos:this.props.config.initialPosition,
               dragging: true,
@@ -254,7 +256,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
             } else {
               this.returnCard();
             }
-          }else if (this.state.pos.x < (-1 * maxDrag) ) {
+          } else if (this.state.pos.x < (-1 * maxDrag) ) {
             //dragged out left
             if (typeof this.props.config.swipeLeft === 'function') {
               this.props.config.swipeLeft(this, this.props.data);
@@ -268,8 +270,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           break;
         case 'mousemove':
         case 'touchmove':
-          console.log('event', event);
-          eventPageX = (event.pageX||event.touches[0].pageX);
+          eventPageX = (event.pageX || event.touches[0].pageX);
           var xPos = eventPageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
           if (xPos > (maxDrag/2)) {

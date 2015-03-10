@@ -104,7 +104,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           $timeout(function() {
             $scope.toggleNavBar(Config.baseView || 'profile', true);
           }, 0);
-        })
+        });
 
         $scope.loggedIn = true;
       });
