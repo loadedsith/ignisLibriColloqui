@@ -17,7 +17,7 @@ define([], function() {
         cardTest: 'Card Test'
       },
       chattingWith: 'with',
-      close: '✖️',
+      close: 'x',
       connectedToFacebook: 'Connected To Facebook.',
       count: 'Matches',
       contact: 'Contact',
