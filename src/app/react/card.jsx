@@ -44,6 +44,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         underlay : document.getElementById('underlay'),
         pos: this.props.config.initialPosition || {x:0, y:0},
         duration: this.props.config.duration || 250,
+        disableDrag: this.props.config.disableDrag,
         rotation: originalRotation,
         originalRotation: originalRotation,
         easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
@@ -190,6 +191,12 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       // }
     },
     handelMouse: function(event) {
+
+      if(this.state.disableDrag === true){
+        console.log('made it here');
+        return;
+      }
+
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
       var maxDrag = this.props.config.maxDrag;

@@ -4,26 +4,28 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
     return {
       restrict: 'E',
       scope: {
-        maxDrag: '=',
-        initialPosition: '=',
-        duration: '=',
         card: '=',
+        cardTemplate:'=',
+        disableDrag:'=',
+        duration: '=',
+        initialPosition: '=',
+        maxDrag: '=',
         profile: '=',
-        userProfile: '=',
-        swipeRight: '=',
         swipeLeft: '=',
-        cardTemplate:'='
+        swipeRight: '=',
+        userProfile: '='
       },
       link: function(scope, el) {//extraAttr: attrs
         var CardFactory = React.createFactory(Card);
-        var maxDrag = scope.maxDrag;
-        var duration = scope.duration;
-        var initialPosition = scope.initialPosition;
         var cardTemplate = scope.cardTemplate;//React Template!
+        var duration = scope.duration;
+        var disableDrag = scope.disableDrag;
+        var initialPosition = scope.initialPosition;
+        var maxDrag = scope.maxDrag;
         var profile = scope.profile;
-        var userProfile = scope.userProfile;
-        var swipeRight;
         var swipeLeft;
+        var swipeRight;
+        var userProfile = scope.userProfile;
 
         if (typeof scope.swipeRight === 'function') {
           swipeRight = scope.swipeRight;
@@ -42,14 +44,15 @@ define(['directives/directiveModule', 'react', 'react/card'], function(directive
         }
 
         var config = {
-          maxDrag: maxDrag,
+          cardTemplate: cardTemplate,
           duration: duration,
+          disableDrag: disableDrag,
           initialPosition: initialPosition,
+          maxDrag: maxDrag,
+          profile: profile,
           swipeLeft: swipeLeft,
           swipeRight: swipeRight,
-          profile: profile,
-          userProfile: userProfile,
-          cardTemplate: cardTemplate
+          userProfile: userProfile
         };
 
         scope.$watch('card', function(newValue) {
