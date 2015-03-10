@@ -211,7 +211,6 @@ $transparent: transparent;
         .subtitle {
           display: inline-block;
           position: absolute;
-
           top: $topbar-height / 4;
           left: 0%;
 
@@ -226,6 +225,7 @@ $transparent: transparent;
 
           text-align: center;
           text-indent: 0;
+          letter-spacing: 0.1em;
 
           color: $white;
 
@@ -254,6 +254,7 @@ $transparent: transparent;
 
     &:first-child {
       background-color: $primary-color;
+      padding-left: 25px;
     }
 
     &.active {
