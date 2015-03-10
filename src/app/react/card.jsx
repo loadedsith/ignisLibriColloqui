@@ -6,7 +6,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
     }
     if (maxAttempts === undefined) {maxAttempts = 6;}
     var attemptsLeft = maxAttempts;
-    if (!(element === undefined || element === null)) {
+    if (element !== undefined && element !== null) {
       if (!(element.classList === undefined || element.classList === null)) {
         while(!element.classList.contains('card') && attemptsLeft > 0) {
           element = element.parentElement;
@@ -42,17 +42,18 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         originalRotation = this.props.config.initialPosition.rotation;
       }
       return {
-        underlay : document.getElementById('underlay'),
-        pos: this.props.config.initialPosition || {x:0, y:0},
-        duration: this.props.config.duration || 250,
+        blur: 3,
         disableDrag: this.props.config.disableDrag,
-        rotation: originalRotation,
-        originalRotation: originalRotation,
-        easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
-        profile: this.props.config.profile || {},
-        opacity: 1,
         dragging: false,
-        rel: null // position relative to the cursor
+        duration: this.props.config.duration || 250,
+        easing: new BezierEasing(0.42, 0.0, 1.00, 1.0),
+        opacity: 1,
+        originalRotation: originalRotation,
+        pos: this.props.config.initialPosition || {x:0, y:0},
+        profile: this.props.config.profile || {},
+        rel: null, // position relative to the cursor,
+        rotation: originalRotation,
+        underlay: document.getElementById('underlay')
       };
     },
     showUnderlay: function() {
@@ -82,11 +83,12 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         left: this.state.pos.x + 'px',
         top: this.state.pos.y + 'px',
         opacity: this.state.opacity,
+        boxShadow: this.state.blur + 'px ' + this.state.blur + 'px '+ this.state.blur * 1.75 + 'px rgba(0, 0, 0, 0.3)',
         transform: 'rotate(' + rotation + 'deg)',
-        '-moz-transform': 'rotate(' + rotation + 'deg)',
-        '-ms-transform': 'rotate(' + rotation + 'deg)',
-        '-webkit-transform': 'rotate(' + rotation + 'deg)',
-        '-o-transform': 'rotate(' + rotation + 'deg)'
+        'MozTransform': 'rotate(' + rotation + 'deg)',
+        'msTransform': 'rotate(' + rotation + 'deg)',
+        'WebkitTransform': 'rotate(' + rotation + 'deg)',
+        'OTransform': 'rotate(' + rotation + 'deg)'
       };
 
       this.showUnderlay();
@@ -124,25 +126,27 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
               </li>;
            /*jshint ignore:end */
     },
+
     componentDidUpdate: function(props, state) {
       if (this.state.dragging && !state.dragging) {
-        document.addEventListener('mousemove', this.handelMouse);
-        document.addEventListener('mouseup', this.handelMouse);
-        document.addEventListener('touchstart', this.handelMouse);
-        document.addEventListener('touchend', this.handelMouse);
-        document.addEventListener('touchmove', this.handelMouse);
-        document.addEventListener('touchcancel', this.handelMouse);
+        window.addEventListener('mousemove', this.handelMouse);
+        window.addEventListener('mouseup', this.handelMouse);
+        window.addEventListener('touchstart', this.handelMouse);
+        window.addEventListener('touchend', this.handelMouse);
+        window.addEventListener('touchmove', this.handelMouse);
+        window.addEventListener('touchcancel', this.handelMouse);
 
       } else if (!this.state.dragging && state.dragging) {
-        document.removeEventListener('mousemove', this.handelMouse);
-        document.removeEventListener('mouseup', this.handelMouse);
-        document.removeEventListener('touchstart', this.handelMouse);
-        document.removeEventListener('touchend', this.handelMouse);
-        document.removeEventListener('touchmove', this.handelMouse);
-        document.removeEventListener('touchcancel', this.handelMouse);
+        window.removeEventListener('mousemove', this.handelMouse);
+        window.removeEventListener('mouseup', this.handelMouse);
+        window.removeEventListener('touchstart', this.handelMouse);
+        window.removeEventListener('touchend', this.handelMouse);
+        window.removeEventListener('touchmove', this.handelMouse);
+        window.removeEventListener('touchcancel', this.handelMouse);
 
       }
     },
+
     fadeOut: function(callback) {
       //apply an animiation cardSlideRight
       if (this.state.underlay.classList.contains('shown')) {
@@ -178,6 +182,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         }
       }
     },
+
     returnCard: function() {
       var duration = this.props.config.duration || 250;//ms
       if (this.state.dragging === false) {
@@ -212,6 +217,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         }
       }
     },
+
     handelMouse: function(event) {
       if(this.state.disableDrag === true){
         return;
@@ -289,8 +295,11 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           }
 
           if (this.state.dragging === true) {
+            var dragFactor = (window.innerWidth / 2 - eventPageX);
+            console.log('dragFactor', dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45);
             this.setState({
-              rotation: -1 * (window.innerWidth / 2 - eventPageX)/45,
+              rotation: -1 * dragFactor / 20,
+              blur: (dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45),
               opacity: opacity,
               pos: {
                 x: xPos

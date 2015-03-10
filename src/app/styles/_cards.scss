@@ -125,9 +125,15 @@ card-gph {
 .card {
   display: block;
   position: absolute;
+
   top: 10px;
+
   transform: translateZ(0);
+
   border-radius: 21px;
+
+  box-shadow: 3px 3px 5px rgba($black, 0.3);
+
   background: $aluminum;
   cursor: pointer;
   width: $cardWidth;

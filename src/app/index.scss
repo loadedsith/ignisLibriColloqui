@@ -14,8 +14,8 @@ $red: #ce1f25;
 $transparent: transparent;
 
 .subtitle {
-  font-weight: 100;
   font-family: $body-font-family;
+  font-weight: 100;
 }
 
 .arrow-bottom-right {
@@ -132,6 +132,9 @@ $transparent: transparent;
 }
 
 .footer {
+  @media #{$small-only} {
+    margin-top: 20px;
+  }
   @media #{$medium-up} {
     position: fixed;
   }
@@ -258,6 +261,26 @@ $transparent: transparent;
       a {
         padding: 0;
         width: auto !important;
+      }
+
+      &:hover {
+        &:after {
+          position: absolute;
+
+          top: 50%;
+          left: 50%;
+
+          transform: translateX(-50%) translateY(-50%) rotate(135deg);
+
+          text-shadow: 0px 0px 6px rgba($black, 0.5);
+
+          color: $white;
+
+          font-family: 'icomoon';
+          font-size: 30px;
+
+          content: '⎋';
+        }
       }
     }
   }
