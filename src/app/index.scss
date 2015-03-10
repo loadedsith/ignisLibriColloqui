@@ -15,6 +15,7 @@ $transparent: transparent;
 
 .subtitle {
   font-weight: 100;
+  font-family: $body-font-family;
 }
 
 .arrow-bottom-right {
@@ -61,7 +62,10 @@ $transparent: transparent;
   &.open {
     display: block;
     position: relative;
-    padding: 0.98em 0px;
+    padding: 0em 0px;
+    @media #{$medium-up}{
+      padding: 0.98em 0px;
+    }
   }
 }
 
@@ -119,6 +123,7 @@ $transparent: transparent;
     cursor: default !important;
   }
 }
+
 .no-touch {
   cursor: default !important;
 }
