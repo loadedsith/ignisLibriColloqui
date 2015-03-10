@@ -19,7 +19,7 @@ define([], function() {
       chattingWith: 'with',
       close: '✖️',
       connectedToFacebook: 'Connected To Facebook.',
-      count: 'Count',
+      count: 'Matches',
       contact: 'Contact',
       commonInterests: 'Common Interests',
       currentInterest: 'Current Interest',
