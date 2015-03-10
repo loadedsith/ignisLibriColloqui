@@ -66,17 +66,17 @@ define(['controllerModule', 'angular'], function(controllers, angular) {
 
     $scope.removeTopCard = function(card, cardData) {
       $timeout(function() {
+        var removeTopCard = function(deck) {
+          $timeout(function() {
+            deck.topCard = undefined;
+          },0);
+        };
         card.fadeOut(function() {//args: card
           for (var i = $scope.decks.length - 1; i >= 0; i--) {
             var deck = $scope.decks[i];
             if (deck.topCard !== undefined) {
               if (deck.topCard.name === cardData.name) {
-                console.log('remove topCard');
-                requestAnimationFrame(function() {
-                  $timeout(function() {
-                    deck.topCard = undefined;
-                  },0);
-                });
+                requestAnimationFrame(removeTopCard.bind(null, deck));
               }
             }
           }
