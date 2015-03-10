@@ -301,7 +301,6 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
 
           if (this.state.dragging === true) {
             var dragFactor = (window.innerWidth / 2 - eventPageX);
-            console.log('dragFactor', dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45);
             this.setState({
               rotation: -1 * dragFactor / 20,
               blur: (dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45),
