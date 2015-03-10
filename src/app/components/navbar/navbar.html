@@ -46,17 +46,29 @@
     </section>
   </nav>
   <div class="icon-bar three-up show-for-small-only" ng-show="showMobileNav">
-    <a class="item" ng-class="{active:shouldShowView('matches')}" ng-click="toggleNavBar('matches')">
-      <span class="icon-fire"></span>
-      <label>{{Strings.matches}}</label>
+    <a
+      class="item"
+      ng-class="{active:shouldShowView('matches')}"
+      ng-click="toggleNavBar('matches');showMobileNav=false;"
+      >
+        <span class="icon-fire"></span>
+        <label>{{Strings.matches}}</label>
     </a>
-    <a class="item" ng-class="{active:shouldShowView('profile')}" ng-click="toggleNavBar('profile')">
-      <span class="icon-book"></span>
-      <label>{{Strings.profile}}</label>
+    <a
+      class="item"
+      ng-class="{active:shouldShowView('profile')}"
+      ng-click="toggleNavBar('profile');showMobileNav=false;"
+      >
+        <span class="icon-book"></span>
+        <label>{{Strings.profile}}</label>
     </a>
-    <a class="item" ng-class="{active:shouldShowView('messages')}" ng-click="toggleNavBar('messages')">
-      <span class="icon-chat"></span>
-      <label>{{Strings.messages}}</label>
+    <a
+      class="item"
+      ng-class="{active:shouldShowView('messages')}"
+      ng-click="toggleNavBar('messages');showMobileNav=false;"
+      >
+        <span class="icon-chat"></span>
+        <label>{{Strings.messages}}</label>
     </a>
   </div>
 </div>
