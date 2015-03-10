@@ -123,6 +123,13 @@ gulp.task('jscs', function() {
 var jshintReporter = function(file, cb) {
 
   var message = '';
+
+  if (file.jshint === undefined) {
+    //handle that the jshint operation wasn't preformed, as it is not on heroku
+    cb(null, file);
+    return;
+  }
+
   if (!file.jshint.success) {
     var errors = file.jshint.results.map(function(data) {
       if (data.error) {
@@ -178,6 +185,7 @@ gulp.task('scripts', function() {//['jscs'] or ['test']
   if (mode !== 'heroku') {
     myHinter = $.jshint();
   }
+
   var one = gulp.src([
     './gulpfile.js',
     './gulp/**/*.js',
