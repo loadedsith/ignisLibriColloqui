@@ -88,6 +88,7 @@ define(['react', 'strings'], function(React, Strings) {
         }
 
         var timeStamp = false;
+
         var datumTime = new Date(datum.date).toDateString();
 
         if (lastTime === undefined) {
@@ -101,7 +102,7 @@ define(['react', 'strings'], function(React, Strings) {
         /*jshint ignore:start */
         if (timeStamp) {
           rows.push(
-            <span className='time' key={datumTime}>
+            <span className='time' key={datum.date}>
               {datumTime}
             </span>
           );
@@ -110,7 +111,7 @@ define(['react', 'strings'], function(React, Strings) {
         rows.push(
           <p
             className='messageBubble'
-            key={messageKey}
+            key={messageKey+datum.date}
             >
             <span className={classes}>
               {userName}:
