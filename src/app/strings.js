@@ -60,7 +60,7 @@ define([], function() {
       siteTitle: '🔥 📖 💬',
       source: 'Source',
       suggest: 'Suggest',
-      topInterests: 'Top Interests',
+      topInterests: 'Suggested Interests',
       suggestFacebookInterests: 'Suggest Facebook Interests?',
       suggestionsFromFacebook: 'Suggestions from ',
       open: '?',
