@@ -15,14 +15,14 @@
           >
         </card-gph>
         <card-gph
-          card-template="MatchDisplay"
+          ng-repeat="card in deck.cards"
           card="card"
+          card-template="MatchDisplay"
           duration="250"
           initial-position="{x:10, y:10}"
           max-drag="250"
           ng-class="{inDeck: deck.topCard !== undefined}"
           ng-if="!hasTopCard(deck)"
-          ng-repeat="card in deck.cards"
           profile="profiles[card.id]"
           swipe-left="swipeLeft"
           swipe-right="swipeRight"
