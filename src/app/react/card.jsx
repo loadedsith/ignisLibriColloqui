@@ -94,7 +94,15 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           userProfile:this.props.config.userProfile
         }, this.props.data, ' ');
       } catch (error) {
-        cardTemplate = <div>{this.props.data}, Example card Content, set yours with card-template</div>
+        console.log('error', error);
+        cardTemplate = <div>
+          <p>
+            Example card Content, set yours with card-template
+          </p>
+          <pre>
+            {this.props.data}
+          </pre>
+        </div>
       }
       return <li
               onMouseDown= {this.handelMouse}
@@ -184,16 +192,9 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           });
         }
       }
-      // if (this.state.pos.x < this.state.initialPos.x && this.state.pos.x > -(this.state.initialPos.x)) {
-      // } else {
-        //loop over this function until card is returned.
-        // requestAnimationFrame(this.returnCard);
-      // }
     },
     handelMouse: function(event) {
-
       if(this.state.disableDrag === true){
-        console.log('made it here');
         return;
       }
 

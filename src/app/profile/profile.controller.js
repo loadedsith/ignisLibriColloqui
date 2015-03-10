@@ -1,10 +1,12 @@
-define(['controllerModule', 'angular'], function(controllers) {
+define(['controllerModule', 'angular', 'react/matchDisplay'], function(controllers, angular, MatchDisplay) {
   'use strict';
   return controllers.controller('ProfileController', [
     '$scope', '$q', 'Config', 'MessagesService', 'FacebookService',
     function($scope, $q, Config, MessagesService, FacebookService) {
 
       $scope.Strings = Config.strings;
+
+      $scope.MatchDisplay = MatchDisplay;
 
       $scope.allLikesAreAlreadyAdded = function(likes, interests) {
         var similar = [];

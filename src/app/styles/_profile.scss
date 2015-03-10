@@ -1,7 +1,30 @@
-.profile.open {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 720px;
+.profile {
+  .open {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 720px;
+  }
+}
+
+.profile-card-gph {
+  cursor: auto;
+
+  .card {
+    background-color: transparent;
+    width: 100%;
+    height: auto;
+
+    &:after {
+      display: block;
+      padding-top: 50%;
+    }
+
+    .matchDisplay {
+      padding-top: 200%;
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .editable-error {

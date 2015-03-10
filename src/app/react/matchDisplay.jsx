@@ -28,9 +28,14 @@ define(['react', 'strings'], function(React, Strings) {/*jshint ignore:line */
     render: function() {
       var defaultImageUrl = './assets/images/FBProfile.jpg';
       var imageUrl = defaultImageUrl;
-      //This is essentailly the same as if (___===undefined) {} blocks. getting this.props.data.image.data
 
-      if (this.props.profile.fetching !== undefined) {
+      if (((this.props.data.profile.image||{}).data || {}).url !== undefined) {
+        //Local User Image, techically this shouldnt happen, cuz who has their own card in their stack? lol
+        imageUrl = this.props.data.profile.image.data.url;
+      }
+
+      //This is essentailly the same as if (___===undefined) {} blocks. getting this.props.data.image.data
+      if ((this.props.profile || {}).fetching !== undefined) {
         //Remote User Image
         if ((this.props.profile.image || {}).data !== undefined) {
           var imageData = this.props.profile.image.data;
@@ -41,10 +46,11 @@ define(['react', 'strings'], function(React, Strings) {/*jshint ignore:line */
       }
 
       /*jshint ignore:start */
-      if ((this.props.profile.image || {}).data !== undefined) {
+      if (((this.props.profile || {}).image || {}).data !== undefined) {
         //Local User Image, techically this shouldnt happen, cuz who has their own card in their stack? lol
         imageUrl = this.props.profile.image.data.url;
       }
+
 
       var styles = {//JsIgnore because unused
         backgroundImage:'url(' + imageUrl + ')',

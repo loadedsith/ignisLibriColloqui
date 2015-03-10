@@ -57,7 +57,6 @@ $transparent: transparent;
     display: block;
     position: relative;
     padding: 0.98em 0px;
-    min-width: 480px;
   }
 }
 
@@ -413,6 +412,12 @@ $transparent: transparent;
   >p {
     background: rgba($black, 0.3);
     text-align: center;
+  }
+}
+
+.right-for-medium-up {
+  @media #{$medium-up} {
+    float: right;
   }
 }
 

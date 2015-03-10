@@ -1,8 +1,25 @@
 <div ng-controller="ProfileController" class="profile">
   <div class="row collapse photo" ng-cloak>
 
+
     <div class="small-12 show-for-medium-up medium-3 columns">
-      <img ng-src="{{user.profilePicture.data.url}}" class="no-touch" ng-click="facebookHandlesImagesWarning = true"/>
+      <card-gph
+        card-template="MatchDisplay"
+        card="user"
+        class="deck profile-card-gph"
+        duration="250"
+        initial-position="{x:0, y:0, rotation:0}"
+        max-drag="250"
+        disable-drag="true"
+        >
+      </card-gph>
+      <!--
+        <img
+          ng-src="{{user.profilePicture.data.url}}"
+          class="no-touch"
+          ng-click="facebookHandlesImagesWarning = true"
+        />
+        -->
     </div>
     <div class="small-12 medium-9 columns">
       <div class="row name">
@@ -31,7 +48,7 @@
         </div>
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
-            <li class="interestWrapper" ng-repeat="interest in user.profile.interests track by $index" >
+            <li class="interestWrapper" ng-repeat="interest in user.profile.interests track by $index">
               {{interest}}
               <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
             </li>
@@ -152,7 +169,7 @@
             <ul class="inline-list">
               <li class="blacklistSelector">
                 <!-- ng-if="roomNames.length < user.profile.blacklist.length" -->
-                <dl class="sub-nav" >
+                <dl class="sub-nav">
                   <!-- ng-if="!roomIsAlreadyBlacklisted(room)" -->
                   <dd ng-repeat="room in roomNames track by room.id" ng-if="checkBlacklist(room.id)">
                     <div>
