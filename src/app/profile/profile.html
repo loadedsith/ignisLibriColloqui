@@ -23,63 +23,138 @@
     </div>
     <div class="small-12 medium-9 columns">
       <div class="row name">
-        <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up" for="name">{{Strings.name}}</label>
-        </div>
-        <div class="small-12 medium-9 columns">
-          <a id="name" href="#" buttons="no" onaftersave="save(user.profile)" editable-text="user.profile.name">
-            {{ user.profile.name || Strings.name }}
-          </a>
-        </div>
-      </div>
-      <div class="row email">
-        <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up" for="email">{{Strings.email}}</label>
-        </div>
-        <div class="small-12 medium-9 columns">
-          <a id="email" href="#" buttons="no" onaftersave="save(user.profile)" editable-email="user.profile.email">
-            {{ user.profile.email || Strings.email }}
-          </a>
-        </div>
-      </div>
-      <div class="row interests">
-        <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up">{{Strings.interests}}</label>
-        </div>
-        <div class="small-12 medium-9 columns">
-          <ul class="inline-list">
-            <li class="interestWrapper" ng-repeat="interest in user.profile.interests track by $index">
-              {{interest}}
-              <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
-            </li>
-            <li>
-              <form
-                editable-form
-                name="textBtnForm"
+        <form
+          editable-form
+          name="nameForm"
+          blur="submit"
+          onaftersave="save(user.profile)"
+        >
+          <div class="small-12 medium-3 columns">
+            <label
+              for="name"
+              ng-click="nameForm.$show()"
+              class="center-for-small-only right-for-medium-up"
               >
+                {{Strings.name}}
+            </label>
+          </div>
+          <div class="small-12 medium-9 columns">
+            <a
+              id="name"
+              href="#"
+              ng-click="nameForm.$show()"
+              ng-show="!nameForm.$visible"
+              blur="submit"
+              editable-text="user.profile.name"
+              >
+                {{ user.profile.name || Strings.name }}
+            </a>
+          </div>
+        </form>
+      </div>
+
+      <div class="row email">
+        <form
+          editable-form
+          name="emailForm"
+          blur="submit"
+          onaftersave="save(user.profile)"
+        >
+          <div class="small-12 medium-3 columns">
+            <label
+              for="email"
+              ng-click="emailForm.$show()"
+              class="center-for-small-only right-for-medium-up"
+              >
+                {{Strings.email}}
+            </label>
+          </div>
+          <div class="small-12 medium-9 columns">
+            <a
+              id="email"
+              href="#"
+              ng-click="emailForm.$show()"
+              ng-show="!emailForm.$visible"
+              editable-email="user.profile.email"
+              >
+                {{ user.profile.email || Strings.email }}
+            </a>
+          </div>
+        </form>
+      </div>
+
+      <div class="row aboutMe">
+        <form
+          editable-form
+          name="aboutMeForm"
+          blur="submit"
+          onaftersave="save(user.profile)"
+        >
+          <div class="small-12 medium-3 columns">
+            <label
+              class="center-for-small-only right-for-medium-up"
+              for="aboutMe"
+              ng-click="aboutMeForm.$show()"
+              >
+                {{Strings.aboutMe}}
+            </label>
+          </div>
+          <div class="small-12 medium-9 columns">
+            <blockquote
+              editable-textarea="user.profile.aboutMe"
+              e-rows="7"
+              e-cols="40"
+              ng-click="aboutMeForm.$show()"
+              ng-show="!aboutMeForm.$visible"
+              >
+                {{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}
+            </blockquote>
+          </div>
+        </form>
+      </div>
+
+      <div class="row interests">
+        <form
+          editable-form
+          name="interestsForm"
+          blur="submit"
+          onaftersave="save(user.profile)"
+        >
+          <div class="small-12 medium-3 columns">
+            <label
+              class="center-for-small-only right-for-medium-up"
+              ng-click="interestsForm.$show()"
+              >{{Strings.interests}}</label>
+          </div>
+          <div class="small-12 medium-9 columns">
+            <ul class="inline-list">
+              <li class="interestWrapper" ng-repeat="interest in user.profile.interests track by $index">
+                {{interest}}
+                <span class="remove" ng-click="removeInterest(interest, user.profile.interests)">&times;</span>
+              </li>
+              <li>
                 <div
                   editable-text="addInterestPlaceholder"
                   onbeforesave="checkInterest($data, user.profile.interests)"
                   onaftersave="addInterest($data, user.profile)">
                 </div>
-              </form>
-            </li>
-            <li class="addInterest noGlyph"
-              href="#"
-              buttons="no"
-              e-form="textBtnForm"
-              ng-click="textBtnForm.$show()"
-              ng-show="!textBtnForm.$visible"
-              >
-              {{Strings.addInterest}}
-            </li>
-          </ul>
-        </div>
+              </li>
+              <li class="addInterest noGlyph"
+                href="#"
+                e-form="interestsForm"
+                ng-click="interestsForm.$show()"
+                ng-show="!interestsForm.$visible"
+                >
+                {{Strings.addInterest}}
+              </li>
+            </ul>
+          </div>
+        </form>
       </div>
 
       <div class="row topInterests interests" ng-if="showTopInterests()===true">
         <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up">{{Strings.topInterests}}</label>
+          <label class="center-for-small-only right-for-medium-up no-touch">{{Strings.topInterests}}</label>
         </div>
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
@@ -98,8 +173,9 @@
 
       <div class="row facebookInterests interests">
         <div class="small-12 medium-3 columns">
-
-          <label class="center-for-small-only right-for-medium-up"><span class="icon-facebook"></span> {{Strings.interests}}</label>
+          <label class="center-for-small-only right-for-medium-up no-touch">
+            <span class="icon-facebook"></span> {{Strings.interests}}
+          </label>
         </div>
         <div class="small-12 medium-9 columns">
           <div
@@ -146,23 +222,25 @@
       </div>
       <div class="row blacklist">
         <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up">{{Strings.blacklist}}</label>
+          <label class="center-for-small-only right-for-medium-up no-touch">
+            {{Strings.blacklist}}
+          </label>
         </div>
         <div class="small-12 medium-9 columns">
           <ul class="inline-list">
 
             <li
-              class="blacklistedWrapper"
+              class="blacklistedWrapper no-touch"
               ng-repeat="blacklisted in user.profile.blacklist track by $index"
               >
                 {{blacklisted.name}}
               <span class="remove"  ng-click="removeBlacklist($index)">&times;</span>
             </li>
           </ul>
-          <span class="black" ng-if="user.profile.blacklist.length === 0 || !user.profile.blacklist">
-            {{Strings.blacklistEmpty}}
-          </span>
           <span class="addBlacklist" ng-click="showBlacklistSelector = !showBlacklistSelector;populateRoomNames()" ng-hide="showBlacklistSelector">
+            <span class="black" ng-if="user.profile.blacklist.length === 0 || !user.profile.blacklist">
+              {{Strings.blacklistEmpty}}
+            </span>
             {{Strings.addBlacklist}}
           </span>
           <div class="blacklistSelector" ng-show="showBlacklistSelector">
@@ -188,16 +266,6 @@
             </ul>
             <p ng-click="showBlacklistSelector = !showBlacklistSelector;" class="small button"><span class="icon-checkmark"></span></p>
           </div>
-        </div>
-      </div>
-      <div class="row aboutMe">
-        <div class="small-12 medium-3 columns">
-          <label class="center-for-small-only right-for-medium-up" for="aboutMe">{{Strings.aboutMe}}</label>
-        </div>
-        <div class="small-12 medium-9 columns">
-          <blockquote editable-textarea="user.profile.aboutMe" e-rows="7" e-cols="40">
-            {{ user.profile.aboutMe || 'no ' + Strings.aboutMe }}
-          </blockquote>
         </div>
       </div>
       <div class="row facebookWarning">
