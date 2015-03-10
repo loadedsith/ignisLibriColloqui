@@ -100,6 +100,11 @@ define(['controllerModule', 'angular'], function(controllers) {
 
       $scope.$on('UserService:ILCLoggedIn', function() {
         StatusService.setStatus(StatusService.ready);
+
+        $timeout(function() {
+          $scope.toggleNavBar(Config.baseView || 'profile', true);
+        }, 0);
+
         $scope.loggedIn = true;
       });
 
