@@ -82,7 +82,11 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         left: this.state.pos.x + 'px',
         top: this.state.pos.y + 'px',
         opacity: this.state.opacity,
-        transform: 'rotate(' + rotation + 'deg)'
+        transform: 'rotate(' + rotation + 'deg)',
+        '-moz-transform': 'rotate(' + rotation + 'deg)',
+        '-ms-transform': 'rotate(' + rotation + 'deg)',
+        '-webkit-transform': 'rotate(' + rotation + 'deg)',
+        '-o-transform': 'rotate(' + rotation + 'deg)'
       };
 
       this.showUnderlay();
@@ -161,7 +165,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
 
       if (completeness < 1) {
         this.setState({
-          opacity:(1-completeness)
+          opacity:(1 - completeness)
         });
         requestAnimationFrame(this.fadeOut);
       } else {
@@ -230,9 +234,9 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
          // only left mouse button
           if (event.button === 0 || event.button === undefined) {
             this.setState({
-              initialPos:this.props.config.initialPosition,
+              initialPos: this.props.config.initialPosition,
               dragging: true,
-              rotation:this.state.rot,
+              rotation: this.state.rot,
               rel: {
                 x: eventPageX
               }
@@ -284,7 +288,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
             }
           }
 
-          if (this.state.dragging) {
+          if (this.state.dragging === true) {
             this.setState({
               rotation: -1 * (window.innerWidth / 2 - eventPageX)/45,
               opacity: opacity,
