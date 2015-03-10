@@ -28,6 +28,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
   };
   return React.createClass({
     getDefaultProps: function() {
+
       return {
         // allow the initial position to be passed in as a prop
         initialPos: {x: 10, y: 10}
@@ -69,6 +70,9 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
 
     },
     render: function() {
+
+      React.initializeTouchEvents(true);
+
       //ignore react jsx, use the force to lint
       // the vars are included to avoid unused complaints
       /*jshint ignore:start */
@@ -106,6 +110,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       }
       return <li
               onMouseDown= {this.handelMouse}
+              onTouchStart= {this.handelMouse}
               className='card'
               style={styles}
               initialPosition={initialPosition}
@@ -119,9 +124,19 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       if (this.state.dragging && !state.dragging) {
         document.addEventListener('mousemove', this.handelMouse);
         document.addEventListener('mouseup', this.handelMouse);
+        document.addEventListener('touchstart', this.handelMouse);
+        document.addEventListener('touchend', this.handelMouse);
+        document.addEventListener('touchmove', this.handelMouse);
+        document.addEventListener('touchcancel', this.handelMouse);
+
       } else if (!this.state.dragging && state.dragging) {
         document.removeEventListener('mousemove', this.handelMouse);
         document.removeEventListener('mouseup', this.handelMouse);
+        document.removeEventListener('touchstart', this.handelMouse);
+        document.removeEventListener('touchend', this.handelMouse);
+        document.removeEventListener('touchmove', this.handelMouse);
+        document.removeEventListener('touchcancel', this.handelMouse);
+
       }
     },
     fadeOut: function(callback) {
@@ -204,23 +219,27 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       if (!topOfTheStack(card)) {
         return;
       }
+      console.log('eventType', eventType);
       switch (eventType) {
         case 'mousedown':
+        case 'touchstart':
          // only left mouse button
-          if (event.button === 0) {
-            // var pos = this.getDOMNode().getBoundingClientRect();
+          if (event.button === 0 || event.button === undefined) {
+
+            var eventPageX = (event.pageX||event.touches[0].pageX)
             this.setState({
               initialPos:this.props.config.initialPosition,
               dragging: true,
               rotation:this.state.rot,
               rel: {
-                x: event.pageX,
-                // y: event.pageY - pos.top
+                x: eventPageX
               }
             });
           }
           break;
         case 'mouseup':
+        case 'touchend':
+        case 'touchcancel':
           this.setState({
             dragging: false,
             droppedPos: this.state.pos,
@@ -248,7 +267,10 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
           }
           break;
         case 'mousemove':
-          var xPos = event.pageX - this.state.rel.x + this.state.initialPos.x;
+        case 'touchmove':
+          console.log('event', event);
+          eventPageX = (event.pageX||event.touches[0].pageX);
+          var xPos = eventPageX - this.state.rel.x + this.state.initialPos.x;
           var opacity = 1;
           if (xPos > (maxDrag/2)) {
             var ratio = maxDrag/xPos;
@@ -263,7 +285,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
 
           if (this.state.dragging) {
             this.setState({
-              rotation: -1 * (window.innerWidth / 2 - event.pageX)/45,
+              rotation: -1 * (window.innerWidth / 2 - eventPageX)/45,
               opacity: opacity,
               pos: {
                 x: xPos
