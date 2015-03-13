@@ -37,6 +37,12 @@ require.config({
       'test/reactPolyfillForPhantomJS'
       ]
     },
+    'angularAnimate': {
+      exports: 'angularAnimate',
+      deps: [
+        'angular'
+      ]
+    },
     'angularCookies': {
       exports: 'angularCookies',
       deps: [
@@ -57,6 +63,12 @@ require.config({
     },
     'mockUserProfile': {
       exports: 'mockUserProfile'
+    },
+    'bezierEasing':{
+      exports:'BezierEasing'
+    },
+    'bezier-easing':{
+      exports:'BezierEasing'
     }
   },
   deps: tests,
@@ -121,27 +133,30 @@ require.config({
     'ignisLibriColloqui': 'src/app/ignisLibriColloqui',
     'main': 'src/app/main',
 
-    'socket.io-client': 'bower_components/socket.io-client/socket.io',
-    'angular-xeditable': 'bower_components/angular-xeditable/dist/js/xeditable',
+    'socket.io-client': 'src/bower_components/socket.io-client/socket.io',
+    'angular-xeditable': 'src/bower_components/angular-xeditable/dist/js/xeditable',
     'ng-socket-gph': 'src/vendor/ng-socket-gph',
-    // 'ng-socket': 'bower_components/ng-socket/ngSocket',
-    'bezierEasing': 'bower_components/bezier-easing/bezier-easing',
+    // 'ng-socket': 'src/bower_components/ng-socket/ngSocket',
+    // 'bezierEasing': 'src/bower_components/bezier-easing/bezier-easing',
+    'bezierEasing': 'src/vendor/bezier-easing-gph',
+    'bezier-easing': 'src/vendor/bezier-easing-gph',
     facebook: 'test/vendor/mockFb',
     // facebook: '//connect.facebook.net/en_US/all',
-    angular: 'bower_components/angular/angular',
-    'angularCookies': 'bower_components/angular-cookies/angular-cookies',
-    'angular-mocks': 'bower_components/angular-mocks/angular-mocks',
-    'angularUiRouter': 'bower_components/angular-ui-router/release/angular-ui-router',
-    foundation: 'bower_components/foundation/js/foundation',
-    requestAnimationFrame: 'bower_components/requestAnimationFrame/app/requestAnimationFrame',
-    fastclick: 'bower_components/fastclick/lib/fastclick',
-    modernizr: 'bower_components/modernizr/modernizr',
-    react: 'bower_components/react/react',
-    requirejs: 'bower_components/requirejs/require',
-    'requirejs-domready': 'bower_components/requirejs-domready/domReady',
-    jquery: 'bower_components/jquery/dist/jquery',
-    'jquery-placeholder': 'bower_components/jquery-placeholder/jquery.placeholder',
-    'jquery.cookie': 'bower_components/jquery.cookie/jquery.cookie'
+    angular: 'src/bower_components/angular/angular',
+    'angularCookies': 'src/bower_components/angular-cookies/angular-cookies',
+    'angularAnimate': 'src/bower_components/angular-animate/angular-animate',
+    'angular-mocks': 'src/bower_components/angular-mocks/angular-mocks',
+    'angularUiRouter': 'src/bower_components/angular-ui-router/release/angular-ui-router',
+    foundation: 'src/bower_components/foundation/js/foundation',
+    requestAnimationFrame: 'src/bower_components/requestAnimationFrame/app/requestAnimationFrame',
+    fastclick: 'src/bower_components/fastclick/lib/fastclick',
+    modernizr: 'src/bower_components/modernizr/modernizr',
+    react: 'src/bower_components/react/react',
+    requirejs: 'src/bower_components/requirejs/require',
+    'requirejs-domready': 'src/bower_components/requirejs-domready/domReady',
+    jquery: 'src/bower_components/jquery/dist/jquery',
+    'jquery-placeholder': 'src/bower_components/jquery-placeholder/jquery.placeholder',
+    'jquery.cookie': 'src/bower_components/jquery.cookie/jquery.cookie'
   },
   packages: [
 

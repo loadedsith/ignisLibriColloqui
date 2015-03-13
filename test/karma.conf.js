@@ -6,7 +6,7 @@ module.exports = function(config) {
     basePath : '..',
 
     files : [
-        {pattern: 'bower_components/**/*.js', included: false},
+        {pattern: 'src/bower_components/**/*.js', included: false},
         {pattern: 'src/app/**/*.js', included: false, watched: true},
         {pattern: '.tmp/app/**/*.js', included: false},
         {pattern: 'src/vendor/**/*.js', included: false, watched: true},
