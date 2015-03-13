@@ -34,7 +34,15 @@ define(['react', 'strings'], function(React, Strings) {/*jshint ignore:line */
       var defaultImageUrl = './assets/images/FBProfile.jpg';
       var imageUrl = defaultImageUrl;
 
-      if (((this.props.data.profile.image||{}).data || {}).url !== undefined) {
+      //looking for this.props.data.profile.image.data.url, and else fail silently
+      var hasThisPropsDataProfileImageDataUrl = (((
+        (this.props.data||{})
+        .profile || {})
+        .image || {})
+        .data || {})
+        .url !== undefined;
+
+      if (hasThisPropsDataProfileImageDataUrl) {
         //Local User Image, techically this shouldnt happen, cuz who has their own card in their stack? lol
         imageUrl = this.props.data.profile.image.data.url;
       }
