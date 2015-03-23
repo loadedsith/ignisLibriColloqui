@@ -18,8 +18,6 @@
       var url;
       var config;
 
-      this.$get = ['$rootScope', socketFactory];
-
       this.setConfig = function(value) {
         config = value;
       };
@@ -36,7 +34,7 @@
         return url;
       };
 
-      function socketFactory() {//args: $rootScope
+      function socketFactory () {//args: $rootScope
         var _this = this;
         _this.initializeSocket = function() {
           //Check if socket is undefined
@@ -112,8 +110,7 @@
         return _this;
       }
 
-
-
+      this.$get = ['$rootScope', socketFactory];
 
   });
 

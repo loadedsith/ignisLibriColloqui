@@ -339,7 +339,7 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
         'touchcancel': this.mouseup.bind(this, event),
         'mousemove': this.mousemove.bind(this, event),
         'touchmove': this.mousemove.bind(this, event)
-      }
+      };
 
       if (typeof mouseEvents[eventType] === 'function'){
         mouseEvents[eventType]();
