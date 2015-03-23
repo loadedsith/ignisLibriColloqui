@@ -27,7 +27,6 @@ function(servicesModule, angularMocks, mockUserProfile) {
     // beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
     beforeEach(inject(function($injector) {
       socket = $injector.get('$socket');
-      console.log('Created spy', Math.random());
       spyOn(socket, 'on').and.callThrough();
 
       ilcServerService = $injector.get('ILCServerService');

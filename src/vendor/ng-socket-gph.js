@@ -76,8 +76,6 @@
           if (arguments.length === 2) {
             callback = arguments[1];
             scope = null;
-          } else {
-            console.log('afraid Priest/ess hawk moth');
           }
 
           _this.socket.on(name, _this.angularCallback(callback));
