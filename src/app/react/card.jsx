@@ -223,6 +223,102 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
       }
     },
 
+    getMaxDrag: function () {
+      var maxDrag = this.props.config.maxDrag;
+      if (maxDrag > window.innerWidth / 4) {
+        maxDrag = window.innerWidth / 4;
+      }
+      return maxDrag;
+    },
+
+    mousedown: function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      var eventPageX = (event.pageX || event.touches[0].pageX || 0);
+
+      // only left mouse button
+      if (event.button === 0 || event.button === undefined) {
+        this.setState({
+          initialPos: this.props.config.initialPosition,
+          dragging: true,
+          rotation: this.state.rot,
+          rel: {
+            x: eventPageX
+          }
+        });
+      }
+    },
+
+    mouseup: function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      var maxDrag = this.getMaxDrag();
+
+      this.setState({
+        dragging: false,
+        droppedPos: this.state.pos,
+        opacity: 1,
+        startTime: new Date().getTime()
+      });
+
+      if (this.state.pos.x > maxDrag) {
+        //dragged out right
+        if (typeof this.props.config.swipeRight === 'function') {
+          this.props.config.swipeRight(this, this.props.data);
+
+        } else {
+          this.returnCard();
+        }
+      } else if (this.state.pos.x < (-1 * maxDrag) ) {
+        //dragged out left
+        if (typeof this.props.config.swipeLeft === 'function') {
+          this.props.config.swipeLeft(this, this.props.data);
+        } else {
+          this.returnCard();
+        }
+
+      } else {
+        this.returnCard();
+      }
+    },
+
+    mousemove: function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      var eventPageX = (event.pageX || event.touches[0].pageX || 0);
+
+      var xPos = eventPageX - this.state.rel.x + this.state.initialPos.x;
+
+      var maxDrag = this.getMaxDrag();
+
+      var opacity = 1;
+      if (xPos > (maxDrag/2)) {
+        var ratio = maxDrag/xPos;
+        if (ratio >= 0) {
+          opacity = ratio;
+        }
+      }else if (xPos < (-1 * (maxDrag/2))) {
+        if (maxDrag/xPos < 0) {
+          opacity = maxDrag/(-1 * xPos);
+        }
+      }
+
+      if (this.state.dragging === true) {
+        var dragFactor = (window.innerWidth / 2 - eventPageX);
+        this.setState({
+          rotation: -1 * dragFactor / 20,
+          blur: (dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45),
+          opacity: opacity,
+          pos: {
+            x: xPos
+          }
+        });
+      }
+    },
+
     handelMouse: function(event) {
       if(this.state.disableDrag === true){
         return;
@@ -230,93 +326,26 @@ define(['react', 'bezierEasing'], function(React, BezierEasing) {
 
       var eventType = event.type;
       var card = getCardFromChild(event.target, 6);
-      var maxDrag = this.props.config.maxDrag;
-      if (maxDrag > window.innerWidth / 4) {
-        maxDrag = window.innerWidth / 4;
-      }
+
       if (!topOfTheStack(card)) {
         return;
       }
 
-      var eventPageX = (event.pageX || event.touches[0].pageX || 0);
-      switch (eventType) {
-        case 'mousedown':
-        case 'touchstart':
-         // only left mouse button
-          if (event.button === 0 || event.button === undefined) {
-            this.setState({
-              initialPos: this.props.config.initialPosition,
-              dragging: true,
-              rotation: this.state.rot,
-              rel: {
-                x: eventPageX
-              }
-            });
-          }
-          break;
-        case 'mouseup':
-        case 'touchend':
-        case 'touchcancel':
-          this.setState({
-            dragging: false,
-            droppedPos: this.state.pos,
-            opacity: 1,
-            startTime: new Date().getTime()
-          });
-          if (this.state.pos.x > maxDrag) {
-            //dragged out right
-            if (typeof this.props.config.swipeRight === 'function') {
-              this.props.config.swipeRight(this, this.props.data);
-
-            } else {
-              this.returnCard();
-            }
-          } else if (this.state.pos.x < (-1 * maxDrag) ) {
-            //dragged out left
-            if (typeof this.props.config.swipeLeft === 'function') {
-              this.props.config.swipeLeft(this, this.props.data);
-            } else {
-              this.returnCard();
-            }
-
-          } else {
-            this.returnCard();
-          }
-          break;
-        case 'mousemove':
-        case 'touchmove':
-          eventPageX = (event.pageX || event.touches[0].pageX);
-          var xPos = eventPageX - this.state.rel.x + this.state.initialPos.x;
-          var opacity = 1;
-          if (xPos > (maxDrag/2)) {
-            var ratio = maxDrag/xPos;
-            if (ratio >= 0) {
-              opacity = ratio;
-            }
-          }else if (xPos < (-1 * (maxDrag/2))) {
-            if (maxDrag/xPos < 0) {
-              opacity = maxDrag/(-1 * xPos);
-            }
-          }
-
-          if (this.state.dragging === true) {
-            var dragFactor = (window.innerWidth / 2 - eventPageX);
-            this.setState({
-              rotation: -1 * dragFactor / 20,
-              blur: (dragFactor > 0 ? dragFactor / 45 : -1 * dragFactor / 45),
-              opacity: opacity,
-              pos: {
-                x: xPos
-              }
-            });
-          }
-
-          break;
-        default :
-          return;//dont stopPropagation or preventDefault
+      var mouseEvents = {
+        'mousedown': this.mousedown.bind(this, event),
+        'touchstart': this.mousedown.bind(this, event),
+        'mouseup': this.mouseup.bind(this, event),
+        'touchend': this.mouseup.bind(this, event),
+        'touchcancel': this.mouseup.bind(this, event),
+        'mousemove': this.mousemove.bind(this, event),
+        'touchmove': this.mousemove.bind(this, event)
       }
-      event.stopPropagation();
-      event.preventDefault();
+
+      if (typeof mouseEvents[eventType] === 'function'){
+        mouseEvents[eventType]();
+      } else {
+        //no event with that name, nothing to do
+      }
     }
   });
 });
