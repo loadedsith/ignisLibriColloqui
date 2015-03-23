@@ -86,9 +86,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
     describe('has many socket connections', function() {
       it('expects each event be mapped to an socket.on call', function() {
         for (var i = events.length - 1; i >= 0; i--) {
-
           var event = events[i];
-          console.log('event', event);
           expect(socket.on).toHaveBeenCalledWith(event, jasmine.any(Function));
         }
       });
@@ -96,6 +94,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
 
     describe('login', function() {
       var mockAccessToken = 'abcd1234';
+
       it('should trigger an emit to validate login',
         function() {
           spyOn(socket, 'emit');
@@ -103,6 +102,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           expect(socket.emit).toHaveBeenCalledWith('login validator', mockAccessToken);
         }
       );
+
       it('should trigger an emit to validate login, which should be answered',
         function() {
           ilcServerService.login(mockAccessToken);
@@ -118,6 +118,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           'test':'dummyObject',
         }
       };
+
       beforeEach(function() {
         // spyOn(ilcServerService, 'setProfile').and.callThrough();
         spyOn($rootScope, '$broadcast').and.callThrough();
@@ -129,29 +130,34 @@ function(servicesModule, angularMocks, mockUserProfile) {
           done();
         });
       });
+
       it('should set updatingProfile flag to indicate profile save state', function(done) {
         ilcServerService.accessToken = mockAccessToken;
+
         //1: not updating
         expect(ilcServerService.updatingProfile).toBe(false);
+
         //2: start updating
         ilcServerService.setProfile({profile:mockValidProfile}).then(function() {
           //4: done updating
           expect(ilcServerService.updatingProfile).toBe(false);
           done();
         });
+
         //3: updating
         it('should be updating', function() {
           expect(ilcServerService.updatingProfile).toBe(true);
         });
-
       });
     });
 
     describe('user profile event', function() {
+
       var mockUserProfileEvent = {
         name: 'user profile',
         data: mockUserProfile
       };
+
       it('should trigger UserService.setUserProfile',
         function(done) {
           spyOn(userService, 'setUserProfile').and.callFake(function() {
@@ -161,6 +167,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           socket.emit('test event', mockUserProfileEvent);
         }
       );
+
       it('should trigger UserService.setUserProfile and trigger \'UserService:UpdateMatchProfile\'',
         function(done) {
           $rootScope.$on('UserService:UpdateMatchProfile', function() {
@@ -187,6 +194,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           '98844'
         ]
       };
+
       it('should trigger MessagesService.setRooms',
         function(done) {
           spyOn(messagesService, 'setRooms').and.callFake(function() {
@@ -196,6 +204,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           socket.emit('test event', mockRoomsSetEvent);
         }
       );
+
       it('should trigger MessagesService.setRooms and trigger \'MessagesService:UpdateRooms\'',
         function(done) {
           $rootScope.$on('MessagesService:UpdateRooms', function() {
@@ -221,6 +230,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           socket.emit('test event', mockGotUserMatchListEvent);
         }
       );
+
       it('should trigger UserService.setMatchList and set userService.user.matches',
         function(done) {
           var mockGotUserMatchListEvent = {
@@ -256,6 +266,7 @@ function(servicesModule, angularMocks, mockUserProfile) {
           socket.emit('test event', mockMessageSent);
         }
       );
+
       it('should trigger messages service, which should trigger a rootScope broadcast \'MessagesService:MessageSent\'',
         function(done) {
           var mockMessageSent = {
@@ -264,10 +275,12 @@ function(servicesModule, angularMocks, mockUserProfile) {
               snapshot:{}
             }
           };
+
           $rootScope.$on('MessagesService:MessageSent', function() {
             expect(true);
             done();
           });
+
           socket.emit('test event', mockMessageSent);
         }
       );
@@ -281,22 +294,25 @@ function(servicesModule, angularMocks, mockUserProfile) {
             snapshot:{}
           }
         };
+
         spyOn(messagesService, 'roomUpdate').and.callFake(function() {
           done();
           expect(true);//Got to this function via the socket event in ilcServerService
         });
+
         socket.emit('test event', mockRoomUpdate);
       });
+
       it('expects on(\'room update\') to update the room',
         function(done) {
           var mockRoomUpdate = {
             name:'room update',
             data:{
-              room:'123245',
+              room:'123245+54321',
               snapshot:{
-                '123245' : {
+                '123245+54321' : {
                   'date' : new Date().getTime(),
-                  'message' : 'Hello Laura',
+                  'message' : 'Test Message, testing, 1, 2',
                   'user' : {
                     'data' : {
                       'app_id' : '676670295780686',
@@ -312,23 +328,16 @@ function(servicesModule, angularMocks, mockUserProfile) {
               }
             }
           };
+
           spyOn(messagesService, 'roomUpdate').and.callThrough();
 
-          //it should run twice, and there should be 2 messages
-          var first = true;
           $rootScope.$on('MessagesService:MessageUpdate', function() {
-            if (first === true) {
-              first = false;//ignore the first run
-              return;
-            }
-            expect(messagesService.rooms[mockRoomUpdate.data.room]).not.toBeUndefined();
-            var last = messagesService.rooms[mockRoomUpdate.data.room].length - 1;
-            expect(last + 1 === 2);//because we sent in 2 updates;
-            expect(messagesService.rooms[mockRoomUpdate.data.room][last]).toEqual(mockRoomUpdate.data.snapshot);
-
+            var roomName = String(mockRoomUpdate.data.room);
+            expect(messagesService.rooms[roomName]).not.toBeUndefined();
+            expect(messagesService.rooms[roomName][0]).toEqual(mockRoomUpdate.data.snapshot);
             done();
-
           });
+
           socket.emit('test event', mockRoomUpdate);
         }
       );
@@ -342,12 +351,15 @@ function(servicesModule, angularMocks, mockUserProfile) {
             snapshot:{}
           }
         };
+
         spyOn(messagesService, 'roomSet').and.callFake(function() {
           done();
           expect(true);//Got to this function via the socket event in ilcServerService
         });
+
         socket.emit('test event', mockRoomSet);
       });
+
       it('expects on(\'room set\') to trigger MessagesService\'s set room with a valid room',
         function(done) {
           var mockRoomSet = {
@@ -384,6 +396,5 @@ function(servicesModule, angularMocks, mockUserProfile) {
         }
       );
     });
-
   });
 });
