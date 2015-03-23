@@ -12,6 +12,7 @@ define(['controllerModule', 'angular'], function(controllers) {
       $scope.loggedIn = false;
 
       $scope.userId = 'default user id, did facebook login fail?';
+
       $scope.disconnectedStatus = {
         text:'🚫 Disconnected from server. Try reconnecting?', //[Optional] Label text
         class:'status status-disconnected', // CSS Class available to angular, not automatically applied
@@ -19,6 +20,7 @@ define(['controllerModule', 'angular'], function(controllers) {
           $scope.login();
         },
       };
+
       $scope.connectionEvent = function(value) {
         switch (value) {
         case 'disconnect':
@@ -37,13 +39,12 @@ define(['controllerModule', 'angular'], function(controllers) {
           StatusService.setStatus(StatusService.ready);
           break;
         }
-
       };
 
       ILCServerService.connectTimeoutEvent = $scope.connectionEvent.bind(this, 'timeout');
-      ILCServerService.connectErrorEvent = $scope.connectionEvent.bind(this, 'error');
-      ILCServerService.disconnectEvent = $scope.connectionEvent.bind(this, 'disconnect');
-      ILCServerService.connectEvent = $scope.connectionEvent.bind(this, 'connect');
+      ILCServerService.connectErrorEvent   = $scope.connectionEvent.bind(this, 'error');
+      ILCServerService.disconnectEvent     = $scope.connectionEvent.bind(this, 'disconnect');
+      ILCServerService.connectEvent        = $scope.connectionEvent.bind(this, 'connect');
 
       StatusService.setStatus(StatusService.loading);
 
@@ -210,10 +211,13 @@ define(['controllerModule', 'angular'], function(controllers) {
         if (value === undefined) {
           value = true;
         }
+
         $scope.hideAllViews();
+
         if ($scope.closeProfile() === true) {
           $scope.setViewState(itemName, value);
         }
+
         if ($scope.shouldShowView('messages') === true) {
           window.requestAnimationFrame(function() {
             $scope.$broadcast('messagesVisible', true);
