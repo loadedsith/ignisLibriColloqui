@@ -15,7 +15,26 @@
 
   angular.module('ngSocket', [])
     .provider('$socket', function socketProvider() {
-      var url, config;
+      var url;
+      var config;
+
+      this.$get = ['$rootScope', socketFactory];
+
+      this.setConfig = function(value) {
+        config = value;
+      };
+
+      this.getConfig = function() {
+        return config;
+      };
+
+      this.setUrl = function (value) {
+        url = value;
+      };
+
+      this.getUrl = function() {
+        return url;
+      };
 
       function socketFactory() {//args: $rootScope
         var _this = this;
@@ -95,23 +114,6 @@
         return _this;
       }
 
-      this.$get = ['$rootScope', socketFactory];
-
-      this.setConfig = function(value) {
-        config = value;
-      };
-
-      this.getConfig = function() {
-        return config;
-      };
-
-      this.setUrl = function (value) {
-        url = value;
-      };
-
-      this.getUrl = function() {
-        return url;
-      };
 
 
 
