@@ -2,7 +2,7 @@ define(['services/serviceModule', 'angular'], function(services) {
   'use strict';
   return services.service('ILCServerService',
   ['$q', 'Config', 'MessagesService', 'UserService', '$socket',
-   function($q, Config, MessagesService, UserService, $socket) {
+  function($q, Config, MessagesService, UserService, $socket) {
     var _this = this;
 
     _this.updatingCurrentInterest = false;
