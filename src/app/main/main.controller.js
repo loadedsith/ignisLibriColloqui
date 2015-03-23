@@ -21,23 +21,30 @@ define(['controllerModule', 'angular'], function(controllers) {
         },
       };
 
-      $scope.connectionEvent = function(value) {
-        switch (value) {
-        case 'disconnect':
+      $scope.connectionEventActions = {
+        'disconnect': function() {
           StatusService.setStatus($scope.disconnectedStatus);
-          break;
-        case 'timeout':
+        },
+        'timeout': function() {
           StatusService.setStatus($scope.disconnectedStatus);
-          break;
-        case 'error':
+        },
+        'error': function() {
           StatusService.setStatus($scope.disconnectedStatus);
-          break;
-        case 'connect':
+        },
+        'connect': function() {
           $scope.login();
-          break;
-        default:
+        },
+        'default': function () {
           StatusService.setStatus(StatusService.ready);
-          break;
+        }
+      };
+
+      $scope.connectionEvent = function(value) {
+        if (typeof $scope.connectionEventActions[value] === 'function'){
+          $scope.connectionEventActions[value]();
+        } else {
+          //no event with that name, use default
+          $scope.connectionEventActions['default'](value);
         }
       };
 
