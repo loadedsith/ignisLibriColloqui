@@ -135,13 +135,15 @@ var jshintReporter = function(file, cb) {
       if (data.error) {
 
         var id;
-        switch (data.error.id) {
-          case '(error)':
-            id = chalk.red('  🚫  ');
-            break;
-          default:
-            id = chalk.yellow('  [' + data.error.id + ']');
-            break;
+
+        var possibleErrorIds = {
+          '(error)':chalk.red('  🚫  ')
+        };
+
+        if (possibleErrorIds[data.error.id] !== undefined) {
+          id = possibleErrorIds[data.error.id];
+        } else {
+          id = chalk.yellow('  [' + data.error.id + ']');
         }
 
         var result = [];
