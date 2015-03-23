@@ -24,28 +24,33 @@ function(servicesModule, angularMocks, mockUserProfile) {
     var $rootScope;
     var socket;
 
-    beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
-      ilcServerService = ILCServerService;
-      messagesService = MessagesService;
-      userService = UserService;
-      $timeout = _$timeout_;
-      $rootScope = _$rootScope_;
-
-      socket = $socket;
+    // beforeEach(inject(function(ILCServerService, MessagesService, UserService, _$timeout_, $socket, _$rootScope_) {
+    beforeEach(inject(function($injector) {
+      socket = $injector.get('$socket');
+      console.log('Created spy', Math.random());
       spyOn(socket, 'on').and.callThrough();
+
+      ilcServerService = $injector.get('ILCServerService');
+      messagesService = $injector.get('MessagesService');
+      userService = $injector.get('UserService');
+      $timeout = $injector.get('$timeout');
+      $rootScope = $injector.get('$rootScope');
+
     }));
 
     var events = [
+      'connect',
+      'connect_error',
+      'connect_timeout',
+      'disconnect',
       'got user matchList',
       'message sent',
       'pong',
       'room set',
       'room update',
       'rooms set',
-      'rooms update',
-      'user disconnected',
-      'user profile',
-      'user profile updated'
+      'user profile update',
+      'user profile'
     ];
 
     afterEach(function() {
@@ -82,7 +87,9 @@ function(servicesModule, angularMocks, mockUserProfile) {
     describe('has many socket connections', function() {
       it('expects each event be mapped to an socket.on call', function() {
         for (var i = events.length - 1; i >= 0; i--) {
+
           var event = events[i];
+          console.log('event', event);
           expect(socket.on).toHaveBeenCalledWith(event, jasmine.any(Function));
         }
       });
